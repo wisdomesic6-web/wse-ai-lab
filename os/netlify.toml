@@ -1,0 +1,10 @@
+# WSE Labs OS — deployed with base directory = "os"
+[build]
+  publish = "."
+  command = ""
+
+[functions]
+  # no serverless functions for the OS site
+
+# Edge function `auth` (os/netlify/edge-functions/auth.js) gates every path
+# via HTTP Basic Auth using OS_USER / OS_PASSWORD env vars.
