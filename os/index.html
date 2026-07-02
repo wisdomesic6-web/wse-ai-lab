@@ -4876,14 +4876,19 @@ const canvas = document.getElementById('revChart');
   gExp.addColorStop(0, 'rgba(31,207,164,0.18)');
   gExp.addColorStop(1, 'rgba(31,207,164,0.0)');
 
-  new Chart(ctx, {
+  const _rm = (window.__DASH && window.__DASH.revenue_monthly) || null;
+  const _labels = _rm ? _rm.map(r => r.month_label)     : ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'];
+  const _rev    = _rm ? _rm.map(r => Number(r.revenue))  : [42, 58, 51, 67, 72, 84.75];
+  const _exp    = _rm ? _rm.map(r => Number(r.expenses)) : [8.2, 9.1, 7.8, 8.5, 7.9, 7.65];
+
+  window._revChartInstance = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+      labels: _labels,
       datasets: [
         {
           label: 'Revenue',
-          data: [42, 58, 51, 67, 72, 84.75],
+          data: _rev,
           borderColor: '#4A6AFF',
           backgroundColor: gRev,
           borderWidth: 2.5,
@@ -4896,7 +4901,7 @@ const canvas = document.getElementById('revChart');
         },
         {
           label: 'Expenses',
-          data: [8.2, 9.1, 7.8, 8.5, 7.9, 7.65],
+          data: _exp,
           borderColor: '#1FCFA4',
           backgroundColor: gExp,
           borderWidth: 2,
@@ -4944,7 +4949,6 @@ const canvas = document.getElementById('revChart');
       }
     }
   });
-})()
 }
 
 
@@ -7270,6 +7274,8 @@ function initRecon() {
   const allBtn = document.getElementById('filter-all');
   if (allBtn) setFilterBtn(allBtn);
 }
+</script>
+
 <style>
 /* ═══════════════════════════════════════
    RECONCILIATION MODULE — Phase 4 CSS
@@ -7518,6 +7524,124 @@ document.addEventListener('DOMContentLoaded', function() {
     dateTag.textContent = d.toLocaleDateString('en-GB', {weekday:'short',day:'numeric',month:'short',year:'numeric'}).replace(',', '');
   }
 });
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Dashboard live data — Supabase via Netlify function.
+     Patches hero, metrics, activity feed and revenue chart from
+     /.netlify/functions/dashboard. Falls back silently to the
+     built-in static values if the data is unavailable.
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  const NGN = new Intl.NumberFormat('en-NG');
+  const fmtFull = (n) => '₦' + NGN.format(Math.round(Number(n) || 0));
+  const fmtM = (n) => {
+    const m = (Number(n) || 0) / 1e6;
+    return '₦' + m.toFixed(2).replace(/\.?0+$/, '') + 'M';
+  };
+  const arrow = (up) => (up ? '▲' : '▼');
+  const pct = (v) => Math.abs(Number(v) || 0);
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function applyHero(s) {
+    const root = document.getElementById('view-dashboard');
+    if (!s || !root) return;
+    const amount = root.querySelector('.hero-amount');
+    if (amount) amount.textContent = fmtFull(s.total_revenue);
+    const delta = root.querySelector('.hero-delta');
+    if (delta) delta.textContent = arrow(Number(s.revenue_delta) >= 0) + ' ' + pct(s.revenue_delta) + '% vs last month';
+
+    const rows = [
+      { val: s.total_income, chg: s.income_delta },
+      { val: s.expenses,     chg: s.expenses_delta },
+      { val: s.net_profit,   chg: s.profit_delta },
+    ];
+    root.querySelectorAll('.hero-row .hero-stat').forEach((st, i) => {
+      if (!rows[i]) return;
+      const v = st.querySelector('.hs-val');
+      const c = st.querySelector('.hs-chg');
+      if (v) v.textContent = fmtM(rows[i].val);
+      if (c) {
+        const up = Number(rows[i].chg) >= 0;
+        c.textContent = arrow(up) + ' ' + pct(rows[i].chg) + '%';
+        c.classList.toggle('neg', !up);
+      }
+    });
+
+    const ai = root.querySelector('.ai-body');
+    if (ai && s.ai_insight) ai.textContent = s.ai_insight;
+  }
+
+  function applyMetrics(metrics) {
+    if (!Array.isArray(metrics)) return;
+    const cards = document.querySelectorAll('#view-dashboard .metrics-row .metric');
+    metrics.forEach((m, i) => {
+      const card = cards[i];
+      if (!card) return;
+      const num = card.querySelector('.metric-num');
+      const lbl = card.querySelector('.metric-lbl');
+      const badge = card.querySelector('.badge');
+      if (num) num.textContent = m.value;
+      if (lbl) lbl.textContent = m.label;
+      if (badge) {
+        const up = m.direction !== 'down';
+        badge.textContent = arrow(up) + ' ' + pct(m.delta_pct) + '%';
+        badge.classList.toggle('badge-up', up);
+        badge.classList.toggle('badge-dn', !up);
+      }
+    });
+  }
+
+  function applyActivity(items) {
+    if (!Array.isArray(items) || !items.length) return;
+    const card = document.querySelectorAll('#view-dashboard .mid-grid > .card')[1];
+    if (!card) return;
+    card.querySelectorAll('.act-item').forEach((el) => el.remove());
+    items.forEach((a) => {
+      const row = document.createElement('div');
+      row.className = 'act-item';
+      row.innerHTML =
+        '<div class="act-av" style="background:' + (a.gradient || '') + '">' + esc(a.initials) + '</div>' +
+        '<div class="act-body"><div class="act-desc">' + (a.description_html || '') + '</div>' +
+        '<div class="act-time">' + esc(a.meta || '') + '</div></div>' +
+        '<div class="act-val" style="color:' + (a.value_color || 'var(--text3)') + '">' + esc(a.value_label || '') + '</div>';
+      card.appendChild(row);
+    });
+  }
+
+  function applyChart(rm) {
+    const ch = window._revChartInstance;
+    if (!ch || !Array.isArray(rm) || !rm.length) return;
+    ch.data.labels = rm.map((r) => r.month_label);
+    ch.data.datasets[0].data = rm.map((r) => Number(r.revenue));
+    ch.data.datasets[1].data = rm.map((r) => Number(r.expenses));
+    ch.update();
+  }
+
+  async function load() {
+    try {
+      const res = await fetch('/.netlify/functions/dashboard', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      window.__DASH = data;
+      applyHero(data.summary);
+      applyMetrics(data.metrics);
+      applyActivity(data.activity);
+      applyChart(data.revenue_monthly);
+    } catch (e) {
+      console.warn('[Dashboard] live data unavailable, using static fallback:', e.message);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', load);
+  } else {
+    load();
+  }
+})();
 </script>
 
 <!-- Theme Engine (inlined) -->

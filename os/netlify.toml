@@ -4,7 +4,10 @@
   command = ""
 
 [functions]
-  # no serverless functions for the OS site
+  # dashboard.js serves Dashboard data from Supabase (service-role, server-side).
+  # Requires env vars SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 # Edge function `auth` (os/netlify/edge-functions/auth.js) gates every path
 # via HTTP Basic Auth using OS_USER / OS_PASSWORD env vars.
