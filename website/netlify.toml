@@ -1,0 +1,10 @@
+# WSE AI Lab — public website. Deployed with base directory = "website".
+[build]
+  publish = "."
+  command = ""
+
+[functions]
+  # Serverless function chat.js (Wizzy chatbot) lives here.
+  # Requires env var ANTHROPIC_API_KEY set in the Netlify dashboard.
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
