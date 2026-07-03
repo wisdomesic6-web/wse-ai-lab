@@ -2855,7 +2855,7 @@ body {
           <div class="leg-item"><div class="leg-swatch" style="background:#1FCFA4; opacity:.7"></div> Expenses</div>
         </div>
         <div class="chart-wrap">
-          <canvas id="revChart" role="img" aria-label="Line chart showing revenue and expenses over 6 months from November to April, with revenue trending upward from 42M to 84.75M NGN">Revenue grew from ₦42M in November to ₦84.75M in April. Expenses remained relatively stable around ₦8M.</canvas>
+          <canvas id="revChart" role="img" aria-label="Revenue and expenses chart — no data yet">No revenue data yet.</canvas>
         </div>
       </div>
 
@@ -3669,7 +3669,7 @@ body {
             <div class="stat-ic" style="background:rgba(31,207,164,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FCFA4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="stat-badge badge-up">▲ 23%</div>
           </div>
-          <div class="stat-val">₦34.2M</div>
+          <div class="stat-val">₦0</div>
           <div class="stat-lbl">Pipeline Value</div>
           <div class="mini-spark">
             <div class="spark-bar" style="height:45%;background:rgba(31,207,164,.3)"></div>
@@ -3741,7 +3741,7 @@ body {
       <div class="section-header" style="margin-bottom:16px">
         <div>
           <div class="section-title-lg">Sales Pipeline</div>
-          <div class="section-sub">₦34.2M potential · 24 active deals</div>
+          <div class="section-sub">No active deals yet</div>
         </div>
         <button class="btn-primary" onclick="openModal('lead')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -3768,17 +3768,17 @@ body {
       <div class="pl-strip">
         <div class="pl-cell">
           <div class="pl-label">Total Revenue</div>
-          <div class="pl-val" style="color:var(--text)" id="plRevenue">₦92,400,000</div>
+          <div class="pl-val" style="color:var(--text)" id="plRevenue">₦0</div>
           <div class="pl-delta" style="color:var(--green)">▲ 12.1% vs last month</div>
         </div>
         <div class="pl-cell">
           <div class="pl-label">Total Expenses</div>
-          <div class="pl-val" style="color:var(--red)" id="plExpenses">₦7,650,000</div>
+          <div class="pl-val" style="color:var(--red)" id="plExpenses">₦0</div>
           <div class="pl-delta" style="color:var(--text3)">▼ 3.2% vs last month</div>
         </div>
         <div class="pl-cell">
           <div class="pl-label">Net Profit</div>
-          <div class="pl-val" style="color:var(--green)" id="plProfit">₦84,750,000</div>
+          <div class="pl-val" style="color:var(--green)" id="plProfit">₦0</div>
           <div class="pl-delta" style="color:var(--green)">▲ 18.3% vs last month</div>
         </div>
       </div>
@@ -3816,7 +3816,7 @@ body {
       <div class="section-header" style="margin-bottom:16px">
         <div>
           <div class="section-title-lg">Invoices</div>
-          <div class="section-sub">₦12.4M pending · 3 overdue</div>
+          <div class="section-sub">No pending invoices</div>
         </div>
         <button class="btn-primary" onclick="openModal('invoice')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -3847,7 +3847,7 @@ body {
       <div class="section-header" style="margin-bottom:16px">
         <div>
           <div class="section-title-lg">Expenses</div>
-          <div class="section-sub">₦7.65M this month · ▼ 3.2%</div>
+          <div class="section-sub">No expenses this month</div>
         </div>
         <button class="btn-primary" onclick="openModal('expense')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -5852,30 +5852,11 @@ let LEADS = [];   /* loaded live from Supabase via loadCRM() */
 
 let INTERACTIONS = [];   /* clean state — no demo interactions */
 
-const INVOICES = [
-  {id:'INV-0042',client:'Zenith Corp',amount:'₦4,200,000',due:'Apr 20',status:'paid',method:'paystack'},
-  {id:'INV-0041',client:'PrimeTech Group',amount:'₦2,800,000',due:'Apr 25',status:'pending',method:'bank'},
-  {id:'INV-0040',client:'Emerald Agro',amount:'₦1,500,000',due:'Apr 18',status:'overdue',method:'stripe'},
-  {id:'INV-0039',client:'Nova Brands',amount:'₦3,100,000',due:'May 2',status:'draft',method:'paystack'},
-  {id:'INV-0038',client:'Delta Logistics',amount:'₦920,000',due:'Apr 30',status:'pending',method:'bank'},
-  {id:'INV-0037',client:'BrightHouse',amount:'₦750,000',due:'Apr 10',status:'paid',method:'paystack'},
-];
+const INVOICES = [];   /* loaded live from Supabase via loadFinance() */
 
-const EXPENSES = [
-  {name:'AWS Infrastructure',cat:'Technology',amount:'₦1,240,000',date:'Apr 23',icon:'☁️',iconBg:'rgba(14,196,216,.12)'},
-  {name:'Office Rent — Lagos HQ',cat:'Operations',amount:'₦850,000',date:'Apr 1',icon:'🏢',iconBg:'rgba(244,162,27,.12)'},
-  {name:'Staff Salaries',cat:'Payroll',amount:'₦3,200,000',date:'Apr 25',icon:'👥',iconBg:'rgba(74,106,255,.12)'},
-  {name:'Marketing & Ads',cat:'Marketing',amount:'₦560,000',date:'Apr 18',icon:'📢',iconBg:'rgba(159,120,250,.12)'},
-  {name:'Legal Retainer',cat:'Professional',amount:'₦400,000',date:'Apr 15',icon:'⚖️',iconBg:'rgba(31,207,164,.12)'},
-];
+const EXPENSES = [];   /* loaded live from Supabase via loadFinance() */
 
-const TAX_RECORDS = [
-  {period:'Q1 2026',type:'WHT',gross:'₦18,400,000',rate:'5%',deducted:'₦920,000'},
-  {period:'Q1 2026',type:'VAT',gross:'₦92,400,000',rate:'7.5%',deducted:'₦6,930,000'},
-  {period:'Q1 2026',type:'PAYE',gross:'₦3,200,000',rate:'15%',deducted:'₦480,000'},
-  {period:'Q4 2025',type:'WHT',gross:'₦15,700,000',rate:'5%',deducted:'₦785,000'},
-  {period:'Q4 2025',type:'VAT',gross:'₦78,500,000',rate:'7.5%',deducted:'₦5,887,500'},
-];
+const TAX_RECORDS = [];   /* loaded live from Supabase via loadFinance() */
 
 /* ═══════════════════════════════════
    MODULE SWITCHER
@@ -5999,6 +5980,7 @@ function renderInvoices(filter) {
   activeInvFilter = filter || activeInvFilter;
   const tbody = document.getElementById('invoicesTbody');
   const data = activeInvFilter === 'all' ? INVOICES : INVOICES.filter(i => i.status === activeInvFilter);
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="7" style="padding:26px;text-align:center;color:var(--text3);font-size:13px;">No invoices yet.</td></tr>'; return; }
   tbody.innerHTML = data.map(inv => {
     const sc = {paid:'inv-paid',pending:'inv-pending',overdue:'inv-overdue',draft:'inv-draft'};
     const mc = {paystack:'pm-paystack',stripe:'pm-stripe',bank:'pm-bank'};
@@ -6033,6 +6015,7 @@ function filterInvoices(filter, el) {
    ═══════════════════════════════════ */
 function renderExpenses() {
   const list = document.getElementById('expenseList');
+  if (!EXPENSES.length) { list.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;">No expenses yet.</div>'; return; }
   list.innerHTML = EXPENSES.map(e => `
     <div class="exp-row">
       <div class="exp-icon" style="background:${e.iconBg}">${e.icon}</div>
@@ -6050,7 +6033,8 @@ function renderExpenses() {
    RENDER TAX
    ═══════════════════════════════════ */
 function renderTax() {
-  document.getElementById('taxRows').innerHTML = TAX_RECORDS.map(r => `
+  if (!TAX_RECORDS.length) { document.getElementById('taxRows').innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;">No tax records yet.</div>'; }
+  else document.getElementById('taxRows').innerHTML = TAX_RECORDS.map(r => `
     <div class="tax-row">
       <div class="tax-cell" style="font-weight:500;color:var(--text)">${r.period}</div>
       <div class="tax-cell">
@@ -6062,10 +6046,10 @@ function renderTax() {
     </div>`).join('');
 
   document.getElementById('whtSummary').innerHTML = [
-    {label:'WHT Deducted',val:'₦920,000',color:'var(--red)'},
-    {label:'VAT Collected',val:'₦6,930,000',color:'var(--amber)'},
-    {label:'PAYE Deducted',val:'₦480,000',color:'var(--purple)'},
-    {label:'Net Tax Liability',val:'₦8,330,000',color:'var(--red)'},
+    {label:'WHT Deducted',val:'₦0',color:'var(--red)'},
+    {label:'VAT Collected',val:'₦0',color:'var(--amber)'},
+    {label:'PAYE Deducted',val:'₦0',color:'var(--purple)'},
+    {label:'Net Tax Liability',val:'₦0',color:'var(--red)'},
   ].map(r=>`
     <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;
       background:var(--surface2);border:1px solid var(--border);border-radius:10px">
@@ -6094,9 +6078,9 @@ function renderTax() {
    ═══════════════════════════════════ */
 let activeCurrency = 'NGN';
 const PL_DATA = {
-  NGN:{rev:'₦92,400,000',exp:'₦7,650,000',profit:'₦84,750,000'},
-  USD:{rev:'$56,800',exp:'$4,708',profit:'$52,092'},
-  EUR:{rev:'€52,600',exp:'€4,360',profit:'€48,240'},
+  NGN:{rev:'₦0',exp:'₦0',profit:'₦0'},
+  USD:{rev:'$0',exp:'$0',profit:'$0'},
+  EUR:{rev:'€0',exp:'€0',profit:'€0'},
 };
 
 function setCurrency(cur, el) {
@@ -6123,19 +6107,19 @@ function buildFinanceCharts() {
   new Chart(ctx1,{type:'line',data:{
     labels:['Nov','Dec','Jan','Feb','Mar','Apr'],
     datasets:[
-      {label:'Revenue',data:[42,58,51,67,72,84.75],borderColor:'#4A6AFF',backgroundColor:g1,borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#4A6AFF',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true},
-      {label:'Expenses',data:[8.2,9.1,7.8,8.5,7.9,7.65],borderColor:'#1FCFA4',backgroundColor:g2,borderWidth:2,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#1FCFA4',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true}
+      {label:'Revenue',data:[0,0,0,0,0,0],borderColor:'#4A6AFF',backgroundColor:g1,borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#4A6AFF',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true},
+      {label:'Expenses',data:[0,0,0,0,0,0],borderColor:'#1FCFA4',backgroundColor:g2,borderWidth:2,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#1FCFA4',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true}
     ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',borderColor:'rgba(74,106,255,.28)',borderWidth:1,titleColor:'#EEF0FF',bodyColor:'#8596C4',padding:10,callbacks:{label:c=>' ₦'+c.parsed.y.toFixed(1)+'M'}}},scales:{x:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11}},border:{display:false}},y:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11},callback:v=>'₦'+v+'M'},border:{display:false}}}}});
 
   /* Payment methods doughnut */
   const ctx2 = document.getElementById('paymentChart').getContext('2d');
   new Chart(ctx2,{type:'doughnut',data:{
     labels:['Paystack','Stripe','Bank Transfer'],
-    datasets:[{data:[52,28,20],backgroundColor:['rgba(31,207,164,.8)','rgba(99,102,241,.8)','rgba(244,162,27,.8)'],borderColor:'#0E1120',borderWidth:3,hoverOffset:6}]
+    datasets:[{data:[0,0,0],backgroundColor:['rgba(31,207,164,.8)','rgba(99,102,241,.8)','rgba(244,162,27,.8)'],borderColor:'#0E1120',borderWidth:3,hoverOffset:6}]
   },options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',bodyColor:'#EEF0FF',padding:10}}}});
 
   const breakdown = document.getElementById('payBreakdown');
-  [['Paystack','52%','#1FCFA4'],['Stripe','28%','#818CF8'],['Bank Transfer','20%','#F4A21B']].forEach(([name,pct,color])=>{
+  [['Paystack','0%','#1FCFA4'],['Stripe','0%','#818CF8'],['Bank Transfer','0%','#F4A21B']].forEach(([name,pct,color])=>{
     const row = document.createElement('div');
     row.style.cssText = 'display:flex;align-items:center;justify-content:space-between';
     row.innerHTML = `<div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;border-radius:2px;background:${color}"></div><span style="font-size:12px;color:var(--text2)">${name}</span></div><span style="font-size:12px;font-weight:600;color:var(--text)">${pct}</span>`;
@@ -6148,7 +6132,7 @@ function buildExpenseChart() {
   const ctx = document.getElementById('expenseChart').getContext('2d');
   new Chart(ctx,{type:'doughnut',data:{
     labels:['Payroll','Technology','Operations','Marketing','Professional'],
-    datasets:[{data:[41.8,16.2,11.1,7.3,5.2],backgroundColor:['rgba(74,106,255,.8)','rgba(14,196,216,.8)','rgba(244,162,27,.8)','rgba(159,120,250,.8)','rgba(31,207,164,.8)'],borderColor:'#0E1120',borderWidth:3,hoverOffset:6}]
+    datasets:[{data:[0,0,0,0,0],backgroundColor:['rgba(74,106,255,.8)','rgba(14,196,216,.8)','rgba(244,162,27,.8)','rgba(159,120,250,.8)','rgba(31,207,164,.8)'],borderColor:'#0E1120',borderWidth:3,hoverOffset:6}]
   },options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',bodyColor:'#EEF0FF',padding:10,callbacks:{label:c=>` ${c.label}: ₦${(c.parsed/100*7650000).toLocaleString()}`}}}}});
 }
 
@@ -6489,10 +6473,12 @@ function submitModal() {
   } else if (activeModalType === 'expense') {
     const name = document.getElementById('mf-ename')?.value.trim();
     if (!name) { document.getElementById('mf-ename').style.borderColor='var(--red)'; return; }
-    EXPENSES.unshift({name,cat:document.getElementById('mf-ecat').value,
+    const _exp = {id:'exp_'+Date.now(),name,cat:document.getElementById('mf-ecat').value,
       amount:document.getElementById('mf-eamt').value||'₦0',
       date:document.getElementById('mf-edate').value||'Today',icon:'💳',
-      iconBg:'rgba(74,106,255,.12)'});
+      iconBg:'rgba(74,106,255,.12)'};
+    EXPENSES.unshift(_exp);
+    if (typeof persistFinance === 'function') persistFinance('expense', _exp);
     renderExpenses();
 
   } else if (activeModalType === 'interaction') {
@@ -6511,9 +6497,11 @@ function submitModal() {
     const clientId = document.getElementById('mf-client').value;
     const client   = CUSTOMERS.find(c=>c.id===clientId);
     const id = 'INV-00'+String(INVOICES.length+43).padStart(2,'0');
-    INVOICES.unshift({id,client:client?.name||'Client',amount,
+    const _inv = {id,client:client?.name||'Client',amount,
       due:document.getElementById('mf-due').value||'TBD',
-      status:'draft',method:document.getElementById('mf-method').value});
+      status:'draft',method:document.getElementById('mf-method').value};
+    INVOICES.unshift(_inv);
+    if (typeof persistFinance === 'function') persistFinance('invoice', _inv);
     renderInvoices();
 
   } else if (activeModalType === 'tax') {
@@ -6523,8 +6511,10 @@ function submitModal() {
     const rate  = document.getElementById('mf-trate').value;
     const rateNum = parseFloat(rate)/100;
     const grossNum = parseFloat(gross.replace(/[₦,]/g,''))||0;
-    TAX_RECORDS.unshift({period,type:document.getElementById('mf-ttype').value,
-      gross:gross||'₦0',rate,deducted:`₦${(grossNum*rateNum).toLocaleString()}`});
+    const _tax = {id:'tax_'+Date.now(),period,type:document.getElementById('mf-ttype').value,
+      gross:gross||'₦0',rate,deducted:`₦${(grossNum*rateNum).toLocaleString()}`};
+    TAX_RECORDS.unshift(_tax);
+    if (typeof persistFinance === 'function') persistFinance('tax', _tax);
     renderTax();
   }
 
@@ -6567,24 +6557,9 @@ renderTax();
    ═══════════════════════════════════════════════════ */
 
 /* ── Data Store ── */
-const TRANSACTIONS = [
-  {id:'TXN-001',ref:'PSK-2026-04-001',amount:4200000,  amountFmt:'₦4,200,000', date:'2026-04-20',dateDisp:'Apr 20',source:'paystack',status:'matched',  invoiceId:'INV-0042',matchedBy:'system',matchScore:100},
-  {id:'TXN-002',ref:'PSK-2026-04-002',amount:750000,   amountFmt:'₦750,000',   date:'2026-04-10',dateDisp:'Apr 10',source:'paystack',status:'matched',  invoiceId:'INV-0037',matchedBy:'system',matchScore:100},
-  {id:'TXN-003',ref:'STR-2026-04-003',amount:1480000,  amountFmt:'₦1,480,000', date:'2026-04-19',dateDisp:'Apr 19',source:'stripe', status:'partial',  invoiceId:'INV-0040',matchedBy:null,   matchScore:74},
-  {id:'TXN-004',ref:'BNK-2026-04-004',amount:2800000,  amountFmt:'₦2,800,000', date:'2026-04-24',dateDisp:'Apr 24',source:'bank',   status:'partial',  invoiceId:'INV-0041',matchedBy:null,   matchScore:88},
-  {id:'TXN-005',ref:'PSK-2026-04-005',amount:3200000,  amountFmt:'₦3,200,000', date:'2026-04-22',dateDisp:'Apr 22',source:'paystack',status:'unmatched',invoiceId:null,       matchedBy:null,   matchScore:0},
-  {id:'TXN-006',ref:'BNK-2026-04-006',amount:920000,   amountFmt:'₦920,000',   date:'2026-04-28',dateDisp:'Apr 28',source:'bank',   status:'unmatched',invoiceId:null,       matchedBy:null,   matchScore:0},
-  {id:'TXN-007',ref:'STR-2026-04-007',amount:4200000,  amountFmt:'₦4,200,000', date:'2026-04-20',dateDisp:'Apr 20',source:'stripe', status:'unmatched',invoiceId:null,       matchedBy:null,   matchScore:0},
-  {id:'TXN-008',ref:'PSK-2026-04-008',amount:1500000,  amountFmt:'₦1,500,000', date:'2026-04-18',dateDisp:'Apr 18',source:'paystack',status:'matched',  invoiceId:'INV-0040',matchedBy:'system',matchScore:100},
-];
+const TRANSACTIONS = [];   /* clean state — reconciliation populates from real feeds later */
 
-const RECON_AUDIT_LOG = [
-  {id:'al1',action:'auto_match',txnId:'TXN-001',invoiceId:'INV-0042',by:'System',byColor:'linear-gradient(135deg,#4A6AFF,#7698FF)',time:'Today 09:14',diff:'Exact match — amount + reference',icon:'🤖'},
-  {id:'al2',action:'auto_match',txnId:'TXN-002',invoiceId:'INV-0037',by:'System',byColor:'linear-gradient(135deg,#4A6AFF,#7698FF)',time:'Today 09:14',diff:'Exact match — amount + reference',icon:'🤖'},
-  {id:'al3',action:'manual_review',txnId:'TXN-003',invoiceId:'INV-0040',by:'Akin Olusola',byColor:'linear-gradient(135deg,#1FCFA4,#0EC4D8)',time:'Today 08:55',diff:'Underpayment: ₦20,000 short — flagged',icon:'AO'},
-  {id:'al4',action:'flag_duplicate',txnId:'TXN-007',invoiceId:null,by:'System',byColor:'linear-gradient(135deg,#9F78FA,#818CF8)',time:'Today 08:50',diff:'Duplicate amount ₦4,200,000 — TXN-001 already matched',icon:'🚨'},
-  {id:'al5',action:'import',txnId:null,invoiceId:null,by:'System',byColor:'linear-gradient(135deg,#4A6AFF,#7698FF)',time:'Yesterday 18:00',diff:'8 transactions imported from Paystack + bank feed',icon:'📥'},
-];
+const RECON_AUDIT_LOG = [];   /* clean state */
 
 /* ── Matching Engine ── */
 const MatchEngine = {
@@ -7616,10 +7591,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // ── Finance live data (invoices + expenses + tax) ──
+  window.persistFinance = async function (entity, row) {
+    try {
+      await fetch('/.netlify/functions/finance', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity, row }),
+      });
+    } catch (e) { console.warn('[Finance] persist failed:', e.message); }
+  };
+  async function loadFinance() {
+    try {
+      const res = await fetch('/.netlify/functions/finance', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      if (d.error) throw new Error(d.error);
+      if (Array.isArray(d.invoices) && typeof INVOICES !== 'undefined') { INVOICES.length = 0; d.invoices.forEach((x) => INVOICES.push(x)); if (typeof renderInvoices === 'function') renderInvoices(); }
+      if (Array.isArray(d.expenses) && typeof EXPENSES !== 'undefined') { EXPENSES.length = 0; d.expenses.forEach((x) => EXPENSES.push(x)); if (typeof renderExpenses === 'function') renderExpenses(); }
+      if (Array.isArray(d.tax) && typeof TAX_RECORDS !== 'undefined') { TAX_RECORDS.length = 0; d.tax.forEach((x) => TAX_RECORDS.push(x)); if (typeof renderTax === 'function') renderTax(); }
+    } catch (e) { console.warn('[Finance] live data unavailable, using local state:', e.message); }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); });
+    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); });
   } else {
-    load(); loadCRM(); loadTasks();
+    load(); loadCRM(); loadTasks(); loadFinance();
   }
 })();
 </script>
