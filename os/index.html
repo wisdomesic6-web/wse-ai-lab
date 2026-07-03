@@ -3633,9 +3633,9 @@ body {
           <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--accent);opacity:.07"></div>
           <div class="stat-hdr">
             <div class="stat-ic" style="background:rgba(74,106,255,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6AFF" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-            <div class="stat-badge badge-up">▲ 12%</div>
+            <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val">148</div>
+          <div class="stat-val" id="crmMCustomers">0</div>
           <div class="stat-lbl">Total Customers</div>
           <div class="mini-spark">
             <div class="spark-bar" style="height:40%;background:rgba(74,106,255,.3)"></div>
@@ -3650,9 +3650,9 @@ body {
           <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--amber);opacity:.07"></div>
           <div class="stat-hdr">
             <div class="stat-ic" style="background:rgba(244,162,27,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F4A21B" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <div class="stat-badge badge-up">▲ 8%</div>
+            <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val">24</div>
+          <div class="stat-val" id="crmMLeads">0</div>
           <div class="stat-lbl">Active Leads</div>
           <div class="mini-spark">
             <div class="spark-bar" style="height:55%;background:rgba(244,162,27,.3)"></div>
@@ -3667,9 +3667,9 @@ body {
           <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--green);opacity:.07"></div>
           <div class="stat-hdr">
             <div class="stat-ic" style="background:rgba(31,207,164,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FCFA4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="stat-badge badge-up">▲ 23%</div>
+            <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val">₦0</div>
+          <div class="stat-val" id="crmMPipeline">₦0</div>
           <div class="stat-lbl">Pipeline Value</div>
           <div class="mini-spark">
             <div class="spark-bar" style="height:45%;background:rgba(31,207,164,.3)"></div>
@@ -3684,12 +3684,12 @@ body {
           <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--purple);opacity:.07"></div>
           <div class="stat-hdr">
             <div class="stat-ic" style="background:rgba(159,120,250,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9F78FA" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-            <div class="stat-badge badge-dn">▼ 2%</div>
+            <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val">68%</div>
+          <div class="stat-val" id="crmMWin">0%</div>
           <div class="stat-lbl">Win Rate</div>
           <div style="margin-top:10px;height:3px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden">
-            <div style="height:100%;width:68%;background:var(--purple);border-radius:3px;transition:width .5s"></div>
+            <div id="crmMWinBar" style="height:100%;width:0%;background:var(--purple);border-radius:3px;transition:width .5s"></div>
           </div>
         </div>
       </div>
@@ -3907,9 +3907,9 @@ body {
           <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--green);opacity:.06;pointer-events:none"></div>
           <div class="stat-hdr">
             <div class="stat-ic" style="background:rgba(31,207,164,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FCFA4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="stat-badge badge-up">▲ 4</div>
+            <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val" id="recon-matched-count">18</div>
+          <div class="stat-val" id="recon-matched-count">0</div>
           <div class="stat-lbl">Matched</div>
         </div>
         <div class="stat-card">
@@ -3918,7 +3918,7 @@ body {
             <div class="stat-ic" style="background:rgba(244,162,27,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F4A21B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
             <div class="stat-badge" style="background:rgba(244,162,27,.12);color:var(--amber)">Review</div>
           </div>
-          <div class="stat-val" id="recon-partial-count">4</div>
+          <div class="stat-val" id="recon-partial-count">0</div>
           <div class="stat-lbl">Partial Match</div>
         </div>
         <div class="stat-card">
@@ -3927,7 +3927,7 @@ body {
             <div class="stat-ic" style="background:rgba(255,79,120,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF4F78" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
             <div class="stat-badge badge-dn">Alert</div>
           </div>
-          <div class="stat-val" id="recon-unmatched-count">3</div>
+          <div class="stat-val" id="recon-unmatched-count">0</div>
           <div class="stat-lbl">Unmatched</div>
         </div>
         <div class="stat-card">
@@ -3936,7 +3936,7 @@ body {
             <div class="stat-ic" style="background:rgba(159,120,250,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9F78FA" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
             <div class="stat-badge" style="background:rgba(159,120,250,.12);color:var(--purple)">Flag</div>
           </div>
-          <div class="stat-val" id="recon-disc-count">2</div>
+          <div class="stat-val" id="recon-disc-count">0</div>
           <div class="stat-lbl">Discrepancies</div>
         </div>
       </div>
@@ -4094,7 +4094,7 @@ body {
     
 <div class="view" id="view-businesses"></div>  <!-- stub: rendered on first visit -->
 
-<div class="view" id="view-bookings">
+<div class="view" id="view-bookings" data-built="true">
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
@@ -4113,23 +4113,23 @@ body {
     <div class="metrics-row" style="margin-bottom:24px;">
       <div class="metric-card">
         <div class="mc-label">This Month</div>
-        <div class="mc-val">18</div>
-        <div class="mc-sub trend-up">+4 vs last month</div>
+        <div class="mc-val" id="bkMMonth">0</div>
+        <div class="mc-sub">bookings</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Confirmed</div>
-        <div class="mc-val">12</div>
+        <div class="mc-val" id="bkMConfirmed">0</div>
         <div class="mc-sub" style="color:var(--green)">● Active</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Pending</div>
-        <div class="mc-val">4</div>
+        <div class="mc-val" id="bkMPending">0</div>
         <div class="mc-sub" style="color:var(--amber)">● Awaiting confirm</div>
       </div>
       <div class="metric-card">
-        <div class="mc-label">Revenue</div>
-        <div class="mc-val">₦340k</div>
-        <div class="mc-sub trend-up">+18%</div>
+        <div class="mc-label">Total</div>
+        <div class="mc-val" id="bkMTotal">0</div>
+        <div class="mc-sub">all bookings</div>
       </div>
     </div>
 
@@ -4198,7 +4198,7 @@ body {
 
 <div class="view" id="view-workflows"></div>  <!-- stub: rendered on first visit -->
 
-<div class="view" id="view-inventory">
+<div class="view" id="view-inventory" data-built="true">
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
@@ -4216,22 +4216,22 @@ body {
     <div class="metrics-row" style="margin-bottom:24px;">
       <div class="metric-card">
         <div class="mc-label">Total Items</div>
-        <div class="mc-val">47</div>
-        <div class="mc-sub">across 5 categories</div>
+        <div class="mc-val" id="invMTotal">0</div>
+        <div class="mc-sub" id="invMCats">across 0 categories</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Stock Value</div>
-        <div class="mc-val">₦2.1M</div>
-        <div class="mc-sub trend-up">+12% this month</div>
+        <div class="mc-val" id="invMValue">₦0</div>
+        <div class="mc-sub">total on hand</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Low Stock</div>
-        <div class="mc-val" style="color:var(--amber)">6</div>
+        <div class="mc-val" id="invMLow" style="color:var(--amber)">0</div>
         <div class="mc-sub" style="color:var(--amber)">● Needs restocking</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Out of Stock</div>
-        <div class="mc-val" style="color:var(--red)">2</div>
+        <div class="mc-val" id="invMOut" style="color:var(--red)">0</div>
         <div class="mc-sub" style="color:var(--red)">● Action needed</div>
       </div>
     </div>
@@ -4322,7 +4322,7 @@ body {
 </div>
 </div>
 
-<div class="view" id="view-ai-engine">
+<div class="view" id="view-ai-engine" data-built="true">
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
@@ -4351,12 +4351,12 @@ body {
       </div>
       <div class="metric-card">
         <div class="mc-label">API Calls (30d)</div>
-        <div class="mc-val">1,284</div>
-        <div class="mc-sub trend-up">+22% vs prior</div>
+        <div class="mc-val">0</div>
+        <div class="mc-sub">no usage tracked yet</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Est. Cost (30d)</div>
-        <div class="mc-val">$4.20</div>
+        <div class="mc-val">$0.00</div>
         <div class="mc-sub" style="color:var(--green)">Within budget</div>
       </div>
     </div>
@@ -4418,7 +4418,7 @@ body {
 </div>
 </div>
 
-<div class="view" id="view-settings">
+<div class="view" id="view-settings" data-built="true">
 <div class="main">
   <header class="topbar">
     <div class="topbar-left">
@@ -5882,7 +5882,9 @@ function switchModule(id) {
    RENDER CUSTOMERS TABLE
    ═══════════════════════════════════ */
 function renderCustomers() {
+  if (typeof updateCrmStats === 'function') updateCrmStats();
   const tbody = document.getElementById('customersTbody');
+  if (!CUSTOMERS.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:26px;text-align:center;color:var(--text3);font-size:13px;">No customers yet.</td></tr>'; return; }
   if (!CUSTOMERS.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:28px;text-align:center;color:var(--text3);font-size:13px;">No customers yet.</td></tr>'; return; }
   tbody.innerHTML = CUSTOMERS.map(c => `
     <tr onclick="openDetail('customer','${c.id}')">
@@ -5926,7 +5928,22 @@ function renderInteractions() {
 /* ═══════════════════════════════════
    RENDER PIPELINE BOARD
    ═══════════════════════════════════ */
+function updateCrmStats() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const parseVal = (v) => { const n = parseFloat(String(v || '').replace(/[₦,\s]/g, '').replace(/M$/i, '')); return String(v).match(/M/i) ? (n || 0) * 1e6 : (n || 0); };
+  set('crmMCustomers', CUSTOMERS.length);
+  const active = LEADS.filter(l => l.stage !== 'closed');
+  set('crmMLeads', active.length);
+  const pipeVal = active.reduce((s, l) => s + parseVal(l.value), 0);
+  set('crmMPipeline', pipeVal >= 1e6 ? '₦' + (pipeVal / 1e6).toFixed(1) + 'M' : '₦' + pipeVal.toLocaleString());
+  const closed = LEADS.filter(l => l.stage === 'closed').length;
+  const win = LEADS.length ? Math.round(closed / LEADS.length * 100) : 0;
+  set('crmMWin', win + '%');
+  const bar = document.getElementById('crmMWinBar'); if (bar) bar.style.width = win + '%';
+}
+
 function renderPipeline() {
+  updateCrmStats();
   const board = document.getElementById('pipelineBoard');
   board.innerHTML = PIPELINE_STAGES.map(stage => {
     const leads = LEADS.filter(l => l.stage === stage.id);
@@ -6251,7 +6268,7 @@ function openDetail(type, id) {
       </div>
       <div style="margin-top:16px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px">
         <div style="font-size:11px;color:var(--text3);margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px">Line Items</div>
-        ${[['Professional Services','1 month','₦3,200,000'],['Platform License','Annual','₦800,000'],['Setup & Onboarding','One-time','₦200,000']].map(([name,qty,amt])=>`
+        ${[[inv.client + ' — services','1 item',inv.amount]].map(([name,qty,amt])=>`
           <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)">
             <div><div style="font-size:12.5px;color:var(--text)">${name}</div><div style="font-size:11px;color:var(--text3)">${qty}</div></div>
             <span style="font-family:var(--syne);font-weight:600;font-size:13px;color:var(--text)">${amt}</span>
@@ -7612,10 +7629,31 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (e) { console.warn('[Finance] live data unavailable, using local state:', e.message); }
   }
 
+  // ── Ops live data (bookings, inventory, AI templates) ──
+  window.persistOps = async function (entity, row) {
+    try {
+      await fetch('/.netlify/functions/ops', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity, row }),
+      });
+    } catch (e) { console.warn('[Ops] persist failed:', e.message); }
+  };
+  async function loadOps() {
+    try {
+      const res = await fetch('/.netlify/functions/ops', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      if (d.error) throw new Error(d.error);
+      if (Array.isArray(d.bookings) && typeof BOOKINGS_DATA !== 'undefined') { BOOKINGS_DATA.length = 0; d.bookings.forEach((x) => BOOKINGS_DATA.push(x)); if (typeof renderBookings === 'function') renderBookings(); }
+      if (Array.isArray(d.inventory) && typeof INVENTORY_DATA !== 'undefined') { INVENTORY_DATA.length = 0; d.inventory.forEach((x) => INVENTORY_DATA.push(x)); if (typeof renderInventory === 'function') renderInventory(); }
+      if (Array.isArray(d.templates) && typeof AI_TEMPLATES !== 'undefined') { AI_TEMPLATES.length = 0; d.templates.forEach((x) => AI_TEMPLATES.push(x)); if (typeof renderAITemplates === 'function') renderAITemplates(); }
+    } catch (e) { console.warn('[Ops] live data unavailable, using local state:', e.message); }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); });
+    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); });
   } else {
-    load(); loadCRM(); loadTasks(); loadFinance();
+    load(); loadCRM(); loadTasks(); loadFinance(); loadOps();
   }
 })();
 </script>
@@ -8281,18 +8319,22 @@ document.addEventListener('DOMContentLoaded', function() {
    BOOKINGS PAGE JS
    ══════════════════════════════════════════════════════════ */
 
-const BOOKINGS_DATA = [
-  { client:'Tunde Adeyemi',   service:'AI Product Build',    date:'2026-07-05', time:'10:00', status:'confirmed' },
-  { client:'Chidi Okonkwo',   service:'Business Automation', date:'2026-07-07', time:'14:00', status:'confirmed' },
-  { client:'Amaka Eze',       service:'AI Strategy Session', date:'2026-07-09', time:'11:00', status:'pending' },
-  { client:'Bola Fashola',    service:'SaaS Consultation',   date:'2026-07-10', time:'15:00', status:'confirmed' },
-  { client:'Ngozi Adichie',   service:'AI Product Build',    date:'2026-07-14', time:'09:00', status:'pending' },
-  { client:'Emeka Anieze',    service:'Business Automation', date:'2026-07-15', time:'13:00', status:'confirmed' },
-];
+let BOOKINGS_DATA = [];   /* loaded live from Supabase via loadOps() */
 
 let bkFilter = 'upcoming';
 
+function updateBookingStats() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const now = new Date();
+  const thisMonth = BOOKINGS_DATA.filter(b => { const d = new Date(b.date); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); }).length;
+  set('bkMMonth', thisMonth);
+  set('bkMConfirmed', BOOKINGS_DATA.filter(b => b.status === 'confirmed').length);
+  set('bkMPending', BOOKINGS_DATA.filter(b => b.status === 'pending').length);
+  set('bkMTotal', BOOKINGS_DATA.length);
+}
+
 function renderBookings() {
+  updateBookingStats();
   const container = document.getElementById('bookingList');
   if (!container) return;
   const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -8342,13 +8384,13 @@ function closeBkModal() {
 function saveBooking() {
   const client = document.getElementById('bkClient').value.trim();
   if (!client) return;
-  BOOKINGS_DATA.push({
-    client, 
+  const _bk = { id:'bk_'+Date.now(), client,
     service: document.getElementById('bkService').value,
     date:    document.getElementById('bkDate').value || new Date().toISOString().slice(0,10),
     time:    document.getElementById('bkTime').value || '10:00',
-    status:  'pending'
-  });
+    status:  'pending' };
+  BOOKINGS_DATA.push(_bk);
+  if (typeof persistOps === 'function') persistOps('booking', _bk);
   closeBkModal();
   renderBookings();
 }
@@ -8358,18 +8400,22 @@ function saveBooking() {
    INVENTORY PAGE JS
    ══════════════════════════════════════════════════════════ */
 
-let INVENTORY_DATA = [
-  { name:'Anthropic API Credits',    cat:'Software Licences', qty:10, cost:15000, reorder:3 },
-  { name:'Supabase Pro Plan',        cat:'Software Licences', qty:1,  cost:25000, reorder:1 },
-  { name:'n8n Railway Instance',     cat:'Software Licences', qty:1,  cost:8000,  reorder:1 },
-  { name:'Netlify Pro',              cat:'Software Licences', qty:2,  cost:12000, reorder:1 },
-  { name:'Dell Laptop',              cat:'Hardware',          qty:1,  cost:650000,reorder:1 },
-  { name:'Business Cards (50)',       cat:'Marketing Assets',  qty:3,  cost:5000,  reorder:2 },
-  { name:'Whiteboard Markers',       cat:'Office Supplies',   qty:2,  cost:800,   reorder:5 },
-  { name:'Render Backend Plan',      cat:'Software Licences', qty:1,  cost:6000,  reorder:1 },
-  { name:'Logo Design Assets',       cat:'Marketing Assets',  qty:1,  cost:45000, reorder:1 },
-  { name:'MetaTrader 5 VPS',         cat:'Software Licences', qty:1,  cost:9000,  reorder:1 },
-];
+let INVENTORY_DATA = [];   /* loaded live from Supabase via loadOps() */
+
+function updateInvMetrics() {
+  const items = INVENTORY_DATA;
+  const totalItems = items.reduce((s, i) => s + (Number(i.qty) || 0), 0);
+  const stockValue = items.reduce((s, i) => s + (Number(i.qty) || 0) * (Number(i.cost) || 0), 0);
+  const low = items.filter(i => Number(i.qty) > 0 && Number(i.qty) <= Number(i.reorder)).length;
+  const out = items.filter(i => Number(i.qty) === 0).length;
+  const cats = new Set(items.map(i => i.cat).filter(Boolean)).size;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('invMTotal', totalItems);
+  set('invMValue', '₦' + stockValue.toLocaleString());
+  set('invMLow', low);
+  set('invMOut', out);
+  set('invMCats', 'across ' + cats + ' categor' + (cats === 1 ? 'y' : 'ies'));
+}
 
 function getInvStatus(item) {
   if (item.qty === 0) return ['Out of Stock', 'status-empty'];
@@ -8381,6 +8427,8 @@ function renderInventory(data) {
   const tbody = document.getElementById('invTbody');
   if (!tbody) return;
   const d = data || INVENTORY_DATA;
+  updateInvMetrics();
+  if (!d.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:26px;text-align:center;color:var(--text3);font-size:13px;">No inventory items yet.</td></tr>'; return; }
   tbody.innerHTML = d.map(item => {
     const [label, cls] = getInvStatus(item);
     const total = (item.qty * item.cost).toLocaleString();
@@ -8416,13 +8464,15 @@ function closeInvModal() {
 function saveItem() {
   const name = (document.getElementById('invName') || {}).value;
   if (!name || !name.trim()) return;
-  INVENTORY_DATA.push({
+  const _item = { id:'inv_'+Date.now(),
     name: name.trim(),
     cat:  document.getElementById('invCat').value,
     qty:  parseInt(document.getElementById('invQty').value) || 0,
     cost: parseInt(document.getElementById('invCost').value) || 0,
     reorder: parseInt(document.getElementById('invReorder').value) || 5,
-  });
+  };
+  INVENTORY_DATA.push(_item);
+  if (typeof persistOps === 'function') persistOps('inventory', _item);
   closeInvModal();
   renderInventory();
 }
@@ -8432,19 +8482,14 @@ function saveItem() {
    AI ENGINE PAGE JS
    ══════════════════════════════════════════════════════════ */
 
-const AI_TEMPLATES = [
-  { name:'Client Proposal Writer',   desc:'Generates professional project proposals from a client brief.',    tag:'Sales',     tagColor:'blue' },
-  { name:'Cold Outreach Email',      desc:'Writes personalised cold emails for WSE AI Lab lead generation.',  tag:'Marketing', tagColor:'green' },
-  { name:'Code Review Assistant',    desc:'Reviews backend or frontend code with actionable suggestions.',     tag:'Dev',       tagColor:'purple' },
-  { name:'Meeting Summary',          desc:'Summarises Zoom call notes into action points and decisions.',      tag:'Ops',       tagColor:'amber' },
-  { name:'Product Brief Generator',  desc:'Turns a concept into a structured product spec.',                  tag:'Product',   tagColor:'blue' },
-];
+let AI_TEMPLATES = [];   /* loaded live from Supabase via loadOps() */
 
 function renderAITemplates() {
   const container = document.getElementById('aiTemplates');
   if (!container) return;
   const colorMap = { blue:'rgba(74,106,255,0.14)', green:'rgba(31,207,164,0.14)', purple:'rgba(159,120,250,0.14)', amber:'rgba(244,162,27,0.14)' };
   const textMap   = { blue:'var(--accent2)', green:'var(--green)', purple:'var(--purple)', amber:'var(--amber)' };
+  if (!AI_TEMPLATES.length) { container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;grid-column:1/-1;">No prompt templates yet.</div>'; return; }
   container.innerHTML = AI_TEMPLATES.map(t => `
     <div class="ai-template-card">
       <div class="at-name">${t.name}</div>
@@ -8456,7 +8501,9 @@ function renderAITemplates() {
 function addTemplate() {
   const name = prompt('Template name:');
   if (!name) return;
-  AI_TEMPLATES.push({ name, desc:'Custom prompt template', tag:'Custom', tagColor:'purple' });
+  const _tpl = { id:'tpl_'+Date.now(), name, desc:'Custom prompt template', tag:'Custom', tagColor:'purple' };
+  AI_TEMPLATES.push(_tpl);
+  if (typeof persistOps === 'function') persistOps('template', _tpl);
   renderAITemplates();
 }
 
@@ -8471,7 +8518,7 @@ function buildAIUsageChart() {
       labels: days,
       datasets: [{ 
         label: 'API Calls',
-        data: [142,98,203,177,261,88,45],
+        data: [0,0,0,0,0,0,0],
         backgroundColor: 'rgba(74,106,255,0.55)',
         borderRadius: 5,
         borderSkipped: false,
