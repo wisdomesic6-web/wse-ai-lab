@@ -4688,10 +4688,11 @@ body {
 <script>
 /* ── Phase 1 JS (base) ── */
 
-// ── Sidebar drawer handled by openSidebar/closeSidebar in router ──
-
-menuToggle.addEventListener('click', openDrawer);
-backdrop.addEventListener('click', closeDrawer);
+// ── Sidebar drawer is wired via inline onclick="openSidebar()" / "closeSidebar()".
+// NOTE: the old `menuToggle.addEventListener('click', openDrawer)` lines were removed —
+// openDrawer/closeDrawer no longer exist, and duplicate id="menuToggle" makes
+// window.menuToggle an HTMLCollection, so calling .addEventListener threw here and
+// halted this whole script block (breaking PAGE_TITLES / showPage / navigation).
 
 // Close drawer on nav item click (mobile UX)
 sidebar.querySelectorAll('.nav-item').forEach(item => {
@@ -5797,14 +5798,7 @@ document.querySelectorAll('.label-toggle').forEach(l => {
 <script>
 
 /* ── Phase 4 JS (CRM/Finance/Recon) ── */
-const CUSTOMERS = [
-  {id:'c1',name:'Zenith Corp',email:'hello@zenithcorp.com',seg:'Enterprise',spent:'₦28.4M',last:'Today',tags:['VIP','Tech'],color:'linear-gradient(135deg,#4A6AFF,#7698FF)',initials:'ZC'},
-  {id:'c2',name:'Nova Brands',email:'info@novabrands.ng',seg:'Mid-Market',spent:'₦5.1M',last:'2 days ago',tags:['Prospect'],color:'linear-gradient(135deg,#9F78FA,#818CF8)',initials:'NB'},
-  {id:'c3',name:'PrimeTech Group',email:'ops@primetech.io',seg:'Enterprise',spent:'₦12.8M',last:'Yesterday',tags:['Finance','Hot'],color:'linear-gradient(135deg,#F4A21B,#EF6C00)',initials:'PG'},
-  {id:'c4',name:'Emerald Agro',email:'contact@emeraldagro.ng',seg:'SME',spent:'₦7.9M',last:'3 days ago',tags:['Agriculture'],color:'linear-gradient(135deg,#1FCFA4,#0EC4D8)',initials:'EA'},
-  {id:'c5',name:'BrightHouse',email:'hello@brighthouse.ng',seg:'SME',spent:'₦3.5M',last:'1 week ago',tags:['Real Estate'],color:'linear-gradient(135deg,#FF4F78,#F43F5E)',initials:'BH'},
-  {id:'c6',name:'Delta Logistics',email:'ops@deltalog.com',seg:'Mid-Market',spent:'₦9.2M',last:'4 days ago',tags:['Logistics'],color:'linear-gradient(135deg,#0EC4D8,#0B7EA8)',initials:'DL'},
-];
+let CUSTOMERS = [];   /* loaded live from Supabase via loadCRM() */
 
 const PIPELINE_STAGES = [
   {id:'prospect', label:'Prospect', color:'#3D4E75', bgColor:'rgba(61,78,117,.15)'},
@@ -5814,22 +5808,9 @@ const PIPELINE_STAGES = [
   {id:'closed', label:'Closed Won', color:'#1FCFA4', bgColor:'rgba(31,207,164,.12)'},
 ];
 
-const LEADS = [
-  {id:'l1',name:'James Owolabi',company:'TechStart Lagos',stage:'qualified',value:'₦5.1M',prob:65,owner:'KA',ownerColor:'linear-gradient(135deg,#1FCFA4,#0EC4D8)',color:'linear-gradient(135deg,#4A6AFF,#7698FF)',initials:'JO'},
-  {id:'l2',name:'Amaka Obi',company:'GreenPower NG',stage:'proposal',value:'₦12.8M',prob:45,owner:'AO',ownerColor:'linear-gradient(135deg,#4A6AFF,#7698FF)',color:'linear-gradient(135deg,#9F78FA,#818CF8)',initials:'AO'},
-  {id:'l3',name:'Chidi Eze',company:'FreshMart',stage:'negotiation',value:'₦3.5M',prob:80,owner:'MT',ownerColor:'linear-gradient(135deg,#F4A21B,#EF6C00)',color:'linear-gradient(135deg,#1FCFA4,#0EC4D8)',initials:'CE'},
-  {id:'l4',name:'Tunde Fashola',company:'BuildRight Const.',stage:'closed',value:'₦8.4M',prob:100,owner:'AO',ownerColor:'linear-gradient(135deg,#4A6AFF,#7698FF)',color:'linear-gradient(135deg,#F4A21B,#EF6C00)',initials:'TF'},
-  {id:'l5',name:'Kemi Suleiman',company:'EduTech Hub',stage:'prospect',value:'₦2.2M',prob:20,owner:'JD',ownerColor:'linear-gradient(135deg,#9F78FA,#818CF8)',color:'linear-gradient(135deg,#FF4F78,#F43F5E)',initials:'KS'},
-  {id:'l6',name:'BrightHouse Realty',company:'BrightHouse',stage:'qualified',value:'₦7.9M',prob:55,owner:'KA',ownerColor:'linear-gradient(135deg,#1FCFA4,#0EC4D8)',color:'linear-gradient(135deg,#0EC4D8,#0B7EA8)',initials:'BR'},
-];
+let LEADS = [];   /* loaded live from Supabase via loadCRM() */
 
-const INTERACTIONS = [
-  {type:'call',icon:'📞',title:'Discovery call with PrimeTech Group',meta:'Akin Olusola · 35 min','time':'2 hours ago',badge:'Call',badgeColor:'rgba(74,106,255,.12)',badgeText:'#7698FF'},
-  {type:'email',icon:'✉️',title:'Sent proposal to Nova Brands — Q2 package',meta:'Super Admin · Email','time':'Yesterday 3:40 PM',badge:'Email',badgeColor:'rgba(31,207,164,.12)',badgeText:'#1FCFA4'},
-  {type:'meeting',icon:'🤝',title:'Onsite meeting — Zenith Corp HQ Lagos',meta:'Kemi Adeyemi + Akin · 2hrs','time':'Apr 22, 2026',badge:'Meeting',badgeColor:'rgba(159,120,250,.12)',badgeText:'#9F78FA'},
-  {type:'note',icon:'📝',title:'Follow-up note: BrightHouse interested in Pro plan',meta:'Musa Tunde','time':'Apr 21, 2026',badge:'Note',badgeColor:'rgba(244,162,27,.12)',badgeText:'#F4A21B'},
-  {type:'call',icon:'📞',title:'Renewal discussion with Emerald Agro',meta:'Super Admin · 18 min','time':'Apr 20, 2026',badge:'Call',badgeColor:'rgba(74,106,255,.12)',badgeText:'#7698FF'},
-];
+let INTERACTIONS = [];   /* clean state — no demo interactions */
 
 const INVOICES = [
   {id:'INV-0042',client:'Zenith Corp',amount:'₦4,200,000',due:'Apr 20',status:'paid',method:'paystack'},
@@ -5881,6 +5862,7 @@ function switchModule(id) {
    ═══════════════════════════════════ */
 function renderCustomers() {
   const tbody = document.getElementById('customersTbody');
+  if (!CUSTOMERS.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:28px;text-align:center;color:var(--text3);font-size:13px;">No customers yet.</td></tr>'; return; }
   tbody.innerHTML = CUSTOMERS.map(c => `
     <tr onclick="openDetail('customer','${c.id}')">
       <td>
@@ -5907,6 +5889,7 @@ function renderCustomers() {
    ═══════════════════════════════════ */
 function renderInteractions() {
   const tl = document.getElementById('interactionTimeline');
+  if (!INTERACTIONS.length) { tl.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;">No interactions logged yet.</div>'; return; }
   tl.innerHTML = INTERACTIONS.map((i,idx) => `
     <div class="t-item">
       ${idx < INTERACTIONS.length-1 ? '<div class="t-line"></div>' : ''}
@@ -6281,6 +6264,7 @@ function moveLead(leadId, newStage) {
   const l = LEADS.find(x=>x.id===leadId);
   if (!l) return;
   l.stage = newStage;
+  if (typeof persistLeadStage === 'function') persistLeadStage(leadId, newStage);
   closeDetail();
   renderPipeline();
   /* Re-open panel with updated data */
@@ -6451,13 +6435,15 @@ function submitModal() {
     const colors = ['linear-gradient(135deg,#4A6AFF,#7698FF)','linear-gradient(135deg,#1FCFA4,#0EC4D8)','linear-gradient(135deg,#9F78FA,#818CF8)'];
     const oc = {'AO':'linear-gradient(135deg,#4A6AFF,#7698FF)','KA':'linear-gradient(135deg,#1FCFA4,#0EC4D8)','MT':'linear-gradient(135deg,#F4A21B,#EF6C00)','JD':'linear-gradient(135deg,#9F78FA,#818CF8)'};
     const owner = document.getElementById('mf-owner').value;
-    LEADS.push({id,name,company:document.getElementById('mf-company').value||'—',
+    const _newLead = {id,name,company:document.getElementById('mf-company').value||'—',
       stage:document.getElementById('mf-stage').value,
       value:document.getElementById('mf-value').value||'₦0',
       prob:parseInt(document.getElementById('mf-prob').value)||20,
       owner,ownerColor:oc[owner],
       color:colors[Math.floor(Math.random()*colors.length)],
-      initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()});
+      initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()};
+    LEADS.push(_newLead);
+    if (typeof persistLead === 'function') persistLead(_newLead);
     renderPipeline();
 
   } else if (activeModalType === 'expense') {
@@ -7522,10 +7508,44 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // ── CRM live data (customers + leads) ──
+  window.persistLead = async function (lead) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'lead', row: lead }),
+      });
+    } catch (e) { console.warn('[CRM] persist lead failed:', e.message); }
+  };
+  window.persistLeadStage = async function (id, stage) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'lead', id, stage }),
+      });
+    } catch (e) { console.warn('[CRM] persist stage failed:', e.message); }
+  };
+  async function loadCRM() {
+    try {
+      const res = await fetch('/.netlify/functions/crm', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      if (d.error) throw new Error(d.error);
+      if (Array.isArray(d.customers)) {
+        CUSTOMERS.length = 0; d.customers.forEach((c) => CUSTOMERS.push(c));
+        if (typeof renderCustomers === 'function') renderCustomers();
+      }
+      if (Array.isArray(d.leads)) {
+        LEADS.length = 0; d.leads.forEach((l) => LEADS.push(l));
+        if (typeof renderPipeline === 'function') renderPipeline();
+      }
+    } catch (e) { console.warn('[CRM] live data unavailable, using local state:', e.message); }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', load);
+    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); });
   } else {
-    load();
+    load(); loadCRM();
   }
 })();
 </script>
