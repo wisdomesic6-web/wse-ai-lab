@@ -4939,17 +4939,7 @@ function openSidebar() {
 
 
 /* ── Phase 2 JS (Tasks/Kanban) ── */
-const TASKS = {
-  t1: { id:'t1', title:'Prepare Q2 investor deck with financial projections', desc:'Include revenue forecasts, burn rate analysis, and growth metrics for Series A presentation.', status:'todo', priority:'pri-high', due:'Apr 20', dueISO:'2026-04-20', assignees:['AO','KA'], labels:['Urgent','Finance'], comments:3, subtasks:{done:2,total:5} },
-  t2: { id:'t2', title:'Onboard new supplier — TechParts Co.', desc:'Complete vendor due diligence, contract signing, and system integration.', status:'todo', priority:'pri-med', due:'Apr 26', dueISO:'2026-04-26', assignees:['MT'], labels:['Ops'], comments:0, subtasks:null },
-  t3: { id:'t3', title:'Update employee handbook v2.1', desc:'', status:'todo', priority:'pri-low', due:'May 10', dueISO:'2026-05-10', assignees:['JD'], labels:[], comments:0, subtasks:null },
-  t4: { id:'t4', title:'Deploy v2 staging environment with Docker', desc:'Set up CI/CD pipeline, configure env variables, and run smoke tests.', status:'inprog', priority:'pri-high', due:'Apr 25', dueISO:'2026-04-25', assignees:['AO','BI','JD'], labels:['Urgent','Tech'], comments:7, subtasks:{done:3,total:4} },
-  t5: { id:'t5', title:'Build Zenith Corp onboarding flow', desc:'', status:'inprog', priority:'pri-med', due:'Apr 30', dueISO:'2026-04-30', assignees:['KA'], labels:['CRM'], comments:0, subtasks:{done:1,total:3} },
-  t6: { id:'t6', title:'Q1 expense report reconciliation', desc:'', status:'review', priority:'pri-med', due:'Apr 27', dueISO:'2026-04-27', assignees:['MT','JD'], labels:['Finance'], comments:0, subtasks:null },
-  t7: { id:'t7', title:'Nova Brands pitch deck — final review', desc:'', status:'review', priority:'pri-low', due:'Apr 28', dueISO:'2026-04-28', assignees:['AO'], labels:[], comments:0, subtasks:null },
-  t8: { id:'t8', title:'Finalize Q1 financial report', desc:'', status:'done', priority:'pri-high', due:'Apr 20', dueISO:'2026-04-20', assignees:['KA'], labels:[], comments:0, subtasks:null },
-  t9: { id:'t9', title:'Set up Paystack webhook integration', desc:'', status:'done', priority:'pri-med', due:'Apr 18', dueISO:'2026-04-18', assignees:['AO'], labels:[], comments:0, subtasks:null },
-};
+let TASKS = {};   /* loaded live from Supabase via loadTasks() */
 
 /* ═════════════════════════════════════════════
    VIEW SWITCHER
@@ -5191,7 +5181,7 @@ function commitDrop(newStatus, ph) {
   draggedEl.classList.remove('dragging');
 
   draggedEl.dataset.status = newStatus;
-  if (TASKS[draggedId]) TASKS[draggedId].status = newStatus;
+  if (TASKS[draggedId]) { TASKS[draggedId].status = newStatus; if (typeof persistTaskPatch === 'function') persistTaskPatch(draggedId, { status: newStatus }); }
 
   /* Done column visual */
   const cardTitle = draggedEl.querySelector('.card-title-text');
@@ -5303,6 +5293,7 @@ function closePanel() {
   if (activePanelId && TASKS[activePanelId]) {
     TASKS[activePanelId].title = document.getElementById('panelTitle').value.trim() || TASKS[activePanelId].title;
     TASKS[activePanelId].desc  = document.getElementById('panelDesc').value.trim();
+    if (typeof persistTaskPatch === 'function') persistTaskPatch(activePanelId, { title: TASKS[activePanelId].title, desc: TASKS[activePanelId].desc });
     /* Update card title in board */
     const card = document.querySelector(`[data-id="${activePanelId}"] .card-title-text`);
     if (card) card.textContent = TASKS[activePanelId].title;
@@ -5400,6 +5391,7 @@ function setStatus(e, newStatus) {
 
   /* Update store */
   t.status = newStatus;
+  if (typeof persistTaskPatch === 'function') persistTaskPatch(activePanelId, { status: newStatus });
 
   /* Move card between Kanban columns */
   const card = document.querySelector(`[data-id="${activePanelId}"]`);
@@ -5672,6 +5664,7 @@ function createTask() {
   const dueClass = due === 'No date' ? 'ok' : getDueUrgency(dueVal) === 'overdue' ? 'overdue' : getDueUrgency(dueVal) === 'soon' ? 'soon' : 'ok';
 
   TASKS[id] = { id, title, desc, status, priority, due, dueISO: dueVal || null, assignees:[assign], labels:[], comments:0, subtasks:null };
+  if (typeof persistTask === 'function') persistTask(TASKS[id]);
 
   const avColor = TEAM[assign]?.color || 'linear-gradient(135deg,#4A6AFF,#7698FF)';
   const cardHTML = `
@@ -5715,7 +5708,54 @@ function createTask() {
 }
 
 function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str == null ? '' : str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═════════════════════════════════════════════
+   KANBAN BOARD RENDER (from TASKS store / Supabase)
+   ═════════════════════════════════════════════ */
+function taskCardHTML(t) {
+  const priLabel = { 'pri-high':'↑ High', 'pri-med':'– Med', 'pri-low':'↓ Low' };
+  const priBadge = { 'pri-high':'pri-badge-high', 'pri-med':'pri-badge-med', 'pri-low':'pri-badge-low' };
+  const urg = t.dueISO && typeof getDueUrgency === 'function' ? getDueUrgency(t.dueISO) : null;
+  const dueClass = urg === 'overdue' ? 'overdue' : urg === 'soon' ? 'soon' : 'ok';
+  const cal = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+  const dots = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>';
+  const chat = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+  const labels = (t.labels || []).map(l => `<span class="label-chip" style="background:rgba(74,106,255,0.12);color:var(--accent2)">${escHtml(l)}</span>`).join('');
+  const assignees = (t.assignees || []).map(a => `<div class="assignee-av" style="background:${(typeof TEAM!=='undefined' && TEAM[a] && TEAM[a].color) || 'linear-gradient(135deg,#4A6AFF,#7698FF)'}">${escHtml(a)}</div>`).join('');
+  const sub = t.subtasks ? `<div class="subtask-bar"><div class="subtask-label"><span>Subtasks</span><span>${t.subtasks.done} / ${t.subtasks.total}</span></div><div class="subtask-track"><div class="subtask-fill" style="width:${t.subtasks.total ? Math.round(t.subtasks.done / t.subtasks.total * 100) : 0}%"></div></div></div>` : '';
+  const comments = t.comments ? `<div class="card-comment-count">${chat}${t.comments}</div>` : '';
+  return `
+  <div class="task-card ${t.priority}" draggable="true" data-id="${t.id}" data-status="${t.status}" onclick="openPanel('${t.id}')">
+    ${labels ? `<div class="card-labels">${labels}</div>` : ''}
+    <div class="card-top">
+      <div class="card-title-text">${escHtml(t.title)}</div>
+      <div class="card-menu" onclick="event.stopPropagation()">${dots}</div>
+    </div>
+    ${t.desc ? `<div class="card-desc">${escHtml(t.desc)}</div>` : ''}
+    ${sub}
+    <div class="card-footer">
+      <div class="card-footer-left">
+        <span class="pri-badge ${priBadge[t.priority] || 'pri-badge-med'}">${priLabel[t.priority] || '– Med'}</span>
+        <div class="card-due ${dueClass}">${cal}${escHtml(t.due || 'No date')}</div>
+      </div>
+      <div class="card-footer-right">${comments}<div class="card-assignees">${assignees}</div></div>
+    </div>
+  </div>`;
+}
+
+function renderTasksBoard() {
+  const cols = ['todo','inprog','review','done'];
+  cols.forEach(s => { const c = document.getElementById('col-' + s); if (c) c.innerHTML = ''; });
+  Object.values(TASKS).forEach(t => {
+    const c = document.getElementById('col-' + t.status);
+    if (c) c.insertAdjacentHTML('beforeend', taskCardHTML(t));
+  });
+  if (typeof bindCardDrag === 'function') {
+    document.querySelectorAll('.k-cards .task-card').forEach(card => bindCardDrag(card));
+  }
+  if (typeof updateCounts === 'function') updateCounts();
 }
 
 /* ═════════════════════════════════════════════
@@ -7542,10 +7582,44 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (e) { console.warn('[CRM] live data unavailable, using local state:', e.message); }
   }
 
+  // ── Tasks live data (Kanban) ──
+  window.persistTask = async function (task) {
+    try {
+      await fetch('/.netlify/functions/tasks', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task),
+      });
+    } catch (e) { console.warn('[Tasks] persist task failed:', e.message); }
+  };
+  window.persistTaskPatch = async function (id, fields) {
+    try {
+      await fetch('/.netlify/functions/tasks', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, ...fields }),
+      });
+    } catch (e) { console.warn('[Tasks] persist patch failed:', e.message); }
+  };
+  async function loadTasks() {
+    try {
+      const res = await fetch('/.netlify/functions/tasks', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      if (d.error) throw new Error(d.error);
+      if (Array.isArray(d.tasks) && typeof TASKS !== 'undefined') {
+        Object.keys(TASKS).forEach((k) => delete TASKS[k]);
+        d.tasks.forEach((t) => { TASKS[t.id] = t; });
+        if (typeof renderTasksBoard === 'function') renderTasksBoard();
+      }
+    } catch (e) {
+      console.warn('[Tasks] live data unavailable, using local state:', e.message);
+      if (typeof renderTasksBoard === 'function') renderTasksBoard(); // clear malformed static cards
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); });
+    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); });
   } else {
-    load(); loadCRM();
+    load(); loadCRM(); loadTasks();
   }
 })();
 </script>
