@@ -175,6 +175,13 @@ body {
 
 .nav-group { padding: 10px 0; border-bottom: 1px solid var(--border); }
 
+/* Appearance settings: compact density + collapsed sidebar rail */
+html[data-density="compact"] { font-size: 14.5px; }
+.sidebar.collapsed { width: 72px; }
+.sidebar.collapsed .nav-section-label { opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden; }
+.sidebar.collapsed .nav-item { font-size: 0; justify-content: center; padding-left: 0; padding-right: 0; gap: 0; }
+.sidebar.collapsed .nav-item .nav-ic { font-size: 15px; }
+
 .nav-section-label {
   padding: 0 18px 5px;
   font-size: 9.5px;
@@ -4570,15 +4577,15 @@ body {
           <h3 class="st-title">Notifications</h3>
           <div class="settings-form">
             <div class="notif-section-label">Email Alerts</div>
-            <div class="notif-row"><span>New client inquiry</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-            <div class="notif-row"><span>Invoice paid</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-            <div class="notif-row"><span>Task overdue</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-            <div class="notif-row"><span>New booking</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
+            <div class="notif-row"><span>New client inquiry</span><label class="toggle-switch"><input type="checkbox" id="ntf-inquiry" checked><span class="toggle-track"></span></label></div>
+            <div class="notif-row"><span>Invoice paid</span><label class="toggle-switch"><input type="checkbox" id="ntf-invoice" checked><span class="toggle-track"></span></label></div>
+            <div class="notif-row"><span>Task overdue</span><label class="toggle-switch"><input type="checkbox" id="ntf-task" checked><span class="toggle-track"></span></label></div>
+            <div class="notif-row"><span>New booking</span><label class="toggle-switch"><input type="checkbox" id="ntf-booking" checked><span class="toggle-track"></span></label></div>
             <div class="notif-section-label" style="margin-top:20px;">Telegram Alerts</div>
-            <div class="notif-row"><span>Trading bot signals</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-track"></span></label></div>
-            <div class="notif-row"><span>Revenue milestones</span><label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label></div>
-            <div class="form-field" style="margin-top:4px;"><label>Telegram Bot Token</label><input type="text" placeholder="Wizzy78bot token"></div>
-            <button class="btn-accent-sm">Save Preferences</button>
+            <div class="notif-row"><span>Trading bot signals</span><label class="toggle-switch"><input type="checkbox" id="ntf-signals" checked><span class="toggle-track"></span></label></div>
+            <div class="notif-row"><span>Revenue milestones</span><label class="toggle-switch"><input type="checkbox" id="ntf-revenue"><span class="toggle-track"></span></label></div>
+            <div class="form-field" style="margin-top:4px;"><label>Telegram Bot Token</label><input type="text" id="ntf-token" placeholder="Wizzy78bot token"></div>
+            <button class="btn-accent-sm" onclick="saveNotificationSettings(this)">Save Preferences</button>
           </div>
         </div>
 
@@ -4625,25 +4632,25 @@ body {
           <div class="settings-form">
             <div class="notif-section-label">Theme</div>
             <div class="theme-grid">
-              <div class="theme-swatch active" onclick="setTheme('fintech-dark')" style="background:#080A12;border-color:var(--accent);">
+              <div class="theme-swatch active" data-theme="fintech-dark" onclick="setThemePref('fintech-dark', this)" style="background:#080A12;border-color:var(--accent);">
                 <div style="font-size:11px;color:var(--text2);margin-top:6px;">Fintech Dark</div>
               </div>
-              <div class="theme-swatch" onclick="setTheme('arctic-light')" style="background:#F5F7FF;">
+              <div class="theme-swatch" data-theme="arctic-light" onclick="setThemePref('arctic-light', this)" style="background:#F5F7FF;">
                 <div style="font-size:11px;color:#3D4E75;margin-top:6px;">Arctic Light</div>
               </div>
-              <div class="theme-swatch" onclick="setTheme('obsidian-gold')" style="background:#0C0A05;">
+              <div class="theme-swatch" data-theme="obsidian-gold" onclick="setThemePref('obsidian-gold', this)" style="background:#0C0A05;">
                 <div style="font-size:11px;color:#C9A84C;margin-top:6px;">Obsidian Gold</div>
               </div>
             </div>
             <div class="notif-section-label" style="margin-top:20px;">Font Scale</div>
             <div class="notif-row">
               <span>Compact</span>
-              <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+              <label class="toggle-switch"><input type="checkbox" id="apr-compact" onchange="onAppearanceToggle()"><span class="toggle-track"></span></label>
             </div>
             <div class="notif-section-label" style="margin-top:20px;">Sidebar</div>
             <div class="notif-row">
               <span>Collapse by default</span>
-              <label class="toggle-switch"><input type="checkbox"><span class="toggle-track"></span></label>
+              <label class="toggle-switch"><input type="checkbox" id="apr-sidebar" onchange="onAppearanceToggle()"><span class="toggle-track"></span></label>
             </div>
           </div>
         </div>
@@ -7686,6 +7693,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const ok = await persistSettings({ company_name: g('set-company'), business_type: g('set-bizType'), country: g('set-country'), website: g('set-website') });
     flashSaved(btn, ok);
   };
+  window.saveNotificationSettings = async function (btn) {
+    const chk = (id) => !!(document.getElementById(id) || {}).checked;
+    const notif = {
+      inquiry: chk('ntf-inquiry'), invoice: chk('ntf-invoice'), task: chk('ntf-task'), booking: chk('ntf-booking'),
+      signals: chk('ntf-signals'), revenue: chk('ntf-revenue'),
+      telegramToken: (document.getElementById('ntf-token') || {}).value || '',
+    };
+    const ok = await persistSettings({ notifications: notif });
+    flashSaved(btn, ok);
+  };
+
+  // ── Appearance (theme / font scale / sidebar) — apply + persist ──
+  const APPEARANCE = { theme: null, fontScale: 'normal', sidebarCollapse: false };
+  function setActiveSwatch(theme) {
+    document.querySelectorAll('.theme-swatch').forEach((el) => el.classList.toggle('active', el.getAttribute('data-theme') === theme));
+  }
+  function applyAppearance() {
+    document.documentElement.setAttribute('data-density', APPEARANCE.fontScale === 'compact' ? 'compact' : 'normal');
+    const sb = document.getElementById('sidebar');
+    if (sb) sb.classList.toggle('collapsed', !!APPEARANCE.sidebarCollapse);
+    if (APPEARANCE.theme && typeof WSETheme !== 'undefined') { try { WSETheme.set(APPEARANCE.theme); } catch (e) {} setActiveSwatch(APPEARANCE.theme); }
+    const c = document.getElementById('apr-compact'); if (c) c.checked = APPEARANCE.fontScale === 'compact';
+    const s2 = document.getElementById('apr-sidebar'); if (s2) s2.checked = !!APPEARANCE.sidebarCollapse;
+  }
+  window.setThemePref = function (theme) {
+    APPEARANCE.theme = theme;
+    if (typeof setTheme === 'function') setTheme(theme);
+    setActiveSwatch(theme);
+    persistSettings({ appearance: APPEARANCE });
+  };
+  window.onAppearanceToggle = function () {
+    APPEARANCE.fontScale = document.getElementById('apr-compact') && document.getElementById('apr-compact').checked ? 'compact' : 'normal';
+    APPEARANCE.sidebarCollapse = !!(document.getElementById('apr-sidebar') && document.getElementById('apr-sidebar').checked);
+    applyAppearance();
+    persistSettings({ appearance: APPEARANCE });
+  };
   async function loadSettings() {
     const badgeIds = ['cfg-supabase_url', 'cfg-supabase_service_role', 'cfg-os_password', 'cfg-anthropic', 'cfg-paystack'];
     try {
@@ -7696,6 +7739,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const setv = (id, v) => { const el = document.getElementById(id); if (el && v != null && v !== '') el.value = v; };
       setv('set-firstName', s.first_name); setv('set-lastName', s.last_name); setv('set-email', s.email); setv('set-phone', s.phone); setv('set-location', s.location);
       setv('set-company', s.company_name); setv('set-bizType', s.business_type); setv('set-country', s.country); setv('set-website', s.website);
+      const n = s.notifications || {};
+      const setc = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.checked = !!v; };
+      setc('ntf-inquiry', n.inquiry); setc('ntf-invoice', n.invoice); setc('ntf-task', n.task); setc('ntf-booking', n.booking);
+      setc('ntf-signals', n.signals); setc('ntf-revenue', n.revenue);
+      setv('ntf-token', n.telegramToken);
+      const a = s.appearance || {};
+      if (a.theme) APPEARANCE.theme = a.theme;
+      if (a.fontScale) APPEARANCE.fontScale = a.fontScale;
+      if ('sidebarCollapse' in a) APPEARANCE.sidebarCollapse = !!a.sidebarCollapse;
+      applyAppearance();
       const st = d.status || {};
       const badge = (id, ok) => { const el = document.getElementById(id); if (el) { el.textContent = ok ? '✓ Configured' : '✕ Not set'; el.style.color = ok ? 'var(--green)' : 'var(--red)'; } };
       badge('cfg-supabase_url', st.supabase_url);
