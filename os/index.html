@@ -1872,6 +1872,9 @@ html[data-density="compact"] { font-size: 14.5px; }
 /* ═══════════════════════════════════════
    PHASE 4 — CRM, FINANCE & RECONCILIATION
    ═══════════════════════════════════════ */
+.module-tabs{display:flex;align-items:center;gap:4px;padding:10px 22px;border-bottom:1px solid var(--border);overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.module-tabs::-webkit-scrollbar{display:none}
+.module-tabs .mod-tab{flex:0 0 auto;white-space:nowrap}
 .mod-tab{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;
   font-size:12.5px;font-weight:500;color:var(--text3);cursor:pointer;
   transition:all .2s;white-space:nowrap;user-select:none;flex-shrink:0}
@@ -3707,7 +3710,7 @@ html[data-density="compact"] { font-size: 14.5px; }
           <div class="section-header">
             <div>
               <div class="section-title-lg">Customers</div>
-              <div class="section-sub">148 total · 38 active this month</div>
+              <div class="section-sub" id="crmCustSub">No customers yet</div>
             </div>
             <div style="display:flex;gap:8px">
               <div class="btn-ghost" style="font-size:12px">
@@ -5956,6 +5959,7 @@ function updateCrmStats() {
   const win = LEADS.length ? Math.round(closed / LEADS.length * 100) : 0;
   set('crmMWin', win + '%');
   const bar = document.getElementById('crmMWinBar'); if (bar) bar.style.width = win + '%';
+  set('crmCustSub', CUSTOMERS.length ? CUSTOMERS.length + ' total' : 'No customers yet');
 }
 
 function renderPipeline() {
