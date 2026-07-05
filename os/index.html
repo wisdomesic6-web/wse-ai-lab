@@ -8837,12 +8837,14 @@ function renderInventory(data) {
   if (!d.length) { tbody.innerHTML = '<tr><td colspan="6" style="padding:26px;text-align:center;color:var(--text3);font-size:13px;">No inventory items yet.</td></tr>'; return; }
   tbody.innerHTML = d.map(item => {
     const [label, cls] = getInvStatus(item);
-    const total = (item.qty * item.cost).toLocaleString();
+    const qty = Number(item.qty) || 0;
+    const cost = Number(item.cost) || 0;
+    const total = (qty * cost).toLocaleString();
     return `<tr>
-      <td style="font-weight:600;">${item.name}</td>
-      <td style="color:var(--text2)">${item.cat}</td>
-      <td>${item.qty}</td>
-      <td>₦${item.cost.toLocaleString()}</td>
+      <td style="font-weight:600;">${item.name || '—'}</td>
+      <td style="color:var(--text2)">${item.cat || '—'}</td>
+      <td>${qty}</td>
+      <td>₦${cost.toLocaleString()}</td>
       <td>₦${total}</td>
       <td><span class="status-badge ${cls}">${label}</span></td>
     </tr>`;
