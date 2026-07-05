@@ -97,11 +97,11 @@
     /* ── HERO ── */
     #hero {
       position: relative;
-      min-height: 100vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 130px 60px 220px;
+      padding: 120px 60px 128px;
       overflow: hidden;
     }
 
@@ -129,11 +129,11 @@
 
     .hero-eyebrow {
       font-family: var(--ff-b);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--terra);
+      color: var(--copper);
       margin-bottom: 28px;
     }
 
@@ -150,12 +150,12 @@
     .hero-headline .acc { color: var(--terra); }
 
     .hero-sub {
-      font-size: clamp(15px, 1.4vw, 19px);
+      font-size: clamp(16.5px, 1.5vw, 20px);
       font-weight: 400;
-      color: var(--copper);
+      color: #C7D0EC;
       max-width: 50ch;
-      margin-bottom: 48px;
-      line-height: 1.75;
+      margin-bottom: 44px;
+      line-height: 1.7;
     }
 
     .hero-btns {
@@ -182,16 +182,19 @@
     .btn-primary:hover { background: var(--copper); transform: translateY(-1px); }
 
     .btn-ghost {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--muted);
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--parch);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: color 0.2s;
+      padding: 15px 6px;
+      border-bottom: 1.5px solid var(--copper);
+      border-radius: 2px;
+      transition: color 0.2s, border-color 0.2s, transform 0.15s;
     }
-    .btn-ghost:hover { color: var(--parch); }
+    .btn-ghost:hover { color: var(--copper); border-color: var(--parch); transform: translateY(-1px); }
 
     .hero-metrics {
       position: absolute;
