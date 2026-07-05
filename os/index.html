@@ -4102,7 +4102,107 @@ html[data-density="compact"] { font-size: 14.5px; }
 
 
     
-<div class="view" id="view-businesses"></div>  <!-- stub: rendered on first visit -->
+<div class="view" id="view-businesses" data-built="true">
+<div class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="openSidebar()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="page-h" id="pageTitle">Businesses</div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-av">SA</div>
+    </div>
+  </header>
+  <div class="content">
+
+    <!-- Stats row -->
+    <div class="metrics-row" style="margin-bottom:24px;">
+      <div class="metric-card">
+        <div class="mc-label">Total Businesses</div>
+        <div class="mc-val" id="bizMTotal">0</div>
+        <div class="mc-sub">in portfolio</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Live</div>
+        <div class="mc-val" id="bizMActive">0</div>
+        <div class="mc-sub" style="color:var(--green)">● Active</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">In Development</div>
+        <div class="mc-val" id="bizMDev">0</div>
+        <div class="mc-sub" style="color:var(--amber)">● Building</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Categories</div>
+        <div class="mc-val" id="bizMTypes">0</div>
+        <div class="mc-sub">business types</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+      <div class="section-hd" style="margin:0;">Portfolio</div>
+      <button class="action-btn" onclick="openNewBusiness()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Add Business
+      </button>
+    </div>
+
+    <!-- Business grid -->
+    <div id="bizGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;"></div>
+
+  </div>
+
+  <!-- New Business Modal -->
+  <div class="modal-overlay" id="bizModalOverlay" onclick="closeBizModal()" style="display:none;"></div>
+  <div class="modal-panel" id="bizModal" style="display:none;">
+    <div class="modal-header">
+      <div class="modal-title">Add Business</div>
+      <button class="modal-close" onclick="closeBizModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label>Business Name</label>
+        <input type="text" placeholder="e.g. WSE Datapilot" id="bizName">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-field">
+          <label>Type</label>
+          <select id="bizType">
+            <option>SaaS</option>
+            <option>Automation</option>
+            <option>E-commerce</option>
+            <option>Service</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Status</label>
+          <select id="bizStatus">
+            <option value="active">Active</option>
+            <option value="development">In development</option>
+            <option value="paused">Paused</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Website / App URL</label>
+        <input type="url" placeholder="https://…" id="bizUrl">
+      </div>
+      <div class="form-field">
+        <label>Notes</label>
+        <textarea rows="3" placeholder="What this business does, current focus…" id="bizNotes"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeBizModal()">Cancel</button>
+      <button class="btn-accent-sm" onclick="saveBusiness()">Save Business</button>
+    </div>
+  </div>
+</div>
+</div>
 
 <div class="view" id="view-bookings" data-built="true">
 <div class="main">
@@ -4206,7 +4306,91 @@ html[data-density="compact"] { font-size: 14.5px; }
 </div>
 </div>
 
-<div class="view" id="view-workflows"></div>  <!-- stub: rendered on first visit -->
+<div class="view" id="view-workflows" data-built="true">
+<div class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="openSidebar()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="page-h" id="pageTitle">Workflows</div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-av">SA</div>
+    </div>
+  </header>
+  <div class="content">
+
+    <!-- Stats row -->
+    <div class="metrics-row" style="margin-bottom:24px;">
+      <div class="metric-card">
+        <div class="mc-label">Total Workflows</div>
+        <div class="mc-val" id="wfMTotal">0</div>
+        <div class="mc-sub">automations</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Active</div>
+        <div class="mc-val" id="wfMActive">0</div>
+        <div class="mc-sub" style="color:var(--green)">● Running</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Paused</div>
+        <div class="mc-val" id="wfMPaused">0</div>
+        <div class="mc-sub" style="color:var(--amber)">● On hold</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Total Runs</div>
+        <div class="mc-val" id="wfMRuns">0</div>
+        <div class="mc-sub">all time</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+      <div class="section-hd" style="margin:0;">Automations</div>
+      <button class="action-btn" onclick="openNewWorkflow()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        New Workflow
+      </button>
+    </div>
+
+    <!-- Workflow list -->
+    <div id="wfList" style="display:flex;flex-direction:column;gap:12px;"></div>
+
+    <div style="margin-top:22px;padding:14px 18px;border:1px dashed var(--border2);border-radius:12px;color:var(--text2);font-size:13px;line-height:1.6;">
+      💡 Workflows are tracked here; execution runs in <strong>n8n</strong> (or WhatsApp/Botpress). Toggle a workflow to reflect its live status.
+    </div>
+
+  </div>
+
+  <!-- New Workflow Modal -->
+  <div class="modal-overlay" id="wfModalOverlay" onclick="closeWfModal()" style="display:none;"></div>
+  <div class="modal-panel" id="wfModal" style="display:none;">
+    <div class="modal-header">
+      <div class="modal-title">New Workflow</div>
+      <button class="modal-close" onclick="closeWfModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label>Workflow Name</label>
+        <input type="text" placeholder="e.g. WhatsApp lead capture" id="wfName">
+      </div>
+      <div class="form-field">
+        <label>Trigger</label>
+        <input type="text" placeholder="e.g. New WhatsApp message to business number" id="wfTrigger">
+      </div>
+      <div class="form-field">
+        <label>Action</label>
+        <input type="text" placeholder="e.g. Save lead to CRM + send auto-reply" id="wfAction">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeWfModal()">Cancel</button>
+      <button class="btn-accent-sm" onclick="saveWorkflow()">Save Workflow</button>
+    </div>
+  </div>
+</div>
+</div>
 
 <div class="view" id="view-inventory" data-built="true">
 <div class="main">
@@ -4352,21 +4536,21 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div class="metric-card" style="border-color:rgba(74,106,255,0.3);">
         <div class="mc-label">Primary Model</div>
         <div class="mc-val" style="font-size:16px;color:var(--accent2)">Claude Sonnet</div>
-        <div class="mc-sub" style="color:var(--green)">● Active</div>
+        <div class="mc-sub" id="aiMModelStatus" style="color:var(--amber)">● Checking key…</div>
       </div>
       <div class="metric-card">
-        <div class="mc-label">Embeddings</div>
-        <div class="mc-val" style="font-size:16px;">Gemini</div>
-        <div class="mc-sub" style="color:var(--green)">● Active</div>
+        <div class="mc-label">Fast Model</div>
+        <div class="mc-val" style="font-size:16px;">Claude Haiku</div>
+        <div class="mc-sub">for quick tasks</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">API Calls (30d)</div>
-        <div class="mc-val">0</div>
-        <div class="mc-sub">no usage tracked yet</div>
+        <div class="mc-val" id="aiMCalls">0</div>
+        <div class="mc-sub" id="aiMCallsSub">no usage tracked yet</div>
       </div>
       <div class="metric-card">
         <div class="mc-label">Est. Cost (30d)</div>
-        <div class="mc-val">$0.00</div>
+        <div class="mc-val" id="aiMCost">$0.00</div>
         <div class="mc-sub" style="color:var(--green)">Within budget</div>
       </div>
     </div>
@@ -4377,8 +4561,12 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div>
         <div class="section-hd">
           <span>Prompt Templates</span>
-          <button class="btn-ghost-sm" onclick="addTemplate()">+ New</button>
+          <span style="display:inline-flex;gap:8px;">
+            <button class="btn-ghost-sm" onclick="openAIRun(null)">▶ Playground</button>
+            <button class="btn-ghost-sm" onclick="addTemplate()">+ New</button>
+          </span>
         </div>
+        <div style="font-size:12.5px;color:var(--text3);margin:-6px 0 12px;">Click a template to run it with Claude.</div>
         <div class="ai-templates" id="aiTemplates"></div>
       </div>
 
@@ -4388,41 +4576,95 @@ html[data-density="compact"] { font-size: 14.5px; }
         <div class="ai-config-card">
           <div class="config-row">
             <span class="config-label">Model</span>
-            <select class="config-select">
+            <select class="config-select" id="ai-model">
               <option>claude-sonnet-4-6</option>
               <option>claude-haiku-4-5</option>
             </select>
           </div>
           <div class="config-row">
             <span class="config-label">Max Tokens</span>
-            <input type="number" class="config-input" value="1000">
+            <input type="number" class="config-input" value="1000" min="64" max="4096" id="ai-maxTokens">
           </div>
           <div class="config-row">
             <span class="config-label">Temperature</span>
             <input type="range" min="0" max="1" step="0.1" value="0.7" class="config-range" id="tempRange" oninput="document.getElementById('tempVal').textContent=this.value">
             <span id="tempVal" style="font-size:13px;color:var(--text2);min-width:28px;">0.7</span>
           </div>
-          <div class="config-row">
-            <span class="config-label">Web Search</span>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-track"></span>
-            </label>
-          </div>
-          <div class="config-row">
-            <span class="config-label">Memory</span>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-track"></span>
-            </label>
-          </div>
-          <button class="btn-accent-sm" style="margin-top:8px;width:100%;">Save Configuration</button>
+          <button class="btn-accent-sm" style="margin-top:8px;width:100%;" onclick="saveAIConfig(this)">Save Configuration</button>
         </div>
 
         <div class="section-hd" style="margin:20px 0 14px;">Usage (Last 7 Days)</div>
         <canvas id="aiUsageChart" height="130"></canvas>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Run / Playground Modal -->
+  <div class="modal-overlay" id="aiRunOverlay" onclick="closeAIRun()" style="display:none;"></div>
+  <div class="modal-panel" id="aiRunModal" style="display:none;max-width:640px;">
+    <div class="modal-header">
+      <div class="modal-title" id="aiRunTitle">AI Playground</div>
+      <button class="modal-close" onclick="closeAIRun()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label id="aiRunInputLabel">Your input</label>
+        <textarea rows="5" placeholder="Describe what you need…" id="aiRunInput"></textarea>
+      </div>
+      <div class="form-field" id="aiRunOutputWrap" style="display:none;">
+        <label style="display:flex;align-items:center;justify-content:space-between;">
+          <span>Result</span>
+          <button class="btn-ghost-sm" onclick="copyAIOutput(this)" style="font-size:11px;padding:3px 10px;">Copy</button>
+        </label>
+        <div id="aiRunOutput" style="white-space:pre-wrap;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:13.5px;line-height:1.65;max-height:320px;overflow-y:auto;color:var(--text);"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeAIRun()">Close</button>
+      <button class="btn-accent-sm" id="aiRunBtn" onclick="runAIPrompt(this)">▶ Run</button>
+    </div>
+  </div>
+
+  <!-- New Template Modal -->
+  <div class="modal-overlay" id="tplModalOverlay" onclick="closeTplModal()" style="display:none;"></div>
+  <div class="modal-panel" id="tplModal" style="display:none;">
+    <div class="modal-header">
+      <div class="modal-title">New Prompt Template</div>
+      <button class="modal-close" onclick="closeTplModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label>Name</label>
+        <input type="text" placeholder="e.g. Client proposal draft" id="tplName">
+      </div>
+      <div class="form-field">
+        <label>Description</label>
+        <input type="text" placeholder="What this template is for" id="tplDesc">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-field">
+          <label>Tag</label>
+          <input type="text" placeholder="e.g. Sales" id="tplTag" value="Custom">
+        </div>
+        <div class="form-field">
+          <label>Color</label>
+          <select id="tplColor">
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="purple" selected>Purple</option>
+            <option value="amber">Amber</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Prompt instructions</label>
+        <textarea rows="4" placeholder="Instructions Claude should follow when this template runs, e.g. 'Write a short, warm client proposal for WSE AI Lab based on the details provided.'" id="tplPrompt"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeTplModal()">Cancel</button>
+      <button class="btn-accent-sm" onclick="saveTemplate()">Save Template</button>
     </div>
   </div>
 </div>
@@ -7403,12 +7645,7 @@ document.getElementById('menuToggle') && document.getElementById('menuToggle').a
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', function() {
   /* Build stub views */
-  buildStubView('businesses', '🏢', 'Businesses', 'Manage all businesses and entities within WSE AI Lab. Track performance, registrations, and ownership structure across the portfolio.');
-  buildStubView('bookings', '📅', 'Bookings', 'Manage appointments, client meetings, and scheduling across all businesses. Full calendar view and booking intake forms.');
-  buildStubView('workflows', '⚡', 'Workflows', 'Automate business processes with no-code workflow builder. Connect to n8n, WhatsApp, email, and internal modules.');
-  buildStubView('inventory', '📦', 'Inventory', 'Track stock levels, SKUs, purchase orders, and low-stock alerts across all business units.');
-  buildStubView('ai-engine', '🤖', 'AI Engine', 'Configure and monitor the AI copilot — prompt templates, model settings, usage analytics, and custom skill training.');
-  buildStubView('settings', '⚙️', 'Settings', 'Manage workspace settings, team members, billing, notifications, and API integrations.');
+  /* All views are now fully built (data-built="true") — buildStubView calls removed. */
 
   /* Init dashboard chart */
   buildRevenueChart();
@@ -7649,7 +7886,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (e) { console.warn('[Finance] live data unavailable, using local state:', e.message); }
   }
 
-  // ── Ops live data (bookings, inventory, AI templates) ──
+  // ── Ops live data (bookings, inventory, AI templates, businesses, workflows) ──
   window.persistOps = async function (entity, row) {
     try {
       await fetch('/.netlify/functions/ops', {
@@ -7657,6 +7894,14 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ entity, row }),
       });
     } catch (e) { console.warn('[Ops] persist failed:', e.message); }
+  };
+  window.patchOps = async function (entity, id, patch) {
+    try {
+      await fetch('/.netlify/functions/ops', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity, id, patch }),
+      });
+    } catch (e) { console.warn('[Ops] patch failed:', e.message); }
   };
   async function loadOps() {
     try {
@@ -7667,8 +7912,34 @@ document.addEventListener('DOMContentLoaded', function() {
       if (Array.isArray(d.bookings) && typeof BOOKINGS_DATA !== 'undefined') { BOOKINGS_DATA.length = 0; d.bookings.forEach((x) => BOOKINGS_DATA.push(x)); if (typeof renderBookings === 'function') renderBookings(); }
       if (Array.isArray(d.inventory) && typeof INVENTORY_DATA !== 'undefined') { INVENTORY_DATA.length = 0; d.inventory.forEach((x) => INVENTORY_DATA.push(x)); if (typeof renderInventory === 'function') renderInventory(); }
       if (Array.isArray(d.templates) && typeof AI_TEMPLATES !== 'undefined') { AI_TEMPLATES.length = 0; d.templates.forEach((x) => AI_TEMPLATES.push(x)); if (typeof renderAITemplates === 'function') renderAITemplates(); }
+      if (Array.isArray(d.businesses) && typeof BUSINESSES_DATA !== 'undefined') { BUSINESSES_DATA.length = 0; d.businesses.forEach((x) => BUSINESSES_DATA.push(x)); if (typeof renderBusinesses === 'function') renderBusinesses(); }
+      if (Array.isArray(d.workflows) && typeof WORKFLOWS_DATA !== 'undefined') { WORKFLOWS_DATA.length = 0; d.workflows.forEach((x) => WORKFLOWS_DATA.push(x)); if (typeof renderWorkflows === 'function') renderWorkflows(); }
     } catch (e) { console.warn('[Ops] live data unavailable, using local state:', e.message); }
   }
+
+  // ── AI Engine: usage stats + key status ──
+  window.loadAIStats = async function () {
+    try {
+      const res = await fetch('/.netlify/functions/ai', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      set('aiMCalls', d.calls_30d || 0);
+      set('aiMCallsSub', d.calls_30d ? 'last 30 days' : 'no usage tracked yet');
+      set('aiMCost', '$' + (d.cost_30d || 0).toFixed(2));
+      const ms = document.getElementById('aiMModelStatus');
+      if (ms) {
+        ms.textContent = d.anthropic_configured ? '● Active' : '✕ API key not set';
+        ms.style.color = d.anthropic_configured ? 'var(--green)' : 'var(--red)';
+      }
+      if (typeof buildAIUsageChart === 'function') buildAIUsageChart(d.daily);
+    } catch (e) {
+      console.warn('[AI] stats unavailable:', e.message);
+      const ms = document.getElementById('aiMModelStatus');
+      if (ms) { ms.textContent = '— status unavailable'; ms.style.color = 'var(--text3)'; }
+      if (typeof buildAIUsageChart === 'function') buildAIUsageChart();
+    }
+  };
 
   // ── Settings: real config (profile/workspace persist + secret status) ──
   window.persistSettings = async function (patch) {
@@ -7695,6 +7966,15 @@ document.addEventListener('DOMContentLoaded', function() {
   window.saveWorkspaceSettings = async function (btn) {
     const g = (id) => (document.getElementById(id) || {}).value;
     const ok = await persistSettings({ company_name: g('set-company'), business_type: g('set-bizType'), country: g('set-country'), website: g('set-website') });
+    flashSaved(btn, ok);
+  };
+  window.saveAIConfig = async function (btn) {
+    const g = (id) => (document.getElementById(id) || {}).value;
+    const ok = await persistSettings({ ai_config: {
+      model: g('ai-model') || 'claude-sonnet-4-6',
+      max_tokens: parseInt(g('ai-maxTokens'), 10) || 1000,
+      temperature: parseFloat(g('tempRange')) || 0.7,
+    } });
     flashSaved(btn, ok);
   };
   window.saveNotificationSettings = async function (btn) {
@@ -7748,6 +8028,13 @@ document.addEventListener('DOMContentLoaded', function() {
       setc('ntf-inquiry', n.inquiry); setc('ntf-invoice', n.invoice); setc('ntf-task', n.task); setc('ntf-booking', n.booking);
       setc('ntf-signals', n.signals); setc('ntf-revenue', n.revenue);
       setv('ntf-token', n.telegramToken);
+      const ai = s.ai_config || {};
+      if (ai.model) setv('ai-model', ai.model);
+      if (ai.max_tokens) setv('ai-maxTokens', ai.max_tokens);
+      if (ai.temperature != null) {
+        setv('tempRange', ai.temperature);
+        const tv = document.getElementById('tempVal'); if (tv) tv.textContent = ai.temperature;
+      }
       const a = s.appearance || {};
       if (a.theme) APPEARANCE.theme = a.theme;
       if (a.fontScale) APPEARANCE.fontScale = a.fontScale;
@@ -7770,9 +8057,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); });
+    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); });
   } else {
-    load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings();
+    load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats();
   }
 })();
 </script>
@@ -8608,36 +8895,113 @@ function renderAITemplates() {
   if (!container) return;
   const colorMap = { blue:'rgba(74,106,255,0.14)', green:'rgba(31,207,164,0.14)', purple:'rgba(159,120,250,0.14)', amber:'rgba(244,162,27,0.14)' };
   const textMap   = { blue:'var(--accent2)', green:'var(--green)', purple:'var(--purple)', amber:'var(--amber)' };
-  if (!AI_TEMPLATES.length) { container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;grid-column:1/-1;">No prompt templates yet.</div>'; return; }
+  if (!AI_TEMPLATES.length) { container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:13px;grid-column:1/-1;">No prompt templates yet. Click “+ New” to create one.</div>'; return; }
   container.innerHTML = AI_TEMPLATES.map(t => `
-    <div class="ai-template-card">
-      <div class="at-name">${t.name}</div>
-      <div class="at-desc">${t.desc}</div>
-      <span class="at-badge" style="background:${colorMap[t.tagColor]};color:${textMap[t.tagColor]}">${t.tag}</span>
+    <div class="ai-template-card" style="cursor:pointer;" onclick="openAIRun('${escHtml(String(t.id))}')" title="Run this template">
+      <div class="at-name">${escHtml(t.name)}</div>
+      <div class="at-desc">${escHtml(t.desc || '')}</div>
+      <span class="at-badge" style="background:${colorMap[t.tagColor] || colorMap.purple};color:${textMap[t.tagColor] || textMap.purple}">${escHtml(t.tag || 'Custom')}</span>
     </div>`).join('');
 }
 
+/* ── Template creation modal ── */
 function addTemplate() {
-  const name = prompt('Template name:');
+  document.getElementById('tplModalOverlay').style.display = 'block';
+  const m = document.getElementById('tplModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function closeTplModal() {
+  document.getElementById('tplModalOverlay').style.display = 'none';
+  document.getElementById('tplModal').style.display = 'none';
+}
+function saveTemplate() {
+  const name = document.getElementById('tplName').value.trim();
   if (!name) return;
-  const _tpl = { id:'tpl_'+Date.now(), name, desc:'Custom prompt template', tag:'Custom', tagColor:'purple' };
+  const _tpl = {
+    id: 'tpl_' + Date.now(),
+    name,
+    desc: document.getElementById('tplDesc').value.trim() || 'Custom prompt template',
+    tag: document.getElementById('tplTag').value.trim() || 'Custom',
+    tagColor: document.getElementById('tplColor').value,
+    prompt: document.getElementById('tplPrompt').value.trim(),
+  };
   AI_TEMPLATES.push(_tpl);
   if (typeof persistOps === 'function') persistOps('template', _tpl);
+  closeTplModal();
   renderAITemplates();
 }
 
-function buildAIUsageChart() {
+/* ── Run / Playground modal ── */
+let AI_RUN_TEMPLATE = null;
+
+function openAIRun(tplId) {
+  AI_RUN_TEMPLATE = tplId ? AI_TEMPLATES.find(t => String(t.id) === String(tplId)) || null : null;
+  document.getElementById('aiRunTitle').textContent = AI_RUN_TEMPLATE ? '▶ ' + AI_RUN_TEMPLATE.name : 'AI Playground';
+  document.getElementById('aiRunInputLabel').textContent = AI_RUN_TEMPLATE ? 'Details for this template' : 'Your prompt';
+  document.getElementById('aiRunInput').value = '';
+  document.getElementById('aiRunOutputWrap').style.display = 'none';
+  document.getElementById('aiRunOutput').textContent = '';
+  document.getElementById('aiRunOverlay').style.display = 'block';
+  const m = document.getElementById('aiRunModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+  document.getElementById('aiRunInput').focus();
+}
+function closeAIRun() {
+  document.getElementById('aiRunOverlay').style.display = 'none';
+  document.getElementById('aiRunModal').style.display = 'none';
+}
+async function runAIPrompt(btn) {
+  const input = document.getElementById('aiRunInput').value.trim();
+  if (!input) return;
+  const out = document.getElementById('aiRunOutput');
+  document.getElementById('aiRunOutputWrap').style.display = 'block';
+  out.textContent = 'Thinking…';
+  btn.disabled = true; const orig = btn.textContent; btn.textContent = 'Running…';
+  try {
+    const body = {
+      prompt: input,
+      model: (document.getElementById('ai-model') || {}).value,
+      max_tokens: (document.getElementById('ai-maxTokens') || {}).value,
+      temperature: (document.getElementById('tempRange') || {}).value,
+    };
+    if (AI_RUN_TEMPLATE && AI_RUN_TEMPLATE.prompt) body.system = AI_RUN_TEMPLATE.prompt;
+    if (AI_RUN_TEMPLATE) body.template = AI_RUN_TEMPLATE.name;
+    const res = await fetch('/.netlify/functions/ai', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const d = await res.json();
+    if (!res.ok || d.error) throw new Error(d.error || 'HTTP ' + res.status);
+    out.textContent = d.text || '(empty response)';
+    if (typeof loadAIStats === 'function') loadAIStats();
+  } catch (e) {
+    out.textContent = '✕ ' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = orig;
+  }
+}
+function copyAIOutput(btn) {
+  const text = document.getElementById('aiRunOutput').textContent;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent; btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = orig; }, 1400);
+  }).catch(() => {});
+}
+
+function buildAIUsageChart(daily) {
   const canvas = document.getElementById('aiUsageChart');
   if (!canvas || !window.Chart) return;
   if (canvas._chart) canvas._chart.destroy();
-  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const labels = Array.isArray(daily) && daily.length ? daily.map(d => d.label) : ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const data = Array.isArray(daily) && daily.length ? daily.map(d => d.count) : [0,0,0,0,0,0,0];
   canvas._chart = new Chart(canvas, {
     type: 'bar',
     data: {
-      labels: days,
-      datasets: [{ 
+      labels,
+      datasets: [{
         label: 'API Calls',
-        data: [0,0,0,0,0,0,0],
+        data,
         backgroundColor: 'rgba(74,106,255,0.55)',
         borderRadius: 5,
         borderSkipped: false,
@@ -8652,6 +9016,146 @@ function buildAIUsageChart() {
       }
     }
   });
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   BUSINESSES PAGE JS
+   ══════════════════════════════════════════════════════════ */
+
+let BUSINESSES_DATA = [];   /* loaded live from Supabase via loadOps() */
+
+function updateBizStats() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('bizMTotal', BUSINESSES_DATA.length);
+  set('bizMActive', BUSINESSES_DATA.filter(b => b.status === 'active').length);
+  set('bizMDev', BUSINESSES_DATA.filter(b => b.status === 'development').length);
+  set('bizMTypes', new Set(BUSINESSES_DATA.map(b => b.btype).filter(Boolean)).size);
+}
+
+function renderBusinesses() {
+  updateBizStats();
+  const grid = document.getElementById('bizGrid');
+  if (!grid) return;
+  if (!BUSINESSES_DATA.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text2);font-size:14px;">No businesses yet. Click “Add Business” to register your first one.</div>';
+    return;
+  }
+  const statusMeta = {
+    active:      { cls: 'green', label: 'Active' },
+    development: { cls: 'amber', label: 'In development' },
+    paused:      { cls: 'red',   label: 'Paused' },
+  };
+  grid.innerHTML = BUSINESSES_DATA.map(b => {
+    const s = statusMeta[b.status] || statusMeta.active;
+    const url = (b.url || '').trim();
+    const safeUrl = /^https?:\/\//i.test(url) ? url : '';
+    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);">${escHtml(b.name)}</div>
+        <span class="badge-pill ${s.cls}">${s.label}</span>
+      </div>
+      <div style="font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;">${escHtml(b.btype || 'SaaS')}</div>
+      ${b.notes ? `<div style="font-size:13px;color:var(--text2);line-height:1.55;">${escHtml(b.notes)}</div>` : ''}
+      ${safeUrl ? `<a href="${escHtml(safeUrl)}" target="_blank" rel="noopener" style="font-size:13px;color:var(--accent2);text-decoration:none;">Visit ↗</a>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function openNewBusiness() {
+  document.getElementById('bizModalOverlay').style.display = 'block';
+  const m = document.getElementById('bizModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function closeBizModal() {
+  document.getElementById('bizModalOverlay').style.display = 'none';
+  document.getElementById('bizModal').style.display = 'none';
+}
+function saveBusiness() {
+  const name = document.getElementById('bizName').value.trim();
+  if (!name) return;
+  const _biz = {
+    id: 'biz_' + Date.now(),
+    name,
+    btype: document.getElementById('bizType').value,
+    status: document.getElementById('bizStatus').value,
+    url: document.getElementById('bizUrl').value.trim(),
+    notes: document.getElementById('bizNotes').value.trim(),
+  };
+  BUSINESSES_DATA.push(_biz);
+  if (typeof persistOps === 'function') persistOps('business', _biz);
+  closeBizModal();
+  renderBusinesses();
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   WORKFLOWS PAGE JS
+   ══════════════════════════════════════════════════════════ */
+
+let WORKFLOWS_DATA = [];   /* loaded live from Supabase via loadOps() */
+
+function updateWfStats() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('wfMTotal', WORKFLOWS_DATA.length);
+  set('wfMActive', WORKFLOWS_DATA.filter(w => w.status === 'active').length);
+  set('wfMPaused', WORKFLOWS_DATA.filter(w => w.status !== 'active').length);
+  set('wfMRuns', WORKFLOWS_DATA.reduce((s, w) => s + (Number(w.runs) || 0), 0));
+}
+
+function renderWorkflows() {
+  updateWfStats();
+  const list = document.getElementById('wfList');
+  if (!list) return;
+  if (!WORKFLOWS_DATA.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">No workflows yet. Click “New Workflow” to track your first automation.</div>';
+    return;
+  }
+  list.innerHTML = WORKFLOWS_DATA.map(w => {
+    const active = w.status === 'active';
+    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:220px;">
+        <div style="font-weight:700;font-size:14.5px;color:var(--text);margin-bottom:4px;">⚡ ${escHtml(w.name)}</div>
+        <div style="font-size:12.5px;color:var(--text2);">When <strong>${escHtml(w.trigger_desc || '—')}</strong> → ${escHtml(w.action_desc || '—')}</div>
+      </div>
+      <span class="badge-pill ${active ? 'green' : 'amber'}">${active ? 'Active' : 'Paused'}</span>
+      <button class="btn-ghost-sm" onclick="toggleWorkflow('${escHtml(String(w.id))}')">${active ? 'Pause' : 'Activate'}</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleWorkflow(id) {
+  const w = WORKFLOWS_DATA.find(x => String(x.id) === String(id));
+  if (!w) return;
+  w.status = w.status === 'active' ? 'paused' : 'active';
+  if (typeof patchOps === 'function') patchOps('workflow', w.id, { status: w.status });
+  renderWorkflows();
+}
+
+function openNewWorkflow() {
+  document.getElementById('wfModalOverlay').style.display = 'block';
+  const m = document.getElementById('wfModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function closeWfModal() {
+  document.getElementById('wfModalOverlay').style.display = 'none';
+  document.getElementById('wfModal').style.display = 'none';
+}
+function saveWorkflow() {
+  const name = document.getElementById('wfName').value.trim();
+  if (!name) return;
+  const _wf = {
+    id: 'wf_' + Date.now(),
+    name,
+    trigger_desc: document.getElementById('wfTrigger').value.trim(),
+    action_desc: document.getElementById('wfAction').value.trim(),
+    status: 'active',
+    runs: 0,
+  };
+  WORKFLOWS_DATA.push(_wf);
+  if (typeof persistOps === 'function') persistOps('workflow', _wf);
+  closeWfModal();
+  renderWorkflows();
 }
 
 
@@ -8682,7 +9186,9 @@ window.showPage = function(id) {
   /* Init pages on first visit */
   if (id === 'bookings'  && !window._bkInit)  { renderBookings();    window._bkInit = true; }
   if (id === 'inventory' && !window._invInit)  { renderInventory();   window._invInit = true; }
-  if (id === 'ai-engine' && !window._aiInit)   { renderAITemplates(); setTimeout(buildAIUsageChart, 100); window._aiInit = true; }
+  if (id === 'businesses' && !window._bizInit) { renderBusinesses();  window._bizInit = true; }
+  if (id === 'workflows' && !window._wfInit)   { renderWorkflows();   window._wfInit = true; }
+  if (id === 'ai-engine' && !window._aiInit)   { renderAITemplates(); if (typeof loadAIStats === 'function') loadAIStats(); else setTimeout(buildAIUsageChart, 100); window._aiInit = true; }
 };
 
 </script>

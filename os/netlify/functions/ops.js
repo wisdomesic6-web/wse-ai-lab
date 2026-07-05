@@ -1,13 +1,32 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Ops data API (bookings, inventory, AI templates)
+   WSE Labs OS — Ops data API
+   (bookings, inventory, AI templates, businesses, workflows)
 
    Backed by Supabase (service-role, server-side, behind Basic Auth).
-     GET  → { bookings: [...], inventory: [...], templates: [...] }
-     POST → body { entity: 'booking'|'inventory'|'template', row: {...} }
+     GET   → { bookings, inventory, templates, businesses, workflows }
+     POST  → body { entity, row }  → insert
+     PATCH → body { entity, id, patch } → update selected fields
 
-   AI-template columns descr/tag_color map to client desc/tagColor.
-   Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+   AI-template columns descr/tag_color/prompt_text map to client
+   desc/tagColor/prompt. Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
    ═══════════════════════════════════════════════════════════ */
+
+const TABLES = {
+  booking: "bookings",
+  inventory: "inventory",
+  template: "ai_templates",
+  business: "businesses",
+  workflow: "workflows",
+};
+
+/* Whitelist of PATCHable columns per entity */
+const PATCHABLE = {
+  workflow: ["name", "trigger_desc", "action_desc", "status", "runs"],
+  template: ["name", "descr", "tag", "tag_color", "prompt_text"],
+  business: ["name", "btype", "status", "url", "notes"],
+  booking: ["status"],
+  inventory: ["qty", "status"],
+};
 
 exports.handler = async function (event) {
   const url = process.env.SUPABASE_URL;
@@ -25,32 +44,50 @@ exports.handler = async function (event) {
     return text ? JSON.parse(text) : null;
   };
 
-  const tplToClient = (r) => ({ id: r.id, name: r.name, desc: r.descr, tag: r.tag, tagColor: r.tag_color });
-  const tplToDb = (r) => ({ id: r.id, name: r.name, descr: r.desc, tag: r.tag, tag_color: r.tagColor });
+  const tplToClient = (r) => ({ id: r.id, name: r.name, desc: r.descr, tag: r.tag, tagColor: r.tag_color, prompt: r.prompt_text || "" });
+  const tplToDb = (r) => ({ id: r.id, name: r.name, descr: r.desc, tag: r.tag, tag_color: r.tagColor, prompt_text: r.prompt || "" });
 
   try {
     const method = event.httpMethod;
 
     if (method === "GET") {
-      const [bookings, inventory, templates] = await Promise.all([
+      const [bookings, inventory, templates, businesses, workflows] = await Promise.all([
         rest("bookings?select=*&order=created_at.asc"),
         rest("inventory?select=*&order=created_at.asc"),
         rest("ai_templates?select=*&order=created_at.asc"),
+        rest("businesses?select=*&order=created_at.asc"),
+        rest("workflows?select=*&order=created_at.asc"),
       ]);
-      return json(200, { bookings, inventory, templates: templates.map(tplToClient) });
+      return json(200, { bookings, inventory, templates: templates.map(tplToClient), businesses, workflows });
     }
 
     if (method === "POST") {
       const body = JSON.parse(event.body || "{}");
       const { entity, row } = body;
-      const table = { booking: "bookings", inventory: "inventory", template: "ai_templates" }[entity];
-      if (!table) return json(400, { error: "Unknown entity." });
+      const table = TABLES[entity];
+      if (!table || !row) return json(400, { error: "Unknown entity." });
       const payload = entity === "template" ? tplToDb(row) : row;
       const [inserted] = await rest(table, {
         method: "POST", headers: { Prefer: "return=representation" },
         body: JSON.stringify(payload),
       });
       return json(201, { row: entity === "template" ? tplToClient(inserted) : inserted });
+    }
+
+    if (method === "PATCH") {
+      const body = JSON.parse(event.body || "{}");
+      const { entity, id, patch } = body;
+      const table = TABLES[entity];
+      const allowed = PATCHABLE[entity] || [];
+      if (!table || !id || !patch) return json(400, { error: "Need entity, id and patch." });
+      const clean = {};
+      allowed.forEach((k) => { if (k in patch) clean[k] = patch[k]; });
+      if (!Object.keys(clean).length) return json(400, { error: "No patchable fields supplied." });
+      const [updated] = await rest(`${table}?id=eq.${encodeURIComponent(id)}`, {
+        method: "PATCH", headers: { Prefer: "return=representation" },
+        body: JSON.stringify(clean),
+      });
+      return json(200, { row: entity === "template" ? tplToClient(updated) : updated });
     }
 
     return json(405, { error: "Method not allowed." });
