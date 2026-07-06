@@ -2995,7 +2995,7 @@ html[data-density="compact"] { font-size: 14.5px; }
         Default Workflow
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <button class="btn-primary" onclick="openModal()">
+      <button class="btn-primary" onclick="openTaskModal()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
         New Task
       </button>
@@ -3504,7 +3504,7 @@ html[data-density="compact"] { font-size: 14.5px; }
   <div class="modal" id="taskModal">
     <div class="modal-head">
       <div class="modal-title">New Task</div>
-      <div class="modal-close" onclick="closeModal()">
+      <div class="modal-close" onclick="closeTaskModal()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </div>
     </div>
@@ -3564,7 +3564,7 @@ html[data-density="compact"] { font-size: 14.5px; }
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn-ghost" style="flex:none;padding:8px 18px;" onclick="closeModal()">Cancel</button>
+      <button class="btn-ghost" style="flex:none;padding:8px 18px;" onclick="closeTaskModal()">Cancel</button>
       <button class="btn-primary" onclick="createTask()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
         Create Task
@@ -5883,7 +5883,11 @@ document.addEventListener('click', e => {
    ═════════════════════════════════════════════ */
 let pendingStatus = 'todo';
 
-function openModal() {
+/* NOTE: named *Task* modal, not openModal/closeModal — the CRM/Finance
+   generic modal (further down) defines openModal(type)/closeModal() too,
+   and the later declaration wins. Sharing the name silently broke the
+   Tasks "New Task" / "Add card" buttons (modal never opened). */
+function openTaskModal() {
   document.getElementById('modalOverlay').classList.add('open');
   document.getElementById('newTaskTitle').focus();
 }
@@ -5891,15 +5895,15 @@ function openModal() {
 function openModalWithStatus(status) {
   pendingStatus = status;
   document.getElementById('newTaskStatus').value = status;
-  openModal();
+  openTaskModal();
 }
 
-function closeModal() {
+function closeTaskModal() {
   document.getElementById('modalOverlay').classList.remove('open');
 }
 
 function handleModalClick(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
+  if (e.target === document.getElementById('modalOverlay')) closeTaskModal();
 }
 
 function createTask() {
@@ -5959,7 +5963,7 @@ function createTask() {
   const newCard = col.querySelector(`[data-id="${id}"]`);
   bindCardDrag(newCard);          /* ← production drag binding */
   updateCounts();
-  closeModal();
+  closeTaskModal();
 
   /* Reset form fields */
   document.getElementById('newTaskTitle').value    = '';
@@ -6079,7 +6083,7 @@ function handleCommentKey(e) {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closePanel();
-    closeModal();
+    closeTaskModal();
   }
 });
 
