@@ -6537,7 +6537,7 @@ function openDetail(type, id) {
           font-size:17px;font-weight:700;color:#fff;flex-shrink:0">${l.initials}</div>
         <div>
           <div style="font-family:var(--syne);font-weight:700;font-size:18px;color:var(--text)">${l.name}</div>
-          <div style="font-size:12px;color:var(--text3);margin-top:3px">${l.company}</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:3px">${l.company}${l.email && l.email !== '—' ? ' · ' + escHtml(l.email) : ''}</div>
         </div>
       </div>
       <div class="meta-grid">
@@ -6683,7 +6683,7 @@ function winLead(l) {
   const _cust = {
     id: 'cust_' + Date.now(),
     name: l.name,
-    email: '—',
+    email: l.email || '—',
     seg: 'Client',
     spent: l.value || '₦0',
     last: 'Just won',
@@ -6709,6 +6709,7 @@ const MODAL_FORMS = {
         <div class="form-group"><label class="form-label">Contact Name *</label><input class="form-input" id="mf-name" placeholder="Full name"></div>
         <div class="form-group"><label class="form-label">Company</label><input class="form-input" id="mf-company" placeholder="Company name"></div>
       </div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="mf-email" type="email" placeholder="name@company.com"></div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Deal Value</label><input class="form-input" id="mf-value" placeholder="e.g. ₦5,000,000"></div>
         <div class="form-group"><label class="form-label">Stage</label>
@@ -6904,6 +6905,7 @@ function submitModal() {
     const owner = document.getElementById('mf-owner').value;
     const ownerColor = (TEAM[owner] && TEAM[owner].color) || colors[0];
     const _newLead = {id,name,company:document.getElementById('mf-company').value||'—',
+      email:document.getElementById('mf-email').value.trim()||'—',
       stage:document.getElementById('mf-stage').value,
       value:document.getElementById('mf-value').value||'₦0',
       prob:parseInt(document.getElementById('mf-prob').value)||20,

@@ -31,12 +31,12 @@ exports.handler = async function (event) {
 
   // DB (snake) ↔ client (camel) mapping for leads
   const leadToClient = (r) => ({
-    id: r.id, name: r.name, company: r.company, stage: r.stage,
+    id: r.id, name: r.name, company: r.company, email: r.email, stage: r.stage,
     value: r.value, prob: r.prob, owner: r.owner, ownerColor: r.owner_color,
     color: r.color, initials: r.initials, converted: r.converted,
   });
   const leadToDb = (r) => ({
-    id: r.id, name: r.name, company: r.company, stage: r.stage,
+    id: r.id, name: r.name, company: r.company, email: r.email, stage: r.stage,
     value: r.value, prob: r.prob, owner: r.owner, owner_color: r.ownerColor,
     color: r.color, initials: r.initials,
   });
