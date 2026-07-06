@@ -3717,7 +3717,7 @@ html[data-density="compact"] { font-size: 14.5px; }
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
                 Filter
               </div>
-              <button class="btn-primary" onclick="openModal('lead')">
+              <button class="btn-primary" onclick="openModal('customer')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
                 Add Customer
               </button>
@@ -6612,6 +6612,26 @@ const MODAL_FORMS = {
         </div>
       </div>`
   },
+  customer: {
+    title: 'Add Customer',
+    html: `
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Customer Name *</label><input class="form-input" id="mf-cname" placeholder="Person or company name"></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="mf-cemail" type="email" placeholder="name@company.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Segment</label>
+          <select class="form-select" id="mf-cseg">
+            <option value="Enterprise">Enterprise</option>
+            <option value="SMB">SMB</option>
+            <option value="Startup">Startup</option>
+            <option value="Individual">Individual</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Total Spent</label><input class="form-input" id="mf-cspent" placeholder="e.g. ₦250,000"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Tags</label><input class="form-input" id="mf-ctags" placeholder="Comma-separated, e.g. VIP, Retainer"></div>`
+  },
   invoice: {
     title: 'New Invoice',
     html: `
@@ -6752,6 +6772,27 @@ function submitModal() {
     LEADS.push(_newLead);
     if (typeof persistLead === 'function') persistLead(_newLead);
     renderPipeline();
+
+  } else if (activeModalType === 'customer') {
+    const name = document.getElementById('mf-cname')?.value.trim();
+    if (!name) { document.getElementById('mf-cname').style.borderColor='var(--red)'; return; }
+    const colors = ['linear-gradient(135deg,#4A6AFF,#7698FF)','linear-gradient(135deg,#1FCFA4,#0EC4D8)','linear-gradient(135deg,#9F78FA,#818CF8)','linear-gradient(135deg,#F4A21B,#EF6C00)'];
+    const tags = (document.getElementById('mf-ctags').value || '')
+      .split(',').map(t => t.trim()).filter(Boolean);
+    const _cust = {
+      id: 'cust_' + Date.now(),
+      name,
+      email: document.getElementById('mf-cemail').value.trim() || '—',
+      seg: document.getElementById('mf-cseg').value,
+      spent: document.getElementById('mf-cspent').value.trim() || '₦0',
+      last: 'Just added',
+      tags,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      initials: name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(),
+    };
+    CUSTOMERS.push(_cust);
+    if (typeof persistCustomer === 'function') persistCustomer(_cust);
+    renderCustomers();
 
   } else if (activeModalType === 'expense') {
     const name = document.getElementById('mf-ename')?.value.trim();
@@ -7809,6 +7850,14 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ entity: 'lead', row: lead }),
       });
     } catch (e) { console.warn('[CRM] persist lead failed:', e.message); }
+  };
+  window.persistCustomer = async function (customer) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'customer', row: customer }),
+      });
+    } catch (e) { console.warn('[CRM] persist customer failed:', e.message); }
   };
   window.persistLeadStage = async function (id, stage) {
     try {
