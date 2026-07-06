@@ -81,6 +81,16 @@ exports.handler = async function (event) {
         });
         return json(200, { ok: true });
       }
+      if (body.entity === "customer" && body.id && body.patch) {
+        const allowed = ["name", "email", "seg", "spent", "last", "tags", "color", "initials"];
+        const clean = {};
+        allowed.forEach((k) => { if (k in body.patch) clean[k] = body.patch[k]; });
+        if (!Object.keys(clean).length) return json(400, { error: "No patchable fields supplied." });
+        await rest(`customers?id=eq.${encodeURIComponent(body.id)}`, {
+          method: "PATCH", body: JSON.stringify(clean),
+        });
+        return json(200, { ok: true });
+      }
       return json(400, { error: "Unsupported patch." });
     }
 

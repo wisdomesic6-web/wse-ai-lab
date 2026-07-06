@@ -6104,6 +6104,7 @@ document.querySelectorAll('.label-toggle').forEach(l => {
 
 /* ── Phase 4 JS (CRM/Finance/Recon) ── */
 let CUSTOMERS = [];   /* loaded live from Supabase via loadCRM() */
+let editingCustomerId = null;   /* set by editCustomer(); null = "Add Customer" insert mode */
 
 const PIPELINE_STAGES = [
   {id:'prospect', label:'Prospect', color:'#3D4E75', bgColor:'rgba(61,78,117,.15)'},
@@ -6461,7 +6462,7 @@ function openDetail(type, id) {
       </div>`;
     footer.innerHTML = `
       <button class="btn-ghost" onclick="closeDetail()">Close</button>
-      <button class="btn-primary" style="flex:1">Edit Customer</button>`;
+      <button class="btn-primary" style="flex:1" onclick="editCustomer('${c.id}')">Edit Customer</button>`;
 
   } else if (type === 'lead') {
     const l = LEADS.find(x=>x.id===id); if (!l) return;
@@ -6565,6 +6566,24 @@ function closeDetail() {
   document.getElementById('p4-detailOverlay').classList.remove('open');
   document.getElementById('p4-detailPanel').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+/* Open the customer modal pre-filled for editing. openModal('customer') resets
+   editingCustomerId to null (insert mode); we set it AFTER so submitModal knows
+   to PATCH the existing row instead of inserting a new one. */
+function editCustomer(id) {
+  const c = CUSTOMERS.find(x => x.id === id);
+  if (!c) return;
+  closeDetail();
+  openModal('customer');
+  editingCustomerId = id;
+  document.getElementById('modalTitle').textContent = 'Edit Customer';
+  const set = (fid, val) => { const el = document.getElementById(fid); if (el) el.value = val; };
+  set('mf-cname', c.name);
+  set('mf-cemail', c.email === '—' ? '' : c.email);
+  set('mf-cseg', c.seg);
+  set('mf-cspent', c.spent === '₦0' ? '' : c.spent);
+  set('mf-ctags', (c.tags || []).join(', '));
 }
 
 function moveLead(leadId, newStage) {
@@ -6736,6 +6755,7 @@ const MODAL_FORMS = {
 
 function openModal(type) {
   activeModalType = type;
+  if (type === 'customer') editingCustomerId = null;   /* default to insert; editCustomer() re-sets it after */
   const form = MODAL_FORMS[type];
   if (!form) return;
   document.getElementById('modalTitle').textContent = form.title;
@@ -6779,19 +6799,29 @@ function submitModal() {
     const colors = ['linear-gradient(135deg,#4A6AFF,#7698FF)','linear-gradient(135deg,#1FCFA4,#0EC4D8)','linear-gradient(135deg,#9F78FA,#818CF8)','linear-gradient(135deg,#F4A21B,#EF6C00)'];
     const tags = (document.getElementById('mf-ctags').value || '')
       .split(',').map(t => t.trim()).filter(Boolean);
-    const _cust = {
-      id: 'cust_' + Date.now(),
-      name,
-      email: document.getElementById('mf-cemail').value.trim() || '—',
-      seg: document.getElementById('mf-cseg').value,
-      spent: document.getElementById('mf-cspent').value.trim() || '₦0',
-      last: 'Just added',
-      tags,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      initials: name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase(),
-    };
-    CUSTOMERS.push(_cust);
-    if (typeof persistCustomer === 'function') persistCustomer(_cust);
+    const email = document.getElementById('mf-cemail').value.trim() || '—';
+    const seg = document.getElementById('mf-cseg').value;
+    const spent = document.getElementById('mf-cspent').value.trim() || '₦0';
+    const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+    if (editingCustomerId) {
+      const idx = CUSTOMERS.findIndex(x => x.id === editingCustomerId);
+      if (idx !== -1) {
+        const patch = { name, email, seg, spent, tags, initials };
+        CUSTOMERS[idx] = { ...CUSTOMERS[idx], ...patch };   /* new object, no in-place mutation */
+        if (typeof persistCustomerPatch === 'function') persistCustomerPatch(editingCustomerId, patch);
+      }
+      editingCustomerId = null;
+    } else {
+      const _cust = {
+        id: 'cust_' + Date.now(), name, email, seg, spent,
+        last: 'Just added', tags,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        initials,
+      };
+      CUSTOMERS.push(_cust);
+      if (typeof persistCustomer === 'function') persistCustomer(_cust);
+    }
     renderCustomers();
 
   } else if (activeModalType === 'expense') {
@@ -7858,6 +7888,14 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ entity: 'customer', row: customer }),
       });
     } catch (e) { console.warn('[CRM] persist customer failed:', e.message); }
+  };
+  window.persistCustomerPatch = async function (id, patch) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'customer', id, patch }),
+      });
+    } catch (e) { console.warn('[CRM] patch customer failed:', e.message); }
   };
   window.persistLeadStage = async function (id, stage) {
     try {
