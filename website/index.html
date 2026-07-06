@@ -1533,8 +1533,8 @@
     <h2 class="contact-headline">Ready to put AI to work in your business?</h2>
     <p class="contact-sub">Tell us what you're trying to build or automate. We will respond within 24 hours with a clear assessment and a concrete next step.</p>
 
-    <div class="contact-btns" style="margin-bottom:56px;">
-      <a href="mailto:support.wselabs@gmail.com" class="btn-primary">support.wselabs@gmail.com</a>
+    <div class="contact-btns" style="margin-bottom:28px;">
+      <a href="mailto:info@wseailab.com" class="btn-primary">info@wseailab.com</a>
       <a href="https://wa.me/2348160829058" class="wa-qr-card" target="_blank" rel="noopener" title="Scan to chat on WhatsApp">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=080A12&color=EEF0FF&margin=12&data=https://wa.me/2348160829058" alt="WhatsApp QR Code" class="wa-qr-img">
       <div class="wa-qr-label">
@@ -1542,6 +1542,21 @@
         Scan to chat on WhatsApp
       </div>
     </a>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:18px 44px;justify-content:center;margin:0 auto 56px;max-width:660px;">
+      <a href="mailto:info@wseailab.com" style="text-decoration:none;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">General Enquiries</div>
+        <div style="font-size:15px;color:var(--parch);font-weight:600;">info@wseailab.com</div>
+      </a>
+      <a href="mailto:support@wseailab.com" style="text-decoration:none;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Support</div>
+        <div style="font-size:15px;color:var(--parch);font-weight:600;">support@wseailab.com</div>
+      </a>
+      <a href="mailto:wisdom@wseailab.com" style="text-decoration:none;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;">Founder — Direct</div>
+        <div style="font-size:15px;color:var(--parch);font-weight:600;">wisdom@wseailab.com</div>
+      </a>
     </div>
 
     <div class="signup-wrap">
@@ -1611,7 +1626,14 @@
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="ft-copy">© 2026 WSE AI Lab · Lagos, Nigeria</div>
+  <div class="ft-copy">
+    <div style="margin-bottom:7px;">
+      <a href="mailto:info@wseailab.com" style="color:var(--muted);text-decoration:none;">info@wseailab.com</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:support@wseailab.com" style="color:var(--muted);text-decoration:none;">support@wseailab.com</a>
+    </div>
+    © 2026 WSE AI Lab · Lagos, Nigeria
+  </div>
 </footer>
 
 
@@ -1743,7 +1765,7 @@ async function sendChatMessage() {
 
   } catch (err) {
     typing.remove();
-    appendMsg('Could not connect right now. Email us at support.wselabs@gmail.com or WhatsApp +2348160829058.', 'bot');
+    appendMsg('Could not connect right now. Email us at support@wseailab.com or WhatsApp +2348160829058.', 'bot');
   }
 }
 
@@ -1772,7 +1794,7 @@ if (_form) {
     } catch {
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      alert('Something went wrong. Email us at support.wselabs@gmail.com');
+      alert('Something went wrong. Email us at support@wseailab.com');
     }
   });
 }

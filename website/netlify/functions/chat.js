@@ -161,8 +161,11 @@ Other: MetaTrader 5 (forex), Twilio (SMS/WhatsApp), Google Sheets (logging)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CONTACT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Email: support.wselabs@gmail.com
+General enquiries: info@wseailab.com
+Support: support@wseailab.com
+Founder (direct): wisdom@wseailab.com
 WhatsApp: +2348160829058
+Website: www.wseailab.com
 Founder: Wisdom Solomon Esic
 Response time: within 24 hours
 
