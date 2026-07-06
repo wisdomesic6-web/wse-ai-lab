@@ -94,6 +94,14 @@ exports.handler = async function (event) {
       return json(400, { error: "Unsupported patch." });
     }
 
+    if (method === "DELETE") {
+      const body = JSON.parse(event.body || "{}");
+      const table = { lead: "leads", customer: "customers" }[body.entity];
+      if (!table || !body.id) return json(400, { error: "Need entity and id." });
+      await rest(`${table}?id=eq.${encodeURIComponent(body.id)}`, { method: "DELETE" });
+      return json(200, { ok: true });
+    }
+
     return json(405, { error: "Method not allowed." });
   } catch (err) {
     return json(502, { error: String(err.message || err) });

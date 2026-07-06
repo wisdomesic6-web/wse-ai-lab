@@ -3544,11 +3544,7 @@ html[data-density="compact"] { font-size: 14.5px; }
         <div class="form-group">
           <label class="form-label">Assign To</label>
           <select class="form-select" id="newTaskAssign">
-            <option value="AO">Akin Olusola</option>
-            <option value="KA">Kemi Adeyemi</option>
-            <option value="MT">Musa Tunde</option>
-            <option value="JD">James Dike</option>
-            <option value="BI">Bola Ige</option>
+            <!-- populated from the live team roster by populateAssigneeSelect() -->
           </select>
         </div>
       </div>
@@ -4753,15 +4749,8 @@ html[data-density="compact"] { font-size: 14.5px; }
             <div class="form-field"><label>Website</label><input type="url" id="set-website" placeholder="https://wselabs.ai"></div>
             <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:8px;">
               <div class="st-subtitle">Team Members</div>
-              <div class="team-member-row">
-                <div class="tm-av">WS</div>
-                <div class="tm-info">
-                  <div class="tm-name">Wisdom Solomon Esic</div>
-                  <div class="tm-role">Super Admin</div>
-                </div>
-                <span class="badge-pill green">Owner</span>
-              </div>
-              <button class="btn-ghost-sm" style="margin-top:12px;">+ Invite Member</button>
+              <div id="teamRosterList"><!-- populated by renderTeamRoster() --></div>
+              <button class="btn-ghost-sm" style="margin-top:12px;" onclick="openModal('member')">+ Invite Member</button>
             </div>
             <button class="btn-accent-sm" onclick="saveWorkspaceSettings(this)">Save Workspace</button>
           </div>
@@ -5489,14 +5478,79 @@ document.querySelectorAll('.task-card').forEach(bindCardDrag);
 /* ═════════════════════════════════════════════
    TEAM ROSTER
    ═════════════════════════════════════════════ */
-const TEAM = {
-  AO: { name: 'Akin Olusola',  color: 'linear-gradient(135deg,#4A6AFF,#7698FF)' },
-  KA: { name: 'Kemi Adeyemi',  color: 'linear-gradient(135deg,#1FCFA4,#0EC4D8)' },
-  MT: { name: 'Musa Tunde',    color: 'linear-gradient(135deg,#F4A21B,#EF6C00)' },
-  JD: { name: 'James Dike',    color: 'linear-gradient(135deg,#9F78FA,#818CF8)' },
-  BI: { name: 'Bola Ige',      color: 'linear-gradient(135deg,#14C4D8,#0B7EA8)' },
-  SA: { name: 'Super Admin',   color: 'linear-gradient(135deg,#4A6AFF,#9F78FA)' },
-};
+/* ═══════════════════════════════════════════════
+   TEAM ROSTER — real members, loaded from Supabase (team_members)
+   via loadTeam(). TEAM is keyed by each member's unique initials code
+   and read across the app as TEAM[code].color / .name. The owner is
+   always present and cannot be deleted; everyone else is admin-managed
+   (add via "Invite Member", delete from Settings or a task assignee).
+   ═══════════════════════════════════════════════ */
+const OWNER_MEMBER = { id: 'owner', name: 'Wisdom Solomon Esic', email: '', role: 'Super Admin', initials: 'WS', color: 'linear-gradient(135deg,#4A6AFF,#9F78FA)', owner: true };
+const MEMBER_COLORS = [
+  'linear-gradient(135deg,#4A6AFF,#7698FF)', 'linear-gradient(135deg,#1FCFA4,#0EC4D8)',
+  'linear-gradient(135deg,#F4A21B,#EF6C00)', 'linear-gradient(135deg,#9F78FA,#818CF8)',
+  'linear-gradient(135deg,#14C4D8,#0B7EA8)', 'linear-gradient(135deg,#FF6B9D,#C44FE0)',
+];
+let MEMBERS = [ { ...OWNER_MEMBER } ];
+let TEAM = {};
+
+function rebuildTeam() {
+  TEAM = {};
+  MEMBERS.forEach(m => { TEAM[m.initials] = { id: m.id, name: m.name, email: m.email, role: m.role, color: m.color, owner: !!m.owner }; });
+  populateAssigneeSelect();
+  renderTeamRoster();
+}
+
+/* Unique 2-letter code from a name (suffix a digit if it collides). */
+function makeMemberInitials(name) {
+  const base = (String(name).trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase()) || 'M';
+  let code = base, n = 1;
+  while (TEAM[code]) { code = base + n; n++; }
+  return code;
+}
+
+/* Rebuild the task-modal assignee <select> from the live roster. */
+function populateAssigneeSelect() {
+  const sel = document.getElementById('newTaskAssign');
+  if (!sel) return;
+  const cur = sel.value;
+  sel.innerHTML = MEMBERS.map(m => `<option value="${m.initials}">${escHtml(m.name)}</option>`).join('');
+  if (cur && MEMBERS.some(m => m.initials === cur)) sel.value = cur;
+}
+
+/* Rebuild the lead-form owner <select> (injected fresh each time the modal opens). */
+function populateOwnerSelect() {
+  const sel = document.getElementById('mf-owner');
+  if (!sel) return;
+  sel.innerHTML = MEMBERS.map(m => `<option value="${m.initials}">${escHtml(m.name)}</option>`).join('');
+}
+
+/* Settings → Team Members list, with delete for non-owner members. */
+function renderTeamRoster() {
+  const list = document.getElementById('teamRosterList');
+  if (!list) return;
+  list.innerHTML = MEMBERS.map(m => `
+    <div class="team-member-row">
+      <div class="tm-av" style="background:${m.color}">${escHtml(m.initials)}</div>
+      <div class="tm-info">
+        <div class="tm-name">${escHtml(m.name)}</div>
+        <div class="tm-role">${escHtml(m.role || 'Member')}${m.email ? ' · ' + escHtml(m.email) : ''}</div>
+      </div>
+      ${m.owner
+        ? '<span class="badge-pill green">Owner</span>'
+        : `<button class="btn-ghost-sm" style="color:var(--red);border-color:rgba(240,80,80,.25)" onclick="deleteMember('${m.id}')">Remove</button>`}
+    </div>`).join('');
+}
+
+function deleteMember(id) {
+  const m = MEMBERS.find(x => x.id === id);
+  if (!m || m.owner) return;
+  if (!confirm(`Remove team member "${m.name}"? Tasks assigned to them will show as unassigned.`)) return;
+  MEMBERS = MEMBERS.filter(x => x.id !== id);
+  if (typeof persistMemberDelete === 'function') persistMemberDelete(id);
+  rebuildTeam();
+  if (typeof renderTasksBoard === 'function') renderTasksBoard();
+}
 
 /* Currently open task ID */
 let activePanelId = null;
@@ -5988,7 +6042,13 @@ function taskCardHTML(t) {
   const dots = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>';
   const chat = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
   const labels = (t.labels || []).map(l => `<span class="label-chip" style="background:rgba(74,106,255,0.12);color:var(--accent2)">${escHtml(l)}</span>`).join('');
-  const assignees = (t.assignees || []).map(a => `<div class="assignee-av" style="background:${(typeof TEAM!=='undefined' && TEAM[a] && TEAM[a].color) || 'linear-gradient(135deg,#4A6AFF,#7698FF)'}">${escHtml(a)}</div>`).join('');
+  const assignees = (t.assignees || []).map(a => {
+    const m = (typeof TEAM !== 'undefined') ? TEAM[a] : null;
+    const bg = m ? m.color : '#3A4256';                       /* deleted/unknown member → grey */
+    const txt = m ? escHtml(a) : '?';
+    const title = m ? escHtml(m.name) : 'Unassigned';
+    return `<div class="assignee-av" style="background:${bg}" title="${title}">${txt}</div>`;
+  }).join('');
   const sub = t.subtasks ? `<div class="subtask-bar"><div class="subtask-label"><span>Subtasks</span><span>${t.subtasks.done} / ${t.subtasks.total}</span></div><div class="subtask-track"><div class="subtask-fill" style="width:${t.subtasks.total ? Math.round(t.subtasks.done / t.subtasks.total * 100) : 0}%"></div></div></div>` : '';
   const comments = t.comments ? `<div class="card-comment-count">${chat}${t.comments}</div>` : '';
   return `
@@ -6462,6 +6522,7 @@ function openDetail(type, id) {
       </div>`;
     footer.innerHTML = `
       <button class="btn-ghost" onclick="closeDetail()">Close</button>
+      <button class="btn-ghost" style="color:var(--red);border-color:rgba(240,80,80,.25)" onclick="deleteCustomer('${c.id}')">Delete</button>
       <button class="btn-primary" style="flex:1" onclick="editCustomer('${c.id}')">Edit Customer</button>`;
 
   } else if (type === 'lead') {
@@ -6586,6 +6647,17 @@ function editCustomer(id) {
   set('mf-ctags', (c.tags || []).join(', '));
 }
 
+function deleteCustomer(id) {
+  const c = CUSTOMERS.find(x => x.id === id);
+  if (!c) return;
+  if (!confirm(`Delete customer "${c.name}"? This cannot be undone.`)) return;
+  const idx = CUSTOMERS.findIndex(x => x.id === id);
+  if (idx !== -1) CUSTOMERS.splice(idx, 1);
+  if (typeof persistCustomerDelete === 'function') persistCustomerDelete(id);
+  closeDetail();
+  renderCustomers();
+}
+
 function moveLead(leadId, newStage) {
   const l = LEADS.find(x=>x.id===leadId);
   if (!l) return;
@@ -6650,6 +6722,26 @@ const MODAL_FORMS = {
         <div class="form-group"><label class="form-label">Total Spent</label><input class="form-input" id="mf-cspent" placeholder="e.g. ₦250,000"></div>
       </div>
       <div class="form-group"><label class="form-label">Tags</label><input class="form-input" id="mf-ctags" placeholder="Comma-separated, e.g. VIP, Retainer"></div>`
+  },
+  member: {
+    title: 'Invite Team Member',
+    html: `
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="mf-mname" placeholder="e.g. Chidi Okafor"></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="mf-memail" type="email" placeholder="name@wselabs.ai"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Role</label>
+        <select class="form-select" id="mf-mrole">
+          <option value="Member">Member</option>
+          <option value="Admin">Admin</option>
+          <option value="Manager">Manager</option>
+          <option value="Analyst">Analyst</option>
+          <option value="Developer">Developer</option>
+        </select>
+      </div>
+      <div style="font-size:11.5px;color:var(--text3);line-height:1.5;margin-top:2px">
+        This adds the person to your team roster so they can be assigned to tasks and leads. It does not create a separate login — the OS uses one shared workspace password.
+      </div>`
   },
   invoice: {
     title: 'New Invoice',
@@ -6760,6 +6852,7 @@ function openModal(type) {
   if (!form) return;
   document.getElementById('modalTitle').textContent = form.title;
   document.getElementById('modalBody').innerHTML = form.html;
+  if (type === 'lead') populateOwnerSelect();   /* fill owner dropdown from the live roster */
   document.getElementById('p4-modalOverlay').classList.add('open');
 }
 
@@ -6780,13 +6873,13 @@ function submitModal() {
     if (!name) { document.getElementById('mf-name').style.borderColor='var(--red)'; return; }
     const id = 'l'+Date.now();
     const colors = ['linear-gradient(135deg,#4A6AFF,#7698FF)','linear-gradient(135deg,#1FCFA4,#0EC4D8)','linear-gradient(135deg,#9F78FA,#818CF8)'];
-    const oc = {'AO':'linear-gradient(135deg,#4A6AFF,#7698FF)','KA':'linear-gradient(135deg,#1FCFA4,#0EC4D8)','MT':'linear-gradient(135deg,#F4A21B,#EF6C00)','JD':'linear-gradient(135deg,#9F78FA,#818CF8)'};
     const owner = document.getElementById('mf-owner').value;
+    const ownerColor = (TEAM[owner] && TEAM[owner].color) || colors[0];
     const _newLead = {id,name,company:document.getElementById('mf-company').value||'—',
       stage:document.getElementById('mf-stage').value,
       value:document.getElementById('mf-value').value||'₦0',
       prob:parseInt(document.getElementById('mf-prob').value)||20,
-      owner,ownerColor:oc[owner],
+      owner,ownerColor,
       color:colors[Math.floor(Math.random()*colors.length)],
       initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()};
     LEADS.push(_newLead);
@@ -6823,6 +6916,21 @@ function submitModal() {
       if (typeof persistCustomer === 'function') persistCustomer(_cust);
     }
     renderCustomers();
+
+  } else if (activeModalType === 'member') {
+    const name = document.getElementById('mf-mname')?.value.trim();
+    if (!name) { document.getElementById('mf-mname').style.borderColor='var(--red)'; return; }
+    const _mem = {
+      id: 'mem_' + Date.now(),
+      name,
+      email: document.getElementById('mf-memail').value.trim() || '',
+      role: document.getElementById('mf-mrole').value,
+      initials: makeMemberInitials(name),
+      color: MEMBER_COLORS[MEMBERS.length % MEMBER_COLORS.length],
+    };
+    MEMBERS.push(_mem);
+    if (typeof persistMember === 'function') persistMember(_mem);
+    rebuildTeam();
 
   } else if (activeModalType === 'expense') {
     const name = document.getElementById('mf-ename')?.value.trim();
@@ -7897,6 +8005,50 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     } catch (e) { console.warn('[CRM] patch customer failed:', e.message); }
   };
+  window.persistCustomerDelete = async function (id) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'customer', id }),
+      });
+    } catch (e) { console.warn('[CRM] delete customer failed:', e.message); }
+  };
+
+  // ── Team roster live data (team_members) ──
+  window.persistMember = async function (member) {
+    try {
+      await fetch('/.netlify/functions/team', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ row: member }),
+      });
+    } catch (e) { console.warn('[Team] persist member failed:', e.message); }
+  };
+  window.persistMemberDelete = async function (id) {
+    try {
+      await fetch('/.netlify/functions/team', {
+        method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+    } catch (e) { console.warn('[Team] delete member failed:', e.message); }
+  };
+  window.loadTeam = async function () {
+    try {
+      const res = await fetch('/.netlify/functions/team', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const d = await res.json();
+      if (d.error) throw new Error(d.error);
+      if (Array.isArray(d.members)) {
+        MEMBERS = [{ ...OWNER_MEMBER }, ...d.members.map((m) => ({
+          id: m.id, name: m.name, email: m.email || '', role: m.role || 'Member',
+          initials: m.initials, color: m.color,
+        }))];
+        if (typeof rebuildTeam === 'function') rebuildTeam();
+      }
+    } catch (e) {
+      console.warn('[Team] live data unavailable, using local state:', e.message);
+      if (typeof rebuildTeam === 'function') rebuildTeam();
+    }
+  };
   window.persistLeadStage = async function (id, stage) {
     try {
       await fetch('/.netlify/functions/crm', {
@@ -8148,9 +8300,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); });
+    document.addEventListener('DOMContentLoaded', () => { rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam(); });
   } else {
-    load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats();
+    rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam();
   }
 })();
 </script>
