@@ -6661,12 +6661,40 @@ function deleteCustomer(id) {
 function moveLead(leadId, newStage) {
   const l = LEADS.find(x=>x.id===leadId);
   if (!l) return;
+  const oldStage = l.stage;
   l.stage = newStage;
   if (typeof persistLeadStage === 'function') persistLeadStage(leadId, newStage);
+  /* Closed Won → automatically create a customer (once) */
+  if (newStage === 'closed' && oldStage !== 'closed') winLead(l);
   closeDetail();
   renderPipeline();
   /* Re-open panel with updated data */
   setTimeout(()=>openDetail('lead',leadId), 50);
+}
+
+/* Convert a won lead into a customer. Guarded by lead.converted (persisted),
+   so a deal can't be converted twice. The lead stays in the Closed Won column
+   for pipeline/win-rate stats. */
+function winLead(l) {
+  if (!l || l.converted) return;
+  l.converted = true;
+  if (typeof persistLeadConverted === 'function') persistLeadConverted(l.id);
+  const tags = (l.company && l.company !== '—') ? [l.company] : [];
+  const _cust = {
+    id: 'cust_' + Date.now(),
+    name: l.name,
+    email: '—',
+    seg: 'Client',
+    spent: l.value || '₦0',
+    last: 'Just won',
+    tags,
+    color: l.color || 'linear-gradient(135deg,#4A6AFF,#7698FF)',
+    initials: l.initials || (String(l.name).split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()),
+  };
+  CUSTOMERS.push(_cust);
+  if (typeof persistCustomer === 'function') persistCustomer(_cust);
+  if (typeof renderCustomers === 'function') renderCustomers();
+  if (typeof showToast === 'function') showToast('🎉 ' + l.name + ' won — added to Customers');
 }
 
 /* ═══════════════════════════════════
@@ -6885,6 +6913,7 @@ function submitModal() {
     LEADS.push(_newLead);
     if (typeof persistLead === 'function') persistLead(_newLead);
     renderPipeline();
+    if (_newLead.stage === 'closed') winLead(_newLead);   /* created already-won → convert */
 
   } else if (activeModalType === 'customer') {
     const name = document.getElementById('mf-cname')?.value.trim();
@@ -8056,6 +8085,14 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ entity: 'lead', id, stage }),
       });
     } catch (e) { console.warn('[CRM] persist stage failed:', e.message); }
+  };
+  window.persistLeadConverted = async function (id) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'lead', id, converted: true }),
+      });
+    } catch (e) { console.warn('[CRM] persist converted failed:', e.message); }
   };
   async function loadCRM() {
     try {

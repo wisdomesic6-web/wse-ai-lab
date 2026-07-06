@@ -33,7 +33,7 @@ exports.handler = async function (event) {
   const leadToClient = (r) => ({
     id: r.id, name: r.name, company: r.company, stage: r.stage,
     value: r.value, prob: r.prob, owner: r.owner, ownerColor: r.owner_color,
-    color: r.color, initials: r.initials,
+    color: r.color, initials: r.initials, converted: r.converted,
   });
   const leadToDb = (r) => ({
     id: r.id, name: r.name, company: r.company, stage: r.stage,
@@ -76,8 +76,12 @@ exports.handler = async function (event) {
     if (method === "PATCH") {
       const body = JSON.parse(event.body || "{}");
       if (body.entity === "lead" && body.id) {
+        const patch = {};
+        if ("stage" in body) patch.stage = body.stage;
+        if ("converted" in body) patch.converted = body.converted;
+        if (!Object.keys(patch).length) return json(400, { error: "No lead fields to patch." });
         await rest(`leads?id=eq.${encodeURIComponent(body.id)}`, {
-          method: "PATCH", body: JSON.stringify({ stage: body.stage }),
+          method: "PATCH", body: JSON.stringify(patch),
         });
         return json(200, { ok: true });
       }
