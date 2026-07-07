@@ -6165,6 +6165,7 @@ document.querySelectorAll('.label-toggle').forEach(l => {
 /* ── Phase 4 JS (CRM/Finance/Recon) ── */
 let CUSTOMERS = [];   /* loaded live from Supabase via loadCRM() */
 let editingCustomerId = null;   /* set by editCustomer(); null = "Add Customer" insert mode */
+let editingLeadId = null;       /* set by editLead(); null = "Add Lead" insert mode */
 
 const PIPELINE_STAGES = [
   {id:'prospect', label:'Prospect', color:'#3D4E75', bgColor:'rgba(61,78,117,.15)'},
@@ -6573,7 +6574,8 @@ function openDetail(type, id) {
       </div>`;
     footer.innerHTML = `
       <button class="btn-ghost" onclick="closeDetail()">Close</button>
-      <button class="btn-primary" style="flex:1">Edit Lead</button>`;
+      <button class="btn-ghost" style="color:var(--red);border-color:rgba(240,80,80,.25)" onclick="deleteLead('${l.id}')">Delete</button>
+      <button class="btn-primary" style="flex:1" onclick="editLead('${l.id}')">Edit Lead</button>`;
 
   } else if (type === 'invoice') {
     const inv = INVOICES.find(x=>x.id===id); if (!inv) return;
@@ -6656,6 +6658,35 @@ function deleteCustomer(id) {
   if (typeof persistCustomerDelete === 'function') persistCustomerDelete(id);
   closeDetail();
   renderCustomers();
+}
+
+/* Open the lead modal pre-filled for editing (mirrors editCustomer). */
+function editLead(id) {
+  const l = LEADS.find(x => x.id === id);
+  if (!l) return;
+  closeDetail();
+  openModal('lead');                       /* resets editingLeadId + fills owner select */
+  editingLeadId = id;
+  document.getElementById('modalTitle').textContent = 'Edit Lead';
+  const set = (fid, val) => { const el = document.getElementById(fid); if (el) el.value = val; };
+  set('mf-name', l.name);
+  set('mf-company', l.company === '—' ? '' : l.company);
+  set('mf-email', (l.email && l.email !== '—') ? l.email : '');
+  set('mf-value', l.value === '₦0' ? '' : l.value);
+  set('mf-stage', l.stage);
+  set('mf-prob', l.prob);
+  set('mf-owner', l.owner);
+}
+
+function deleteLead(id) {
+  const l = LEADS.find(x => x.id === id);
+  if (!l) return;
+  if (!confirm(`Delete lead "${l.name}"? This cannot be undone.`)) return;
+  const idx = LEADS.findIndex(x => x.id === id);
+  if (idx !== -1) LEADS.splice(idx, 1);
+  if (typeof persistLeadDelete === 'function') persistLeadDelete(id);
+  closeDetail();
+  renderPipeline();
 }
 
 function moveLead(leadId, newStage) {
@@ -6877,6 +6908,7 @@ const MODAL_FORMS = {
 function openModal(type) {
   activeModalType = type;
   if (type === 'customer') editingCustomerId = null;   /* default to insert; editCustomer() re-sets it after */
+  if (type === 'lead') editingLeadId = null;           /* default to insert; editLead() re-sets it after */
   const form = MODAL_FORMS[type];
   if (!form) return;
   document.getElementById('modalTitle').textContent = form.title;
@@ -6900,22 +6932,35 @@ function submitModal() {
   if (activeModalType === 'lead') {
     const name = document.getElementById('mf-name')?.value.trim();
     if (!name) { document.getElementById('mf-name').style.borderColor='var(--red)'; return; }
-    const id = 'l'+Date.now();
     const colors = ['linear-gradient(135deg,#4A6AFF,#7698FF)','linear-gradient(135deg,#1FCFA4,#0EC4D8)','linear-gradient(135deg,#9F78FA,#818CF8)'];
     const owner = document.getElementById('mf-owner').value;
     const ownerColor = (TEAM[owner] && TEAM[owner].color) || colors[0];
-    const _newLead = {id,name,company:document.getElementById('mf-company').value||'—',
-      email:document.getElementById('mf-email').value.trim()||'—',
-      stage:document.getElementById('mf-stage').value,
-      value:document.getElementById('mf-value').value||'₦0',
-      prob:parseInt(document.getElementById('mf-prob').value)||20,
-      owner,ownerColor,
-      color:colors[Math.floor(Math.random()*colors.length)],
-      initials:name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()};
-    LEADS.push(_newLead);
-    if (typeof persistLead === 'function') persistLead(_newLead);
-    renderPipeline();
-    if (_newLead.stage === 'closed') winLead(_newLead);   /* created already-won → convert */
+    const company = document.getElementById('mf-company').value || '—';
+    const email = document.getElementById('mf-email').value.trim() || '—';
+    const stage = document.getElementById('mf-stage').value;
+    const value = document.getElementById('mf-value').value || '₦0';
+    const prob = parseInt(document.getElementById('mf-prob').value) || 20;
+    const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+    if (editingLeadId) {
+      const idx = LEADS.findIndex(x => x.id === editingLeadId);
+      if (idx !== -1) {
+        const oldStage = LEADS[idx].stage;
+        const patch = { name, company, email, value, prob, owner, ownerColor, stage, initials };
+        LEADS[idx] = { ...LEADS[idx], ...patch };   /* new object, no in-place mutation */
+        if (typeof persistLeadPatch === 'function') persistLeadPatch(editingLeadId, patch);
+        renderPipeline();
+        if (stage === 'closed' && oldStage !== 'closed') winLead(LEADS[idx]);
+      }
+      editingLeadId = null;
+    } else {
+      const _newLead = { id:'l'+Date.now(), name, company, email, stage, value, prob, owner, ownerColor,
+        color: colors[Math.floor(Math.random()*colors.length)], initials };
+      LEADS.push(_newLead);
+      if (typeof persistLead === 'function') persistLead(_newLead);
+      renderPipeline();
+      if (_newLead.stage === 'closed') winLead(_newLead);   /* created already-won → convert */
+    }
 
   } else if (activeModalType === 'customer') {
     const name = document.getElementById('mf-cname')?.value.trim();
@@ -8095,6 +8140,22 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ entity: 'lead', id, converted: true }),
       });
     } catch (e) { console.warn('[CRM] persist converted failed:', e.message); }
+  };
+  window.persistLeadPatch = async function (id, patch) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'lead', id, patch }),
+      });
+    } catch (e) { console.warn('[CRM] patch lead failed:', e.message); }
+  };
+  window.persistLeadDelete = async function (id) {
+    try {
+      await fetch('/.netlify/functions/crm', {
+        method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entity: 'lead', id }),
+      });
+    } catch (e) { console.warn('[CRM] delete lead failed:', e.message); }
   };
   async function loadCRM() {
     try {

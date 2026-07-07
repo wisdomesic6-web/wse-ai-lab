@@ -79,6 +79,14 @@ exports.handler = async function (event) {
         const patch = {};
         if ("stage" in body) patch.stage = body.stage;
         if ("converted" in body) patch.converted = body.converted;
+        if (body.patch && typeof body.patch === "object") {
+          const map = {
+            name: "name", company: "company", email: "email", value: "value",
+            prob: "prob", owner: "owner", ownerColor: "owner_color", stage: "stage",
+            color: "color", initials: "initials", converted: "converted",
+          };
+          Object.keys(body.patch).forEach((k) => { if (map[k]) patch[map[k]] = body.patch[k]; });
+        }
         if (!Object.keys(patch).length) return json(400, { error: "No lead fields to patch." });
         await rest(`leads?id=eq.${encodeURIComponent(body.id)}`, {
           method: "PATCH", body: JSON.stringify(patch),
