@@ -2735,29 +2735,26 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div class="hero-top">
         <div>
           <div class="hero-label"><div class="live-dot"></div> Total Revenue — Live</div>
-          <div class="hero-amount">₦0</div>
+          <div class="hero-amount money">₦0</div>
           <div class="hero-delta">No change yet</div>
         </div>
-        <div class="currency-toggle">
-          <div class="cur-opt active">NGN</div>
-          <div class="cur-opt">USD</div>
-          <div class="cur-opt">EUR</div>
-        </div>
+        <select class="currency-select" onchange="setCurrency(this.value)" aria-label="Workspace currency"
+          style="background:rgba(255,255,255,.06);color:var(--parch,#EEF0FF);border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:8px 12px;font-size:12.5px;font-weight:600;cursor:pointer;max-width:180px;"></select>
       </div>
       <div class="hero-row">
         <div class="hero-stat">
           <div class="hs-label">Total Income</div>
-          <div class="hs-val">₦0</div>
+          <div class="hs-val money">₦0</div>
           <div class="hs-chg">—</div>
         </div>
         <div class="hero-stat">
           <div class="hs-label">Expenses</div>
-          <div class="hs-val" style="color:var(--red)">₦0</div>
+          <div class="hs-val money" style="color:var(--red)">₦0</div>
           <div class="hs-chg">—</div>
         </div>
         <div class="hero-stat">
           <div class="hs-label">Net Profit</div>
-          <div class="hs-val" style="color:var(--green)">₦0</div>
+          <div class="hs-val money" style="color:var(--green)">₦0</div>
           <div class="hs-chg">—</div>
         </div>
       </div>
@@ -2829,7 +2826,7 @@ html[data-density="compact"] { font-size: 14.5px; }
           </div>
           <div class="badge">—</div>
         </div>
-        <div class="metric-num">₦0</div>
+        <div class="metric-num money">₦0</div>
         <div class="metric-lbl">Pending Invoices</div>
         <div class="prog-bar"><div class="prog-fill" style="width:0%;background:var(--amber)"></div></div>
       </div>
@@ -3675,7 +3672,7 @@ html[data-density="compact"] { font-size: 14.5px; }
             <div class="stat-ic" style="background:rgba(31,207,164,.1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FCFA4" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div class="stat-badge">—</div>
           </div>
-          <div class="stat-val" id="crmMPipeline">₦0</div>
+          <div class="stat-val money" id="crmMPipeline">₦0</div>
           <div class="stat-lbl">Pipeline Value</div>
           <div class="mini-spark">
             <div class="spark-bar" style="height:45%;background:rgba(31,207,164,.3)"></div>
@@ -3762,11 +3759,8 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div class="section-header" style="margin-bottom:16px">
         <div><div class="section-title-lg">Financial Overview</div></div>
         <div style="display:flex;gap:8px;align-items:center">
-          <div class="cur-toggle">
-            <div class="cur-btn active" onclick="setCurrency('NGN',this)">NGN</div>
-            <div class="cur-btn" onclick="setCurrency('USD',this)">USD</div>
-            <div class="cur-btn" onclick="setCurrency('EUR',this)">EUR</div>
-          </div>
+          <select class="currency-select" onchange="setCurrency(this.value)" aria-label="Workspace currency"
+            style="background:var(--surface2,#141828);color:var(--text,#EEF0FF);border:1px solid var(--border,rgba(255,255,255,.1));border-radius:9px;padding:8px 12px;font-size:12.5px;font-weight:600;cursor:pointer;max-width:200px;"></select>
         </div>
       </div>
 
@@ -3774,17 +3768,17 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div class="pl-strip">
         <div class="pl-cell">
           <div class="pl-label">Total Revenue</div>
-          <div class="pl-val" style="color:var(--text)" id="plRevenue">₦0</div>
+          <div class="pl-val money" style="color:var(--text)" id="plRevenue">₦0</div>
           <div class="pl-delta" style="color:var(--green)">▲ 12.1% vs last month</div>
         </div>
         <div class="pl-cell">
           <div class="pl-label">Total Expenses</div>
-          <div class="pl-val" style="color:var(--red)" id="plExpenses">₦0</div>
+          <div class="pl-val money" style="color:var(--red)" id="plExpenses">₦0</div>
           <div class="pl-delta" style="color:var(--text3)">▼ 3.2% vs last month</div>
         </div>
         <div class="pl-cell">
           <div class="pl-label">Net Profit</div>
-          <div class="pl-val" style="color:var(--green)" id="plProfit">₦0</div>
+          <div class="pl-val money" style="color:var(--green)" id="plProfit">₦0</div>
           <div class="pl-delta" style="color:var(--green)">▲ 18.3% vs last month</div>
         </div>
       </div>
@@ -4411,7 +4405,7 @@ html[data-density="compact"] { font-size: 14.5px; }
       </div>
       <div class="metric-card">
         <div class="mc-label">Stock Value</div>
-        <div class="mc-val" id="invMValue">₦0</div>
+        <div class="mc-val money" id="invMValue">₦0</div>
         <div class="mc-sub">total on hand</div>
       </div>
       <div class="metric-card">
@@ -4495,7 +4489,7 @@ html[data-density="compact"] { font-size: 14.5px; }
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div class="form-field">
-          <label>Unit Cost (₦)</label>
+          <label>Unit Cost</label>
           <input type="number" placeholder="0" id="invCost" min="0">
         </div>
         <div class="form-field">
@@ -4746,6 +4740,7 @@ html[data-density="compact"] { font-size: 14.5px; }
               <select id="set-bizType"><option>AI Product Company</option><option>Automation Agency</option><option>SaaS Builder</option><option>Hybrid</option></select>
             </div>
             <div class="form-field"><label>Country</label><input type="text" id="set-country" value="Nigeria"></div>
+            <div class="form-field"><label>Currency</label><select class="currency-select" onchange="setCurrency(this.value)"></select></div>
             <div class="form-field"><label>Website</label><input type="url" id="set-website" placeholder="https://wselabs.ai"></div>
             <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:8px;">
               <div class="st-subtitle">Team Members</div>
@@ -5045,7 +5040,7 @@ const canvas = document.getElementById('revChart');
           bodyColor: '#8596C4',
           padding: 11,
           callbacks: {
-            label: (c) => ' ₦' + c.parsed.y.toFixed(2) + 'M'
+            label: (c) => ' ' + CS + c.parsed.y.toFixed(2) + 'M'
           }
         }
       },
@@ -5059,7 +5054,7 @@ const canvas = document.getElementById('revChart');
           grid: { color: 'rgba(255,255,255,0.035)' },
           ticks: {
             color: '#3D4E75', font: { size: 11 },
-            callback: (v) => '₦' + v + 'M'
+            callback: (v) => CS + v + 'M'
           },
           border: { display: false }
         }
@@ -6257,12 +6252,12 @@ function renderInteractions() {
    ═══════════════════════════════════ */
 function updateCrmStats() {
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-  const parseVal = (v) => { const n = parseFloat(String(v || '').replace(/[₦,\s]/g, '').replace(/M$/i, '')); return String(v).match(/M/i) ? (n || 0) * 1e6 : (n || 0); };
+  const parseVal = parseMoney;
   set('crmMCustomers', CUSTOMERS.length);
   const active = LEADS.filter(l => l.stage !== 'closed');
   set('crmMLeads', active.length);
   const pipeVal = active.reduce((s, l) => s + parseVal(l.value), 0);
-  set('crmMPipeline', pipeVal >= 1e6 ? '₦' + (pipeVal / 1e6).toFixed(1) + 'M' : '₦' + pipeVal.toLocaleString());
+  set('crmMPipeline', pipeVal >= 1e6 ? CS + (pipeVal / 1e6).toFixed(1) + 'M' : CS + pipeVal.toLocaleString());
   const closed = LEADS.filter(l => l.stage === 'closed').length;
   const win = LEADS.length ? Math.round(closed / LEADS.length * 100) : 0;
   set('crmMWin', win + '%');
@@ -6275,8 +6270,8 @@ function renderPipeline() {
   const board = document.getElementById('pipelineBoard');
   board.innerHTML = PIPELINE_STAGES.map(stage => {
     const leads = LEADS.filter(l => l.stage === stage.id);
-    const totalVal = leads.reduce((sum,l) => sum + parseFloat(l.value.replace(/[₦,M]/g,''))*1e6, 0);
-    const dispTotal = totalVal >= 1e6 ? '₦'+(totalVal/1e6).toFixed(1)+'M' : '₦'+totalVal.toLocaleString();
+    const totalVal = leads.reduce((sum,l) => sum + parseMoney(l.value), 0);
+    const dispTotal = totalVal >= 1e6 ? CS+(totalVal/1e6).toFixed(1)+'M' : CS+totalVal.toLocaleString();
     return `
     <div class="pipe-col">
       <div class="pipe-col-header" style="background:${stage.bgColor}">
@@ -6391,10 +6386,10 @@ function renderTax() {
     </div>`).join('');
 
   document.getElementById('whtSummary').innerHTML = [
-    {label:'WHT Deducted',val:'₦0',color:'var(--red)'},
-    {label:'VAT Collected',val:'₦0',color:'var(--amber)'},
-    {label:'PAYE Deducted',val:'₦0',color:'var(--purple)'},
-    {label:'Net Tax Liability',val:'₦0',color:'var(--red)'},
+    {label:'WHT Deducted',val:CS+'0',color:'var(--red)'},
+    {label:'VAT Collected',val:CS+'0',color:'var(--amber)'},
+    {label:'PAYE Deducted',val:CS+'0',color:'var(--purple)'},
+    {label:'Net Tax Liability',val:CS+'0',color:'var(--red)'},
   ].map(r=>`
     <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;
       background:var(--surface2);border:1px solid var(--border);border-radius:10px">
@@ -6421,23 +6416,113 @@ function renderTax() {
 /* ═══════════════════════════════════
    CHARTS
    ═══════════════════════════════════ */
-let activeCurrency = 'NGN';
-const PL_DATA = {
-  NGN:{rev:'₦0',exp:'₦0',profit:'₦0'},
-  USD:{rev:'$0',exp:'$0',profit:'$0'},
-  EUR:{rev:'€0',exp:'€0',profit:'€0'},
+/* ═══════════════════════════════════
+   CURRENCY — workspace-wide, all African currencies + majors.
+   `CS` is the live symbol; every money-generating line reads it, so
+   changing currency updates symbols across the whole app. Amounts are
+   not FX-converted (no live rates) — the symbol/label changes to the
+   workspace currency, which is what a single-currency business wants.
+   ═══════════════════════════════════ */
+const CURRENCIES = {
+  NGN:{name:'Nigerian Naira',symbol:'₦'},
+  GHS:{name:'Ghanaian Cedi',symbol:'GH₵'},
+  KES:{name:'Kenyan Shilling',symbol:'KSh'},
+  ZAR:{name:'South African Rand',symbol:'R'},
+  EGP:{name:'Egyptian Pound',symbol:'E£'},
+  MAD:{name:'Moroccan Dirham',symbol:'DH'},
+  DZD:{name:'Algerian Dinar',symbol:'DA'},
+  TND:{name:'Tunisian Dinar',symbol:'DT'},
+  LYD:{name:'Libyan Dinar',symbol:'LD'},
+  XOF:{name:'West African CFA Franc',symbol:'CFA'},
+  XAF:{name:'Central African CFA Franc',symbol:'FCFA'},
+  ETB:{name:'Ethiopian Birr',symbol:'Br'},
+  UGX:{name:'Ugandan Shilling',symbol:'USh'},
+  TZS:{name:'Tanzanian Shilling',symbol:'TSh'},
+  RWF:{name:'Rwandan Franc',symbol:'FRw'},
+  BIF:{name:'Burundian Franc',symbol:'FBu'},
+  CDF:{name:'Congolese Franc',symbol:'FC'},
+  AOA:{name:'Angolan Kwanza',symbol:'Kz'},
+  MZN:{name:'Mozambican Metical',symbol:'MT'},
+  ZMW:{name:'Zambian Kwacha',symbol:'ZK'},
+  MWK:{name:'Malawian Kwacha',symbol:'MK'},
+  ZWL:{name:'Zimbabwean Dollar',symbol:'Z$'},
+  BWP:{name:'Botswana Pula',symbol:'P'},
+  NAD:{name:'Namibian Dollar',symbol:'N$'},
+  SZL:{name:'Eswatini Lilangeni',symbol:'E'},
+  LSL:{name:'Lesotho Loti',symbol:'L'},
+  MUR:{name:'Mauritian Rupee',symbol:'Rs'},
+  SCR:{name:'Seychellois Rupee',symbol:'SR'},
+  MGA:{name:'Malagasy Ariary',symbol:'Ar'},
+  CVE:{name:'Cape Verdean Escudo',symbol:'$'},
+  GMD:{name:'Gambian Dalasi',symbol:'D'},
+  GNF:{name:'Guinean Franc',symbol:'FG'},
+  LRD:{name:'Liberian Dollar',symbol:'L$'},
+  SLE:{name:'Sierra Leonean Leone',symbol:'Le'},
+  SOS:{name:'Somali Shilling',symbol:'Sh'},
+  SDG:{name:'Sudanese Pound',symbol:'SDG'},
+  SSP:{name:'South Sudanese Pound',symbol:'SSP'},
+  MRU:{name:'Mauritanian Ouguiya',symbol:'UM'},
+  DJF:{name:'Djiboutian Franc',symbol:'Fdj'},
+  ERN:{name:'Eritrean Nakfa',symbol:'Nfk'},
+  KMF:{name:'Comorian Franc',symbol:'CF'},
+  STN:{name:'São Tomé Dobra',symbol:'Db'},
+  USD:{name:'US Dollar',symbol:'$'},
+  EUR:{name:'Euro',symbol:'€'},
+  GBP:{name:'British Pound',symbol:'£'},
 };
+let activeCurrency = 'NGN';
+let CS = '₦';   /* live symbol — read by every money-generating line */
 
-function setCurrency(cur, el) {
-  activeCurrency = cur;
-  document.querySelectorAll('.cur-btn').forEach(b => {
-    if (b.closest('.cur-toggle') === el.closest('.cur-toggle')) b.classList.remove('active');
+function curSym() { return (CURRENCIES[activeCurrency] || CURRENCIES.NGN).symbol; }
+
+/* Parse a money string to a number, ignoring any currency symbol (incl.
+   letter symbols like "MK"/"KSh"). A trailing millions suffix (digit then M)
+   is expanded; "MK5,000" is NOT treated as millions. */
+function parseMoney(v) {
+  const s = String(v == null ? '' : v);
+  const n = parseFloat(s.replace(/[^\d.]/g, '')) || 0;
+  return /\d\s*M/i.test(s) ? n * 1e6 : n;
+}
+
+/* Strip any leading currency symbol/code, keep the number + suffix (e.g. "5.2M"). */
+function reSym(v) {
+  const s = String(v == null ? '' : v).trim();
+  const num = s.replace(/^[^\d.\-]+/, '');
+  return CS + num;
+}
+
+function currencyOptionsHTML(sel) {
+  return Object.keys(CURRENCIES).map(code =>
+    `<option value="${code}"${code === sel ? ' selected' : ''}>${code} — ${CURRENCIES[code].name} (${CURRENCIES[code].symbol})</option>`
+  ).join('');
+}
+
+/* Populate every currency dropdown in the DOM and sync it to the active code. */
+function initCurrencyDropdowns() {
+  document.querySelectorAll('.currency-select').forEach(sel => {
+    sel.innerHTML = currencyOptionsHTML(activeCurrency);
+    sel.value = activeCurrency;
   });
-  el.classList.add('active');
-  const d = PL_DATA[cur];
-  document.getElementById('plRevenue').textContent  = d.rev;
-  document.getElementById('plExpenses').textContent = d.exp;
-  document.getElementById('plProfit').textContent   = d.profit;
+}
+
+function setCurrency(code, persist = true) {
+  if (!CURRENCIES[code]) return;
+  activeCurrency = code;
+  CS = curSym();
+  /* Re-symbol money already held in memory so re-renders keep the new symbol. */
+  (typeof CUSTOMERS !== 'undefined' ? CUSTOMERS : []).forEach(c => { if (c && c.spent) c.spent = reSym(c.spent); });
+  (typeof LEADS !== 'undefined' ? LEADS : []).forEach(l => { if (l && l.value) l.value = reSym(l.value); });
+  (typeof INVOICES !== 'undefined' ? INVOICES : []).forEach(i => { if (i && i.amount) i.amount = reSym(i.amount); });
+  (typeof EXPENSES !== 'undefined' ? EXPENSES : []).forEach(e => { if (e && e.amount) e.amount = reSym(e.amount); });
+  (typeof TAX_RECORDS !== 'undefined' ? TAX_RECORDS : []).forEach(t => { if (t) { if (t.gross) t.gross = reSym(t.gross); if (t.deducted) t.deducted = reSym(t.deducted); } });
+  /* Keep every dropdown in sync. */
+  document.querySelectorAll('.currency-select').forEach(sel => { sel.value = code; });
+  /* Re-render money-bearing views. */
+  ['renderCustomers','renderPipeline','updateCrmStats','renderInvoices','renderExpenses','renderTax','updateInvMetrics','renderInventory','updateBookingStats']
+    .forEach(fn => { if (typeof window[fn] === 'function') { try { window[fn](); } catch (e) {} } });
+  /* Swap symbol on static/zero-state money nodes not owned by a render fn. */
+  document.querySelectorAll('.money').forEach(el => { el.textContent = reSym(el.textContent); });
+  if (persist && typeof persistSettings === 'function') persistSettings({ currency: code });
 }
 
 function buildFinanceCharts() {
@@ -6454,7 +6539,7 @@ function buildFinanceCharts() {
     datasets:[
       {label:'Revenue',data:[0,0,0,0,0,0],borderColor:'#4A6AFF',backgroundColor:g1,borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#4A6AFF',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true},
       {label:'Expenses',data:[0,0,0,0,0,0],borderColor:'#1FCFA4',backgroundColor:g2,borderWidth:2,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#1FCFA4',pointBorderColor:'#080A12',pointBorderWidth:2,tension:.45,fill:true}
-    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',borderColor:'rgba(74,106,255,.28)',borderWidth:1,titleColor:'#EEF0FF',bodyColor:'#8596C4',padding:10,callbacks:{label:c=>' ₦'+c.parsed.y.toFixed(1)+'M'}}},scales:{x:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11}},border:{display:false}},y:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11},callback:v=>'₦'+v+'M'},border:{display:false}}}}});
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',borderColor:'rgba(74,106,255,.28)',borderWidth:1,titleColor:'#EEF0FF',bodyColor:'#8596C4',padding:10,callbacks:{label:c=>' '+CS+c.parsed.y.toFixed(1)+'M'}}},scales:{x:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11}},border:{display:false}},y:{grid:{color:'rgba(255,255,255,.035)'},ticks:{color:'#3D4E75',font:{size:11},callback:v=>CS+v+'M'},border:{display:false}}}}});
 
   /* Payment methods doughnut */
   const ctx2 = document.getElementById('paymentChart').getContext('2d');
@@ -6478,7 +6563,7 @@ function buildExpenseChart() {
   new Chart(ctx,{type:'doughnut',data:{
     labels:['Payroll','Technology','Operations','Marketing','Professional'],
     datasets:[{data:[0,0,0,0,0],backgroundColor:['rgba(74,106,255,.8)','rgba(14,196,216,.8)','rgba(244,162,27,.8)','rgba(159,120,250,.8)','rgba(31,207,164,.8)'],borderColor:'#0E1120',borderWidth:3,hoverOffset:6}]
-  },options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',bodyColor:'#EEF0FF',padding:10,callbacks:{label:c=>` ${c.label}: ₦${(c.parsed/100*7650000).toLocaleString()}`}}}}});
+  },options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{backgroundColor:'#141828',bodyColor:'#EEF0FF',padding:10,callbacks:{label:c=>` ${c.label}: ${CS}${(c.parsed/100*7650000).toLocaleString()}`}}}}});
 }
 
 /* ═══════════════════════════════════
@@ -6645,7 +6730,7 @@ function editCustomer(id) {
   set('mf-cname', c.name);
   set('mf-cemail', c.email === '—' ? '' : c.email);
   set('mf-cseg', c.seg);
-  set('mf-cspent', c.spent === '₦0' ? '' : c.spent);
+  set('mf-cspent', parseMoney(c.spent) === 0 ? '' : c.spent);
   set('mf-ctags', (c.tags || []).join(', '));
 }
 
@@ -6672,7 +6757,7 @@ function editLead(id) {
   set('mf-name', l.name);
   set('mf-company', l.company === '—' ? '' : l.company);
   set('mf-email', (l.email && l.email !== '—') ? l.email : '');
-  set('mf-value', l.value === '₦0' ? '' : l.value);
+  set('mf-value', parseMoney(l.value) === 0 ? '' : l.value);
   set('mf-stage', l.stage);
   set('mf-prob', l.prob);
   set('mf-owner', l.owner);
@@ -6716,7 +6801,7 @@ function winLead(l) {
     name: l.name,
     email: l.email || '—',
     seg: 'Client',
-    spent: l.value || '₦0',
+    spent: l.value || (CS+'0'),
     last: 'Just won',
     tags,
     color: l.color || 'linear-gradient(135deg,#4A6AFF,#7698FF)',
@@ -6742,7 +6827,7 @@ const MODAL_FORMS = {
       </div>
       <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="mf-email" type="email" placeholder="name@company.com"></div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Deal Value</label><input class="form-input" id="mf-value" placeholder="e.g. ₦5,000,000"></div>
+        <div class="form-group"><label class="form-label">Deal Value</label><input class="form-input" id="mf-value" placeholder="e.g. 5,000,000"></div>
         <div class="form-group"><label class="form-label">Stage</label>
           <select class="form-select" id="mf-stage">
             <option value="prospect">Prospect</option>
@@ -6779,7 +6864,7 @@ const MODAL_FORMS = {
             <option value="Individual">Individual</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Total Spent</label><input class="form-input" id="mf-cspent" placeholder="e.g. ₦250,000"></div>
+        <div class="form-group"><label class="form-label">Total Spent</label><input class="form-input" id="mf-cspent" placeholder="e.g. 250,000"></div>
       </div>
       <div class="form-group"><label class="form-label">Tags</label><input class="form-input" id="mf-ctags" placeholder="Comma-separated, e.g. VIP, Retainer"></div>`
   },
@@ -6841,7 +6926,7 @@ const MODAL_FORMS = {
     html: `
       <div class="form-group"><label class="form-label">Expense Name *</label><input class="form-input" id="mf-ename" placeholder="What was purchased?"></div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Amount *</label><input class="form-input" id="mf-eamt" placeholder="₦0.00"></div>
+        <div class="form-group"><label class="form-label">Amount *</label><input class="form-input" id="mf-eamt" placeholder="0.00"></div>
         <div class="form-group"><label class="form-label">Category</label>
           <select class="form-select" id="mf-ecat">
             <option>Payroll</option><option>Technology</option><option>Operations</option>
@@ -6897,7 +6982,7 @@ const MODAL_FORMS = {
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Gross Amount</label><input class="form-input" id="mf-tgross" placeholder="₦0.00"></div>
+        <div class="form-group"><label class="form-label">Gross Amount</label><input class="form-input" id="mf-tgross" placeholder="0.00"></div>
         <div class="form-group"><label class="form-label">Tax Rate</label>
           <select class="form-select" id="mf-trate"><option>5%</option><option>7.5%</option><option>10%</option><option>15%</option><option>30%</option></select>
         </div>
@@ -6938,7 +7023,8 @@ function submitModal() {
     const company = document.getElementById('mf-company').value || '—';
     const email = document.getElementById('mf-email').value.trim() || '—';
     const stage = document.getElementById('mf-stage').value;
-    const value = document.getElementById('mf-value').value || '₦0';
+    const valueIn = document.getElementById('mf-value').value.trim();
+    const value = valueIn ? reSym(valueIn) : (CS+'0');
     const prob = parseInt(document.getElementById('mf-prob').value) || 20;
     const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
 
@@ -6970,7 +7056,8 @@ function submitModal() {
       .split(',').map(t => t.trim()).filter(Boolean);
     const email = document.getElementById('mf-cemail').value.trim() || '—';
     const seg = document.getElementById('mf-cseg').value;
-    const spent = document.getElementById('mf-cspent').value.trim() || '₦0';
+    const spentIn = document.getElementById('mf-cspent').value.trim();
+    const spent = spentIn ? reSym(spentIn) : (CS+'0');
     const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
 
     if (editingCustomerId) {
@@ -7012,7 +7099,7 @@ function submitModal() {
     const name = document.getElementById('mf-ename')?.value.trim();
     if (!name) { document.getElementById('mf-ename').style.borderColor='var(--red)'; return; }
     const _exp = {id:'exp_'+Date.now(),name,cat:document.getElementById('mf-ecat').value,
-      amount:document.getElementById('mf-eamt').value||'₦0',
+      amount:(document.getElementById('mf-eamt').value.trim() ? reSym(document.getElementById('mf-eamt').value.trim()) : CS+'0'),
       date:document.getElementById('mf-edate').value||'Today',icon:'💳',
       iconBg:'rgba(74,106,255,.12)'};
     EXPENSES.unshift(_exp);
@@ -7030,8 +7117,9 @@ function submitModal() {
     renderInteractions();
 
   } else if (activeModalType === 'invoice') {
-    const amount = document.getElementById('mf-amount')?.value.trim();
-    if (!amount) { document.getElementById('mf-amount').style.borderColor='var(--red)'; return; }
+    const amountIn = document.getElementById('mf-amount')?.value.trim();
+    if (!amountIn) { document.getElementById('mf-amount').style.borderColor='var(--red)'; return; }
+    const amount = reSym(amountIn);
     const clientId = document.getElementById('mf-client').value;
     const client   = CUSTOMERS.find(c=>c.id===clientId);
     const id = 'INV-00'+String(INVOICES.length+43).padStart(2,'0');
@@ -7045,12 +7133,13 @@ function submitModal() {
   } else if (activeModalType === 'tax') {
     const period = document.getElementById('mf-tperiod')?.value.trim();
     if (!period) { document.getElementById('mf-tperiod').style.borderColor='var(--red)'; return; }
-    const gross = document.getElementById('mf-tgross').value;
+    const grossIn = document.getElementById('mf-tgross').value.trim();
     const rate  = document.getElementById('mf-trate').value;
     const rateNum = parseFloat(rate)/100;
-    const grossNum = parseFloat(gross.replace(/[₦,]/g,''))||0;
+    const grossNum = parseMoney(grossIn);
+    const gross = grossIn ? reSym(grossIn) : (CS+'0');
     const _tax = {id:'tax_'+Date.now(),period,type:document.getElementById('mf-ttype').value,
-      gross:gross||'₦0',rate,deducted:`₦${(grossNum*rateNum).toLocaleString()}`};
+      gross,rate,deducted:`${CS}${(grossNum*rateNum).toLocaleString()}`};
     TAX_RECORDS.unshift(_tax);
     if (typeof persistFinance === 'function') persistFinance('tax', _tax);
     renderTax();
@@ -7105,7 +7194,7 @@ const MatchEngine = {
   /* Normalise amount string → number */
   parseAmount(str) {
     if (typeof str === 'number') return str;
-    return parseFloat(String(str).replace(/[₦,$€,\s]/g, '')) || 0;
+    return parseMoney(str);
   },
 
   /* Score 0–100: exact=100, close=partial, far=low */
@@ -7182,7 +7271,7 @@ const MatchEngine = {
       const key = `${txn.amount}-${txn.source}`;
       if (seenAmounts[key]) {
         disc.push({ type:'duplicate', txnId:txn.id, txnId2:seenAmounts[key],
-          amount:txn.amountFmt, desc:`Duplicate ₦${(txn.amount/1e6).toFixed(2)}M from ${txn.source}` });
+          amount:txn.amountFmt, desc:`Duplicate ${CS}${(txn.amount/1e6).toFixed(2)}M from ${txn.source}` });
       } else { seenAmounts[key] = txn.id; }
 
       /* Over/underpayment detection */
@@ -7191,8 +7280,8 @@ const MatchEngine = {
         if (inv) {
           const invAmt = MatchEngine.parseAmount(inv.amount);
           const diff   = txn.amount - invAmt;
-          if (diff > 0)       disc.push({ type:'over',  txnId:txn.id, invoiceId:inv.id, amount:`+₦${(diff/1e6).toFixed(3)}M`, desc:`Overpayment on ${inv.id} by ₦${diff.toLocaleString()}` });
-          else if (diff < 0)  disc.push({ type:'under', txnId:txn.id, invoiceId:inv.id, amount:`-₦${(Math.abs(diff)/1e6).toFixed(3)}M`, desc:`Underpayment on ${inv.id} — short by ₦${Math.abs(diff).toLocaleString()}` });
+          if (diff > 0)       disc.push({ type:'over',  txnId:txn.id, invoiceId:inv.id, amount:`+${CS}${(diff/1e6).toFixed(3)}M`, desc:`Overpayment on ${inv.id} by ${CS}${diff.toLocaleString()}` });
+          else if (diff < 0)  disc.push({ type:'under', txnId:txn.id, invoiceId:inv.id, amount:`-${CS}${(Math.abs(diff)/1e6).toFixed(3)}M`, desc:`Underpayment on ${inv.id} — short by ${CS}${Math.abs(diff).toLocaleString()}` });
         }
       }
     });
@@ -7325,8 +7414,8 @@ function renderMatchingQueue() {
     const invAmt = inv ? MatchEngine.parseAmount(inv.amount) : null;
     const diff   = inv ? txn.amount - invAmt : null;
     const diffStr = diff !== null
-      ? (diff === 0 ? 'Exact amount' : diff > 0 ? `Overpayment +₦${Math.abs(diff).toLocaleString()}`
-                                                 : `Underpayment −₦${Math.abs(diff).toLocaleString()}`)
+      ? (diff === 0 ? 'Exact amount' : diff > 0 ? `Overpayment +${CS}${Math.abs(diff).toLocaleString()}`
+                                                 : `Underpayment −${CS}${Math.abs(diff).toLocaleString()}`)
       : 'No invoice linked';
     const diffColor = diff === null ? 'var(--text3)'
       : diff === 0 ? 'var(--green)' : diff > 0 ? 'var(--accent2)' : 'var(--red)';
@@ -7935,10 +8024,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 (function () {
   const NGN = new Intl.NumberFormat('en-NG');
-  const fmtFull = (n) => '₦' + NGN.format(Math.round(Number(n) || 0));
+  const fmtFull = (n) => (typeof CS !== 'undefined' ? CS : '₦') + NGN.format(Math.round(Number(n) || 0));
   const fmtM = (n) => {
     const m = (Number(n) || 0) / 1e6;
-    return '₦' + m.toFixed(2).replace(/\.?0+$/, '') + 'M';
+    return (typeof CS !== 'undefined' ? CS : '₦') + m.toFixed(2).replace(/\.?0+$/, '') + 'M';
   };
   const arrow = (up) => (up ? '▲' : '▼');
   const pct = (v) => Math.abs(Number(v) || 0);
@@ -8363,6 +8452,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const d = await res.json();
       const s = d.settings || {};
+      if (s.currency && CURRENCIES[s.currency]) setCurrency(s.currency, false);   /* apply saved workspace currency (no re-save) */
       const setv = (id, v) => { const el = document.getElementById(id); if (el && v != null && v !== '') el.value = v; };
       setv('set-firstName', s.first_name); setv('set-lastName', s.last_name); setv('set-email', s.email); setv('set-phone', s.phone); setv('set-location', s.location);
       setv('set-company', s.company_name); setv('set-bizType', s.business_type); setv('set-country', s.country); setv('set-website', s.website);
@@ -8400,9 +8490,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam(); });
+    document.addEventListener('DOMContentLoaded', () => { initCurrencyDropdowns(); rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam(); });
   } else {
-    rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam();
+    initCurrencyDropdowns(); rebuildTeam(); load(); loadCRM(); loadTasks(); loadFinance(); loadOps(); loadSettings(); loadAIStats(); loadTeam();
   }
 })();
 </script>
@@ -9160,7 +9250,7 @@ function updateInvMetrics() {
   const cats = new Set(items.map(i => i.cat).filter(Boolean)).size;
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set('invMTotal', totalItems);
-  set('invMValue', '₦' + stockValue.toLocaleString());
+  set('invMValue', CS + stockValue.toLocaleString());
   set('invMLow', low);
   set('invMOut', out);
   set('invMCats', 'across ' + cats + ' categor' + (cats === 1 ? 'y' : 'ies'));
@@ -9187,8 +9277,8 @@ function renderInventory(data) {
       <td style="font-weight:600;">${item.name || '—'}</td>
       <td style="color:var(--text2)">${item.cat || '—'}</td>
       <td>${qty}</td>
-      <td>₦${cost.toLocaleString()}</td>
-      <td>₦${total}</td>
+      <td>${CS}${cost.toLocaleString()}</td>
+      <td>${CS}${total}</td>
       <td><span class="status-badge ${cls}">${label}</span></td>
     </tr>`;
   }).join('');

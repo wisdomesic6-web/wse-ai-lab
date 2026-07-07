@@ -44,7 +44,7 @@ exports.handler = async function (event) {
   };
 
   const ALLOWED = ["first_name", "last_name", "email", "phone", "location",
-    "company_name", "business_type", "country", "website", "notifications", "appearance", "ai_config"];
+    "company_name", "business_type", "country", "website", "notifications", "appearance", "ai_config", "currency"];
 
   try {
     if (event.httpMethod === "GET") {
