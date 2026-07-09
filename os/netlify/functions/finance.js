@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Finance data API (Netlify serverless function)
+   WSE Lab Consult OS — Finance data API (Netlify serverless function)
 
    Invoices, expenses, tax records — backed by Supabase using the
    SERVICE ROLE key (server-side only, behind the Basic Auth edge gate).

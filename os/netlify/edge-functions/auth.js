@@ -1,4 +1,4 @@
-// HTTP Basic Auth gate for WSE Labs OS (Netlify free-tier password protection).
+// HTTP Basic Auth gate for WSE Lab Consult OS (Netlify free-tier password protection).
 // Credentials come from environment variables set in the Netlify dashboard —
 // never hardcode them here.
 //   OS_USER     (optional, defaults to "wse")
@@ -15,7 +15,7 @@ function gatePage({ title, message }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>WSE Labs OS — ${title}</title>
+<title>WSE Lab Consult OS — ${title}</title>
 <style>
   :root {
     --bg: #0a0e14;
@@ -71,8 +71,8 @@ function gatePage({ title, message }) {
     <div class="badge">WSE</div>
     <h1>${title}</h1>
     <p>${message}</p>
-    <div class="lock">🔒 Internal system — WSE AI Lab</div>
-    <footer>Product created by WSE AI Lab © ${YEAR}</footer>
+    <div class="lock">🔒 Internal system — WSE Lab Consult</div>
+    <footer>Product created by WSE Lab Consult © ${YEAR}</footer>
   </main>
 </body>
 </html>`;
@@ -102,13 +102,13 @@ export default async (request, context) => {
       gatePage({
         title: "Authentication required",
         message:
-          "This is a private WSE AI Lab system. Sign in with your credentials to continue.",
+          "This is a private WSE Lab Consult system. Sign in with your credentials to continue.",
       }),
       {
         status: 401,
         headers: {
           "content-type": "text/html; charset=utf-8",
-          "WWW-Authenticate": 'Basic realm="WSE Labs OS", charset="UTF-8"',
+          "WWW-Authenticate": 'Basic realm="WSE Lab Consult OS", charset="UTF-8"',
         },
       },
     );

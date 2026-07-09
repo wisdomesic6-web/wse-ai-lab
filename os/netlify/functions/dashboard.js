@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Dashboard data API (Netlify serverless function)
+   WSE Lab Consult OS — Dashboard data API (Netlify serverless function)
 
    The Dashboard is a LIVE ROLLUP: it aggregates real counts and sums
    from the other modules' tables (customers, leads, tasks, invoices,

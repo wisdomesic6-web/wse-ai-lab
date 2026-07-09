@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Tasks (Kanban) data API (Netlify serverless function)
+   WSE Lab Consult OS — Tasks (Kanban) data API (Netlify serverless function)
 
    Backed by Supabase using the SERVICE ROLE key (server-side only,
    behind the Basic Auth edge gate).

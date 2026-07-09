@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — App settings + config status (Netlify function)
+   WSE Lab Consult OS — App settings + config status (Netlify function)
 
    GET  → { settings: {...}, status: { <envVar>: bool, ... } }
           settings = editable profile/workspace/notifications/appearance

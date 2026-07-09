@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Team Members data API (Netlify serverless function)
+   WSE Lab Consult OS — Team Members data API (Netlify serverless function)
 
    The real team roster that feeds task/lead assignee pickers.
    Backed by Supabase using the SERVICE ROLE key (server-side only,

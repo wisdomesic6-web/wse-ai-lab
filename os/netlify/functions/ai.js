@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — AI Engine (Netlify function)
+   WSE Lab Consult OS — AI Engine (Netlify function)
 
    POST → body { prompt, system?, model?, max_tokens?, temperature?, template? }
           → calls Anthropic Messages API, logs usage to ai_usage,
@@ -65,7 +65,7 @@ async function runPrompt(event, rest) {
   const temperature = clamp(parseFloat(body.temperature), 0, 1);
   const system = typeof body.system === "string" && body.system.trim()
     ? body.system.trim().slice(0, MAX_PROMPT_CHARS)
-    : "You are the AI engine inside WSE Labs OS, the internal business operating system of WSE AI Lab (Lagos, Nigeria). Be direct, practical, and concise. Format output so it is ready to use.";
+    : "You are the AI engine inside WSE Lab Consult OS, the internal business operating system of WSE Lab Consult (Lagos, Nigeria). Be direct, practical, and concise. Format output so it is ready to use.";
 
   const payload = { model, max_tokens: maxTokens, system, messages: [{ role: "user", content: prompt }] };
   if (!Number.isNaN(temperature)) payload.temperature = temperature;

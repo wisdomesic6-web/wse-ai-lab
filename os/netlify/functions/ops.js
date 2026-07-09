@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — Ops data API
+   WSE Lab Consult OS — Ops data API
    (bookings, inventory, AI templates, businesses, workflows)
 
    Backed by Supabase (service-role, server-side, behind Basic Auth).

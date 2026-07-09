@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Labs OS — CRM data API (Netlify serverless function)
+   WSE Lab Consult OS — CRM data API (Netlify serverless function)
 
    Customers + leads, backed by Supabase using the SERVICE ROLE key
    (server-side only, behind the Basic Auth edge gate).
