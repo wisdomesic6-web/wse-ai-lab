@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Update Founder Photo — WSE Lab Consult</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .admin-wrap{max-width:460px;margin:0 auto;padding:clamp(48px,8vw,96px) 20px}
+  .admin-card{padding:32px}
+  .admin-preview{width:140px;height:175px;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--card);margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
+  .admin-preview img{width:100%;height:100%;object-fit:cover}
+  .admin-status{margin-top:16px;font-size:14px;text-align:center}
+  .admin-status.err{color:#B4232A}
+  .admin-status.ok{color:#1A7A4C}
+  .field{margin-bottom:18px}
+</style>
+</head>
+<body>
+<main class="admin-wrap">
+  <div class="card admin-card">
+    <span class="eyebrow">WSE Lab Consult</span>
+    <h1 class="h-md" style="margin:12px 0 6px">Update founder photo</h1>
+    <p class="body-muted" style="font-size:14px;margin-bottom:24px">Not linked anywhere public — bookmark this page. Upload replaces the photo shown on the home page and About page for everyone, immediately.</p>
+
+    <div class="admin-preview" id="preview"><span class="ph-ini">WS</span></div>
+
+    <form id="photoForm">
+      <div class="field">
+        <label for="secret">Password</label>
+        <input type="password" id="secret" name="secret" required autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="file">Photo (PNG, JPEG, or WebP — max 5MB)</label>
+        <input type="file" id="file" name="file" accept="image/png,image/jpeg,image/webp" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" id="submitBtn">Upload photo</button>
+      <p class="admin-status" id="status"></p>
+    </form>
+  </div>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('photoForm');
+  var fileInput = document.getElementById('file');
+  var secretInput = document.getElementById('secret');
+  var statusEl = document.getElementById('status');
+  var submitBtn = document.getElementById('submitBtn');
+  var preview = document.getElementById('preview');
+
+  fileInput.addEventListener('change', function () {
+    var f = fileInput.files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      preview.innerHTML = '<img src="' + reader.result + '" alt="Preview">';
+    };
+    reader.readAsDataURL(f);
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = fileInput.files[0];
+    if (!f) return;
+
+    statusEl.textContent = '';
+    statusEl.className = 'admin-status';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Uploading…';
+
+    var reader = new FileReader();
+    reader.onload = function () {
+      var dataUrl = reader.result;
+      var base64 = dataUrl.slice(dataUrl.indexOf(',') + 1);
+
+      fetch('/api/upload-photo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: secretInput.value,
+          contentType: f.type,
+          dataBase64: base64
+        })
+      })
+        .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
+        .then(function (result) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Upload photo';
+          if (result.ok) {
+            statusEl.textContent = 'Uploaded — live on the site now.';
+            statusEl.className = 'admin-status ok';
+            secretInput.value = '';
+          } else {
+            statusEl.textContent = result.data.error || 'Upload failed.';
+            statusEl.className = 'admin-status err';
+          }
+        })
+        .catch(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Upload photo';
+          statusEl.textContent = 'Could not reach the server. Try again.';
+          statusEl.className = 'admin-status err';
+        });
+    };
+    reader.readAsDataURL(f);
+  });
+})();
+</script>
+</body>
+</html>

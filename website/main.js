@@ -267,11 +267,30 @@
   }
   function wirePlaceholders(root) {
     (root || document).querySelectorAll('img[data-ph]').forEach(function (img) {
+      if (img.getAttribute('data-ph') === 'photo') return; // handled by wirePhoto(), which is async
       if (img.complete && img.naturalWidth === 0) { buildPlaceholder(img); return; }
       img.addEventListener('error', function () { buildPlaceholder(img); });
     });
   }
   wirePlaceholders();
+
+  /* ═══ Founder photo — checks Vercel Blob for a self-service upload
+     (see admin-photo.html) before falling back to the static asset ═══ */
+  function wirePhoto(root) {
+    var imgs = (root || document).querySelectorAll('img[data-ph="photo"]');
+    if (!imgs.length) return;
+    function fallback() {
+      imgs.forEach(function (img) {
+        if (img.complete && img.naturalWidth === 0) { buildPlaceholder(img); return; }
+        img.addEventListener('error', function () { buildPlaceholder(img); });
+      });
+    }
+    fetch('/api/photo-url').then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.url) { imgs.forEach(function (img) { img.src = data.url; }); }
+      fallback();
+    }).catch(fallback);
+  }
+  wirePhoto();
 
   /* ═══ Scroll reveals ═══ */
   function wireReveals(root) {
