@@ -23,7 +23,7 @@
     },
     {
       slug: 'wse-datapilot', name: 'WSE Datapilot', status: 'live', tag: 'Analytics · Business Intelligence',
-      url: 'https://wse-datapilot.vercel.app',
+      url: 'https://wse-datapilot.vercel.app', logo: 'assets/products/wse-datapilot.svg',
       desc: 'Plug in your data, get plain-English reports, trends, and anomaly flags — no data team required.',
       long: [
         'WSE Datapilot is an AI-powered analytics platform for businesses that don’t have — and don’t want to hire — a data team. Connect your data sources and it does the analyst’s job: finds the trends, flags the anomalies, and writes the report.',
@@ -34,7 +34,7 @@
     },
     {
       slug: 'wse-audit-system', name: 'WSE Audit System', status: 'live', tag: 'Accounting · ICAN / ISA 2024',
-      url: 'https://wseauditsystem.netlify.app',
+      url: 'https://wseauditsystem.netlify.app', logo: 'assets/products/wse-audit-system.svg',
       desc: 'Audit intelligence for Nigerian accounting firms — ICAN and ISA 2024 compliant, with an AI copilot.',
       long: [
         'WSE Audit System is a SaaS audit intelligence platform built for Nigerian accounting firms. It is compliant with ICAN requirements and the ISA 2024 standards, so firms can modernise without compliance risk.',
@@ -45,7 +45,7 @@
     },
     {
       slug: 'wse-soundhub', name: 'WSE SoundHub', status: 'live', tag: 'E-commerce · Musical Instruments',
-      url: 'https://wsesound-hub.netlify.app',
+      url: 'https://wsesound-hub.netlify.app', logo: 'assets/products/wse-soundhub.svg',
       desc: 'Nigerian musical-instrument e-commerce with a full Supabase backend and complete admin console.',
       long: [
         'WSE SoundHub is a Nigerian musical instrument e-commerce platform running on a full Supabase backend — products, orders, customers, and payments in one system.',
@@ -357,8 +357,9 @@
       var visit = p.url
         ? '<a class="link-arrow accent" href="' + p.url + '" target="_blank" rel="noopener">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>'
         : '';
+      var favicon = p.logo ? '<img src="' + p.logo + '" alt="">' : '';
       return '<article class="card prod-card reveal" data-status="' + p.status + '" data-href="product.html?p=' + p.slug + '" role="link" tabindex="0" aria-label="' + p.name + ' details">' +
-        '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + p.name + '</span>' + badge + '</div>' +
+        '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + favicon + p.name + '</span>' + badge + '</div>' +
         '<div class="prod-media"><img src="assets/example.png" alt="' + p.name + ' preview" loading="lazy" data-ph="product" data-ph-label="' + productInitials(p.name) + '" data-ph-cap="' + p.name + '"></div>' +
         '<div class="prod-body">' +
           '<div class="prod-top"><h3>' + p.name + '</h3></div>' +
@@ -408,6 +409,7 @@
       var visitBtn = product.url
         ? '<a class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px" href="' + product.url + '" target="_blank" rel="noopener">Visit Product <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>'
         : '<p style="margin-top:20px;font-size:13.5px;color:var(--muted)">This product is in the workshop — <a href="contact.html">ask about early access</a>.</p>';
+      var detailFavicon = product.logo ? '<img src="' + product.logo + '" alt="">' : '';
       var related = PRODUCTS.filter(function (p) { return p.slug !== product.slug && p.status === product.status; }).slice(0, 3);
       if (related.length < 3) {
         related = related.concat(PRODUCTS.filter(function (p) {
@@ -417,7 +419,7 @@
       detail.innerHTML =
         '<a class="link-arrow" href="products.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform:rotate(180deg)"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Back to Products</a>' +
         '<div class="detail-hero" style="margin-top:24px">' +
-          '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + product.name + '</span>' + badge + '</div>' +
+          '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + detailFavicon + product.name + '</span>' + badge + '</div>' +
           '<div class="dh-media"><img src="assets/example.png" alt="' + product.name + ' preview" data-ph="product" data-ph-label="' + productInitials(product.name) + '" data-ph-cap="' + product.name + '"></div>' +
         '</div>' +
         '<div class="detail-grid">' +
@@ -465,7 +467,7 @@
       }).catch(function () {
         button.innerHTML = originalHtml;
         button.disabled = false;
-        alert('Something went wrong. Please email us at support.wselabs@gmail.com.');
+        alert('Something went wrong. Please email us at info@wseailab.com.');
       });
     });
   }
@@ -557,7 +559,7 @@
       });
     }).catch(function () {
       typing.remove();
-      addMessage('Could not connect right now. Email support.wselabs@gmail.com or tap the WhatsApp button below.', 'bot');
+      addMessage('Could not connect right now. Email info@wseailab.com or tap the WhatsApp button below.', 'bot');
     });
   }
 

@@ -3,6 +3,9 @@
 .env.*
 *.local
 
+# Personal ID documents — never publish
+website/assets/My passport.jpeg
+
 # Netlify
 .netlify/
 
@@ -11,3 +14,6 @@
 Thumbs.db
 *.log
 node_modules/
+
+# Local Claude Code skills (installed tooling, not site source)
+.claude/skills/
