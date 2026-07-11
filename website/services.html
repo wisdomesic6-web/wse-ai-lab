@@ -4,23 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Services — WSE Lab Consult</title>
-<meta name="description" content="What WSE Lab Consult builds: websites & web apps, custom software & SaaS, AI products, business automation, and strategy — for African businesses.">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="description" content="AI Product Build, Business Automation, AI Strategy &amp; Advisory, SaaS Launch &amp; Scale — WSE Lab Consult builds revenue-generating AI systems for African businesses.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .svc-row { display: grid; grid-template-columns: 88px 1fr 1.1fr; gap: 32px; padding: 40px 0; border-top: 1px solid var(--line); align-items: start; }
-  .svc-idx { font-family: var(--ff-mono); font-size: 30px; color: var(--brass); line-height: 1; }
-  .svc-row h3 { margin-bottom: 12px; }
-  .svc-deliver { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-  .svc-deliver li { position: relative; padding-left: 24px; color: var(--stone); font-size: 15.5px; }
-  .svc-deliver li::before { content: "→"; position: absolute; left: 0; color: var(--indigo); font-family: var(--ff-mono); }
-  .svc-best { font-family: var(--ff-mono); font-size: 12.5px; color: var(--ink); margin-top: 16px; }
-  .svc-best b { color: var(--brass); }
-  @media (max-width: 820px){ .svc-row { grid-template-columns: 1fr; gap: 14px; padding: 30px 0; } .svc-idx { font-size: 24px; } }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -28,148 +17,228 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
-      <span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span>
+      <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+      <span class="brand-name">WSE <b>Lab Consult</b></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a project</a>
+      <a href="services.html" data-nav>Services</a>
+      <a href="products.html" data-nav>Products</a>
+      <a href="about.html" data-nav>About</a>
+      <a href="index.html#pricing" data-nav>Pricing</a>
+      <a href="contact.html" data-nav>Contact</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="main">
+
   <section class="phero">
-    <div class="blueprint"></div>
     <div class="wrap">
       <span class="eyebrow">Services</span>
-      <h1 class="h-xl" style="max-width:15ch">One team, from first sketch to shipped.</h1>
-      <p class="lead">We're a full software studio: we build the website, the platform behind it, the AI inside it, and the automation around it. Here's the work, in plain terms.</p>
+      <h1 class="h-xl" data-split>AI that pays for itself.</h1>
+      <p class="lead">Four ways we put intelligent automation to work for your business — each scoped to a fixed quote, shipped in stages, and measured by what it earns or saves.</p>
     </div>
   </section>
 
-  <section class="section--tight">
+  <!-- 1 · AI PRODUCT BUILD -->
+  <section class="svc-section">
     <div class="wrap">
-
-      <div class="svc-row reveal">
-        <div class="svc-idx">01</div>
-        <div><h3 class="h-md">Websites &amp; Web Apps</h3><p style="color:var(--stone)">Every business needs a professional web presence. We build it — custom, fast, mobile-first, and deployed live. AI features optional.</p></div>
-        <div>
-          <ul class="svc-deliver">
-            <li>Company sites, landing pages &amp; portfolios</li>
-            <li>E-commerce stores &amp; booking sites</li>
-            <li>Client portals &amp; dashboards</li>
-            <li>Lead capture, forms, and analytics wired in</li>
-          </ul>
-          <p class="svc-best">Best for: <b>any business that needs a credible, converting website.</b></p>
-        </div>
-      </div>
-
-      <div class="svc-row reveal">
-        <div class="svc-idx">02</div>
-        <div><h3 class="h-md">Custom Software &amp; SaaS</h3><p style="color:var(--stone)">From concept to paying customers. We handle the whole stack and the boring-but-critical parts that make software real.</p></div>
-        <div>
-          <ul class="svc-deliver">
-            <li>Backend, frontend &amp; database design</li>
-            <li>Billing, authentication &amp; onboarding</li>
-            <li>Admin consoles &amp; internal tools</li>
-            <li>Built to scale without a rewrite</li>
-          </ul>
-          <p class="svc-best">Best for: <b>founders taking a product from zero to launch.</b></p>
-        </div>
-      </div>
-
-      <div class="svc-row reveal">
-        <div class="svc-idx">03</div>
-        <div><h3 class="h-md">AI Products</h3><p style="color:var(--stone)">Practical AI trained on your business — assistants, copilots, and data tools that save real hours. No science projects.</p></div>
-        <div>
-          <ul class="svc-deliver">
-            <li>Private AI assistants with your business memory</li>
-            <li>Chatbots for support &amp; lead qualification</li>
-            <li>Data analysis &amp; plain-English reporting</li>
-            <li>Document understanding &amp; content generation</li>
-          </ul>
-          <p class="svc-best">Best for: <b>teams drowning in repetitive knowledge work.</b></p>
-        </div>
-      </div>
-
-      <div class="svc-row reveal">
-        <div class="svc-idx">04</div>
-        <div><h3 class="h-md">Business Automation</h3><p style="color:var(--stone)">We connect your tools so work happens without you. Intake, follow-ups, reporting, and messaging — on autopilot.</p></div>
-        <div>
-          <ul class="svc-deliver">
-            <li>n8n &amp; AI-agent workflows</li>
-            <li>WhatsApp, SMS &amp; email automation</li>
-            <li>Automated reporting &amp; alerts</li>
-            <li>CRM, inventory &amp; payment integrations</li>
-          </ul>
-          <p class="svc-best">Best for: <b>operations that still run on manual copy-paste.</b></p>
-        </div>
-      </div>
-
-      <div class="svc-row reveal">
-        <div class="svc-idx">05</div>
-        <div><h3 class="h-md">Strategy &amp; Advisory</h3><p style="color:var(--stone)">Before we build, we make sure we're building the right thing. A specific plan tied to your revenue — not a trends deck.</p></div>
-        <div>
-          <ul class="svc-deliver">
-            <li>Business &amp; opportunity assessment</li>
-            <li>A prioritised build roadmap</li>
-            <li>Scope, budget &amp; sequencing</li>
-            <li>Clear next step you can act on Monday</li>
-          </ul>
-          <p class="svc-best">Best for: <b>businesses that know AI matters but not where to start.</b></p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Engagement -->
-  <section class="section section--ink">
-    <div class="wrap">
-      <div class="grid g-2" style="gap:48px;align-items:center">
+      <div class="svc-inner">
         <div class="reveal">
-          <span class="eyebrow">How engagements work</span>
-          <h2 class="h-lg" style="margin:16px 0 16px">Flat rates. Clear scope. No surprises.</h2>
-          <p class="lead">Every project is scoped and quoted up front. You'll know exactly what you're getting, what it costs, and when it ships — before we write a line of code.</p>
-          <div style="margin-top:26px"><a class="btn btn-primary" href="contact.html">Get a quote</a></div>
+          <span class="eyebrow">01 · AI Product Build</span>
+          <h2 class="h-lg" style="margin:16px 0 14px">Your AI product, from concept to customers.</h2>
+          <p class="lead" style="font-size:1.05rem">We design, engineer, and launch complete AI products — assistants, copilots, and intelligent platforms trained on your business. Proven in our own portfolio before we ever build for you.</p>
+          <ul class="svc-list">
+            <li>Custom AI assistants with your business knowledge built in</li>
+            <li>Document analysis and plain-English reporting</li>
+            <li>Voice, image, and multilingual support</li>
+            <li>Claude API production infrastructure</li>
+            <li>Your data stays in your workspace — strict isolation</li>
+          </ul>
+          <div class="svc-meta">
+            <span class="svc-time">⏱ 6–10 weeks typical</span>
+            <a class="btn btn-primary" href="contact.html">Enquire
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
         </div>
-        <div class="grid reveal" style="gap:14px">
-          <div class="card" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)"><span class="card-num" style="color:#E7B96A">Discovery</span><h3 class="h-md" style="color:var(--paper);margin:10px 0 6px;font-size:1.2rem">We scope it together</h3><p style="color:var(--stone-d)">A short conversation to understand the goal, then a written plan and fixed quote.</p></div>
-          <div class="card" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)"><span class="card-num" style="color:#E7B96A">Build</span><h3 class="h-md" style="color:var(--paper);margin:10px 0 6px;font-size:1.2rem">We ship in stages</h3><p style="color:var(--stone-d)">You see progress you can click on, not status reports — and give feedback as it takes shape.</p></div>
-          <div class="card" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)"><span class="card-num" style="color:#E7B96A">Launch</span><h3 class="h-md" style="color:var(--paper);margin:10px 0 6px;font-size:1.2rem">It goes live &amp; stays supported</h3><p style="color:var(--stone-d)">Deployed to production, handed over, and backed by ongoing support if you want it.</p></div>
+        <!-- Visual: dark code/dashboard UI -->
+        <div class="mock mock-dash reveal" aria-hidden="true">
+          <div class="b-bar" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10)"><span></span><span></span><span></span></div>
+          <div class="m-nav"></div>
+          <div class="b-body" style="min-height:0">
+            <div class="m-side"><i></i><i></i><i></i></div>
+            <div class="m-code">
+              <i style="width:52%"></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="text-align:center">
+  <!-- 2 · BUSINESS AUTOMATION -->
+  <section class="svc-section alt">
     <div class="wrap">
-      <h2 class="h-lg reveal" style="max-width:22ch;margin:0 auto 18px">Have something in mind? Let's scope it.</h2>
-      <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-ink" href="contact.html">Start a project</a>
-        <a class="btn btn-line" href="portfolio.html">See our work</a>
+      <div class="svc-inner">
+        <div class="reveal">
+          <span class="eyebrow">02 · Business Automation</span>
+          <h2 class="h-lg" style="margin:16px 0 14px">Operations that run while you sleep.</h2>
+          <p class="lead" style="font-size:1.05rem">We wire your business together — lead intake, follow-ups, reporting, WhatsApp responses — so the busywork runs itself around the clock, without a human on standby.</p>
+          <ul class="svc-list">
+            <li>n8n workflows across the tools you already use</li>
+            <li>WhatsApp, SMS, and email automation</li>
+            <li>Lead scoring with AI-drafted outreach</li>
+            <li>Scheduled reports that write themselves</li>
+            <li>Deployed live with monitoring and handover</li>
+          </ul>
+          <div class="svc-meta">
+            <span class="svc-time">⏱ 2–4 weeks typical</span>
+            <a class="btn btn-primary" href="contact.html">Enquire
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <!-- Visual: workflow diagram with nodes + connecting lines -->
+        <div class="mock mock-flow reveal" aria-hidden="true">
+          <div class="f-col">
+            <span class="f-node dark">New lead arrives</span>
+            <span class="f-line"></span>
+            <span class="f-node">AI qualifies &amp; scores</span>
+            <div class="f-split">
+              <div class="f-branch"><span class="f-node">WhatsApp reply</span><span class="f-line dashed"></span><span class="f-node">Follow-up sequence</span></div>
+              <div class="f-branch"><span class="f-node">CRM entry</span><span class="f-line dashed"></span><span class="f-node dark">Weekly report</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- 3 · AI STRATEGY & ADVISORY -->
+  <section class="svc-section">
+    <div class="wrap">
+      <div class="svc-inner">
+        <div class="reveal">
+          <span class="eyebrow">03 · AI Strategy &amp; Advisory</span>
+          <h2 class="h-lg" style="margin:16px 0 14px">A build plan tied to revenue, not trends.</h2>
+          <p class="lead" style="font-size:1.05rem">A specific, prioritised plan for what to build, in what order, and why — grounded in thirteen products we've shipped ourselves, not a slide deck of possibilities.</p>
+          <ul class="svc-list">
+            <li>Technical audit of what you have today</li>
+            <li>Prioritised build roadmap with costs</li>
+            <li>Build-vs-buy calls for each piece</li>
+            <li>ROI model tied to your revenue targets</li>
+            <li>A plan you can execute with us or without us</li>
+          </ul>
+          <div class="svc-meta">
+            <span class="svc-time">⏱ 1–2 weeks typical</span>
+            <a class="btn btn-primary" href="contact.html">Enquire
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <!-- Visual: roadmap + growth chart -->
+        <div class="mock mock-chart reveal" aria-hidden="true">
+          <div class="c-bars"><b></b><b></b><b class="a"></b><b></b><b class="a"></b></div>
+          <div class="c-road"><i class="done"></i><i class="done"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · SAAS LAUNCH & SCALE -->
+  <section class="svc-section alt">
+    <div class="wrap">
+      <div class="svc-inner">
+        <div class="reveal">
+          <span class="eyebrow">04 · SaaS Launch &amp; Scale</span>
+          <h2 class="h-lg" style="margin:16px 0 14px">From working product to paying customers.</h2>
+          <p class="lead" style="font-size:1.05rem">Everything a product needs to earn: billing, auth, onboarding, and the growth loops that turn users into revenue. Naira-first with Paystack, global-ready with Stripe.</p>
+          <ul class="svc-list">
+            <li>Paystack and Stripe billing built in</li>
+            <li>Auth, roles, and multi-tenant workspaces</li>
+            <li>Onboarding flows that convert</li>
+            <li>Analytics and growth instrumentation</li>
+            <li>Staged delivery — live at every milestone</li>
+          </ul>
+          <div class="svc-meta">
+            <span class="svc-time">⏱ 4–8 weeks typical</span>
+            <a class="btn btn-primary" href="contact.html">Enquire
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+        <!-- Visual: SaaS pricing card mockup -->
+        <div class="mock mock-saas reveal" aria-hidden="true">
+          <div class="s-card">
+            <span class="s-t"></span>
+            <span class="s-p"></span>
+            <span class="s-r w85"></span>
+            <span class="s-r w70"></span>
+            <span class="s-r w85"></span>
+            <span class="s-btn"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:clamp(40px,4vw,64px);padding-bottom:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <h2 class="h-lg">Not sure which one you need?</h2>
+        <p class="lead">Tell us the problem. We'll tell you the highest-leverage place to start — within 24 hours.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="contact.html">Start a Project</a>
+          <a class="btn btn-ghost" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></div>
-        <p class="footer-blurb">A Lagos software &amp; AI studio. We design, build, and ship production software for African businesses — websites, platforms, and automation that earn their keep.</p>
+        <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+          <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+          <span class="brand-name">WSE <b>Lab Consult</b></span>
+        </a>
+        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
       </div>
-      <div class="footer-col"><h4>Company</h4><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Get in touch</h4><a href="mailto:info@wseailab.com">info@wseailab.com</a><a href="mailto:support@wseailab.com">support@wseailab.com</a><a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp +234 816 082 9058</a></div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Live Products</h4>
+        <a href="https://memora-os.vercel.app" target="_blank" rel="noopener">Memora OS</a>
+        <a href="https://wse-datapilot.vercel.app" target="_blank" rel="noopener">WSE Datapilot</a>
+        <a href="https://wseauditsystem.netlify.app" target="_blank" rel="noopener">WSE Audit System</a>
+        <a href="https://wsesound-hub.netlify.app" target="_blank" rel="noopener">WSE SoundHub</a>
+        <a href="https://solwise-realty-ai.netlify.app" target="_blank" rel="noopener">Solwise Realty AI</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:support.wselabs@gmail.com">support.wselabs@gmail.com</a>
+        <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="contact.html">Start a Project</a>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>Lagos, Nigeria · Bootstrapped</span>
-      <span>Product created by WSE Lab Consult © <span data-year>2026</span></span>
+      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
+      <span>Intelligent Automation Studio</span>
     </div>
   </div>
 </footer>
+
 <script src="main.js" defer></script>
 </body>
 </html>

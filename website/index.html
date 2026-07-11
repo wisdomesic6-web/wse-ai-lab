@@ -3,213 +3,360 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WSE Lab Consult — software, websites & AI, built in Lagos</title>
-<meta name="description" content="WSE Lab Consult is a Lagos software studio. We design, build, and ship websites, platforms, and AI automation for African businesses — production-ready, not proof-of-concept.">
-<meta name="theme-color" content="#FBFAF7">
+<title>WSE Lab Consult — Africa's AI Execution Lab · Lagos, Nigeria</title>
+<meta name="description" content="WSE Lab Consult builds revenue-generating AI systems for African businesses — SaaS platforms, intelligent agents, and automation that work from day one. Lagos, Nigeria.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  /* Home hero signature: blueprint field + plotted execution line */
-  .hero { position: relative; overflow: hidden; padding-block: clamp(56px, 4vw + 44px, 116px) clamp(52px, 4vw, 96px); }
-  .hero .wrap { position: relative; z-index: 2; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
-  .hero h1 { margin: 20px 0 22px; }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
-  .hero-figure { position: relative; aspect-ratio: 1 / 1; }
-  .hero-figure svg { width: 100%; height: 100%; overflow: visible; }
-  /* Draw-in effect enhances real browsers; the line is fully visible by default
-     (dashoffset 0) so it never renders blank if the animation doesn't run. */
-  .plot-path { stroke-dasharray: 620; stroke-dashoffset: 0; }
-  @media (prefers-reduced-motion: no-preference) {
-    .plot-path { animation: draw 2.2s var(--ease) .2s; }
-    @keyframes draw { from { stroke-dashoffset: 620; } to { stroke-dashoffset: 0; } }
-  }
-  .marquee { display: flex; gap: 40px; flex-wrap: wrap; align-items: center; }
-  .marquee span { font-family: var(--ff-mono); font-size: 13px; color: var(--stone); letter-spacing: .04em; }
-  .marquee b { color: var(--ink); }
-  @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; gap: 30px; } .hero-figure { max-width: 380px; order: -1; } }
-</style>
 </head>
 <body>
+
+<!-- ═══ LOADING SCREEN ═══ -->
+<div id="loader" aria-hidden="true">
+  <img class="loader-logo" src="assets/logo.png" alt="" data-ph="logo">
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-tag">Intelligent Automation Studio</div>
+</div>
+
 <a class="skip" href="#main">Skip to content</a>
 
+<!-- ═══ NAV ═══ -->
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
-      <span class="brand-mark">WSE</span>
+      <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
       <span class="brand-name">WSE <b>Lab Consult</b></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a project</a>
+      <a href="services.html" data-nav>Services</a>
+      <a href="products.html" data-nav>Products</a>
+      <a href="about.html" data-nav>About</a>
+      <a href="index.html#pricing" data-nav>Pricing</a>
+      <a href="contact.html" data-nav>Contact</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- HERO -->
+  <!-- ═══ HERO — text left, founder right ═══ -->
   <section class="hero">
-    <div class="blueprint"></div>
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow">WSE Lab Consult · Lagos, Nigeria</span>
-          <h1 class="h-xl">We build the software your business <span class="accent">runs on.</span></h1>
-          <p class="lead">Websites, platforms, and AI automation — designed, engineered, and shipped for African businesses. We don't stop at a demo. We deliver the real thing, live and earning.</p>
+          <span class="eyebrow">Lagos · Nigeria · Built for Africa</span>
+          <h1 class="h-xl" data-split>Africa's AI Execution Lab</h1>
+          <p class="lead">We build revenue-generating AI systems for African businesses — SaaS platforms, intelligent agents, and automation that work from day one.</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="contact.html">Start a project
+            <a class="btn btn-primary" href="contact.html">Start a Project
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a class="btn btn-line" href="portfolio.html">See what we've built</a>
+            <a class="btn btn-ghost" href="#featured">See our products
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </a>
+          </div>
+          <p class="hero-note">Replies within 24 hours · No pitch decks, no pressure</p>
+        </div>
+
+        <div class="founder-visual reveal in">
+          <div class="founder-frame">
+            <img src="assets/me.png" alt="Wisdom Solomon Esic, founder of WSE Lab Consult" data-ph="photo" data-ph-label="WS" data-ph-cap="Wisdom Solomon Esic" fetchpriority="high">
+          </div>
+          <div class="founder-tag">
+            <div class="ft-name">Wisdom Solomon Esic</div>
+            <div class="ft-role">Founder — WSE Lab Consult</div>
           </div>
         </div>
-        <div class="hero-figure" aria-hidden="true">
-          <svg viewBox="0 0 400 400" role="img">
-            <!-- axes -->
-            <line x1="40" y1="360" x2="380" y2="360" stroke="var(--line)" stroke-width="1.5"/>
-            <line x1="40" y1="20"  x2="40"  y2="360" stroke="var(--line)" stroke-width="1.5"/>
-            <!-- plotted execution line -->
-            <path class="plot-path" d="M40 320 C120 300, 150 210, 210 190 S320 120, 372 54"
-                  fill="none" stroke="var(--brass)" stroke-width="3.5" stroke-linecap="round"/>
-            <!-- nodes = shipped milestones -->
-            <circle class="plot-node" cx="40"  cy="320" r="7" fill="var(--indigo)"/>
-            <circle class="plot-node" cx="150" cy="222" r="7" fill="var(--indigo)"/>
-            <circle class="plot-node" cx="262" cy="150" r="7" fill="var(--indigo)"/>
-            <circle class="plot-node" cx="372" cy="54"  r="9" fill="var(--ink)"/>
-            <text x="52" y="46" font-family="Space Mono, monospace" font-size="12" fill="var(--stone)">idea → shipped</text>
+      </div>
+
+      <!-- Dashboard mockup (CSS-drawn) -->
+      <div class="browser reveal" aria-hidden="true">
+        <div class="b-bar"><span></span><span></span><span></span><i class="b-url"></i></div>
+        <div class="b-screen">
+          <div class="m-nav"></div>
+          <div class="b-body">
+            <div class="m-side"><i></i><i></i><i></i><i></i></div>
+            <div class="m-main">
+              <div class="m-row w60"></div>
+              <div class="m-cards"><b></b><b></b><b></b></div>
+              <div class="m-row w80"></div>
+              <div class="m-row w50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat strip with geometric dividers -->
+    <div class="geo-divider" aria-hidden="true" style="margin-top:clamp(44px,5vw,68px)"></div>
+    <div class="wrap">
+      <div class="stat-strip">
+        <div class="stat reveal"><div class="num"><span data-count="13" data-suffix="+">0+</span></div><div class="lbl">AI Products</div></div>
+        <div class="stat reveal"><div class="num"><span data-count="8" data-suffix="wk">0wk</span></div><div class="lbl">Avg Launch</div></div>
+        <div class="stat reveal"><div class="num"><span data-count="5" data-suffix="+">0+</span></div><div class="lbl">Industries</div></div>
+        <div class="stat reveal"><div class="num">₦<em>0</em></div><div class="lbl">VC Taken</div></div>
+      </div>
+    </div>
+    <div class="geo-divider" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══ FEATURED PRODUCTS ═══ -->
+  <section class="section" id="featured">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">Featured Products</span>
+        <h2 class="h-lg reveal">Built here. Running live.</h2>
+        <p class="lead reveal">We don't just advise — we ship and operate our own products. Three of the thirteen:</p>
+      </div>
+      <div class="show-grid">
+        <a class="show-card reveal" href="product.html?p=memora-os">
+          <div class="show-media"><img src="assets/example.png" alt="Memora OS preview" loading="lazy" data-ph="product" data-ph-label="MO" data-ph-cap="Memora OS"></div>
+          <div class="show-body">
+            <h3>Memora OS</h3>
+            <p>A private AI assistant with persistent business memory — your team's second brain.</p>
+            <span class="link-arrow accent">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+        <a class="show-card reveal" href="product.html?p=wse-audit-system">
+          <div class="show-media"><img src="assets/example.png" alt="WSE Audit System preview" loading="lazy" data-ph="product" data-ph-label="AU" data-ph-cap="WSE Audit System"></div>
+          <div class="show-body">
+            <h3>WSE Audit System</h3>
+            <p>Audit intelligence for Nigerian accounting firms — ICAN &amp; ISA 2024 compliant.</p>
+            <span class="link-arrow accent">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+        <a class="show-card reveal" href="product.html?p=solwise-realty-ai">
+          <div class="show-media"><img src="assets/example.png" alt="Solwise Realty AI preview" loading="lazy" data-ph="product" data-ph-label="SR" data-ph-cap="Solwise Realty AI"></div>
+          <div class="show-body">
+            <h3>Solwise Realty AI</h3>
+            <p>WhatsApp lead capture and automated follow-ups for Nigerian real-estate agencies.</p>
+            <span class="link-arrow accent">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+      </div>
+      <div style="margin-top:36px" class="reveal">
+        <a class="btn btn-ghost" href="products.html">View all 13 products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES STRIP ═══ -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">What We Do</span>
+        <h2 class="h-lg reveal">Four ways we put AI to work for you.</h2>
+      </div>
+      <div class="grid g-4">
+        <article class="card svc-card reveal">
+          <span class="card-kicker">01</span>
+          <h3 class="h-md">AI Product Build</h3>
+          <p>Your AI product designed, engineered, and launched — from concept to paying customers.</p>
+        </article>
+        <article class="card svc-card reveal">
+          <span class="card-kicker">02</span>
+          <h3 class="h-md">Business Automation</h3>
+          <p>Intake, follow-ups, reporting, WhatsApp — your operations wired to run while you sleep.</p>
+        </article>
+        <article class="card svc-card reveal">
+          <span class="card-kicker">03</span>
+          <h3 class="h-md">AI Strategy</h3>
+          <p>A specific build plan tied to revenue targets — what to build, in what order, and why.</p>
+        </article>
+        <article class="card svc-card reveal">
+          <span class="card-kicker">04</span>
+          <h3 class="h-md">SaaS Launch &amp; Scale</h3>
+          <p>Billing, auth, onboarding, growth loops — everything a product needs to earn.</p>
+        </article>
+      </div>
+      <div style="margin-top:34px" class="reveal">
+        <a class="link-arrow accent" href="services.html">Explore all services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OODA — navy break ═══ -->
+  <section class="section on-navy">
+    <div class="wrap">
+      <div class="ooda-grid">
+        <div>
+          <span class="eyebrow reveal">How We Work</span>
+          <h2 class="h-lg reveal" style="margin:18px 0 16px">The OODA Loop.</h2>
+          <p class="lead reveal" style="margin-bottom:30px">The decision framework built for moving fast without breaking things. We study your business, find the highest-leverage build, ship it, and measure what changed — then the loop runs again.</p>
+          <ol class="ooda-steps reveal">
+            <li class="ooda-step"><span class="ooda-num">O1</span><div><h3>Observe</h3><p>We learn how your business actually makes money — and where it leaks time.</p></div></li>
+            <li class="ooda-step"><span class="ooda-num">O2</span><div><h3>Orient</h3><p>We map the highest-leverage thing to build first, scoped to your budget.</p></div></li>
+            <li class="ooda-step"><span class="ooda-num">D</span><div><h3>Decide</h3><p>A clear plan and a fixed quote — no vague retainers, no surprise scope.</p></div></li>
+            <li class="ooda-step"><span class="ooda-num">A</span><div><h3>Act</h3><p>We build and ship the real thing, then measure what it changed.</p></div></li>
+          </ol>
+        </div>
+        <div class="ooda-visual reveal" aria-hidden="true">
+          <svg viewBox="0 0 400 400">
+            <!-- rotating dashed rings -->
+            <g class="ooda-ring">
+              <circle cx="200" cy="200" r="168" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-dasharray="10 14"/>
+            </g>
+            <g class="ooda-ring2">
+              <circle cx="200" cy="200" r="132" fill="none" stroke="rgba(122,168,235,.45)" stroke-width="1.5" stroke-dasharray="4 10"/>
+            </g>
+            <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+            <!-- centre -->
+            <circle cx="200" cy="200" r="56" fill="#081B4A" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+            <text x="200" y="207" text-anchor="middle" font-family="Syne, sans-serif" font-weight="800" font-size="22" fill="#FFFFFF">OODA</text>
+            <!-- four nodes -->
+            <g font-family="Syne, sans-serif" font-weight="800" font-size="14">
+              <circle cx="200" cy="68"  r="26" fill="#0A2463" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="200" y="73"  text-anchor="middle" fill="#FFFFFF">O</text>
+              <circle cx="332" cy="200" r="26" fill="#0A2463" stroke="#7AA8EB" stroke-width="2"/>
+              <text x="332" y="205" text-anchor="middle" fill="#7AA8EB">O</text>
+              <circle cx="200" cy="332" r="26" fill="#0A2463" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="200" y="337" text-anchor="middle" fill="#FFFFFF">D</text>
+              <circle cx="68"  cy="200" r="26" fill="#0A2463" stroke="#7AA8EB" stroke-width="2"/>
+              <text x="68"  y="205" text-anchor="middle" fill="#7AA8EB">A</text>
+            </g>
+            <!-- flow arrows between nodes -->
+            <g fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5">
+              <path d="M223 80 A132 132 0 0 1 320 177"/>
+              <path d="M320 223 A132 132 0 0 1 223 320"/>
+              <path d="M177 320 A132 132 0 0 1 80 223"/>
+              <path d="M80 177 A132 132 0 0 1 177 80"/>
+            </g>
+            <g fill="rgba(255,255,255,.8)">
+              <polygon points="320,177 312,163 326,166"/>
+              <polygon points="223,320 237,312 234,326"/>
+              <polygon points="80,223 88,237 74,234"/>
+              <polygon points="177,80 163,88 166,74"/>
+            </g>
           </svg>
         </div>
       </div>
-      <hr class="divider" style="margin-top:44px">
-      <div class="marquee" style="margin-top:24px">
-        <span><b>12+</b> products shipped</span>
-        <span><b>100%</b> bootstrapped</span>
-        <span><b>African-market</b> built</span>
-        <span><b>Live</b> in real businesses</span>
-      </div>
     </div>
   </section>
 
-  <!-- WHAT WE DO -->
+  <!-- ═══ RESULTS STRIP ═══ -->
   <section class="section">
     <div class="wrap">
-      <span class="eyebrow reveal">What we do</span>
-      <h2 class="h-lg reveal" style="max-width:16ch;margin:16px 0 12px">Five ways we put software to work for you.</h2>
-      <p class="lead reveal" style="max-width:56ch;margin-bottom:40px">From a marketing website to a full AI platform — one team, from first sketch to a system your customers use every day.</p>
-      <div class="grid g-3">
-        <article class="card reveal"><span class="card-num">01</span><h3 class="h-md">Websites &amp; Web Apps</h3><p>Company sites, landing pages, e-commerce, booking and portals — fast, responsive, and built to convert. Any business, AI optional.</p></article>
-        <article class="card reveal"><span class="card-num">02</span><h3 class="h-md">Custom Software &amp; SaaS</h3><p>From concept to paying customers: backend, frontend, billing, auth, onboarding — production-ready and built to grow.</p></article>
-        <article class="card reveal"><span class="card-num">03</span><h3 class="h-md">AI Products</h3><p>Assistants, copilots, and data tools trained on your business — practical AI that saves hours, not a science project.</p></article>
-        <article class="card reveal"><span class="card-num">04</span><h3 class="h-md">Business Automation</h3><p>We wire your operations together — intake, follow-ups, reporting, WhatsApp — running while you sleep.</p></article>
-        <article class="card reveal"><span class="card-num">05</span><h3 class="h-md">Strategy &amp; Advisory</h3><p>A specific build plan tied to your revenue targets — what to build, in what order, and why. Not a trends deck.</p></article>
-        <article class="card reveal" style="background:var(--ink-2);border-color:transparent;color:var(--paper);display:flex;flex-direction:column;justify-content:space-between">
-          <div><span class="card-num" style="color:#E7B96A">Where to start</span><h3 class="h-md" style="color:var(--paper);margin-top:14px">Not sure which you need?</h3></div>
-          <a class="link-arrow" style="color:#E7B96A;margin-top:20px" href="services.html">Explore services
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </article>
+      <div class="results">
+        <div class="result reveal"><div class="num" data-count="13">0</div><div class="lbl">AI Products</div></div>
+        <div class="result reveal"><div class="num" data-count="5" data-suffix="+">0+</div><div class="lbl">Industries</div></div>
+        <div class="result reveal"><div class="num" data-count="8" data-suffix="wk">0wk</div><div class="lbl">Avg Launch</div></div>
+        <div class="result reveal"><div class="num">₦0</div><div class="lbl">VC Taken</div></div>
       </div>
     </div>
   </section>
 
-  <!-- SELECTED WORK -->
-  <section class="section section--ink" style="position:relative;overflow:hidden">
-    <div class="blueprint"></div>
-    <div class="wrap" style="position:relative;z-index:1">
-      <span class="eyebrow reveal">Selected work</span>
-      <h2 class="h-lg reveal" style="max-width:18ch;margin:16px 0 40px">Platforms we designed, built, and own.</h2>
-      <div class="grid g-3">
-        <article class="card reveal" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)">
-          <span class="chip">AI Assistant</span>
-          <h3 class="h-md" style="color:var(--paper);margin:16px 0 8px">Memora OS</h3>
-          <p style="color:var(--stone-d)">A private AI assistant for African businesses — persistent memory, team access, live search, voice and image.</p>
-          <a class="link-arrow" style="color:#E7B96A;margin-top:16px" href="https://memora-os.vercel.app" target="_blank" rel="noopener">Visit product ↗</a>
-        </article>
-        <article class="card reveal" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)">
-          <span class="chip">Data &amp; Analytics</span>
-          <h3 class="h-md" style="color:var(--paper);margin:16px 0 8px">WSE DataPilot</h3>
-          <p style="color:var(--stone-d)">Plug in your data, get plain-English reports, trends, and anomaly flags — no data team required.</p>
-          <a class="link-arrow" style="color:#E7B96A;margin-top:16px" href="https://wse-datapilot.vercel.app" target="_blank" rel="noopener">Visit product ↗</a>
-        </article>
-        <article class="card reveal" style="background:var(--ink-3);border-color:var(--line-d);color:var(--paper)">
-          <span class="chip">Fintech / Audit</span>
-          <h3 class="h-md" style="color:var(--paper);margin:16px 0 8px">WSE Audit System</h3>
-          <p style="color:var(--stone-d)">Audit intelligence for Nigerian accounting firms — ICAN &amp; ISA 2024 compliant, with an AI copilot.</p>
-          <a class="link-arrow" style="color:#E7B96A;margin-top:16px" href="https://wse-labs-audit.netlify.app/" target="_blank" rel="noopener">Visit product ↗</a>
-        </article>
-      </div>
-      <div style="margin-top:34px"><a class="btn btn-line" href="portfolio.html">View the full portfolio</a></div>
-    </div>
-  </section>
-
-  <!-- HOW WE WORK -->
-  <section class="section">
+  <!-- ═══ PRICING ═══ -->
+  <section class="section alt" id="pricing">
     <div class="wrap">
-      <div class="grid g-2" style="gap:56px;align-items:center">
-        <div class="reveal">
-          <span class="eyebrow">How we work</span>
-          <h2 class="h-lg" style="margin:16px 0 16px">Observe. Orient. Decide. Act.</h2>
-          <p class="lead">We run every engagement on the OODA loop — the decision framework built for moving fast without breaking things. We study your business, find the highest-leverage build, ship it, and measure what it changed.</p>
-          <div style="margin-top:26px"><a class="link-arrow" href="about.html">How we think about building →</a></div>
+      <div class="section-head">
+        <span class="eyebrow reveal">Pricing</span>
+        <h2 class="h-lg reveal">Flat rates. Clear scope. No surprises.</h2>
+        <p class="lead reveal">Every engagement starts with a scoping session and a fixed quote — you know the price before we write a line of code.</p>
+      </div>
+      <div class="grid g-3">
+        <article class="card price-card reveal">
+          <span class="tier">Automate</span>
+          <div class="amount">₦350,000</div>
+          <div class="per">one-time</div>
+          <ul class="price-list">
+            <li>One automation workflow, built end-to-end</li>
+            <li>WhatsApp, email or reporting automation</li>
+            <li>Deployed live with handover</li>
+            <li>30-day support window</li>
+          </ul>
+          <a class="btn btn-ghost" href="contact.html">Start with Automate</a>
+        </article>
+        <article class="card price-card featured reveal">
+          <span class="flag">Most Popular</span>
+          <span class="tier">Build</span>
+          <div class="amount">₦1,200,000+</div>
+          <div class="per">per product · scoped fixed quote</div>
+          <ul class="price-list">
+            <li>Full AI product or SaaS platform</li>
+            <li>Backend, frontend, billing, auth</li>
+            <li>Staged delivery — live at every milestone</li>
+            <li>Launch + 90-day support window</li>
+          </ul>
+          <a class="btn btn-invert" href="contact.html">Scope your build</a>
+        </article>
+        <article class="card price-card reveal">
+          <span class="tier">Partner</span>
+          <div class="amount">Custom</div>
+          <div class="per">ongoing engagement</div>
+          <ul class="price-list">
+            <li>Your embedded AI product team</li>
+            <li>Strategy, build and operations</li>
+            <li>Monthly build cycles on the OODA loop</li>
+            <li>Priority support, direct founder access</li>
+          </ul>
+          <a class="btn btn-ghost" href="contact.html">Talk to us</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="section" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <span class="eyebrow" style="justify-content:center">Start a Project</span>
+        <h2 class="h-lg">Ready to build something that earns?</h2>
+        <p class="lead">Tell us the goal. We reply within 24 hours with a clear assessment and a concrete next step.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="contact.html">Start a Project</a>
+          <a class="btn btn-ghost" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Chat on WhatsApp</a>
         </div>
-        <ol class="reveal" style="list-style:none;margin:0;padding:0;display:grid;gap:14px">
-          <li class="card" style="display:flex;gap:16px;align-items:flex-start"><span class="card-num">01</span><div><h3 class="h-md" style="font-size:1.15rem">Observe</h3><p>We learn how your business actually makes money — and where it leaks time.</p></div></li>
-          <li class="card" style="display:flex;gap:16px;align-items:flex-start"><span class="card-num">02</span><div><h3 class="h-md" style="font-size:1.15rem">Orient</h3><p>We map the highest-leverage thing to build first, scoped to your budget.</p></div></li>
-          <li class="card" style="display:flex;gap:16px;align-items:flex-start"><span class="card-num">03</span><div><h3 class="h-md" style="font-size:1.15rem">Decide</h3><p>A clear plan and quote — no vague retainers, no surprise scope.</p></div></li>
-          <li class="card" style="display:flex;gap:16px;align-items:flex-start"><span class="card-num">04</span><div><h3 class="h-md" style="font-size:1.15rem">Act</h3><p>We build and ship the real thing, then measure what it changed.</p></div></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section section--ink" style="text-align:center">
-    <div class="wrap">
-      <span class="eyebrow reveal" style="justify-content:center">Start a project</span>
-      <h2 class="h-lg reveal" style="max-width:20ch;margin:18px auto 16px">Tell us what you're trying to build.</h2>
-      <p class="lead reveal" style="max-width:52ch;margin:0 auto 30px">We reply within 24 hours with a clear assessment and a concrete next step. No pitch decks, no pressure.</p>
-      <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-primary" href="contact.html">Get in touch</a>
-        <a class="btn btn-line" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Chat on WhatsApp</a>
       </div>
     </div>
   </section>
 
 </main>
 
+<!-- ═══ FOOTER ═══ -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></div>
-        <p class="footer-blurb">A Lagos software &amp; AI studio. We design, build, and ship production software for African businesses — websites, platforms, and automation that earn their keep.</p>
+        <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+          <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+          <span class="brand-name">WSE <b>Lab Consult</b></span>
+        </a>
+        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="services.html">Services</a>
-        <a href="portfolio.html">Portfolio</a>
         <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#pricing">Pricing</a>
         <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
-        <h4>Get in touch</h4>
-        <a href="mailto:info@wseailab.com">info@wseailab.com</a>
-        <a href="mailto:support@wseailab.com">support@wseailab.com</a>
-        <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp +234 816 082 9058</a>
+        <h4>Live Products</h4>
+        <a href="https://memora-os.vercel.app" target="_blank" rel="noopener">Memora OS</a>
+        <a href="https://wse-datapilot.vercel.app" target="_blank" rel="noopener">WSE Datapilot</a>
+        <a href="https://wseauditsystem.netlify.app" target="_blank" rel="noopener">WSE Audit System</a>
+        <a href="https://wsesound-hub.netlify.app" target="_blank" rel="noopener">WSE SoundHub</a>
+        <a href="https://solwise-realty-ai.netlify.app" target="_blank" rel="noopener">Solwise Realty AI</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:support.wselabs@gmail.com">support.wselabs@gmail.com</a>
+        <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="contact.html">Start a Project</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>Lagos, Nigeria · Bootstrapped</span>
-      <span>Product created by WSE Lab Consult © <span data-year>2026</span></span>
+      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
+      <span>Intelligent Automation Studio</span>
     </div>
   </div>
 </footer>

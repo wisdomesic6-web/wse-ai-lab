@@ -4,166 +4,160 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — WSE Lab Consult</title>
-<meta name="description" content="Tell WSE Lab Consult what you want to build. We reply within 24 hours with a clear assessment and a concrete next step. Lagos, Nigeria.">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="description" content="Ready to build something? Tell WSE Lab Consult the goal — we reply within 24 hours with a clear assessment and a concrete next step. Lagos, Nigeria.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 52px; align-items: start; }
-  @media (max-width: 900px){ .contact-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .ch-item { display: block; border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; transition: border-color .2s, transform .2s var(--ease); }
-  .ch-item:hover { border-color: var(--indigo); transform: translateX(3px); }
-  .ch-k { font-family: var(--ff-mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--brass); }
-  .ch-v { font-family: var(--ff-display); font-weight: 600; font-size: 1.1rem; margin-top: 5px; color: var(--ink); }
-  .qr { display: flex; align-items: center; gap: 16px; border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-top: 4px; }
-  .qr img { width: 92px; height: 92px; border-radius: 8px; }
-  form.inq { display: grid; gap: 16px; }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 520px){ .row2 { grid-template-columns: 1fr; } }
-  .field label { display: block; font-family: var(--ff-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); margin-bottom: 7px; }
-  .field input, .field textarea, .field select {
-    width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 10px;
-    padding: 13px 14px; font-family: var(--ff-body); font-size: 15.5px; color: var(--ink); outline: none;
-    transition: border-color .2s;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--indigo); }
-  .field textarea { resize: vertical; min-height: 120px; }
-  .inq-panel { background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; }
-  .sent { display: none; text-align: center; padding: 40px 20px; }
-  .sent.show { display: block; }
-  .sent .ico { width: 54px; height: 54px; border-radius: 50%; background: var(--indigo); color: #fff; display: grid; place-items: center; margin: 0 auto 16px; }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html" aria-label="WSE Lab Consult home"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></a>
+    <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+      <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+      <span class="brand-name">WSE <b>Lab Consult</b></span>
+    </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a project</a>
+      <a href="services.html" data-nav>Services</a>
+      <a href="products.html" data-nav>Products</a>
+      <a href="about.html" data-nav>About</a>
+      <a href="index.html#pricing" data-nav>Pricing</a>
+      <a href="contact.html" data-nav>Contact</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="main">
-  <section class="phero">
-    <div class="blueprint"></div>
+
+  <section class="contact-hero">
     <div class="wrap">
-      <span class="eyebrow">Contact</span>
-      <h1 class="h-xl" style="max-width:16ch">Tell us what you want to <span class="accent">build.</span></h1>
-      <p class="lead">Share the goal — a website, a platform, an automation, or just a problem you're stuck on. We reply within 24 hours with a clear assessment and a concrete next step.</p>
+      <span class="eyebrow center">Get In Touch</span>
+      <h1 class="h-xl" data-split>Ready to build something?</h1>
+      <p class="lead">Share the goal — an AI product, an automation, or just a problem you're stuck on. We reply within 24 hours with a clear assessment and a concrete next step.</p>
     </div>
   </section>
 
-  <section class="section--tight">
+  <section class="section" style="padding-top:clamp(36px,4vw,56px)">
     <div class="wrap">
       <div class="contact-grid">
 
-        <!-- Channels -->
-        <div class="reveal">
-          <h2 class="h-md" style="margin-bottom:18px">Reach us directly</h2>
-          <a class="ch-item" href="mailto:info@wseailab.com"><div class="ch-k">General enquiries</div><div class="ch-v">info@wseailab.com</div></a>
-          <a class="ch-item" href="mailto:support@wseailab.com"><div class="ch-k">Support</div><div class="ch-v">support@wseailab.com</div></a>
-          <a class="ch-item" href="mailto:wisdom@wseailab.com"><div class="ch-k">Founder — direct</div><div class="ch-v">wisdom@wseailab.com</div></a>
-
-          <div class="qr">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=FBFAF7&color=12161F&margin=8&data=https://wa.me/2348160829058" alt="Scan to chat on WhatsApp" loading="lazy" width="92" height="92">
-            <div>
-              <div class="ch-k" style="color:#25D366">WhatsApp</div>
-              <div class="ch-v">+234 816 082 9058</div>
-              <a class="link-arrow" style="margin-top:6px" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Open chat ↗</a>
-            </div>
-          </div>
-
-          <p style="font-family:var(--ff-mono);font-size:12.5px;color:var(--stone);margin-top:22px;letter-spacing:.03em">Lagos, Nigeria · Replies within 24 hours</p>
-        </div>
-
         <!-- Form -->
-        <div class="inq-panel reveal">
+        <div class="form-panel reveal">
           <form class="inq" id="inquiryForm" action="https://formspree.io/f/mrewogqj" method="POST">
             <div class="row2">
-              <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" placeholder="Amara Okafor" required></div>
-              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" placeholder="amara@company.com" required></div>
+              <div class="field"><label for="f-name">Full Name</label><input id="f-name" name="name" type="text" placeholder="Amara Okafor" autocomplete="name" required></div>
+              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" placeholder="amara@company.com" autocomplete="email" required></div>
             </div>
             <div class="row2">
-              <div class="field"><label for="f-biz">Business</label><input id="f-biz" name="business" type="text" placeholder="Okafor Ventures Ltd"></div>
-              <div class="field"><label for="f-need">What you need</label>
-                <select id="f-need" name="need">
-                  <option>A website</option>
-                  <option>Custom software / SaaS</option>
-                  <option>An AI product</option>
-                  <option>Business automation</option>
-                  <option>Strategy / advice</option>
+              <div class="field"><label for="f-biz">Business</label><input id="f-biz" name="business" type="text" placeholder="Okafor Ventures Ltd" autocomplete="organization"></div>
+              <div class="field"><label for="f-need">Service Interest</label>
+                <select id="f-need" name="service_interest">
+                  <option>AI Product Build</option>
+                  <option>Business Automation</option>
+                  <option>AI Strategy &amp; Advisory</option>
+                  <option>SaaS Launch &amp; Scale</option>
                   <option>Not sure yet</option>
                 </select>
               </div>
             </div>
-            <div class="field"><label for="f-msg">Tell us about the project</label><textarea id="f-msg" name="message" placeholder="What are you trying to build or fix? What does success look like?" required></textarea></div>
-            <input type="hidden" name="_subject" value="New project enquiry — wseailab.com">
-            <button class="btn btn-primary" type="submit" id="formSubmitBtn" style="justify-content:center">Send message
+            <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="What are you trying to build or fix? What does success look like?" required></textarea></div>
+            <input type="hidden" name="_subject" value="New project enquiry — WSE Lab Consult">
+            <button class="btn btn-primary" type="submit" id="formSubmitBtn" style="justify-content:center">Send Message
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             </button>
-            <p style="font-size:12.5px;color:var(--stone);margin:2px 0 0">No spam, no sales calls you didn't ask for. Just a real reply from a builder.</p>
+            <p style="font-size:12.5px;color:var(--muted);margin:2px 0 0">No spam, no sales calls you didn't ask for. Just a real reply from a builder.</p>
           </form>
-          <div class="sent" id="formSent">
+          <div class="sent" id="formSent" role="status">
             <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
             <h3 class="h-md">Message sent.</h3>
-            <p style="color:var(--stone);margin-top:8px">Thanks — we've got it. You'll hear back within 24 hours.</p>
+            <p style="color:var(--muted);margin-top:8px">Thanks — we've got it. You'll hear back within 24 hours.</p>
+          </div>
+        </div>
+
+        <!-- Info card -->
+        <div class="info-card reveal">
+          <div class="info-row">
+            <span class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <div>
+              <div class="info-k">Email</div>
+              <div class="info-v"><a href="mailto:support.wselabs@gmail.com">support.wselabs@gmail.com</a></div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <div>
+              <div class="info-k">WhatsApp</div>
+              <div class="info-v"><a href="https://wa.me/2348160829058" target="_blank" rel="noopener">Scan to chat</a></div>
+              <div class="info-qr" style="margin-top:12px">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=208x208&amp;bgcolor=FFFFFF&amp;color=0A2463&amp;margin=10&amp;data=https://wa.me/2348160829058" alt="Scan to chat on WhatsApp" loading="lazy" width="104" height="104">
+              </div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="pin" aria-hidden="true"></span>
+            <div>
+              <div class="info-k">Location</div>
+              <div class="info-v">Lagos, Nigeria</div>
+              <p style="font-size:12.5px;color:var(--on-navy-muted);margin-top:4px">Replies within 24 hours</p>
+            </div>
           </div>
         </div>
 
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></div>
-        <p class="footer-blurb">A Lagos software &amp; AI studio. We design, build, and ship production software for African businesses — websites, platforms, and automation that earn their keep.</p>
+        <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+          <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+          <span class="brand-name">WSE <b>Lab Consult</b></span>
+        </a>
+        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
       </div>
-      <div class="footer-col"><h4>Company</h4><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Get in touch</h4><a href="mailto:info@wseailab.com">info@wseailab.com</a><a href="mailto:support@wseailab.com">support@wseailab.com</a><a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp +234 816 082 9058</a></div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Live Products</h4>
+        <a href="https://memora-os.vercel.app" target="_blank" rel="noopener">Memora OS</a>
+        <a href="https://wse-datapilot.vercel.app" target="_blank" rel="noopener">WSE Datapilot</a>
+        <a href="https://wseauditsystem.netlify.app" target="_blank" rel="noopener">WSE Audit System</a>
+        <a href="https://wsesound-hub.netlify.app" target="_blank" rel="noopener">WSE SoundHub</a>
+        <a href="https://solwise-realty-ai.netlify.app" target="_blank" rel="noopener">Solwise Realty AI</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:support.wselabs@gmail.com">support.wselabs@gmail.com</a>
+        <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="contact.html">Start a Project</a>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>Lagos, Nigeria · Bootstrapped</span>
-      <span>Product created by WSE Lab Consult © <span data-year>2026</span></span>
+      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
+      <span>Intelligent Automation Studio</span>
     </div>
   </div>
 </footer>
 
-<script>
-  /* Contact form → Formspree (AJAX, no page reload) */
-  (function () {
-    var form = document.getElementById('inquiryForm');
-    if (!form) return;
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var btn = document.getElementById('formSubmitBtn');
-      var original = btn.innerHTML;
-      btn.textContent = 'Sending…'; btn.disabled = true;
-      try {
-        var res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('formSent').classList.add('show');
-        } else {
-          throw new Error('bad status');
-        }
-      } catch (err) {
-        btn.innerHTML = original; btn.disabled = false;
-        alert('Something went wrong. Please email us at support@wseailab.com.');
-      }
-    });
-  })();
-</script>
 <script src="main.js" defer></script>
 </body>
 </html>

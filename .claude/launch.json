@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "os-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "os", "-p", "8099", "-c-1"],
+      "port": 8099
+    },
+    {
+      "name": "website",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "website", "-p", "8098", "-c-1"],
+      "port": 8098
+    }
+  ]
+}

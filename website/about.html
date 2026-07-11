@@ -4,132 +4,207 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — WSE Lab Consult</title>
-<meta name="description" content="WSE Lab Consult is a bootstrapped Lagos software studio founded by Wisdom Solomon Esic, building production software and AI for African businesses.">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="description" content="One founder. A full-stack studio. Wisdom Solomon Esic builds revenue-generating AI systems for African businesses from Lagos — 13 products, 100% bootstrapped.">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-  @media (max-width: 820px){ .story { grid-template-columns: 1fr; gap: 30px; } }
-  .story p { color: var(--stone); margin: 0 0 18px; font-size: 16.5px; }
-  .story p.first::first-letter { font-family: var(--ff-display); font-size: 3.4em; font-weight: 600; float: left; line-height: .8; padding: 6px 12px 0 0; color: var(--indigo); }
-  .founder { border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; background: var(--paper-2); }
-  .founder-av { width: 64px; height: 64px; border-radius: 14px; background: var(--ink); color: var(--paper); display: grid; place-items: center; font-family: var(--ff-display); font-weight: 700; font-size: 22px; }
-  .founder-name { font-family: var(--ff-display); font-weight: 600; font-size: 1.25rem; margin-top: 16px; }
-  .founder-role { font-family: var(--ff-mono); font-size: 12.5px; color: var(--brass); margin-top: 4px; }
-  .principle { display: grid; grid-template-columns: 46px 1fr; gap: 18px; padding: 26px 0; border-top: 1px solid var(--line); align-items: start; }
-  .principle .n { font-family: var(--ff-mono); color: var(--brass); font-size: 15px; }
-  .principle h3 { font-size: 1.2rem; margin-bottom: 6px; }
-  .principle p { color: var(--stone); margin: 0; font-size: 15.5px; }
-  .stat-band { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
-  @media (max-width: 620px){ .stat-band { grid-template-columns: 1fr; gap: 20px; } }
-  .stat-band .n { font-family: var(--ff-display); font-weight: 700; font-size: clamp(2.4rem,1.5rem+3vw,3.4rem); color: var(--paper); line-height: 1; }
-  .stat-band .l { font-family: var(--ff-mono); font-size: 12.5px; color: var(--stone-d); margin-top: 10px; letter-spacing: .04em; }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html" aria-label="WSE Lab Consult home"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></a>
+    <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+      <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+      <span class="brand-name">WSE <b>Lab Consult</b></span>
+    </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html">Home</a><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a project</a>
+      <a href="services.html" data-nav>Services</a>
+      <a href="products.html" data-nav>Products</a>
+      <a href="about.html" data-nav>About</a>
+      <a href="index.html#pricing" data-nav>Pricing</a>
+      <a href="contact.html" data-nav>Contact</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="main">
+
   <section class="phero">
-    <div class="blueprint"></div>
     <div class="wrap">
       <span class="eyebrow">About</span>
-      <h1 class="h-xl" style="max-width:17ch">Builders first. From Lagos, for the continent.</h1>
-      <p class="lead">WSE Lab Consult is a software studio that ships. We started because too much African software stops at the demo — and too many good businesses were left waiting for tools built for someone else's market.</p>
+      <h1 class="h-xl" data-split>One founder. A full-stack studio.</h1>
+      <p class="lead">WSE Lab Consult is a bootstrapped intelligent automation studio in Lagos. Every product here was designed, engineered, shipped, and operated by the same hands — no outsourcing chains, no hand-offs.</p>
     </div>
   </section>
 
-  <section class="section--tight">
+  <!-- FOUNDER CARD -->
+  <section class="section" style="padding-top:clamp(36px,4vw,56px)">
     <div class="wrap">
-      <div class="story">
-        <div class="reveal">
-          <p class="first">WSE Lab Consult is a bootstrapped studio, funded entirely by the work we ship. No venture capital, no runway pressure — just software that has to earn its place in a real business, or it doesn't ship.</p>
-          <p>That constraint is the point. When you build with your own money for customers who pay with theirs, you stop chasing impressive and start chasing useful. Every product in our portfolio is live, in the hands of real users, doing a real job.</p>
-          <p>We build across the full stack — websites, platforms, AI, and the automation that ties them together — with a bias for the African market: local payment rails, WhatsApp-first, mobile-first, and priced for businesses here.</p>
+      <div class="founder-card reveal">
+        <div class="fc-media">
+          <img src="assets/me.png" alt="Wisdom Solomon Esic, founder of WSE Lab Consult" data-ph="photo" data-ph-label="WS" data-ph-cap="Wisdom Solomon Esic">
         </div>
-        <aside class="founder reveal">
-          <div class="founder-av">WS</div>
-          <div class="founder-name">Wisdom Solomon Esic</div>
-          <div class="founder-role">Founder &amp; Lead Engineer</div>
-          <p style="color:var(--stone);font-size:15px;margin:18px 0 0">Wisdom founded WSE Lab Consult to build the software African businesses actually run on — and to prove a small, focused team can ship products that stand next to anything built anywhere.</p>
-          <a class="link-arrow" style="margin-top:20px" href="mailto:wisdom@wseailab.com">wisdom@wseailab.com →</a>
-        </aside>
+        <div>
+          <span class="eyebrow">Founder</span>
+          <h2 class="h-lg" style="margin:16px 0 14px">Wisdom Solomon Esic</h2>
+          <p class="lead" style="font-size:1.08rem">Builder, strategist, and the person who ships everything at WSE Lab Consult. 3 years building software for African businesses. Started from zero, bootstrapped, shipped 13 products.</p>
+          <div class="stats-2x2">
+            <div class="cell"><b>13+</b><span>Products shipped</span></div>
+            <div class="cell"><b>100%</b><span>Bootstrapped</span></div>
+            <div class="cell"><b>6+</b><span>Industries served</span></div>
+            <div class="cell"><b>3yr</b><span>Building</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Stats -->
-  <section class="section section--ink" style="position:relative;overflow:hidden">
-    <div class="blueprint"></div>
-    <div class="wrap" style="position:relative;z-index:1">
-      <div class="stat-band">
-        <div class="reveal"><div class="n">12+</div><div class="l">Products shipped &amp; live</div></div>
-        <div class="reveal"><div class="n">100%</div><div class="l">Bootstrapped — no VC</div></div>
-        <div class="reveal"><div class="n">24h</div><div class="l">Response time on enquiries</div></div>
+  <!-- TIMELINE -->
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">The Journey</span>
+        <h2 class="h-lg reveal">From first line of code to a product lab.</h2>
       </div>
+      <ol class="timeline reveal">
+        <li>
+          <span class="yr">2022</span>
+          <h3>First lines of code</h3>
+          <p>Self-taught, starting from zero — learning by building things that had to work.</p>
+        </li>
+        <li>
+          <span class="yr">2023</span>
+          <h3>First paying clients</h3>
+          <p>Websites and automation for Lagos businesses. Real deadlines, real invoices, real feedback.</p>
+        </li>
+        <li>
+          <span class="yr">2024</span>
+          <h3>AI products go live</h3>
+          <p>The shift from services to products — the first AI systems ship and start earning.</p>
+        </li>
+        <li>
+          <span class="yr">2025</span>
+          <h3>WSE Lab Consult formalised</h3>
+          <p>The studio becomes a company. Thirteen products in the portfolio, five live in production.</p>
+        </li>
+        <li>
+          <span class="yr">2026</span>
+          <h3>Scaling</h3>
+          <p>Growing the team, scaling the products, and taking the lab to the continent.</p>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- Principles -->
+  <!-- LEADERSHIP -->
   <section class="section">
     <div class="wrap">
-      <div class="grid g-2" style="gap:56px;align-items:start">
-        <div class="reveal" style="position:sticky;top:96px">
-          <span class="eyebrow">How we think</span>
-          <h2 class="h-lg" style="margin:16px 0 14px">Four principles we don't bend on.</h2>
-          <p class="lead">They're why our clients get software that works on launch day — not a project that needs another three months.</p>
-        </div>
-        <div class="reveal">
-          <div class="principle"><span class="n">01</span><div><h3>Shipped beats perfect</h3><p>Real software in front of real users teaches more than any plan. We get to live fast, then improve with evidence.</p></div></div>
-          <div class="principle"><span class="n">02</span><div><h3>Built for here</h3><p>African payment rails, WhatsApp, mobile-first, offline-aware. We build for how business actually happens on the continent.</p></div></div>
-          <div class="principle"><span class="n">03</span><div><h3>Own the whole stack</h3><p>Design, backend, frontend, AI, deployment — one accountable team, so nothing falls through the cracks between vendors.</p></div></div>
-          <div class="principle"><span class="n">04</span><div><h3>Useful over impressive</h3><p>We'd rather save you ten hours a week than win a demo. If it doesn't move your business, we don't build it.</p></div></div>
+      <div class="section-head">
+        <span class="eyebrow reveal">Leadership</span>
+        <h2 class="h-lg reveal">The team behind the lab.</h2>
+        <p class="lead reveal">Founder-led today, growing deliberately. Three seats are open for people who ship.</p>
+      </div>
+      <div class="team-grid">
+        <article class="card team-card reveal">
+          <div class="team-top">WS</div>
+          <div class="team-body">
+            <h3>Wisdom Solomon Esic</h3>
+            <p class="team-role">Founder &amp; CEO</p>
+            <span class="badge founder">Founder</span>
+          </div>
+        </article>
+        <article class="card team-card reveal">
+          <div class="team-top">CTO</div>
+          <div class="team-body">
+            <h3>Chief Technology Officer</h3>
+            <p class="team-role">Owns engineering quality across every product and client build</p>
+            <span class="badge hiring">Position Open</span>
+          </div>
+        </article>
+        <article class="card team-card reveal">
+          <div class="team-top">SG</div>
+          <div class="team-body">
+            <h3>Head of Sales</h3>
+            <p class="team-role">Owns pipeline, partnerships, and taking our products to market</p>
+            <span class="badge hiring">Position Open</span>
+          </div>
+        </article>
+        <article class="card team-card reveal">
+          <div class="team-top">CS</div>
+          <div class="team-body">
+            <h3>Head of Client Services</h3>
+            <p class="team-role">Owns delivery, onboarding, and every client's experience</p>
+            <span class="badge hiring">Position Open</span>
+          </div>
+        </article>
+      </div>
+      <p class="body-muted reveal" style="margin-top:26px;font-size:14.5px">Think one of these seats is yours? <a href="contact.html" style="font-weight:600">Introduce yourself →</a></p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top:0;padding-bottom:0">
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <h2 class="h-lg">Let's build something that ships.</h2>
+        <p class="lead">Bring the problem. We'll bring the plan, the build, and the launch.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="contact.html">Start a Project</a>
+          <a class="btn btn-ghost" href="products.html">See what we've built</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--ink" style="text-align:center">
-    <div class="wrap">
-      <h2 class="h-lg reveal" style="max-width:22ch;margin:0 auto 18px">Let's build something that ships.</h2>
-      <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-primary" href="contact.html">Start a project</a>
-        <a class="btn btn-line" href="portfolio.html">See our work</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="brand"><span class="brand-mark">WSE</span><span class="brand-name">WSE <b>Lab Consult</b></span></div>
-        <p class="footer-blurb">A Lagos software &amp; AI studio. We design, build, and ship production software for African businesses — websites, platforms, and automation that earn their keep.</p>
+        <a class="brand" href="index.html" aria-label="WSE Lab Consult home">
+          <img class="logo-img" src="assets/logo.png" alt="WSE Lab Consult" data-ph="logo">
+          <span class="brand-name">WSE <b>Lab Consult</b></span>
+        </a>
+        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
       </div>
-      <div class="footer-col"><h4>Company</h4><a href="services.html">Services</a><a href="portfolio.html">Portfolio</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
-      <div class="footer-col"><h4>Get in touch</h4><a href="mailto:info@wseailab.com">info@wseailab.com</a><a href="mailto:support@wseailab.com">support@wseailab.com</a><a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp +234 816 082 9058</a></div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Live Products</h4>
+        <a href="https://memora-os.vercel.app" target="_blank" rel="noopener">Memora OS</a>
+        <a href="https://wse-datapilot.vercel.app" target="_blank" rel="noopener">WSE Datapilot</a>
+        <a href="https://wseauditsystem.netlify.app" target="_blank" rel="noopener">WSE Audit System</a>
+        <a href="https://wsesound-hub.netlify.app" target="_blank" rel="noopener">WSE SoundHub</a>
+        <a href="https://solwise-realty-ai.netlify.app" target="_blank" rel="noopener">Solwise Realty AI</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:support.wselabs@gmail.com">support.wselabs@gmail.com</a>
+        <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="contact.html">Start a Project</a>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>Lagos, Nigeria · Bootstrapped</span>
-      <span>Product created by WSE Lab Consult © <span data-year>2026</span></span>
+      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
+      <span>Intelligent Automation Studio</span>
     </div>
   </div>
 </footer>
+
 <script src="main.js" defer></script>
 </body>
 </html>
