@@ -3,9 +3,6 @@
 .env.*
 *.local
 
-# Personal ID documents — never publish
-website/assets/My passport.jpeg
-
 # Netlify
 .netlify/
 
