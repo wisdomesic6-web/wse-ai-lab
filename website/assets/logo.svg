@@ -1,0 +1,148 @@
+<svg width="680" height="240" viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+  <rect width="680" height="240" rx="16" fill="#0A0C14"/>
+
+  <!-- shoulder / bust base -->
+  <path d="M42,228 C42,210 68,198 105,198 C142,198 168,210 168,228 Z" fill="#0D1523" stroke="#C9A84C" stroke-width="1.2"/>
+  <line x1="60" y1="215" x2="150" y2="215" stroke="#C9A84C" stroke-width="0.6" opacity="0.2"/>
+  <circle cx="75"  cy="218" r="2" fill="#C9A84C" opacity="0.3"/>
+  <circle cx="105" cy="220" r="2.5" fill="#C9A84C" opacity="0.45"/>
+  <circle cx="135" cy="218" r="2" fill="#C9A84C" opacity="0.3"/>
+
+  <!-- neck -->
+  <rect x="90" y="187" width="30" height="32" rx="5" fill="#0D1523" stroke="#C9A84C" stroke-width="1.2"/>
+  <line x1="96"  y1="190" x2="96"  y2="218" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
+  <line x1="102" y1="190" x2="102" y2="218" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
+  <line x1="108" y1="190" x2="108" y2="218" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
+  <line x1="114" y1="190" x2="114" y2="218" stroke="#C9A84C" stroke-width="0.7" opacity="0.4"/>
+
+  <!-- HEAD SHAPE -->
+  <path d="M105,30 C138,30 158,52 158,82 L158,158 C158,173 146,183 131,187 L105,190 L79,187 C64,183 52,173 52,158 L52,82 C52,52 72,30 105,30 Z"
+        fill="#0C1422" stroke="#C9A84C" stroke-width="2"/>
+
+  <!-- forehead crease -->
+  <line x1="79" y1="92" x2="131" y2="92" stroke="#C9A84C" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- temple panels -->
+  <path d="M52,108 L64,96 L64,150 L52,142" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.25"/>
+  <path d="M158,108 L146,96 L146,150 L158,142" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.25"/>
+
+  <!-- circuit traces -->
+  <path d="M56,118 L68,118 L68,112 L80,112" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.3"/>
+  <circle cx="56" cy="118" r="1.8" fill="#C9A84C" opacity="0.45"/>
+  <path d="M154,118 L142,118 L142,112 L130,112" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.3"/>
+  <circle cx="154" cy="118" r="1.8" fill="#C9A84C" opacity="0.45"/>
+
+  <!-- BRAIN DOME -->
+  <circle cx="105" cy="63" r="37" fill="#060A12" stroke="#C9A84C" stroke-width="1.8"/>
+  <circle cx="105" cy="63" r="31" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.3"/>
+  <circle cx="105" cy="63" r="23" fill="none" stroke="#C9A84C" stroke-width="0.6" opacity="0.45"/>
+  <circle cx="105" cy="63" r="15" fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.55"/>
+
+  <!-- radial spokes -->
+  <line x1="105" y1="32" x2="105" y2="48" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="127" y1="41" x2="119" y2="52" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="136" y1="63" x2="120" y2="63" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="127" y1="85" x2="118" y2="74" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="105" y1="94" x2="105" y2="78" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="83"  y1="85" x2="92"  y2="74" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="74"  y1="63" x2="90"  y2="63" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+  <line x1="83"  y1="41" x2="91"  y2="52" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+
+  <!-- orbit node dots -->
+  <circle cx="105" cy="32" r="2.5" fill="#C9A84C" opacity="0.75"/>
+  <circle cx="127" cy="41" r="2"   fill="#C9A84C" opacity="0.5"/>
+  <circle cx="136" cy="63" r="2"   fill="#C9A84C" opacity="0.5"/>
+  <circle cx="127" cy="85" r="2"   fill="#C9A84C" opacity="0.5"/>
+
+  <!-- SECONDARY ORB -->
+  <circle cx="93" cy="75" r="11" fill="#080D18" stroke="#C9A84C" stroke-width="1.3"/>
+  <circle cx="93" cy="75" r="7"  fill="none"   stroke="#C9A84C" stroke-width="0.7" opacity="0.6"/>
+  <circle cx="93" cy="75" r="4"  fill="#C9A84C" opacity="0.7"/>
+  <circle cx="91" cy="73" r="2"  fill="white"  opacity="0.5"/>
+
+  <!-- MAIN ORB -->
+  <circle cx="115" cy="54" r="15" fill="#080D18" stroke="#C9A84C" stroke-width="1.6"/>
+  <circle cx="115" cy="54" r="10" fill="none"   stroke="#C9A84C" stroke-width="0.9" opacity="0.65"/>
+  <circle cx="115" cy="54" r="5.5" fill="#C9A84C"/>
+  <circle cx="113" cy="52" r="2.5" fill="white" opacity="0.55"/>
+
+  <!-- EYES -->
+  <path d="M69,100 C74,97 82,95 90,96"  fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+  <path d="M141,100 C136,97 128,95 120,96" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.4"/>
+
+  <ellipse cx="82"  cy="114" rx="18" ry="12" fill="#050910" stroke="#C9A84C" stroke-width="1.4"/>
+  <circle  cx="82"  cy="114" r="9"   fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.55"/>
+  <circle  cx="82"  cy="114" r="5.5" fill="#C9A84C" opacity="0.18" stroke="#C9A84C" stroke-width="0.6"/>
+  <circle  cx="82"  cy="114" r="3.8" fill="#C9A84C"/>
+  <circle  cx="80"  cy="112" r="1.8" fill="white" opacity="0.6"/>
+
+  <ellipse cx="128" cy="114" rx="18" ry="12" fill="#050910" stroke="#C9A84C" stroke-width="1.4"/>
+  <circle  cx="128" cy="114" r="9"   fill="none" stroke="#C9A84C" stroke-width="0.7" opacity="0.55"/>
+  <circle  cx="128" cy="114" r="5.5" fill="#C9A84C" opacity="0.18" stroke="#C9A84C" stroke-width="0.6"/>
+  <circle  cx="128" cy="114" r="3.8" fill="#C9A84C"/>
+  <circle  cx="126" cy="112" r="1.8" fill="white" opacity="0.6"/>
+
+  <!-- nose -->
+  <path d="M105,128 L100,143 L110,143" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.3"/>
+  <circle cx="105" cy="145" r="2" fill="#C9A84C" opacity="0.3"/>
+
+  <!-- mouth -->
+  <path d="M85,160 C93,165 117,165 125,160" fill="none" stroke="#C9A84C" stroke-width="1.3" opacity="0.55" stroke-linecap="round"/>
+  <line x1="97"  y1="161" x2="97"  y2="164" stroke="#C9A84C" stroke-width="0.8" opacity="0.3"/>
+  <line x1="105" y1="161" x2="105" y2="164" stroke="#C9A84C" stroke-width="0.8" opacity="0.3"/>
+  <line x1="113" y1="161" x2="113" y2="164" stroke="#C9A84C" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- cheek sensors -->
+  <circle cx="63" cy="132" r="2.2" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="63" cy="141" r="1.6" fill="#C9A84C" opacity="0.35"/>
+  <circle cx="147" cy="132" r="2.2" fill="#C9A84C" opacity="0.5"/>
+  <circle cx="147" cy="141" r="1.6" fill="#C9A84C" opacity="0.35"/>
+
+  <!-- chin sensor -->
+  <circle cx="105" cy="178" r="3" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.35"/>
+  <circle cx="105" cy="178" r="1.2" fill="#C9A84C" opacity="0.4"/>
+
+  <!-- EAR PANELS -->
+  <rect x="37" y="102" width="15" height="52" rx="5" fill="#0D1523" stroke="#C9A84C" stroke-width="1.2"/>
+  <line x1="42" y1="110" x2="49" y2="110" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="42" y1="118" x2="49" y2="118" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="42" y1="126" x2="49" y2="126" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="42" y1="134" x2="49" y2="134" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="44" cy="144" r="3" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.5"/>
+
+  <rect x="158" y="102" width="15" height="52" rx="5" fill="#0D1523" stroke="#C9A84C" stroke-width="1.2"/>
+  <line x1="161" y1="110" x2="170" y2="110" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="161" y1="118" x2="170" y2="118" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="161" y1="126" x2="170" y2="126" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <line x1="161" y1="134" x2="170" y2="134" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="166" cy="144" r="3" fill="none" stroke="#C9A84C" stroke-width="0.9" opacity="0.5"/>
+
+  <!-- ANTENNA PINS -->
+  <line x1="90"  y1="30" x2="86"  y2="14" stroke="#C9A84C" stroke-width="1.3" opacity="0.7"/>
+  <circle cx="86" cy="12" r="3.5" fill="#C9A84C" opacity="0.85"/>
+  <circle cx="86" cy="12" r="1.5" fill="white" opacity="0.45"/>
+
+  <line x1="120" y1="30" x2="124" y2="14" stroke="#C9A84C" stroke-width="1.3" opacity="0.7"/>
+  <circle cx="124" cy="12" r="3.5" fill="#C9A84C" opacity="0.85"/>
+  <circle cx="124" cy="12" r="1.5" fill="white" opacity="0.45"/>
+
+  <!-- DIVIDER + WORDMARK -->
+  <line x1="224" y1="35" x2="224" y2="200" stroke="#C9A84C" stroke-width="0.8" opacity="0.2"/>
+
+  <text x="248" y="152"
+        font-family="Georgia,'Palatino Linotype',serif"
+        font-size="80" font-weight="400"
+        fill="#C9A84C" letter-spacing="5">WSE</text>
+
+  <line x1="248" y1="162" x2="470" y2="162" stroke="#C9A84C" stroke-width="0.7" opacity="0.2"/>
+
+  <text x="251" y="182"
+        font-family="Arial,Helvetica,sans-serif"
+        font-size="14" font-weight="400"
+        fill="#C9A84C" letter-spacing="6" opacity="0.85">LAB CONSULT</text>
+
+  <text x="251" y="204"
+        font-family="Arial,Helvetica,sans-serif"
+        font-size="10.5" font-weight="400"
+        fill="#C9A84C" letter-spacing="2.5" opacity="0.38">INTELLIGENT AUTOMATION STUDIO</text>
+</svg>

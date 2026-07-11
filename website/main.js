@@ -202,22 +202,67 @@
     if (isActive) link.setAttribute('aria-current', 'page');
   });
 
-  /* ═══ Image placeholders — swap missing assets for branded blocks ═══ */
+  /* ═══ Image placeholders — swap missing assets for illustrated branded blocks ═══
+     Portraits get an abstract bust silhouette; products get a mini app-mockup
+     screenshot (one of three layouts, chosen deterministically per product so
+     the same card always looks the same). Both swap for the real asset the
+     instant it exists at the same path — no code changes needed. */
+  var phSeq = 0;
+  function textSeed(text) {
+    var sum = 0;
+    for (var i = 0; i < text.length; i++) sum += text.charCodeAt(i);
+    return sum;
+  }
   function buildPlaceholder(img) {
     var kind = img.getAttribute('data-ph');
     var label = img.getAttribute('data-ph-label') || 'WSE';
+    var cap = img.getAttribute('data-ph-cap') || '';
     var ph = document.createElement('div');
+
     if (kind === 'logo') {
       ph.innerHTML = '<span class="brand-mark">WSE</span>';
       ph.style.display = 'inline-flex';
       img.replaceWith(ph.firstChild);
       return;
     }
-    ph.className = 'ph' + (kind === 'photo' ? ' ph-photo' : '');
-    ph.innerHTML = '<span class="ph-ini">' + label + '</span>' +
-      (img.getAttribute('data-ph-cap') ? '<span class="ph-cap">' + img.getAttribute('data-ph-cap') + '</span>' : '');
-    ph.style.width = '100%';
-    ph.style.height = '100%';
+
+    if (kind === 'photo') {
+      var gid = 'bust-grad-' + (phSeq++);
+      ph.className = 'ph ph-photo';
+      ph.innerHTML =
+        '<svg class="ph-bust" viewBox="0 0 200 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true">' +
+          '<defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="0" y2="1">' +
+            '<stop offset="0" stop-color="#ffffff" stop-opacity=".2"/>' +
+            '<stop offset="1" stop-color="#ffffff" stop-opacity=".05"/>' +
+          '</linearGradient></defs>' +
+          '<circle cx="100" cy="90" r="50" fill="url(#' + gid + ')"/>' +
+          '<path d="M14 250 C14 168 54 142 100 142 C146 142 186 168 186 250 Z" fill="url(#' + gid + ')"/>' +
+        '</svg>' +
+        '<span class="ph-badge">' + label + '</span>' +
+        (cap ? '<span class="ph-cap">' + cap + '</span>' : '');
+      img.replaceWith(ph);
+      return;
+    }
+
+    if (kind === 'product') {
+      var variant = textSeed(cap || label) % 3;
+      var body =
+        variant === 0
+          ? '<div class="pa-row w70"></div><div class="pa-blocks"><b></b><b></b><b></b></div><div class="pa-row w40 accent"></div>'
+          : variant === 1
+          ? '<div class="pa-row w55"></div><div class="pa-row w85"></div><div class="pa-row w40 accent"></div><div class="pa-row w70"></div>'
+          : '<div class="pa-blocks"><b></b><b></b></div><div class="pa-row w70"></div><div class="pa-row w55 accent"></div>';
+      ph.className = 'ph ph-app';
+      ph.innerHTML =
+        '<div class="pa-bar"><i></i><i></i><i></i></div>' +
+        '<div class="pa-body">' + body + '</div>' +
+        '<div class="pa-foot"><span class="pa-mono">' + label + '</span><span class="pa-name">' + cap + '</span></div>';
+      img.replaceWith(ph);
+      return;
+    }
+
+    ph.className = 'ph';
+    ph.innerHTML = '<span class="ph-ini">' + label + '</span>' + (cap ? '<span class="ph-cap">' + cap + '</span>' : '');
     img.replaceWith(ph);
   }
   function wirePlaceholders(root) {

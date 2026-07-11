@@ -234,27 +234,66 @@ p{margin:0}
 .badge.hiring{background:var(--amber-soft);color:var(--amber-deep)}
 .badge.founder{background:var(--accent-soft);color:var(--accent)}
 
-/* ── Image placeholders ── */
+/* ── Image placeholders (until real assets are dropped into website/assets/) ── */
 .ph{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  background:
-    linear-gradient(rgba(209,217,240,.55) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(209,217,240,.55) 1px, transparent 1px),
-    var(--card);
-  background-size:36px 36px,36px 36px,auto;
-  border:1px solid var(--border);color:var(--accent);
+  background:var(--card);border:1px solid var(--border);color:var(--accent);
 }
 .ph .ph-ini{
   font-family:var(--ff-display);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);
   color:var(--accent);letter-spacing:.04em;
 }
 .ph .ph-cap{font-family:var(--ff-display);font-weight:700;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* Portrait placeholder — illustrated bust silhouette, not a flat letter box.
+   Swapped automatically the instant assets/me.png exists. */
 .ph-photo{
+  position:relative;overflow:hidden;
   background:linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
   border:1px solid var(--navy);color:var(--white);
 }
-.ph-photo .ph-ini{font-size:clamp(3.4rem,7vw,5.5rem);color:var(--white)}
-.ph-photo .ph-cap{color:var(--on-navy-muted)}
+.ph-photo .ph-bust{position:absolute;inset:0;width:100%;height:100%}
+.ph-photo .ph-badge{
+  position:absolute;top:18px;left:18px;z-index:2;width:46px;height:46px;border-radius:10px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+  display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;font-size:15px;color:#fff;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.ph-photo .ph-cap{
+  position:absolute;left:18px;right:18px;bottom:18px;z-index:2;
+  font-family:var(--ff-display);font-weight:700;font-size:12.5px;letter-spacing:normal;text-transform:none;color:#fff;
+  background:rgba(8,27,74,.55);border:1px solid rgba(255,255,255,.16);
+  padding:9px 13px;border-radius:8px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+
+/* App-mockup placeholder (products) — a compact abstract screenshot instead
+   of a bare grid + initials. Three layout variants keep the grid from
+   looking like the same card repeated thirteen times. */
+.ph-app{position:relative;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;background:var(--card);border:1px solid var(--border);padding:0}
+.ph-app .pa-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--white);border-bottom:1px solid var(--border);flex:none}
+.ph-app .pa-bar i{width:7px;height:7px;border-radius:50%;background:var(--border)}
+.ph-app .pa-bar i:first-child{background:var(--accent)}
+.ph-app .pa-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;justify-content:center;min-height:0}
+.ph-app .pa-row{height:9px;border-radius:5px;background:var(--border);flex:none}
+.ph-app .pa-row.accent{background:var(--accent);opacity:.6}
+.ph-app .pa-row.w85{width:85%}.ph-app .pa-row.w70{width:70%}.ph-app .pa-row.w55{width:55%}.ph-app .pa-row.w40{width:40%}
+.ph-app .pa-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ph-app .pa-blocks b{height:32px;border-radius:6px;background:var(--white);border:1px solid var(--border)}
+.ph-app .pa-blocks b:first-child{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ph-app .pa-foot{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--border);background:var(--white);flex:none}
+.ph-app .pa-mono{
+  width:26px;height:26px;border-radius:6px;background:var(--navy);color:var(--white);
+  display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;font-size:10.5px;flex:none;
+}
+.ph-app .pa-name{font-family:var(--ff-display);font-weight:700;font-size:11.5px;letter-spacing:.03em;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Small circular icon badge — used on flat card grids for visual weight */
+.card-ico{
+  width:44px;height:44px;border-radius:10px;background:var(--white);border:1px solid var(--border);
+  display:grid;place-items:center;color:var(--accent);margin-bottom:14px;
+}
+.card-ico svg{width:20px;height:20px}
+.on-navy .card-ico{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:var(--white)}
 
 /* ── HOME hero ── */
 .hero{position:relative;overflow:hidden;padding-block:clamp(56px,5.5vw,100px) 0}
