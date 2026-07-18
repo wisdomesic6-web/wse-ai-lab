@@ -67,7 +67,7 @@
     },
     {
       slug: 'smartsales', name: 'SmartSales', status: 'building', tag: 'Retail · Business Management',
-      url: null,
+      url: null, logo: 'assets/products/smartsales.svg',
       desc: 'Mobile-first business management for African retailers — customers, payments, cashflow, AI insights.',
       long: [
         'SmartSales is a mobile-first business management app for African retailers. It covers the essentials a small retail business runs on: customer management, business profiles, payments, and cashflow tracking.',
