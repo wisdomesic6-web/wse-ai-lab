@@ -12,6 +12,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "http-server", "website", "-p", "8098", "-c-1"],
       "port": 8098
+    },
+    {
+      "name": "smartsale-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "C:/Users/DELL/Desktop/SmartSales/smartsale-handoff", "-p", "8123", "-c-1"],
+      "port": 8123
     }
   ]
 }
