@@ -12,7 +12,7 @@
   var PRODUCTS = [
     {
       slug: 'memora-os', name: 'Memora OS', status: 'live', tag: 'AI Assistant · Multi-tenant SaaS',
-      url: 'https://memora-os.vercel.app',
+      url: 'https://memora-os.vercel.app', logo: 'assets/memora-mark.svg',
       desc: 'Private AI assistant for African businesses with persistent memory, team access, and live search.',
       long: [
         'Memora OS is a private AI assistant built for African businesses. Unlike generic chatbots, it keeps a persistent memory of your business — your products, your customers, your way of working — so every answer gets sharper the longer you use it.',
