@@ -78,6 +78,24 @@ function gatePage({ title, message }) {
 </html>`;
 }
 
+// Constant-time compare: hashes both sides to a fixed-length digest first
+// (via the standard Web Crypto API, available in both Deno and Vercel Edge)
+// so there's no length-dependent branch, then XORs every byte instead of
+// short-circuiting on the first mismatch — defeats naive response-timing
+// attacks against the Basic Auth credential.
+async function safeEqual(a, b) {
+  const enc = new TextEncoder();
+  const [digestA, digestB] = await Promise.all([
+    crypto.subtle.digest("SHA-256", enc.encode(a)),
+    crypto.subtle.digest("SHA-256", enc.encode(b)),
+  ]);
+  const bytesA = new Uint8Array(digestA);
+  const bytesB = new Uint8Array(digestB);
+  let diff = 0;
+  for (let i = 0; i < bytesA.length; i++) diff |= bytesA[i] ^ bytesB[i];
+  return diff === 0;
+}
+
 export default async (request, context) => {
   const user = Deno.env.get("OS_USER") || "wse";
   const pass = Deno.env.get("OS_PASSWORD");
@@ -97,7 +115,7 @@ export default async (request, context) => {
   const header = request.headers.get("authorization") || "";
   const expected = "Basic " + btoa(`${user}:${pass}`);
 
-  if (header !== expected) {
+  if (!(await safeEqual(header, expected))) {
     return new Response(
       gatePage({
         title: "Authentication required",

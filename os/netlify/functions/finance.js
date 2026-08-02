@@ -29,6 +29,11 @@ exports.handler = async function (event) {
 
   const expToClient = (r) => ({ id: r.id, name: r.name, cat: r.cat, amount: r.amount, date: r.date, icon: r.icon, iconBg: r.icon_bg });
   const expToDb = (r) => ({ id: r.id, name: r.name, cat: r.cat, amount: r.amount, date: r.date, icon: r.icon, icon_bg: r.iconBg });
+  // Allow-lists mirroring what the client actually sends (index.html's
+  // invoice/tax modal handlers) — an arbitrary POST body can't set columns
+  // outside this set (e.g. force an invoice straight to status "paid").
+  const invToDb = (r) => ({ id: r.id, client: r.client, amount: r.amount, due: r.due, status: r.status, method: r.method });
+  const taxToDb = (r) => ({ id: r.id, period: r.period, type: r.type, gross: r.gross, rate: r.rate, deducted: r.deducted });
 
   try {
     const method = event.httpMethod;
@@ -47,7 +52,8 @@ exports.handler = async function (event) {
       const { entity, row } = body;
       const table = { invoice: "invoices", expense: "expenses", tax: "tax_records" }[entity];
       if (!table) return json(400, { error: "Unknown entity." });
-      const payload = entity === "expense" ? expToDb(row) : row;
+      const toDb = { invoice: invToDb, expense: expToDb, tax: taxToDb }[entity];
+      const payload = toDb(row);
       const [inserted] = await rest(table, {
         method: "POST", headers: { Prefer: "return=representation" },
         body: JSON.stringify(payload),

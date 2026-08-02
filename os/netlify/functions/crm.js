@@ -40,6 +40,13 @@ exports.handler = async function (event) {
     value: r.value, prob: r.prob, owner: r.owner, owner_color: r.ownerColor,
     color: r.color, initials: r.initials,
   });
+  // Allow-list for new customers — mirrors the fields the client actually
+  // builds (see index.html's "Add Customer" flow), so an arbitrary POST
+  // body can't set unexpected columns on the customers table.
+  const customerToDb = (r) => ({
+    id: r.id, name: r.name, email: r.email, seg: r.seg, spent: r.spent,
+    last: r.last, tags: r.tags, color: r.color, initials: r.initials,
+  });
 
   try {
     const method = event.httpMethod;
@@ -66,7 +73,7 @@ exports.handler = async function (event) {
       if (entity === "customer") {
         const [inserted] = await rest("customers", {
           method: "POST", headers: { Prefer: "return=representation" },
-          body: JSON.stringify(row),
+          body: JSON.stringify(customerToDb(row)),
         });
         return json(201, { customer: inserted });
       }

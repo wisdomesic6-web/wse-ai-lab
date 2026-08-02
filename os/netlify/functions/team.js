@@ -42,9 +42,15 @@ exports.handler = async function (event) {
       const body = JSON.parse(event.body || "{}");
       const row = body.row || {};
       if (!row.id || !row.name) return json(400, { error: "Need id and name." });
+      // Allow-list mirroring the member object index.html actually builds,
+      // so an arbitrary POST body can't set columns outside this set.
+      const memberToDb = {
+        id: row.id, name: row.name, email: row.email, role: row.role,
+        initials: row.initials, color: row.color,
+      };
       const [inserted] = await rest("team_members", {
         method: "POST", headers: { Prefer: "return=representation" },
-        body: JSON.stringify(row),
+        body: JSON.stringify(memberToDb),
       });
       return json(201, { member: inserted });
     }

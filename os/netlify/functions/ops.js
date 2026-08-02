@@ -28,6 +28,17 @@ const PATCHABLE = {
   inventory: ["qty", "status"],
 };
 
+/* Whitelist of insertable columns per entity — mirrors what index.html's
+   save*() handlers actually build, so an arbitrary POST body can't set
+   columns outside this set (id is included: these tables use client-
+   generated ids like "bk_<timestamp>", not DB-assigned ones). */
+const POSTABLE = {
+  workflow: ["id", "name", "trigger_desc", "action_desc", "status", "runs"],
+  business: ["id", "name", "btype", "status", "url", "notes"],
+  booking: ["id", "client", "service", "date", "time", "status"],
+  inventory: ["id", "name", "cat", "qty", "cost", "reorder"],
+};
+
 exports.handler = async function (event) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -66,7 +77,14 @@ exports.handler = async function (event) {
       const { entity, row } = body;
       const table = TABLES[entity];
       if (!table || !row) return json(400, { error: "Unknown entity." });
-      const payload = entity === "template" ? tplToDb(row) : row;
+      let payload;
+      if (entity === "template") {
+        payload = tplToDb(row);
+      } else {
+        const allowed = POSTABLE[entity] || [];
+        payload = {};
+        allowed.forEach((k) => { if (k in row) payload[k] = row[k]; });
+      }
       const [inserted] = await rest(table, {
         method: "POST", headers: { Prefer: "return=representation" },
         body: JSON.stringify(payload),
