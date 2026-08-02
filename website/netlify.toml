@@ -8,3 +8,10 @@
   # Requires env var ANTHROPIC_API_KEY set in the Netlify dashboard.
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# NOTE — Vercel-only feature: api/upload-photo.js and api/photo-url.js (the
+# self-service founder-photo upload, admin-photo.html) use Vercel Blob and
+# have no Netlify equivalent. On Netlify those two routes 404; main.js's
+# wirePhoto() already degrades gracefully to the static assets/me.png in
+# that case, but admin-photo.html's upload flow will not work unless this
+# site is served from Vercel.

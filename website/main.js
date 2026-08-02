@@ -66,13 +66,13 @@
       features: ['WhatsApp chatbot for lead capture', 'Property listing management', 'Automated follow-up sequences', 'Full agency dashboard', 'Lead qualification and routing']
     },
     {
-      slug: 'smartsales', name: 'SmartSales', status: 'building', tag: 'Retail · Business Management',
-      url: null, logo: 'assets/products/smartsales.svg',
+      slug: 'smartsales', name: 'SmartSales', status: 'live', tag: 'Retail · Business Management',
+      url: 'https://smartsales.wseailab.com', logo: 'assets/products/smartsales.svg',
       desc: 'Mobile-first business management for African retailers — customers, payments, cashflow, AI insights.',
       long: [
         'SmartSales is a mobile-first business management app for African retailers. It covers the essentials a small retail business runs on: customer management, business profiles, payments, and cashflow tracking.',
         'On top of the records sits an AI layer that turns the numbers into plain-English business insights — what is selling, what is stalling, and where the cash is going.',
-        'Currently in development in the WSE workshop.'
+        'Built for retailers who need it simple: log a sale, see the cash position, know what to reorder — no accountant required.'
       ],
       features: ['Customer and business profile management', 'Payments and cashflow tracking', 'Plain-English AI business insights', 'Mobile-first, low-data design']
     },
@@ -555,13 +555,17 @@
     return el;
   }
 
+  var isSending = false;
   function sendChat() {
+    if (isSending) return; // guards against double-send (double-click, Enter key-repeat)
     var input = document.getElementById('wz-input');
     var text = input.value.trim();
     if (!text) return;
+    isSending = true;
     input.value = '';
     addMessage(text, 'user');
-    history.push({ role: 'user', content: text });
+    var pending = { role: 'user', content: text };
+    history.push(pending);
     var typing = addMessage('Typing…', 'bot typing');
     fetch('/.netlify/functions/chat', {
       method: 'POST',
@@ -578,8 +582,13 @@
       });
     }).catch(function () {
       typing.remove();
+      // Roll back the pending user turn so history never ends on two
+      // consecutive user messages — the Anthropic API rejects that shape
+      // on the next send, which would otherwise break chat permanently.
+      var idx = history.indexOf(pending);
+      if (idx !== -1) history.splice(idx, 1);
       addMessage('Could not connect right now. Email info@wseailab.com or tap the WhatsApp button below.', 'bot');
-    });
+    }).then(function () { isSending = false; }, function () { isSending = false; });
   }
 
   document.getElementById('wz-send').addEventListener('click', sendChat);
