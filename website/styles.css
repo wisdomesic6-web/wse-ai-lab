@@ -808,5 +808,27 @@ form.inq{display:grid;gap:16px}
 }
 .wz-foot button:hover{background:var(--accent)}
 
+/* ── Affiliate portal — commission table + product-picker modal ── */
+.aff-table{width:100%;border-collapse:collapse;font-size:var(--fs-support)}
+.aff-table th,.aff-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.aff-table th{font-family:var(--ff-display);font-weight:700;font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.aff-table tr:last-child td{border-bottom:0}
+.aff-table td b{color:var(--accent)}
+
+.aff-modal{
+  position:fixed;inset:0;z-index:250;background:rgba(10,36,99,.55);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.aff-modal-panel{
+  background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-lg);
+  max-width:760px;width:100%;max-height:min(640px,88vh);overflow-y:auto;padding:clamp(24px,3vw,36px);
+}
+.aff-modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.aff-modal-close{
+  flex:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--border);background:var(--white);
+  color:var(--navy);display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s;
+}
+.aff-modal-close:hover{background:var(--card);border-color:var(--accent)}
+
 /* Anchor offset under sticky nav */
 [id]{scroll-margin-top:96px}

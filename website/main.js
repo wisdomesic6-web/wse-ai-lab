@@ -603,4 +603,230 @@
   document.getElementById('wz-input').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') sendChat();
   });
+
+  /* ═══ Affiliate portal — signup, login, dashboard ═══
+     Endpoints are called at /.netlify/functions/... (not /api/...) so the
+     same call works unchanged on both Netlify (native path) and Vercel
+     (via the generic rewrite already in vercel.json) — same convention
+     already used by the Wizzy chat widget above. */
+  function escHtml(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtNaira(n) {
+    return Number(n || 0).toLocaleString('en-NG');
+  }
+  function postJson(url, payload) {
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload || {}),
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        return { ok: res.ok, status: res.status, data: data };
+      });
+    });
+  }
+
+  var affSignupForm = document.getElementById('affSignupForm');
+  if (affSignupForm) {
+    affSignupForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var btn = document.getElementById('affSignupBtn');
+      var msg = document.getElementById('affSignupMsg');
+      var original = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      msg.textContent = '';
+      postJson('/.netlify/functions/affiliate-signup', {
+        fullName: document.getElementById('as-name').value,
+        whatsapp: document.getElementById('as-whatsapp').value,
+        email: document.getElementById('as-email').value,
+        password: document.getElementById('as-password').value,
+        bankName: document.getElementById('as-bank').value,
+        accountNumber: document.getElementById('as-acctno').value,
+        accountName: document.getElementById('as-acctname').value,
+      }).then(function (result) {
+        if (!result.ok) {
+          msg.textContent = result.data.error || 'Something went wrong.';
+          btn.disabled = false;
+          btn.innerHTML = original;
+          return;
+        }
+        affSignupForm.style.display = 'none';
+        document.getElementById('affSignupSent').classList.add('show');
+      }).catch(function () {
+        msg.textContent = 'Network error — please try again.';
+        btn.disabled = false;
+        btn.innerHTML = original;
+      });
+    });
+  }
+
+  var affLoginForm = document.getElementById('affLoginForm');
+  if (affLoginForm) {
+    affLoginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var btn = document.getElementById('affLoginBtn');
+      var msg = document.getElementById('affLoginMsg');
+      btn.disabled = true;
+      btn.textContent = 'Logging in…';
+      msg.textContent = '';
+      postJson('/.netlify/functions/affiliate-login', {
+        email: document.getElementById('al-email').value,
+        password: document.getElementById('al-password').value,
+      }).then(function (result) {
+        if (!result.ok) {
+          msg.textContent = result.data.error || 'Login failed.';
+          btn.disabled = false;
+          btn.textContent = 'Log In';
+          return;
+        }
+        window.location.href = 'affiliate-dashboard.html';
+      }).catch(function () {
+        msg.textContent = 'Network error — please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+      });
+    });
+  }
+
+  var affDashRoot = document.getElementById('affDashboard');
+  if (affDashRoot) {
+    fetch('/.netlify/functions/affiliate-me')
+      .then(function (res) {
+        if (res.status === 401) {
+          window.location.href = 'affiliate-login.html';
+          return null;
+        }
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (me) {
+        if (!me) return;
+        document.getElementById('affName').textContent = me.fullName || '';
+        if (me.status !== 'approved') {
+          showAffGate(me.status);
+          return;
+        }
+        loadAffDashboard();
+      })
+      .catch(function () {
+        showAffGate('error');
+      });
+  }
+
+  function showAffGate(status) {
+    var gate = document.getElementById('affGate');
+    if (!gate) return;
+    var title = status === 'pending' ? 'Application under review'
+      : status === 'error' ? 'Could not load your account'
+      : 'Application not approved';
+    var text = status === 'pending'
+      ? 'Your application is under review. We will email you once it is approved.'
+      : status === 'error' ? 'Something went wrong loading your account. Please refresh, or try again shortly.'
+      : 'Your application was not approved. Contact info@wseailab.com if you think this is a mistake.';
+    gate.innerHTML =
+      '<div class="card" style="max-width:520px;margin:0 auto;text-align:center">' +
+      '<h2 class="h-md">' + escHtml(title) + '</h2>' +
+      '<p style="color:var(--muted);margin-top:10px">' + escHtml(text) + '</p></div>';
+    gate.style.display = 'block';
+  }
+
+  function loadAffDashboard() {
+    document.getElementById('affDashboard').style.display = 'block';
+    fetch('/.netlify/functions/affiliate-dashboard').then(function (res) { return res.json(); }).then(renderAffDashboard);
+    var addBtn = document.getElementById('affAddProductBtn');
+    if (addBtn) addBtn.addEventListener('click', openAffPicker);
+    var closeBtn = document.getElementById('affPickerClose');
+    if (closeBtn) closeBtn.addEventListener('click', closeAffPicker);
+  }
+
+  function renderAffDashboard(data) {
+    var totals = data.totals || {};
+    var totalsEl = document.getElementById('affTotals');
+    if (totalsEl) {
+      totalsEl.innerHTML =
+        '<div class="cell"><b>₦' + fmtNaira(totals.pendingCommission) + '</b><span>Pending Commission</span></div>' +
+        '<div class="cell"><b>₦' + fmtNaira(totals.totalPaidOut) + '</b><span>Paid Out</span></div>' +
+        '<div class="cell"><b>₦' + fmtNaira(totals.totalEarned) + '</b><span>Total Earned</span></div>' +
+        '<div class="cell"><b>' + (data.products || []).length + '</b><span>Products Promoted</span></div>';
+    }
+    var list = document.getElementById('affProductsList');
+    if (list) {
+      var products = data.products || [];
+      list.innerHTML = products.length ? products.map(function (p) {
+        return '<article class="card">' +
+          '<h3 class="h-sm">' + escHtml(p.name) + '</h3>' +
+          '<p style="color:var(--muted);font-size:var(--fs-support);margin-top:6px">Code: <b>' + escHtml(p.referralCode) + '</b></p>' +
+          '<div class="field" style="margin-top:12px"><input readonly value="' + escHtml(p.referralLink) + '" data-copy-link onclick="this.select()"></div>' +
+          '<button class="btn btn-ghost" style="margin-top:10px" data-copy-btn="' + escHtml(p.referralLink) + '">Copy Link</button>' +
+          '<div class="stats-2x2" style="margin-top:16px">' +
+          '<div class="cell"><b>' + p.clicks + '</b><span>Clicks</span></div>' +
+          '<div class="cell"><b>' + p.conversions + '</b><span>Conversions</span></div>' +
+          '</div></article>';
+      }).join('') : '<p style="color:var(--muted)">You have not picked a product yet — click "Add a product" above to get your first link.</p>';
+      list.querySelectorAll('[data-copy-btn]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          navigator.clipboard.writeText(btn.getAttribute('data-copy-btn')).then(function () {
+            var original = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(function () { btn.textContent = original; }, 1600);
+          });
+        });
+      });
+    }
+    var payoutsList = document.getElementById('affPayoutsList');
+    if (payoutsList) {
+      var payouts = data.payouts || [];
+      payoutsList.innerHTML = payouts.length ? payouts.map(function (p) {
+        return '<div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:10px">' +
+          '<span>' + escHtml(p.periodCovered) + '</span>' +
+          '<span>₦' + fmtNaira(p.amount) + '</span>' +
+          '<span class="badge ' + (p.status === 'paid' ? 'live' : 'building') + '">' + escHtml(p.status) + '</span></div>';
+      }).join('') : '<p style="color:var(--muted)">No payouts yet.</p>';
+    }
+  }
+
+  function openAffPicker() {
+    var modal = document.getElementById('affPickerModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    fetch('/.netlify/functions/affiliate-products').then(function (res) { return res.json(); }).then(function (data) {
+      var grid = document.getElementById('affPickerGrid');
+      var products = (data && data.products) || [];
+      grid.innerHTML = products.map(function (p) {
+        return '<article class="card">' +
+          '<img src="' + (p.logo_url || 'assets/example.png') + '" alt="" loading="lazy" style="width:44px;height:44px;object-fit:contain;border-radius:8px;margin-bottom:10px" ' +
+          'data-ph="product" data-ph-icon="' + escHtml(p.slug) + '" data-ph-label="' + escHtml(productInitials(p.name)) + '" data-ph-cap="' + escHtml(p.name) + '">' +
+          '<h3 class="h-sm">' + escHtml(p.name) + '</h3>' +
+          '<p style="color:var(--muted);font-size:var(--fs-support);margin-top:6px">' + escHtml(p.description) + '</p>' +
+          '<button class="btn btn-primary" style="margin-top:14px" data-pick-slug="' + escHtml(p.slug) + '">Get My Link</button>' +
+          '</article>';
+      }).join('');
+      wirePlaceholders(grid);
+      grid.querySelectorAll('[data-pick-slug]').forEach(function (btn) {
+        btn.addEventListener('click', function () { pickAffProduct(btn.getAttribute('data-pick-slug'), btn); });
+      });
+    });
+  }
+
+  function closeAffPicker() {
+    var modal = document.getElementById('affPickerModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function pickAffProduct(slug, btn) {
+    if (btn) { btn.disabled = true; btn.textContent = 'Getting your link…'; }
+    postJson('/.netlify/functions/affiliate-pick-product', { slug: slug }).then(function (result) {
+      if (!result.ok) {
+        if (btn) { btn.disabled = false; btn.textContent = 'Get My Link'; }
+        alert(result.data.error || 'Could not get your link — please try again.');
+        return;
+      }
+      closeAffPicker();
+      loadAffDashboard();
+    });
+  }
 })();

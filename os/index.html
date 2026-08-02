@@ -2662,6 +2662,14 @@ html[data-density="compact"] { font-size: 14.5px; }
     </div>
   </div>
 
+  <div class="nav-group">
+    <div class="nav-section-label">Growth</div>
+    <div class="nav-item" data-page="affiliates" onclick="showPage('affiliates')">
+      <div class="nav-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg></div>
+      Affiliates
+    </div>
+  </div>
+
   <div class="nav-group" style="border-bottom:none;">
     <div class="nav-section-label">System</div>
     <div class="nav-item" data-page="ai-engine" onclick="showPage('ai-engine')">
@@ -4509,6 +4517,201 @@ html[data-density="compact"] { font-size: 14.5px; }
 </div>
 </div>
 
+<div class="view" id="view-affiliates" data-built="true">
+<div class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="openSidebar()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="page-h" id="pageTitle">Affiliates</div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-av">SA</div>
+    </div>
+  </header>
+  <div class="content">
+
+    <!-- Stats row -->
+    <div class="metrics-row" style="margin-bottom:24px;">
+      <div class="metric-card">
+        <div class="mc-label">Total Affiliates</div>
+        <div class="mc-val" id="affMTotal">0</div>
+        <div class="mc-sub">approved + pending</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Pending Applications</div>
+        <div class="mc-val" id="affMPending">0</div>
+        <div class="mc-sub" style="color:var(--amber)">● Needs review</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Total Clicks</div>
+        <div class="mc-val" id="affMClicks">0</div>
+        <div class="mc-sub">across all referral links</div>
+      </div>
+      <div class="metric-card">
+        <div class="mc-label">Pending Payout</div>
+        <div class="mc-val" id="affMPendingPayout">₦0</div>
+        <div class="mc-sub">owed to affiliates</div>
+      </div>
+    </div>
+
+    <!-- Sub-module tabs -->
+    <div class="module-tabs">
+      <div class="mod-tab active" id="aftab-applications" onclick="switchAffModule('applications')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Applications
+      </div>
+      <div class="mod-tab" id="aftab-affiliates" onclick="switchAffModule('affiliates')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Affiliates
+      </div>
+      <div class="mod-tab" id="aftab-products" onclick="switchAffModule('products')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
+        Products
+      </div>
+      <div class="mod-tab" id="aftab-referrals" onclick="switchAffModule('referrals')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1.5-1.5"/></svg>
+        Referrals
+      </div>
+      <div class="mod-tab" id="aftab-payouts" onclick="switchAffModule('payouts')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Payouts
+      </div>
+    </div>
+
+    <!-- Applications -->
+    <div class="page-content active" id="affpage-applications">
+      <div id="affApplicationsList"></div>
+    </div>
+
+    <!-- Affiliates -->
+    <div class="page-content" id="affpage-affiliates">
+      <div id="affAffiliatesList"></div>
+    </div>
+
+    <!-- Products -->
+    <div class="page-content" id="affpage-products">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+        <div class="section-hd" style="margin:0;">Product Catalog</div>
+        <button class="action-btn" onclick="openNewAffProduct()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add Product
+        </button>
+      </div>
+      <div id="affProductsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;"></div>
+    </div>
+
+    <!-- Referrals -->
+    <div class="page-content" id="affpage-referrals">
+      <div id="affReferralsList"></div>
+    </div>
+
+    <!-- Payouts -->
+    <div class="page-content" id="affpage-payouts">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+        <div class="section-hd" style="margin:0;">Payout Queue</div>
+        <button class="action-btn" onclick="openNewAffPayout()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Record Payout
+        </button>
+      </div>
+      <div id="affPayoutsQueue"></div>
+    </div>
+
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div class="modal-overlay" id="affProductModalOverlay" onclick="closeAffProductModal()" style="display:none;"></div>
+  <div class="modal-panel" id="affProductModal" style="display:none;">
+    <div class="modal-header">
+      <div class="modal-title" id="affProductModalTitle">Add Product</div>
+      <button class="modal-close" onclick="closeAffProductModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="afpId">
+      <div class="form-field">
+        <label>Product Name</label>
+        <input type="text" placeholder="e.g. WSE Datapilot" id="afpName">
+      </div>
+      <div class="form-field">
+        <label>Slug</label>
+        <input type="text" placeholder="wse-datapilot" id="afpSlug">
+      </div>
+      <div class="form-field">
+        <label>Logo URL</label>
+        <input type="text" placeholder="/assets/products/x.svg" id="afpLogo">
+      </div>
+      <div class="form-field">
+        <label>Description</label>
+        <textarea rows="2" id="afpDesc"></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-field">
+          <label>Commission %</label>
+          <input type="number" step="0.1" min="0" max="100" value="20" id="afpCommission">
+        </div>
+        <div class="form-field">
+          <label>Status</label>
+          <select id="afpStatus">
+            <option value="live">Live</option>
+            <option value="building">Building</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Product URL</label>
+        <input type="url" placeholder="https://…" id="afpUrl">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeAffProductModal()">Cancel</button>
+      <button class="btn-accent-sm" onclick="saveAffProduct()">Save Product</button>
+    </div>
+  </div>
+
+  <!-- Record Payout Modal -->
+  <div class="modal-overlay" id="affPayoutModalOverlay" onclick="closeAffPayoutModal()" style="display:none;"></div>
+  <div class="modal-panel" id="affPayoutModal" style="display:none;">
+    <div class="modal-header">
+      <div class="modal-title">Record Payout</div>
+      <button class="modal-close" onclick="closeAffPayoutModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label>Affiliate</label>
+        <select id="afyAffiliate"></select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="form-field">
+          <label>Amount (₦)</label>
+          <input type="number" min="0" id="afyAmount">
+        </div>
+        <div class="form-field">
+          <label>Period Covered</label>
+          <input type="text" placeholder="e.g. 2026-08" id="afyPeriod">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Status</label>
+        <select id="afyStatus">
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Note</label>
+        <input type="text" id="afyNote">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost-sm" onclick="closeAffPayoutModal()">Cancel</button>
+      <button class="btn-accent-sm" onclick="saveAffPayout()">Save Payout</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <div class="view" id="view-ai-engine" data-built="true">
 <div class="main">
   <header class="topbar">
@@ -5086,6 +5289,7 @@ const PAGE_TITLES = {
   tax:        'Tax Records',
   recon:      'Reconciliation',
   inventory:  'Inventory',
+  affiliates: 'Affiliates',
   'ai-engine':'AI Engine',
   settings:   'Settings',
 };
@@ -5130,6 +5334,11 @@ function showPage(id) {
   /* Lazy init: reconciliation module */
   if (id === 'recon' && !window._reconBuilt) {
     if (typeof initRecon === 'function') initRecon();
+  }
+  /* Lazy init: affiliates module */
+  if (id === 'affiliates' && !window._affBuilt) {
+    if (typeof loadAffiliates === 'function') loadAffiliates();
+    window._affBuilt = true;
   }
 
   /* Close sidebar on mobile */
@@ -9611,6 +9820,278 @@ function saveWorkflow() {
   if (typeof persistOps === 'function') persistOps('workflow', _wf);
   closeWfModal();
   renderWorkflows();
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   AFFILIATES MODULE JS
+
+   Backed by a dedicated /.netlify/functions/affiliates endpoint (not
+   ops.js) — same tables the public website's affiliate signup/login/
+   dashboard endpoints read and write, so approvals and catalog edits
+   made here are immediately live for affiliates on the website.
+   ══════════════════════════════════════════════════════════ */
+
+let AFF_DATA = { affiliates: [], products: [], links: [], payouts: [] };
+
+window.persistAffiliates = async function (entity, row) {
+  try {
+    const res = await fetch('/.netlify/functions/affiliates', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entity, row }),
+    });
+    return await res.json();
+  } catch (e) { console.warn('[Affiliates] persist failed:', e.message); return null; }
+};
+window.patchAffiliates = async function (entity, id, patch) {
+  try {
+    await fetch('/.netlify/functions/affiliates', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entity, id, patch }),
+    });
+  } catch (e) { console.warn('[Affiliates] patch failed:', e.message); }
+};
+
+async function loadAffiliates() {
+  try {
+    const res = await fetch('/.netlify/functions/affiliates', { headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    if (d.error) throw new Error(d.error);
+    AFF_DATA.affiliates = d.affiliates || [];
+    AFF_DATA.products = d.products || [];
+    AFF_DATA.links = d.links || [];
+    AFF_DATA.payouts = d.payouts || [];
+    updateAffStats();
+    renderAffApplications();
+    renderAffAffiliatesList();
+    renderAffProducts();
+    renderAffReferrals();
+    renderAffPayouts();
+  } catch (e) { console.warn('[Affiliates] live data unavailable, using empty state:', e.message); }
+}
+
+function updateAffStats() {
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('affMTotal', AFF_DATA.affiliates.length);
+  set('affMPending', AFF_DATA.affiliates.filter(a => a.status === 'pending').length);
+  set('affMClicks', AFF_DATA.links.reduce((s, l) => s + (Number(l.clicks) || 0), 0));
+  const totalPendingPayouts = AFF_DATA.payouts.filter(p => p.status === 'pending').reduce((s, p) => s + Number(p.amount || 0), 0);
+  set('affMPendingPayout', '₦' + totalPendingPayouts.toLocaleString('en-NG'));
+}
+
+function switchAffModule(id) {
+  // Scoped to #view-affiliates (unlike the CRM/Finance switchModule() above,
+  // which queries .page-content/.mod-tab document-wide) so switching an
+  // affiliates sub-tab never touches another module's active state.
+  document.querySelectorAll('#view-affiliates .mod-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#view-affiliates .page-content').forEach(p => p.classList.remove('active'));
+  const tab = document.getElementById('aftab-' + id);
+  const page = document.getElementById('affpage-' + id);
+  if (tab) tab.classList.add('active');
+  if (page) page.classList.add('active');
+}
+
+function renderAffApplications() {
+  const list = document.getElementById('affApplicationsList');
+  if (!list) return;
+  const pending = AFF_DATA.affiliates.filter(a => a.status === 'pending');
+  if (!pending.length) { list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">No pending applications.</div>'; return; }
+  list.innerHTML = pending.map(a => `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+      <div style="flex:1;min-width:220px;">
+        <div style="font-weight:700;font-size:14.5px;color:var(--text);margin-bottom:4px;">${escHtml(a.full_name)}</div>
+        <div style="font-size:12.5px;color:var(--text2);">${escHtml(a.email)} · ${escHtml(a.whatsapp_phone)}</div>
+        <div style="font-size:12.5px;color:var(--text2);margin-top:4px;">${escHtml(a.bank_name)} · ${escHtml(a.account_number)} · ${escHtml(a.account_name)}</div>
+      </div>
+      <button class="btn-accent-sm" onclick="approveAffiliate('${escHtml(String(a.id))}')">Approve</button>
+      <button class="btn-ghost-sm" onclick="rejectAffiliate('${escHtml(String(a.id))}')">Reject</button>
+    </div>
+  `).join('');
+}
+
+async function approveAffiliate(id) {
+  await patchAffiliates('affiliate', id, { status: 'approved' });
+  const a = AFF_DATA.affiliates.find(x => String(x.id) === String(id));
+  if (a) a.status = 'approved';
+  updateAffStats(); renderAffApplications(); renderAffAffiliatesList();
+}
+async function rejectAffiliate(id) {
+  await patchAffiliates('affiliate', id, { status: 'rejected' });
+  const a = AFF_DATA.affiliates.find(x => String(x.id) === String(id));
+  if (a) a.status = 'rejected';
+  updateAffStats(); renderAffApplications(); renderAffAffiliatesList();
+}
+
+function renderAffAffiliatesList() {
+  const list = document.getElementById('affAffiliatesList');
+  if (!list) return;
+  const rows = AFF_DATA.affiliates.filter(a => a.status !== 'pending');
+  if (!rows.length) { list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">No approved or rejected affiliates yet.</div>'; return; }
+  const statusMeta = { approved: { cls: 'green', label: 'Approved' }, rejected: { cls: 'red', label: 'Rejected' } };
+  list.innerHTML = rows.map(a => {
+    const s = statusMeta[a.status] || statusMeta.approved;
+    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+      <div style="flex:1;min-width:220px;">
+        <div style="font-weight:700;font-size:14.5px;color:var(--text);margin-bottom:4px;">${escHtml(a.full_name)}</div>
+        <div style="font-size:12.5px;color:var(--text2);">${escHtml(a.email)} · ${escHtml(a.whatsapp_phone)}</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:4px;">Last seen: ${a.last_login_at ? new Date(a.last_login_at).toLocaleString() : 'never'}</div>
+      </div>
+      <span class="badge-pill ${s.cls}">${s.label}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderAffProducts() {
+  const grid = document.getElementById('affProductsGrid');
+  if (!grid) return;
+  if (!AFF_DATA.products.length) { grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;grid-column:1/-1;">No products yet. Click “Add Product” to seed the catalog.</div>'; return; }
+  grid.innerHTML = AFF_DATA.products.map(p => `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;cursor:pointer;" onclick="openEditAffProduct('${escHtml(String(p.id))}')">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:var(--syne);font-size:16px;font-weight:700;color:var(--text);">${escHtml(p.name)}</div>
+        <span class="badge-pill ${p.status === 'live' ? 'green' : 'amber'}">${p.status === 'live' ? 'Live' : 'Building'}</span>
+      </div>
+      <div style="font-size:12.5px;color:var(--text2);line-height:1.5;">${escHtml(p.description)}</div>
+      <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-top:4px;">${p.commission_pct}% commission</div>
+    </div>
+  `).join('');
+}
+
+function openNewAffProduct() {
+  document.getElementById('affProductModalTitle').textContent = 'Add Product';
+  document.getElementById('afpId').value = '';
+  document.getElementById('afpName').value = '';
+  document.getElementById('afpSlug').value = '';
+  document.getElementById('afpLogo').value = '';
+  document.getElementById('afpDesc').value = '';
+  document.getElementById('afpCommission').value = '20';
+  document.getElementById('afpStatus').value = 'live';
+  document.getElementById('afpUrl').value = '';
+  document.getElementById('affProductModalOverlay').style.display = 'block';
+  const m = document.getElementById('affProductModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function openEditAffProduct(id) {
+  const p = AFF_DATA.products.find(x => String(x.id) === String(id));
+  if (!p) return;
+  document.getElementById('affProductModalTitle').textContent = 'Edit Product';
+  document.getElementById('afpId').value = p.id;
+  document.getElementById('afpName').value = p.name || '';
+  document.getElementById('afpSlug').value = p.slug || '';
+  document.getElementById('afpLogo').value = p.logo_url || '';
+  document.getElementById('afpDesc').value = p.description || '';
+  document.getElementById('afpCommission').value = p.commission_pct;
+  document.getElementById('afpStatus').value = p.status;
+  document.getElementById('afpUrl').value = p.product_url || '';
+  document.getElementById('affProductModalOverlay').style.display = 'block';
+  const m = document.getElementById('affProductModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function closeAffProductModal() {
+  document.getElementById('affProductModalOverlay').style.display = 'none';
+  document.getElementById('affProductModal').style.display = 'none';
+}
+async function saveAffProduct() {
+  const name = document.getElementById('afpName').value.trim();
+  const slug = document.getElementById('afpSlug').value.trim();
+  if (!name || !slug) return;
+  const row = {
+    name, slug,
+    logo_url: document.getElementById('afpLogo').value.trim(),
+    description: document.getElementById('afpDesc').value.trim(),
+    commission_pct: Number(document.getElementById('afpCommission').value) || 0,
+    status: document.getElementById('afpStatus').value,
+    product_url: document.getElementById('afpUrl').value.trim(),
+  };
+  const id = document.getElementById('afpId').value;
+  if (id) {
+    await patchAffiliates('product', id, row);
+    const existing = AFF_DATA.products.find(p => String(p.id) === String(id));
+    if (existing) Object.assign(existing, row);
+  } else {
+    const result = await persistAffiliates('product', row);
+    if (result && result.product) AFF_DATA.products.push(result.product);
+  }
+  closeAffProductModal();
+  renderAffProducts();
+}
+
+function renderAffReferrals() {
+  const list = document.getElementById('affReferralsList');
+  if (!list) return;
+  if (!AFF_DATA.links.length) { list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">No referral links generated yet.</div>'; return; }
+  list.innerHTML = AFF_DATA.links.map(l => {
+    const affName = l.affiliates ? l.affiliates.full_name : '—';
+    const prodName = l.aff_products ? l.aff_products.name : '—';
+    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+      <div style="flex:1;min-width:180px;">
+        <div style="font-weight:700;font-size:14px;color:var(--text);">${escHtml(affName)}</div>
+        <div style="font-size:12.5px;color:var(--text2);">promoting ${escHtml(prodName)}</div>
+      </div>
+      <div style="font-family:monospace;font-size:13px;color:var(--accent2);">${escHtml(l.referral_code)}</div>
+      <div style="font-size:13px;color:var(--text2);">${l.clicks || 0} clicks</div>
+    </div>`;
+  }).join('');
+}
+
+function renderAffPayouts() {
+  const list = document.getElementById('affPayoutsQueue');
+  if (!list) return;
+  if (!AFF_DATA.payouts.length) { list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2);font-size:14px;">No payouts recorded yet.</div>'; return; }
+  list.innerHTML = AFF_DATA.payouts.map(p => {
+    const affName = p.affiliates ? p.affiliates.full_name : '—';
+    const isPaid = p.status === 'paid';
+    return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+      <div style="flex:1;min-width:180px;">
+        <div style="font-weight:700;font-size:14px;color:var(--text);">${escHtml(affName)}</div>
+        <div style="font-size:12.5px;color:var(--text2);">${escHtml(p.period_covered)}${p.note ? ' · ' + escHtml(p.note) : ''}</div>
+      </div>
+      <div style="font-weight:700;font-size:14px;color:var(--text);">₦${Number(p.amount || 0).toLocaleString('en-NG')}</div>
+      <span class="badge-pill ${isPaid ? 'green' : 'amber'}">${isPaid ? 'Paid' : 'Pending'}</span>
+      ${!isPaid ? `<button class="btn-ghost-sm" onclick="markAffPayoutPaid('${escHtml(String(p.id))}')">Mark Paid</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+async function markAffPayoutPaid(id) {
+  await patchAffiliates('payout', id, { status: 'paid' });
+  const p = AFF_DATA.payouts.find(x => String(x.id) === String(id));
+  if (p) p.status = 'paid';
+  updateAffStats(); renderAffPayouts();
+}
+
+function openNewAffPayout() {
+  const sel = document.getElementById('afyAffiliate');
+  const approved = AFF_DATA.affiliates.filter(a => a.status === 'approved');
+  sel.innerHTML = approved.map(a => `<option value="${escHtml(String(a.id))}">${escHtml(a.full_name)}</option>`).join('');
+  document.getElementById('afyAmount').value = '';
+  document.getElementById('afyPeriod').value = '';
+  document.getElementById('afyStatus').value = 'pending';
+  document.getElementById('afyNote').value = '';
+  document.getElementById('affPayoutModalOverlay').style.display = 'block';
+  const m = document.getElementById('affPayoutModal');
+  m.style.display = 'flex'; m.style.flexDirection = 'column';
+}
+function closeAffPayoutModal() {
+  document.getElementById('affPayoutModalOverlay').style.display = 'none';
+  document.getElementById('affPayoutModal').style.display = 'none';
+}
+async function saveAffPayout() {
+  const affiliate_id = document.getElementById('afyAffiliate').value;
+  const amount = Number(document.getElementById('afyAmount').value) || 0;
+  if (!affiliate_id || !amount) return;
+  const row = {
+    affiliate_id, amount,
+    period_covered: document.getElementById('afyPeriod').value.trim(),
+    status: document.getElementById('afyStatus').value,
+    note: document.getElementById('afyNote').value.trim(),
+  };
+  const result = await persistAffiliates('payout', row);
+  if (result && result.payout) AFF_DATA.payouts.push(result.payout);
+  closeAffPayoutModal();
+  updateAffStats();
+  renderAffPayouts();
 }
 
 

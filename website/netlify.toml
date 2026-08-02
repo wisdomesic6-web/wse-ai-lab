@@ -15,3 +15,11 @@
 # wirePhoto() already degrades gracefully to the static assets/me.png in
 # that case, but admin-photo.html's upload flow will not work unless this
 # site is served from Vercel.
+
+# Affiliate referral short-links: /r/CODE rewrites into the r.js function
+# (200 rewrite, not a redirect, so the function itself controls the real
+# 302 to the product's URL).
+[[redirects]]
+  from = "/r/:code"
+  to = "/.netlify/functions/r?code=:code"
+  status = 200

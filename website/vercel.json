@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/.netlify/functions/:fn", "destination": "/api/:fn" }
+    { "source": "/.netlify/functions/:fn", "destination": "/api/:fn" },
+    { "source": "/r/:code", "destination": "/api/r?code=:code" }
   ]
 }
