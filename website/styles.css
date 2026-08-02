@@ -269,23 +269,37 @@ p{margin:0}
 /* App-mockup placeholder (products) — a compact abstract screenshot instead
    of a bare grid + initials. Three layout variants keep the grid from
    looking like the same card repeated thirteen times. */
-.ph-app{position:relative;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;background:var(--card);border:1px solid var(--border);padding:0}
-.ph-app .pa-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--white);border-bottom:1px solid var(--border);flex:none}
-.ph-app .pa-bar i{width:7px;height:7px;border-radius:50%;background:var(--border)}
-.ph-app .pa-bar i:first-child{background:var(--accent)}
-.ph-app .pa-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:10px;justify-content:center;min-height:0}
-.ph-app .pa-row{height:9px;border-radius:5px;background:var(--border);flex:none}
-.ph-app .pa-row.accent{background:var(--accent);opacity:.6}
-.ph-app .pa-row.w85{width:85%}.ph-app .pa-row.w70{width:70%}.ph-app .pa-row.w55{width:55%}.ph-app .pa-row.w40{width:40%}
-.ph-app .pa-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.ph-app .pa-blocks b{height:32px;border-radius:6px;background:var(--white);border:1px solid var(--border)}
-.ph-app .pa-blocks b:first-child{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
-.ph-app .pa-foot{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid var(--border);background:var(--white);flex:none}
-.ph-app .pa-mono{
-  width:26px;height:26px;border-radius:6px;background:var(--navy);color:var(--white);
-  display:grid;place-items:center;font-family:var(--ff-display);font-weight:800;font-size:10.5px;flex:none;
+/* Product illustration placeholder — bespoke per-product line icon on a
+   glowing navy backdrop, replacing the old fake-app-mockup rows: a
+   deliberate illustration reads as designed, a fake screenshot reads as
+   a placeholder. Swaps for a real screenshot instantly once one exists
+   at the matching path, same as every other .ph variant. */
+.ph-illustration{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:16px;padding:24px;
+  background:
+    radial-gradient(120% 140% at 30% 18%, rgba(21,101,192,.4), transparent 60%),
+    linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
 }
-.ph-app .pa-name{font-family:var(--ff-display);font-weight:700;font-size:11.5px;letter-spacing:.03em;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ph-illustration::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size:18px 18px;
+  -webkit-mask-image:radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
+  mask-image:radial-gradient(circle at 50% 42%, #000 0%, transparent 72%);
+}
+.ph-illustration .pi-icon{
+  position:relative;z-index:1;width:64px;height:64px;border-radius:16px;flex:none;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  display:grid;place-items:center;color:#7DA9FF;
+  box-shadow:0 16px 34px -10px rgba(0,0,0,.5);
+}
+.ph-illustration .pi-icon svg{width:30px;height:30px}
+.ph-illustration .pi-label{
+  position:relative;z-index:1;text-align:center;max-width:220px;
+  font-family:var(--ff-display);font-weight:700;font-size:12.5px;letter-spacing:.03em;
+  color:rgba(255,255,255,.9);
+}
 
 /* Small circular icon badge — used on flat card grids for visual weight */
 .card-ico{
@@ -332,16 +346,34 @@ p{margin:0}
 .m-side{width:64px;background:rgba(255,255,255,.05);border-right:1px solid rgba(255,255,255,.09);padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
 .m-side i{width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.14)}
 .m-side i:first-child{background:var(--accent)}
-.m-main{flex:1;padding:18px;display:flex;flex-direction:column;gap:12px}
-.m-row{height:10px;border-radius:5px;background:rgba(255,255,255,.14)}
-.m-row.w80{width:80%}.m-row.w60{width:60%}.m-row.w50{width:50%}.m-row.w70{width:70%}
-.m-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.m-cards b{
-  height:64px;border-radius:8px;background:rgba(255,255,255,.09);
-  border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;
+.m-main{flex:1;padding:18px;display:flex;flex-direction:column;gap:14px}
+
+/* Animated revenue chart — replaces the old static gray-bar mockup with a
+   genuine (if illustrative) data visualisation that draws itself in when
+   the hero scrolls into view, driven by the shared .reveal/.in mechanism. */
+.viz-head{display:flex;align-items:center;justify-content:space-between;flex:none}
+.viz-label{font-family:var(--ff-display);font-weight:700;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.viz-delta{font-family:var(--ff-display);font-weight:800;font-size:12px;color:#5FE3A6;background:rgba(95,227,166,.15);padding:3px 10px;border-radius:999px}
+.viz-chart{position:relative;flex:1;min-height:110px}
+.viz-line{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.viz-line polyline{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset 1.3s var(--ease) .3s}
+.viz-line circle{fill:var(--accent);opacity:0;transition:opacity .4s ease 1.4s}
+.reveal.in .viz-line polyline{stroke-dashoffset:0}
+.reveal.in .viz-line circle{opacity:1}
+.viz-bars{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;gap:8px;height:100%;pointer-events:none}
+.viz-bars b{
+  flex:1;height:100%;border-radius:4px 4px 0 0;
+  background:linear-gradient(180deg, var(--accent) 0%, rgba(21,101,192,.3) 100%);opacity:.55;
+  transform:scaleY(0);transform-origin:bottom;transition:transform .8s var(--ease);
 }
-.m-cards b::before{content:"";position:absolute;left:10px;top:10px;width:44%;height:8px;border-radius:4px;background:rgba(255,255,255,.30)}
-.m-cards b::after{content:"";position:absolute;left:10px;bottom:10px;width:28%;height:12px;border-radius:4px;background:var(--accent)}
+.reveal.in .viz-bars b{transform:scaleY(var(--h))}
+.viz-bars b:nth-child(1){transition-delay:.05s}
+.viz-bars b:nth-child(2){transition-delay:.1s}
+.viz-bars b:nth-child(3){transition-delay:.15s}
+.viz-bars b:nth-child(4){transition-delay:.2s}
+.viz-bars b:nth-child(5){transition-delay:.25s}
+.viz-bars b:nth-child(6){transition-delay:.3s}
+.viz-bars b:nth-child(7){transition-delay:.35s}
 
 /* ── Geometric dividers (stats band) ── */
 .geo-divider{

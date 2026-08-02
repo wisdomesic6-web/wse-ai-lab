@@ -208,11 +208,25 @@
      the same card always looks the same). Both swap for the real asset the
      instant it exists at the same path — no code changes needed. */
   var phSeq = 0;
-  function textSeed(text) {
-    var sum = 0;
-    for (var i = 0; i < text.length; i++) sum += text.charCodeAt(i);
-    return sum;
-  }
+
+  /* One bespoke line-icon per product, matching what each one actually
+     does — used on the illustrated placeholder below so every product
+     card has a distinct identity instead of an identical mockup. */
+  var PRODUCT_ICON_PATHS = {
+    'memora-os': '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><path d="M12 7v3.2M6.6 10.8l3-1M17.4 10.8l-3-1M12 13.2V17"/>',
+    'wse-datapilot': '<polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/>',
+    'wse-audit-system': '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    'wse-soundhub': '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    'solwise-realty-ai': '<path d="M4 11.5L12 4l8 7.5"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>',
+    'smartsales': '<path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 016 0v2"/>',
+    'wse-academy': '<path d="M12 4L2 9l10 5 10-5-10-5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/>',
+    'wizzy-ai': '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M12 8v3M10.5 9.5h3"/>',
+    'wse-trading-bot': '<line x1="5" y1="4" x2="5" y2="20"/><rect x="3" y="8" width="4" height="6"/><line x1="12" y1="2" x2="12" y2="22"/><rect x="10" y="6" width="4" height="9"/><line x1="19" y1="6" x2="19" y2="18"/><rect x="17" y="10" width="4" height="5"/>',
+    'ai-lead-generator': '<path d="M3 4h18l-7 8v6l-4 2v-8z"/>',
+    'wse-postpilot': '<path d="M3 11v2a2 2 0 002 2h1l3 5V4l-3 5H5a2 2 0 00-2 2z"/><path d="M14 8a4 4 0 010 8"/><path d="M17 5a8 8 0 010 14"/>',
+    'wse-autoreply': '<path d="M20 13a2 2 0 01-2 2H8l-3 3V6a2 2 0 012-2h11a2 2 0 012 2z"/><circle cx="9" cy="9" r=".9"/><circle cx="13" cy="9" r=".9"/><circle cx="17" cy="9" r=".9"/>',
+    'whatsapp-autoreply': '<path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M9 7h6M9 10.5h4M9 14h6"/>'
+  };
   function buildPlaceholder(img) {
     var kind = img.getAttribute('data-ph');
     var label = img.getAttribute('data-ph-label') || 'WSE';
@@ -245,18 +259,12 @@
     }
 
     if (kind === 'product') {
-      var variant = textSeed(cap || label) % 3;
-      var body =
-        variant === 0
-          ? '<div class="pa-row w70"></div><div class="pa-blocks"><b></b><b></b><b></b></div><div class="pa-row w40 accent"></div>'
-          : variant === 1
-          ? '<div class="pa-row w55"></div><div class="pa-row w85"></div><div class="pa-row w40 accent"></div><div class="pa-row w70"></div>'
-          : '<div class="pa-blocks"><b></b><b></b></div><div class="pa-row w70"></div><div class="pa-row w55 accent"></div>';
-      ph.className = 'ph ph-app';
+      var iconSlug = img.getAttribute('data-ph-icon');
+      var iconPath = PRODUCT_ICON_PATHS[iconSlug] || '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>';
+      ph.className = 'ph ph-illustration';
       ph.innerHTML =
-        '<div class="pa-bar"><i></i><i></i><i></i></div>' +
-        '<div class="pa-body">' + body + '</div>' +
-        '<div class="pa-foot"><span class="pa-mono">' + label + '</span><span class="pa-name">' + cap + '</span></div>';
+        '<div class="pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + iconPath + '</svg></div>' +
+        '<span class="pi-label">' + (cap || label) + '</span>';
       img.replaceWith(ph);
       return;
     }
@@ -379,7 +387,7 @@
       var favicon = p.logo ? '<img src="' + p.logo + '" alt="">' : '';
       return '<article class="card prod-card reveal" data-status="' + p.status + '" data-href="product.html?p=' + p.slug + '" role="link" tabindex="0" aria-label="' + p.name + ' details">' +
         '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + favicon + p.name + '</span>' + badge + '</div>' +
-        '<div class="prod-media"><img src="assets/example.png" alt="' + p.name + ' preview" loading="lazy" data-ph="product" data-ph-label="' + productInitials(p.name) + '" data-ph-cap="' + p.name + '"></div>' +
+        '<div class="prod-media"><img src="assets/example.png" alt="' + p.name + ' preview" loading="lazy" data-ph="product" data-ph-icon="' + p.slug + '" data-ph-label="' + productInitials(p.name) + '" data-ph-cap="' + p.name + '"></div>' +
         '<div class="prod-body">' +
           '<div class="prod-top"><h3>' + p.name + '</h3></div>' +
           '<div class="prod-tag">' + p.tag + '</div>' +
@@ -439,7 +447,7 @@
         '<a class="link-arrow" href="products.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform:rotate(180deg)"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Back to Products</a>' +
         '<div class="detail-hero" style="margin-top:24px">' +
           '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + detailFavicon + product.name + '</span>' + badge + '</div>' +
-          '<div class="dh-media"><img src="assets/example.png" alt="' + product.name + ' preview" data-ph="product" data-ph-label="' + productInitials(product.name) + '" data-ph-cap="' + product.name + '"></div>' +
+          '<div class="dh-media"><img src="assets/example.png" alt="' + product.name + ' preview" data-ph="product" data-ph-icon="' + product.slug + '" data-ph-label="' + productInitials(product.name) + '" data-ph-cap="' + product.name + '"></div>' +
         '</div>' +
         '<div class="detail-grid">' +
           '<div class="detail-body">' +

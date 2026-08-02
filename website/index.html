@@ -74,10 +74,20 @@
           <div class="b-body">
             <div class="m-side"><i></i><i></i><i></i><i></i></div>
             <div class="m-main">
-              <div class="m-row w60"></div>
-              <div class="m-cards"><b></b><b></b><b></b></div>
-              <div class="m-row w80"></div>
-              <div class="m-row w50"></div>
+              <div class="viz-head">
+                <span class="viz-label">Weekly Revenue</span>
+                <span class="viz-delta">▲ 24%</span>
+              </div>
+              <div class="viz-chart">
+                <svg class="viz-line" viewBox="0 0 260 70" preserveAspectRatio="none" aria-hidden="true">
+                  <polyline points="10,55 50,42 90,48 130,30 170,34 210,16 250,10"></polyline>
+                  <circle cx="250" cy="10" r="4"></circle>
+                </svg>
+                <div class="viz-bars">
+                  <b style="--h:.35"></b><b style="--h:.55"></b><b style="--h:.42"></b>
+                  <b style="--h:.68"></b><b style="--h:.5"></b><b style="--h:.82"></b><b style="--h:.96"></b>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -107,7 +117,7 @@
       </div>
       <div class="show-grid">
         <a class="show-card reveal" href="product.html?p=memora-os">
-          <div class="show-media"><img src="assets/example.png" alt="Memora OS preview" loading="lazy" data-ph="product" data-ph-label="MO" data-ph-cap="Memora OS"></div>
+          <div class="show-media"><img src="assets/example.png" alt="Memora OS preview" loading="lazy" data-ph="product" data-ph-icon="memora-os" data-ph-label="MO" data-ph-cap="Memora OS"></div>
           <div class="show-body">
             <h3>Memora OS</h3>
             <p>A private AI assistant with persistent business memory — your team's second brain.</p>
@@ -115,7 +125,7 @@
           </div>
         </a>
         <a class="show-card reveal" href="product.html?p=wse-audit-system">
-          <div class="show-media"><img src="assets/example.png" alt="WSE Audit System preview" loading="lazy" data-ph="product" data-ph-label="AU" data-ph-cap="WSE Audit System"></div>
+          <div class="show-media"><img src="assets/example.png" alt="WSE Audit System preview" loading="lazy" data-ph="product" data-ph-icon="wse-audit-system" data-ph-label="AU" data-ph-cap="WSE Audit System"></div>
           <div class="show-body">
             <h3>WSE Audit System</h3>
             <p>Audit intelligence for Nigerian accounting firms — ICAN &amp; ISA 2024 compliant.</p>
@@ -123,7 +133,7 @@
           </div>
         </a>
         <a class="show-card reveal" href="product.html?p=solwise-realty-ai">
-          <div class="show-media"><img src="assets/example.png" alt="Solwise Realty AI preview" loading="lazy" data-ph="product" data-ph-label="SR" data-ph-cap="Solwise Realty AI"></div>
+          <div class="show-media"><img src="assets/example.png" alt="Solwise Realty AI preview" loading="lazy" data-ph="product" data-ph-icon="solwise-realty-ai" data-ph-label="SR" data-ph-cap="Solwise Realty AI"></div>
           <div class="show-body">
             <h3>Solwise Realty AI</h3>
             <p>WhatsApp lead capture and automated follow-ups for Nigerian real-estate agencies.</p>
