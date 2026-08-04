@@ -4649,7 +4649,7 @@ html[data-density="compact"] { font-size: 14.5px; }
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div class="form-field">
           <label>Commission %</label>
-          <input type="number" step="0.1" min="0" max="100" value="20" id="afpCommission">
+          <input type="number" step="0.1" min="0" max="100" value="10" id="afpCommission">
         </div>
         <div class="form-field">
           <label>Status</label>
@@ -9965,7 +9965,7 @@ function openNewAffProduct() {
   document.getElementById('afpSlug').value = '';
   document.getElementById('afpLogo').value = '';
   document.getElementById('afpDesc').value = '';
-  document.getElementById('afpCommission').value = '20';
+  document.getElementById('afpCommission').value = '10';
   document.getElementById('afpStatus').value = 'live';
   document.getElementById('afpUrl').value = '';
   document.getElementById('affProductModalOverlay').style.display = 'block';
