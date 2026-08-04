@@ -17,6 +17,6 @@ exports.handler = async function (event) {
   const affiliate = await requireAffiliate(event);
   if (!affiliate) return json(401, { error: "Not signed in." });
 
-  const products = await rest("aff_products?status=eq.live&select=slug,name,logo_url,description,commission_pct&order=name.asc");
+  const products = await rest("aff_products?status=eq.live&select=slug,name,logo_url,description,guide&order=name.asc");
   return json(200, { products });
 };

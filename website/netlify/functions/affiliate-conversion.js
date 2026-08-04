@@ -10,6 +10,12 @@
    wiring SmartSales (or any other product) to actually call it is
    separate follow-up work in that product's own codebase.
 
+   Commission rate is NOT the product's flat commission_pct — it's the
+   affiliate's current performance tier (see getAffiliateTierRate), based
+   on their live count of active paying customers combined across every
+   product they promote. That's why externalRef is required: it's the
+   only way to tell distinct referred customers apart when counting.
+
    Not public: requires the shared secret, compared in constant time
    (same reasoning as upload-photo.js's safeEqual) so a timing attack
    can't be used to guess it byte-by-byte.
@@ -18,7 +24,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 const crypto = require("crypto");
-const { rest, json } = require("../../lib/affiliate-auth");
+const { rest, json, getAffiliateTierRate } = require("../../lib/affiliate-auth");
 
 function safeEqual(a, b) {
   const bufA = Buffer.from(String(a));
@@ -46,12 +52,13 @@ exports.handler = async function (event) {
   }
 
   const referralCode = String(body.referralCode || "").trim();
-  const externalRef = body.externalRef ? String(body.externalRef).trim() : null;
+  const externalRef = String(body.externalRef || "").trim();
   const amount = Number(body.amount);
   const status = ["paid", "refunded", "cancelled"].includes(body.status) ? body.status : "paid";
   const billingPeriod = String(body.billingPeriod || "").trim();
 
   if (!referralCode) return json(400, { error: "referralCode is required." });
+  if (!externalRef) return json(400, { error: "externalRef is required (a stable id for the referred customer, used for tier tracking)." });
   if (!Number.isFinite(amount) || amount < 0) return json(400, { error: "amount must be a non-negative number." });
   if (!billingPeriod) return json(400, { error: "billingPeriod is required (e.g. 2026-08-01)." });
 
@@ -59,12 +66,9 @@ exports.handler = async function (event) {
   const link = links && links[0];
   if (!link) return json(404, { error: "Unknown referral code." });
 
-  const products = await rest(`aff_products?id=eq.${link.product_id}&select=commission_pct`);
-  const product = products && products[0];
-  if (!product) return json(404, { error: "Referral code's product no longer exists." });
-
-  const commissionAmount = Math.round(amount * (Number(product.commission_pct) / 100) * 100) / 100;
-
+  // Insert first, then derive the tier from ground truth (including this
+  // row) rather than trying to diff the count in memory — simpler and
+  // avoids subtle double-count/timing bugs for what is a low-volume webhook.
   const [inserted] = await rest("aff_conversions", {
     method: "POST",
     headers: { Prefer: "return=representation" },
@@ -72,11 +76,20 @@ exports.handler = async function (event) {
       aff_link_id: link.id,
       external_ref: externalRef,
       amount,
-      commission_amount: commissionAmount,
+      commission_amount: 0,
       status,
       billing_period: billingPeriod,
     }),
   });
 
-  return json(201, { conversion: inserted, commissionAmount });
+  const tier = await getAffiliateTierRate(link.affiliate_id);
+  const commissionAmount = Math.round(amount * (tier.commissionPct / 100) * 100) / 100;
+
+  const [updated] = await rest(`aff_conversions?id=eq.${inserted.id}`, {
+    method: "PATCH",
+    headers: { Prefer: "return=representation" },
+    body: JSON.stringify({ commission_amount: commissionAmount }),
+  });
+
+  return json(201, { conversion: updated, commissionAmount, tier });
 };

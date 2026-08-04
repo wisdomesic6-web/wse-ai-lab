@@ -744,6 +744,26 @@
   }
 
   function renderAffDashboard(data) {
+    var tier = data.tier || {};
+    var tierEl = document.getElementById('affTierCard');
+    if (tierEl) {
+      var progressHtml = '';
+      if (tier.nextThreshold) {
+        var remaining = Math.max(0, tier.nextThreshold - (tier.activeCustomers || 0));
+        progressHtml = '<p style="color:var(--muted);font-size:var(--fs-support);margin-top:6px">' +
+          remaining + ' more active paying referral' + (remaining === 1 ? '' : 's') +
+          ' to reach ' + tier.nextCommissionPct + '% commission.</p>';
+      } else {
+        progressHtml = '<p style="color:var(--muted);font-size:var(--fs-support);margin-top:6px">You are at the top tier.</p>';
+      }
+      tierEl.innerHTML =
+        '<div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">' +
+        '<div><span class="eyebrow">Your Tier</span>' +
+        '<h3 class="h-sm" style="margin-top:4px">' + (tier.commissionPct || 0) + '% commission &middot; ' +
+        (tier.activeCustomers || 0) + ' active paying referral' + ((tier.activeCustomers || 0) === 1 ? '' : 's') + '</h3>' +
+        progressHtml +
+        '</div></div>';
+    }
     var totals = data.totals || {};
     var totalsEl = document.getElementById('affTotals');
     if (totalsEl) {
@@ -765,7 +785,10 @@
           '<div class="stats-2x2" style="margin-top:16px">' +
           '<div class="cell"><b>' + p.clicks + '</b><span>Clicks</span></div>' +
           '<div class="cell"><b>' + p.conversions + '</b><span>Conversions</span></div>' +
-          '</div></article>';
+          '</div>' +
+          (p.guide ? '<details style="margin-top:14px"><summary style="cursor:pointer;font-size:var(--fs-support);color:var(--accent2);font-weight:600">Product guide</summary>' +
+            '<div style="margin-top:8px;color:var(--muted);font-size:var(--fs-support);white-space:pre-line">' + escHtml(p.guide) + '</div></details>' : '') +
+          '</article>';
       }).join('') : '<p style="color:var(--muted)">You have not picked a product yet — click "Add a product" above to get your first link.</p>';
       list.querySelectorAll('[data-copy-btn]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -802,6 +825,8 @@
           'data-ph="product" data-ph-icon="' + escHtml(p.slug) + '" data-ph-label="' + escHtml(productInitials(p.name)) + '" data-ph-cap="' + escHtml(p.name) + '">' +
           '<h3 class="h-sm">' + escHtml(p.name) + '</h3>' +
           '<p style="color:var(--muted);font-size:var(--fs-support);margin-top:6px">' + escHtml(p.description) + '</p>' +
+          (p.guide ? '<details style="margin-top:10px"><summary style="cursor:pointer;font-size:var(--fs-support);color:var(--accent2);font-weight:600">Read the product guide</summary>' +
+            '<div style="margin-top:8px;color:var(--muted);font-size:var(--fs-support);white-space:pre-line">' + escHtml(p.guide) + '</div></details>' : '') +
           '<button class="btn btn-primary" style="margin-top:14px" data-pick-slug="' + escHtml(p.slug) + '">Get My Link</button>' +
           '</article>';
       }).join('');

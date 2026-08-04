@@ -34,7 +34,7 @@ exports.handler = async function (event) {
   // actually edits.
   const productToDb = (r) => ({
     slug: r.slug, name: r.name, logo_url: r.logo_url || null, description: r.description,
-    commission_pct: r.commission_pct, product_url: r.product_url, status: r.status,
+    guide: r.guide || null, product_url: r.product_url, status: r.status,
   });
   const payoutToDb = (r) => ({
     affiliate_id: r.affiliate_id, amount: r.amount, period_covered: r.period_covered,

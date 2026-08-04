@@ -11,7 +11,7 @@
    Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_ANON_KEY
    ═══════════════════════════════════════════════════════════ */
 
-const { rest, requireAffiliate, json } = require("../../lib/affiliate-auth");
+const { rest, requireAffiliate, getAffiliateTierRate, json } = require("../../lib/affiliate-auth");
 
 exports.handler = async function (event) {
   if (event.httpMethod !== "GET") return json(405, { error: "Method not allowed" });
@@ -20,7 +20,7 @@ exports.handler = async function (event) {
   if (!affiliate) return json(401, { error: "Not signed in." });
 
   const links = await rest(
-    `aff_links?affiliate_id=eq.${affiliate.id}&select=id,referral_code,clicks,created_at,aff_products(slug,name,logo_url,description)`
+    `aff_links?affiliate_id=eq.${affiliate.id}&select=id,referral_code,clicks,created_at,aff_products(slug,name,logo_url,description,guide)`
   );
 
   let conversions = [];
@@ -30,6 +30,7 @@ exports.handler = async function (event) {
   }
 
   const payouts = await rest(`aff_payouts?affiliate_id=eq.${affiliate.id}&select=*&order=created_at.desc`);
+  const tier = await getAffiliateTierRate(affiliate.id);
 
   const products = links.map((l) => {
     const paidConversions = conversions.filter((c) => c.aff_link_id === l.id && c.status === "paid");
@@ -38,6 +39,7 @@ exports.handler = async function (event) {
       name: l.aff_products.name,
       logoUrl: l.aff_products.logo_url,
       description: l.aff_products.description,
+      guide: l.aff_products.guide,
       referralCode: l.referral_code,
       referralLink: `https://wseailab.com/r/${l.referral_code}`,
       clicks: l.clicks,
@@ -54,5 +56,11 @@ exports.handler = async function (event) {
     products,
     totals: { totalEarned, totalPaidOut, pendingCommission },
     payouts: payouts.map((p) => ({ amount: p.amount, periodCovered: p.period_covered, status: p.status, paidAt: p.paid_at })),
+    tier: {
+      activeCustomers: tier.activeCount,
+      commissionPct: tier.commissionPct,
+      nextThreshold: tier.nextThreshold,
+      nextCommissionPct: tier.nextCommissionPct,
+    },
   });
 };

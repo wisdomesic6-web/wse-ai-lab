@@ -171,6 +171,44 @@ async function checkRateLimit(key, maxAttempts) {
   return { limited: false };
 }
 
+// Performance tiers: an affiliate's commission rate is based on their
+// CURRENT count of active (status='paid', latest billing_period) distinct
+// referred customers, combined across every product they promote — not a
+// lifetime total, so the rate moves up or down as that count changes.
+// "Distinct customer" = one (aff_link_id, external_ref) pair; this is why
+// affiliate-conversion.js requires externalRef rather than treating it as
+// optional metadata.
+async function getAffiliateTierRate(affiliateId) {
+  const rows = await rest(
+    `aff_conversions?select=aff_link_id,external_ref,billing_period,status,aff_links!inner(affiliate_id)` +
+      `&aff_links.affiliate_id=eq.${affiliateId}&order=billing_period.desc`
+  );
+
+  const latestStatusByCustomer = new Map();
+  for (const row of rows || []) {
+    const key = `${row.aff_link_id}|${row.external_ref}`;
+    if (!latestStatusByCustomer.has(key)) latestStatusByCustomer.set(key, row.status);
+  }
+  const activeCount = [...latestStatusByCustomer.values()].filter((status) => status === "paid").length;
+
+  const tiers = await rest("aff_tiers?select=*&order=min_conversions.asc");
+  if (!tiers || !tiers.length) throw new Error("No commission tiers configured");
+
+  const matched =
+    tiers.find((t) => activeCount >= t.min_conversions && (t.max_conversions === null || activeCount <= t.max_conversions)) ||
+    tiers[0];
+  const nextTier = tiers[tiers.indexOf(matched) + 1] || null;
+
+  return {
+    activeCount,
+    commissionPct: Number(matched.commission_pct),
+    tierMin: matched.min_conversions,
+    tierMax: matched.max_conversions,
+    nextThreshold: nextTier ? nextTier.min_conversions : null,
+    nextCommissionPct: nextTier ? Number(nextTier.commission_pct) : null,
+  };
+}
+
 function json(statusCode, body, extraHeaders = {}) {
   return {
     statusCode,
@@ -189,6 +227,7 @@ module.exports = {
   requireAffiliate,
   clientIp,
   checkRateLimit,
+  getAffiliateTierRate,
   json,
   SESSION_COOKIE,
 };

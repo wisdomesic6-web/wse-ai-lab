@@ -4599,6 +4599,14 @@ html[data-density="compact"] { font-size: 14.5px; }
           Add Product
         </button>
       </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:18px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="font-size:12.5px;color:var(--text2);font-weight:600;">Commission is tier-based (not per-product) — active paying referrals, combined across all products:</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;">
+          <span style="font-size:13px;color:var(--text);"><b>1–50</b> → 10%</span>
+          <span style="font-size:13px;color:var(--text);"><b>51–100</b> → 15%</span>
+          <span style="font-size:13px;color:var(--text);"><b>101+</b> → 20%</span>
+        </div>
+      </div>
       <div id="affProductsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;"></div>
     </div>
 
@@ -4646,18 +4654,16 @@ html[data-density="compact"] { font-size: 14.5px; }
         <label>Description</label>
         <textarea rows="2" id="afpDesc"></textarea>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="form-field">
-          <label>Commission %</label>
-          <input type="number" step="0.1" min="0" max="100" value="10" id="afpCommission">
-        </div>
-        <div class="form-field">
-          <label>Status</label>
-          <select id="afpStatus">
-            <option value="live">Live</option>
-            <option value="building">Building</option>
-          </select>
-        </div>
+      <div class="form-field">
+        <label>Affiliate Guide (what it does, who it's for, benefits — shown to affiliates when picking/promoting this product)</label>
+        <textarea rows="8" id="afpGuide" placeholder="What is it? Who is it for? What does it do for the customer?"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Status</label>
+        <select id="afpStatus">
+          <option value="live">Live</option>
+          <option value="building">Building</option>
+        </select>
       </div>
       <div class="form-field">
         <label>Product URL</label>
@@ -9953,7 +9959,6 @@ function renderAffProducts() {
         <span class="badge-pill ${p.status === 'live' ? 'green' : 'amber'}">${p.status === 'live' ? 'Live' : 'Building'}</span>
       </div>
       <div style="font-size:12.5px;color:var(--text2);line-height:1.5;">${escHtml(p.description)}</div>
-      <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-top:4px;">${p.commission_pct}% commission</div>
     </div>
   `).join('');
 }
@@ -9965,7 +9970,7 @@ function openNewAffProduct() {
   document.getElementById('afpSlug').value = '';
   document.getElementById('afpLogo').value = '';
   document.getElementById('afpDesc').value = '';
-  document.getElementById('afpCommission').value = '10';
+  document.getElementById('afpGuide').value = '';
   document.getElementById('afpStatus').value = 'live';
   document.getElementById('afpUrl').value = '';
   document.getElementById('affProductModalOverlay').style.display = 'block';
@@ -9981,7 +9986,7 @@ function openEditAffProduct(id) {
   document.getElementById('afpSlug').value = p.slug || '';
   document.getElementById('afpLogo').value = p.logo_url || '';
   document.getElementById('afpDesc').value = p.description || '';
-  document.getElementById('afpCommission').value = p.commission_pct;
+  document.getElementById('afpGuide').value = p.guide || '';
   document.getElementById('afpStatus').value = p.status;
   document.getElementById('afpUrl').value = p.product_url || '';
   document.getElementById('affProductModalOverlay').style.display = 'block';
@@ -10000,7 +10005,7 @@ async function saveAffProduct() {
     name, slug,
     logo_url: document.getElementById('afpLogo').value.trim(),
     description: document.getElementById('afpDesc').value.trim(),
-    commission_pct: Number(document.getElementById('afpCommission').value) || 0,
+    guide: document.getElementById('afpGuide').value.trim(),
     status: document.getElementById('afpStatus').value,
     product_url: document.getElementById('afpUrl').value.trim(),
   };
