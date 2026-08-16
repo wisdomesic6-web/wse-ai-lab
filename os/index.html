@@ -2672,6 +2672,10 @@ html[data-density="compact"] { font-size: 14.5px; }
 
   <div class="nav-group" style="border-bottom:none;">
     <div class="nav-section-label">System</div>
+    <div class="nav-item" data-page="agents" onclick="showPage('agents')">
+      <div class="nav-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="12" cy="6" r="1" fill="currentColor"/><path d="M8 13l-3 3M16 13l3 3"/></svg></div>
+      Agents
+    </div>
     <div class="nav-item" data-page="ai-engine" onclick="showPage('ai-engine')">
       <div class="nav-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 20v2M12 2v2"/></svg></div>
       AI Engine
@@ -4872,6 +4876,52 @@ html[data-density="compact"] { font-size: 14.5px; }
 </div>
 </div>
 
+<!-- ═══ Agents Module ═══ -->
+<div class="view" id="view-agents">
+<div class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" onclick="openSidebar()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="page-h" id="pageTitle">Agents</div>
+    </div>
+    <div class="topbar-right">
+      <div class="tb-av">SA</div>
+    </div>
+  </header>
+  <div class="content">
+
+    <!-- Agent status cards -->
+    <div id="agentCards" class="metrics-row" style="margin-bottom:28px;flex-wrap:wrap;gap:16px;"></div>
+
+    <!-- Expense widget + Telegram status -->
+    <div style="display:flex;gap:20px;margin-bottom:28px;flex-wrap:wrap;">
+      <div class="metric-card" style="flex:1;min-width:260px;border-color:rgba(255,171,0,0.3);">
+        <div class="mc-label">MTD Expenses</div>
+        <div class="mc-val" id="agExpTotal" style="font-size:20px;">--</div>
+        <div id="agExpBreakdown" class="mc-sub" style="white-space:pre-line;"></div>
+      </div>
+      <div class="metric-card" style="flex:0 0 200px;border-color:rgba(74,106,255,0.3);">
+        <div class="mc-label">Telegram Bot</div>
+        <div class="mc-val" style="font-size:15px;color:var(--accent2)">@wse_os_bot</div>
+        <div class="mc-sub" id="agTgStatus" style="color:var(--green)"></div>
+      </div>
+    </div>
+
+    <!-- Activity feed -->
+    <div class="card" style="padding:0;">
+      <div style="padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-weight:600;font-size:14px;">Activity Feed</div>
+        <button class="btn-ghost-sm" onclick="loadAgents()">Refresh</button>
+      </div>
+      <div id="agActivityFeed" style="max-height:400px;overflow-y:auto;"></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
 <div class="view" id="view-settings" data-built="true">
 <div class="main">
   <header class="topbar">
@@ -5296,6 +5346,7 @@ const PAGE_TITLES = {
   recon:      'Reconciliation',
   inventory:  'Inventory',
   affiliates: 'Affiliates',
+  agents:     'Agents',
   'ai-engine':'AI Engine',
   settings:   'Settings',
 };
@@ -10130,6 +10181,117 @@ window.showPage = function(id) {
   if (id === 'businesses' && !window._bizInit) { renderBusinesses();  window._bizInit = true; }
   if (id === 'workflows' && !window._wfInit)   { renderWorkflows();   window._wfInit = true; }
   if (id === 'ai-engine' && !window._aiInit)   { renderAITemplates(); if (typeof loadAIStats === 'function') loadAIStats(); else setTimeout(buildAIUsageChart, 100); window._aiInit = true; }
+  if (id === 'agents'    && !window._agInit)   { loadAgents(); window._agInit = true; }
 };
 
+</script>
+
+<script>
+/* ═══ Agents Module ═══ */
+const _agEsc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadAgents() {
+  const esc = _agEsc;
+  const safeAttr = _agEsc;
+  const cards = document.getElementById('agentCards');
+  const feed = document.getElementById('agActivityFeed');
+  const expTotal = document.getElementById('agExpTotal');
+  const expBreak = document.getElementById('agExpBreakdown');
+  const tgStatus = document.getElementById('agTgStatus');
+
+  cards.innerHTML = '<div style="padding:16px;color:var(--muted);">Loading agents...</div>';
+  feed.innerHTML = '<div style="padding:16px;color:var(--muted);">Loading...</div>';
+
+  try {
+    const res = await fetch('/api/agents');
+    if (!res.ok) throw new Error('Failed to load agent data');
+    const data = await res.json();
+
+    const logsByAgent = {};
+    (data.logs || []).forEach(l => {
+      const k = l.agent_name || '';
+      if (!logsByAgent[k]) logsByAgent[k] = l;
+    });
+
+    const statusColor = (s) => s === 'success' ? 'var(--green)' : s === 'error' ? 'var(--red)' : 'var(--amber)';
+    const ago = (ts) => {
+      if (!ts) return 'Never';
+      const d = Math.floor((Date.now() - new Date(ts).getTime()) / 60000);
+      if (d < 1) return 'Just now';
+      if (d < 60) return d + 'm ago';
+      if (d < 1440) return Math.floor(d / 60) + 'h ago';
+      return Math.floor(d / 1440) + 'd ago';
+    };
+
+    cards.innerHTML = data.agents.map(a => {
+      const log = logsByAgent[a.name] || {};
+      const st = log.status || 'unknown';
+      const badge = st === 'success' ? 'Active' : st === 'error' ? 'Error' : 'Waiting';
+      const col = statusColor(st);
+      const runBtn = a.webhookPath
+        ? '<button class="btn-ghost-sm" onclick="runAgent(\'' + safeAttr(a.webhookPath) + '\')" style="margin-top:8px;font-size:11px;">Run Now</button>'
+        : '';
+      return '<div class="metric-card" style="flex:1;min-width:220px;border-color:' + col.replace(')', ',0.3)').replace('var(', 'rgba(').replace('--green', '76,175,80').replace('--red', '244,67,54').replace('--amber', '255,171,0') + ';">'
+        + '<div class="mc-label">' + esc(a.name) + '</div>'
+        + '<div class="mc-sub" style="color:' + col + ';">' + badge + '</div>'
+        + '<div class="mc-sub">Last: ' + ago(log.run_at) + '</div>'
+        + '<div class="mc-sub" style="font-size:11px;color:var(--muted);">' + esc(a.schedule) + '</div>'
+        + runBtn
+        + '</div>';
+    }).join('');
+
+    const rows = (data.logs || []).slice(0, 20);
+    if (rows.length === 0) {
+      feed.innerHTML = '<div style="padding:16px;color:var(--muted);">No activity yet.</div>';
+    } else {
+      feed.innerHTML = '<table style="width:100%;font-size:13px;"><thead><tr>'
+        + '<th style="text-align:left;padding:8px 16px;color:var(--muted);font-weight:500;">Agent</th>'
+        + '<th style="text-align:left;padding:8px 16px;color:var(--muted);font-weight:500;">Status</th>'
+        + '<th style="text-align:left;padding:8px 16px;color:var(--muted);font-weight:500;">Time</th>'
+        + '<th style="text-align:left;padding:8px 16px;color:var(--muted);font-weight:500;">Output</th>'
+        + '</tr></thead><tbody>'
+        + rows.map(l => {
+          const outStr = typeof l.output === 'object' && l.output ? JSON.stringify(l.output).substring(0, 60) : String(l.output || '').substring(0, 60);
+          return '<tr style="border-top:1px solid var(--border);">'
+            + '<td style="padding:8px 16px;">' + esc(l.agent_name || '?') + '</td>'
+            + '<td style="padding:8px 16px;color:' + statusColor(l.status) + ';">' + esc(l.status || '?') + '</td>'
+            + '<td style="padding:8px 16px;color:var(--muted);">' + ago(l.run_at) + '</td>'
+            + '<td style="padding:8px 16px;color:var(--muted);font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(outStr) + '</td>'
+            + '</tr>';
+        }).join('')
+        + '</tbody></table>';
+    }
+
+    const expenses = data.expenses || [];
+    const total = expenses.reduce((s, e) => s + parseFloat(e.amount_ngn || 0), 0);
+    expTotal.textContent = '₦' + total.toLocaleString('en-NG');
+    const byCat = {};
+    expenses.forEach(e => { const c = e.category || 'Other'; byCat[c] = (byCat[c] || 0) + parseFloat(e.amount_ngn || 0); });
+    expBreak.textContent = Object.entries(byCat).sort((a, b) => b[1] - a[1]).map(([c, a]) => c + ': ₦' + a.toLocaleString('en-NG')).join('\n');
+
+    const tgAgent = data.agents.find(a => a.name === 'Telegram Bot');
+    const tgLog = tgAgent ? logsByAgent[tgAgent.name] : null;
+    tgStatus.innerHTML = tgLog && tgLog.status === 'success'
+      ? '<span style="color:var(--green);">● Connected</span> — ' + ago(tgLog.run_at)
+      : '<span style="color:var(--green);">● Polling active</span>';
+
+  } catch (err) {
+    cards.innerHTML = '<div style="padding:16px;color:var(--red);">Failed to load: ' + esc(err.message) + '</div>';
+    feed.innerHTML = '';
+  }
+}
+
+async function runAgent(webhookPath) {
+  try {
+    const res = await fetch(webhookPath, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    if (res.ok) {
+      alert('Agent triggered successfully.');
+      setTimeout(loadAgents, 3000);
+    } else {
+      alert('Trigger failed: ' + res.status);
+    }
+  } catch (e) {
+    alert('Error: ' + e.message);
+  }
+}
 </script>

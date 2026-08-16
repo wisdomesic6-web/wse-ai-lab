@@ -14,3 +14,9 @@ node_modules/
 
 # Local Claude Code skills (installed tooling, not site source)
 .claude/skills/
+
+# Agent build tooling (installed reference, not site source)
+n8n-skills/
+
+# MCP config (contains local API keys)
+.mcp.json
