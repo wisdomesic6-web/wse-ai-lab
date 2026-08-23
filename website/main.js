@@ -227,6 +227,295 @@
     'wse-autoreply': '<path d="M20 13a2 2 0 01-2 2H8l-3 3V6a2 2 0 012-2h11a2 2 0 012 2z"/><circle cx="9" cy="9" r=".9"/><circle cx="13" cy="9" r=".9"/><circle cx="17" cy="9" r=".9"/>',
     'whatsapp-autoreply': '<path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M9 7h6M9 10.5h4M9 14h6"/>'
   };
+
+  var G = '#A8882E', GB = '#C9A84C', S = '#F0ECE3', W = '#fff', T = '#1C1A14', TS = '#5C564A', B = '#FAF7F0';
+  function sv(inner) { return '<svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><defs><style>@keyframes kPulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes kBlink{0%,100%{opacity:0}50%{opacity:1}}@keyframes kGrow{0%,100%{transform:scaleY(.7)}50%{transform:scaleY(1)}}@keyframes kSlide{0%,100%{opacity:.3;transform:translateX(-4px)}50%{opacity:.7;transform:translateX(4px)}}@keyframes kType{0%{width:0}50%{width:80px}100%{width:0}}.ap{animation:kPulse 2.4s ease-in-out infinite}.ab{animation:kBlink 1.2s ease-in-out infinite}.ag{animation:kGrow 2.8s ease-in-out infinite;transform-origin:center bottom}.as{animation:kSlide 3s ease-in-out infinite}</style></defs>' + inner + '</svg>'; }
+  function bar(x, h, w, c) { return '<rect x="' + x + '" y="' + (185 - h) + '" width="' + (w || 28) + '" height="' + h + '" rx="4" fill="' + (c || G) + '" opacity=".6"/>'; }
+  function ln(x, y, w, c, o) { return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="6" rx="3" fill="' + (c || TS) + '" opacity="' + (o || .3) + '"/>'; }
+  function dot(x, y, r, c) { return '<circle cx="' + x + '" cy="' + y + '" r="' + (r || 4) + '" fill="' + (c || G) + '"/>'; }
+
+  var PRODUCT_PREVIEW_SVGS = {
+    'memora-os': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect width="68" height="225" fill="' + S + '"/>' +
+      '<circle cx="34" cy="28" r="14" fill="' + G + '" opacity=".14"/>' +
+      '<text x="34" y="33" text-anchor="middle" font-size="13" font-weight="800" fill="' + G + '">M</text>' +
+      ln(14, 58, 40, G, .1) + ln(14, 74, 40, G, .07) + ln(14, 90, 40, G, .07) +
+      '<rect x="68" y="0" width="332" height="38" fill="' + W + '"/>' +
+      ln(84, 14, 90, G, .12) +
+      '<rect x="90" y="56" width="170" height="34" rx="12" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      ln(104, 66, 110, TS, .4) + ln(104, 78, 70, TS, .25) +
+      '<rect x="230" y="106" width="130" height="28" rx="12" fill="' + G + '"/>' +
+      ln(244, 116, 80, W, .8) +
+      '<rect x="90" y="150" width="190" height="40" rx="12" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      ln(104, 160, 130, TS, .4) + ln(104, 172, 90, TS, .25) + ln(104, 184, 50, G, .3) +
+      '<rect x="84" y="205" width="250" height="1" fill="' + G + '" opacity=".1"/>' +
+      '<rect class="ab" x="100" y="194" width="2" height="12" rx="1" fill="' + G + '"/>'
+    ),
+
+    'wse-datapilot': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="110" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      ln(28, 24, 50, TS, .2) +
+      '<text x="28" y="48" font-size="18" font-weight="800" fill="' + T + '">₦2.4M</text>' +
+      '<rect x="142" y="12" width="110" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      ln(154, 24, 40, TS, .2) +
+      '<text x="154" y="48" font-size="18" font-weight="800" fill="' + G + '">+34%</text>' +
+      '<rect x="268" y="12" width="116" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      ln(280, 24, 60, TS, .2) +
+      '<text x="280" y="48" font-size="18" font-weight="800" fill="' + T + '">1,247</text>' +
+      '<rect x="16" y="76" width="240" height="138" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      ln(28, 86, 60, TS, .25) +
+      '<rect class="ag" x="32" y="125" width="22" height="60" rx="4" fill="' + G + '" opacity=".6"/>' +
+      '<rect class="ag" x="62" y="95" width="22" height="90" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.15s"/>' +
+      '<rect class="ag" x="92" y="140" width="22" height="45" rx="4" fill="' + S + '" opacity=".6" style="animation-delay:.3s"/>' +
+      '<rect class="ag" x="122" y="110" width="22" height="75" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.45s"/>' +
+      '<rect class="ag" x="152" y="75" width="22" height="110" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.6s"/>' +
+      '<rect class="ag" x="182" y="130" width="22" height="55" rx="4" fill="' + S + '" opacity=".6" style="animation-delay:.75s"/>' +
+      '<rect class="ag" x="212" y="100" width="22" height="85" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.9s"/>' +
+      '<rect x="272" y="76" width="112" height="138" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      dot(328, 115, 28, G) + '<text x="328" y="120" text-anchor="middle" font-size="14" font-weight="800" fill="' + W + '">67%</text>' +
+      ln(284, 160, 88, TS, .15) + ln(284, 176, 70, TS, .10) + ln(284, 192, 80, G, .2)
+    ),
+
+    'wse-audit-system': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="368" height="38" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<path d="M36 24l5 4-1-1 3-5" fill="none" stroke="' + G + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<circle cx="34" cy="31" r="10" fill="none" stroke="' + G + '" stroke-width="1.5" opacity=".3"/>' +
+      ln(52, 24, 80, T, .5) + ln(52, 36, 50, TS, .2) +
+      '<text x="340" y="35" text-anchor="end" font-size="12" font-weight="700" fill="#15803D">COMPLIANT</text>' +
+      '<rect x="16" y="62" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="28" y="72" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 79l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
+      ln(52, 76, 160, T, .35) + '<text x="360" y="82" text-anchor="end" font-size="11" fill="#15803D">Pass</text>' +
+      '<rect x="16" y="100" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="28" y="110" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 117l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
+      ln(52, 114, 180, T, .35) + '<text x="360" y="120" text-anchor="end" font-size="11" fill="#15803D">Pass</text>' +
+      '<rect x="16" y="138" width="368" height="32" rx="8" fill="' + W + '" stroke="#D97706" stroke-opacity=".3"/>' +
+      '<rect x="28" y="148" width="14" height="14" rx="3" fill="#D97706" opacity=".15"/>' +
+      ln(52, 152, 140, T, .35) + '<text x="360" y="158" text-anchor="end" font-size="11" fill="#D97706">Review</text>' +
+      '<rect x="16" y="176" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="28" y="186" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 193l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
+      ln(52, 190, 120, T, .35) + '<text x="360" y="196" text-anchor="end" font-size="11" fill="#15803D">Pass</text>'
+    ),
+
+    'wse-soundhub': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="368" height="60" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<rect x="28" y="22" width="40" height="40" rx="8" fill="' + G + '" opacity=".12"/>' +
+      '<path d="M40 36l10 6-10 6z" fill="' + G + '"/>' +
+      ln(80, 28, 100, T, .4) + ln(80, 40, 60, TS, .2) +
+      '<rect x="80" y="52" width="120" height="6" rx="3" fill="' + S + '"/><rect x="80" y="52" width="45" height="6" rx="3" fill="' + G + '"/>' +
+      '<text x="360" y="46" text-anchor="end" font-size="12" font-weight="700" fill="' + G + '">₦45,000</text>' +
+      '<rect x="16" y="84" width="116" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="24" y="92" width="100" height="64" rx="6" fill="' + S + '"/>' +
+      '<circle cx="74" cy="124" r="16" fill="' + G + '" opacity=".15"/><path d="M68 118l14 6-14 6z" fill="' + G + '"/>' +
+      ln(24, 168, 80, T, .35) + ln(24, 182, 50, TS, .2) +
+      '<text x="24" y="204" font-size="12" font-weight="700" fill="' + G + '">₦85,000</text>' +
+      '<rect x="144" y="84" width="116" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="152" y="92" width="100" height="64" rx="6" fill="' + S + '"/>' +
+      ln(152, 168, 70, T, .35) + ln(152, 182, 50, TS, .2) +
+      '<text x="152" y="204" font-size="12" font-weight="700" fill="' + G + '">₦120,000</text>' +
+      '<rect x="272" y="84" width="112" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
+      '<rect x="280" y="92" width="96" height="64" rx="6" fill="' + S + '"/>' +
+      ln(280, 168, 60, T, .35) + ln(280, 182, 40, TS, .2) +
+      '<text x="280" y="204" font-size="12" font-weight="700" fill="' + G + '">₦65,000</text>'
+    ),
+
+    'solwise-realty-ai': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="180" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<rect x="24" y="20" width="164" height="90" rx="6" fill="' + S + '"/>' +
+      '<path d="M80 50l26-18 26 18v28H80z" fill="' + G + '" opacity=".2"/><path d="M80 50l26-18 26 18" fill="none" stroke="' + G + '" stroke-width="2"/>' +
+      ln(24, 122, 120, T, .4) + ln(24, 136, 80, TS, .2) +
+      '<text x="24" y="162" font-size="16" font-weight="800" fill="' + T + '">₦35M</text>' +
+      ln(24, 172, 60, TS, .15) +
+      '<rect x="24" y="186" width="72" height="20" rx="6" fill="' + G + '"/><text x="60" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="' + W + '">Enquire</text>' +
+      '<rect x="210" y="12" width="174" height="100" rx="10" fill="#25D366" opacity=".08" stroke="#25D366" stroke-opacity=".2"/>' +
+      '<circle cx="234" cy="32" r="12" fill="#25D366" opacity=".2"/><text x="234" y="37" text-anchor="middle" font-size="12" font-weight="800" fill="#25D366">W</text>' +
+      ln(254, 28, 60, '#25D366', .3) +
+      '<rect x="222" y="52" width="140" height="22" rx="8" fill="' + W + '" stroke="#25D366" stroke-opacity=".15"/>' +
+      ln(230, 60, 80, TS, .3) +
+      '<rect x="260" y="82" width="110" height="22" rx="8" fill="#25D366" opacity=".12"/>' +
+      ln(268, 90, 70, '#25D366', .4) +
+      '<rect x="210" y="124" width="174" height="88" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      ln(222, 136, 80, T, .35) +
+      '<text x="222" y="162" font-size="12" font-weight="700" fill="' + G + '">12 Active Leads</text>' +
+      '<rect x="222" y="176" width="148" height="8" rx="4" fill="' + S + '"/><rect x="222" y="176" width="100" height="8" rx="4" fill="' + G + '" opacity=".3"/>' +
+      ln(222, 196, 60, TS, .15)
+    ),
+
+    'smartsales': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="110" y="4" width="180" height="217" rx="20" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      '<rect x="118" y="18" width="164" height="24" rx="0" fill="' + G + '" opacity=".06"/>' +
+      '<text x="200" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="' + G + '">SmartSales</text>' +
+      ln(128, 56, 100, T, .25) +
+      '<text x="128" y="80" font-size="24" font-weight="800" fill="' + T + '">₦847K</text>' +
+      '<text x="230" y="80" font-size="11" font-weight="600" fill="#15803D">+12% today</text>' +
+      '<rect x="128" y="96" width="144" height="1" fill="' + G + '" opacity=".1"/>' +
+      '<rect x="128" y="108" width="144" height="28" rx="6" fill="' + S + '"/>' +
+      ln(136, 114, 60, T, .3) + '<text x="256" y="126" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦15,000</text>' +
+      '<rect x="128" y="142" width="144" height="28" rx="6" fill="' + S + '"/>' +
+      ln(136, 148, 70, T, .3) + '<text x="256" y="160" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦8,500</text>' +
+      '<rect x="128" y="176" width="144" height="28" rx="6" fill="' + S + '"/>' +
+      ln(136, 182, 50, T, .3) + '<text x="256" y="194" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦22,000</text>'
+    ),
+
+    'wse-academy': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="368" height="36" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="32" y="35" font-size="13" font-weight="700" fill="' + T + '">Classes</text>' +
+      '<text x="110" y="35" font-size="13" font-weight="600" fill="' + G + '">Students</text>' +
+      '<text x="200" y="35" font-size="13" font-weight="600" fill="' + TS + '" opacity=".5">Fees</text>' +
+      '<rect x="16" y="58" width="180" height="76" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="28" y="78" font-size="12" font-weight="700" fill="' + T + '">JSS 1A</text>' +
+      '<text x="28" y="96" font-size="11" fill="' + TS + '">42 students</text>' +
+      ln(28, 108, 80, G, .15) + '<rect x="28" y="118" width="40" height="8" rx="4" fill="#15803D" opacity=".15"/><text x="34" y="125" font-size="8" font-weight="700" fill="#15803D">Active</text>' +
+      '<rect x="204" y="58" width="180" height="76" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="216" y="78" font-size="12" font-weight="700" fill="' + T + '">JSS 2B</text>' +
+      '<text x="216" y="96" font-size="11" fill="' + TS + '">38 students</text>' +
+      ln(216, 108, 70, G, .15) + '<rect x="216" y="118" width="40" height="8" rx="4" fill="#15803D" opacity=".15"/><text x="222" y="125" font-size="8" font-weight="700" fill="#15803D">Active</text>' +
+      '<rect x="16" y="144" width="180" height="68" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="28" y="164" font-size="12" font-weight="700" fill="' + T + '">SS 1</text>' +
+      '<text x="28" y="182" font-size="11" fill="' + TS + '">35 students</text>' +
+      '<rect x="204" y="144" width="180" height="68" rx="10" fill="' + G + '" opacity=".06" stroke="' + G + '" stroke-opacity=".12"/>' +
+      '<text x="294" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="' + G + '">+ Add Class</text>'
+    ),
+
+    'wizzy-ai': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="60" y="10" width="280" height="205" rx="14" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
+      '<rect x="60" y="10" width="280" height="40" rx="14" fill="' + G + '" opacity=".06"/>' +
+      '<rect x="60" y="46" width="280" height="4" rx="0" fill="' + G + '" opacity=".06"/>' +
+      '<circle cx="86" cy="30" r="12" fill="' + G + '" opacity=".15"/><text x="86" y="35" text-anchor="middle" font-size="13" font-weight="800" fill="' + G + '">W</text>' +
+      '<text x="106" y="28" font-size="12" font-weight="700" fill="' + T + '">Wizzy</text>' +
+      '<circle class="ap" cx="106" cy="38" r="3" fill="#15803D"/>' + '<text x="114" y="42" font-size="9" fill="#15803D">Online</text>' +
+      '<rect x="80" y="62" width="160" height="30" rx="10" fill="' + S + '"/>' +
+      ln(90, 72, 110, TS, .35) + ln(90, 82, 70, TS, .2) +
+      '<rect x="200" y="104" width="120" height="24" rx="10" fill="' + G + '"/>' +
+      ln(212, 113, 70, W, .8) +
+      '<rect x="80" y="140" width="180" height="36" rx="10" fill="' + S + '"/>' +
+      ln(90, 150, 130, TS, .35) + ln(90, 162, 80, TS, .2) +
+      '<rect x="74" y="190" width="210" height="2" fill="' + G + '" opacity=".08"/>'
+    ),
+
+    'wse-trading-bot': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="12" y="8" width="376" height="30" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="24" y="28" font-size="12" font-weight="700" fill="' + T + '">EUR/USD</text>' +
+      '<text x="110" y="28" font-size="12" font-weight="800" fill="#15803D">1.0847</text>' +
+      '<text x="180" y="28" font-size="10" font-weight="600" fill="#15803D">+0.23%</text>' +
+      '<rect x="300" y="14" width="36" height="18" rx="4" fill="#15803D" opacity=".12"/><text x="318" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#15803D">BUY</text>' +
+      '<rect x="340" y="14" width="36" height="18" rx="4" fill="#dc2626" opacity=".12"/><text x="358" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">SELL</text>' +
+      '<line x1="40" y1="60" x2="40" y2="140" stroke="' + G + '" stroke-width="1.5"/><rect x="32" y="80" width="16" height="40" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="80" y1="50" x2="80" y2="150" stroke="' + G + '" stroke-width="1.5"/><rect x="72" y="60" width="16" height="60" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="120" y1="70" x2="120" y2="160" stroke="' + G + '" stroke-width="1.5"/><rect x="112" y="90" width="16" height="50" rx="2" fill="#dc2626" opacity=".4"/>' +
+      '<line x1="160" y1="55" x2="160" y2="145" stroke="' + G + '" stroke-width="1.5"/><rect x="152" y="65" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="200" y1="45" x2="200" y2="130" stroke="' + G + '" stroke-width="1.5"/><rect x="192" y="55" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="240" y1="60" x2="240" y2="140" stroke="' + G + '" stroke-width="1.5"/><rect x="232" y="75" width="16" height="40" rx="2" fill="#dc2626" opacity=".4"/>' +
+      '<line x1="280" y1="40" x2="280" y2="120" stroke="' + G + '" stroke-width="1.5"/><rect x="272" y="48" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="320" y1="35" x2="320" y2="110" stroke="' + G + '" stroke-width="1.5"/><rect x="312" y="40" width="16" height="45" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<line x1="360" y1="50" x2="360" y2="125" stroke="' + G + '" stroke-width="1.5"/><rect x="352" y="55" width="16" height="40" rx="2" fill="#15803D" opacity=".5"/>' +
+      '<polygon class="ap" points="195,50 200,42 205,50" fill="#15803D"/><text class="ap" x="200" y="38" text-anchor="middle" font-size="8" font-weight="700" fill="#15803D">BUY</text>' +
+      '<rect x="12" y="170" width="120" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="24" y="188" font-size="10" font-weight="600" fill="' + TS + '">Daily P/L</text>' +
+      '<text x="24" y="206" font-size="14" font-weight="800" fill="#15803D">+$342.80</text>' +
+      '<rect x="144" y="170" width="120" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="156" y="188" font-size="10" font-weight="600" fill="' + TS + '">Win Rate</text>' +
+      '<text x="156" y="206" font-size="14" font-weight="800" fill="' + G + '">73.2%</text>' +
+      '<rect x="276" y="170" width="112" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="288" y="188" font-size="10" font-weight="600" fill="' + TS + '">Risk Used</text>' +
+      '<text x="288" y="206" font-size="14" font-weight="800" fill="' + T + '">1.8%</text>'
+    ),
+
+    'ai-lead-generator': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<path d="M120 20 L280 20 L250 80 L150 80 Z" fill="' + G + '" opacity=".08" stroke="' + G + '" stroke-opacity=".2"/>' +
+      '<text x="200" y="45" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">SCRAPED</text>' +
+      '<text x="200" y="62" text-anchor="middle" font-size="16" font-weight="800" fill="' + T + '">2,480</text>' +
+      '<path d="M150 84 L250 84 L232 132 L168 132 Z" fill="' + G + '" opacity=".12" stroke="' + G + '" stroke-opacity=".25"/>' +
+      '<text x="200" y="104" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">SCORED</text>' +
+      '<text x="200" y="122" text-anchor="middle" font-size="14" font-weight="800" fill="' + T + '">847</text>' +
+      '<path d="M168 136 L232 136 L220 176 L180 176 Z" fill="' + G + '" opacity=".18" stroke="' + G + '" stroke-opacity=".3"/>' +
+      '<text x="200" y="154" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">HOT</text>' +
+      '<text x="200" y="170" text-anchor="middle" font-size="13" font-weight="800" fill="' + T + '">124</text>' +
+      '<rect x="16" y="190" width="112" height="26" rx="8" fill="#15803D" opacity=".08" stroke="#15803D" stroke-opacity=".15"/>' +
+      '<circle class="ap" cx="32" cy="203" r="4" fill="#15803D"/>' + '<text x="42" y="207" font-size="10" font-weight="600" fill="#15803D">Hot · 124</text>' +
+      '<rect x="144" y="190" width="112" height="26" rx="8" fill="' + G + '" opacity=".08" stroke="' + G + '" stroke-opacity=".15"/>' +
+      dot(160, 203, 4, G) + '<text x="170" y="207" font-size="10" font-weight="600" fill="' + G + '">Warm · 723</text>' +
+      '<rect x="272" y="190" width="112" height="26" rx="8" fill="' + TS + '" opacity=".08" stroke="' + TS + '" stroke-opacity=".15"/>' +
+      dot(288, 203, 4, TS) + '<text x="298" y="207" font-size="10" font-weight="600" fill="' + TS + '">Ignore · 1,633</text>'
+    ),
+
+    'wse-postpilot': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="180" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<rect x="24" y="20" width="164" height="80" rx="6" fill="' + S + '"/>' +
+      '<text x="106" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="' + TS + '">Image Preview</text>' +
+      ln(24, 112, 140, T, .35) + ln(24, 126, 100, TS, .2) + ln(24, 140, 120, TS, .15) +
+      '<rect x="24" y="160" width="50" height="16" rx="4" fill="#0077B5" opacity=".12"/><text x="49" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="#0077B5">LinkedIn</text>' +
+      '<rect x="80" y="160" width="36" height="16" rx="4" fill="#E1306C" opacity=".12"/><text x="98" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="#E1306C">IG</text>' +
+      '<rect x="122" y="160" width="24" height="16" rx="4" fill="' + T + '" opacity=".12"/><text x="134" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="' + T + '">X</text>' +
+      '<rect x="24" y="186" width="80" height="20" rx="6" fill="' + G + '"/><text x="64" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="' + W + '">Schedule</text>' +
+      '<rect x="210" y="12" width="174" height="48" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="222" y="32" font-size="10" font-weight="600" fill="' + TS + '">Today\'s Queue</text>' +
+      '<text x="222" y="48" font-size="16" font-weight="800" fill="' + T + '">4 posts ready</text>' +
+      '<rect x="210" y="70" width="174" height="36" rx="8" fill="' + S + '"/>' +
+      '<circle class="ap" cx="226" cy="88" r="4" fill="#15803D"/>' + ln(236, 82, 100, T, .3) + ln(236, 92, 60, TS, .15) +
+      '<rect x="210" y="114" width="174" height="36" rx="8" fill="' + S + '"/>' +
+      '<circle class="ap" cx="226" cy="132" r="4" fill="#0077B5" style="animation-delay:.4s"/>' + ln(236, 126, 80, T, .3) + ln(236, 136, 70, TS, .15) +
+      '<rect x="210" y="158" width="174" height="36" rx="8" fill="' + S + '"/>' +
+      '<circle class="ap" cx="226" cy="176" r="4" fill="#E1306C" style="animation-delay:.8s"/>' + ln(236, 170, 90, T, .3) + ln(236, 180, 50, TS, .15)
+    ),
+
+    'wse-autoreply': sv(
+      '<rect width="400" height="225" fill="' + B + '"/>' +
+      '<rect x="16" y="12" width="220" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<rect x="16" y="12" width="220" height="36" rx="10" fill="' + G + '" opacity=".05"/>' +
+      '<text x="32" y="35" font-size="12" font-weight="700" fill="' + T + '">Live Chat</text>' +
+      '<circle class="ap" cx="200" cy="30" r="4" fill="#15803D"/>' + '<text class="ap" x="210" y="34" font-size="9" font-weight="600" fill="#15803D">AI</text>' +
+      '<rect x="32" y="60" width="140" height="24" rx="8" fill="' + S + '"/>' +
+      ln(42, 68, 100, TS, .35) +
+      '<rect x="100" y="96" width="120" height="24" rx="8" fill="' + G + '" opacity=".12"/>' +
+      ln(112, 104, 80, G, .5) +
+      '<rect x="32" y="132" width="160" height="30" rx="8" fill="' + S + '"/>' +
+      ln(42, 140, 110, TS, .35) + ln(42, 152, 60, TS, .2) +
+      '<rect x="32" y="174" width="80" height="20" rx="6" fill="' + G + '" opacity=".08"/><text x="72" y="188" text-anchor="middle" font-size="9" font-weight="600" fill="' + G + '">Auto-reply</text>' +
+      '<rect x="252" y="12" width="132" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
+      '<text x="264" y="32" font-size="10" font-weight="700" fill="' + T + '">Queue</text>' +
+      '<rect x="260" y="44" width="116" height="36" rx="6" fill="' + S + '"/>' +
+      dot(272, 58, 3, '#15803D') + ln(280, 54, 70, T, .25) + ln(280, 66, 40, TS, .15) +
+      '<rect x="260" y="88" width="116" height="36" rx="6" fill="' + S + '"/>' +
+      dot(272, 102, 3, G) + ln(280, 98, 60, T, .25) + ln(280, 110, 50, TS, .15) +
+      '<rect x="260" y="132" width="116" height="36" rx="6" fill="' + S + '"/>' +
+      dot(272, 146, 3, '#D97706') + ln(280, 142, 80, T, .25) + ln(280, 154, 30, TS, .15) +
+      '<text x="318" y="192" text-anchor="middle" font-size="18" font-weight="800" fill="' + T + '">24</text>' +
+      '<text x="318" y="206" text-anchor="middle" font-size="9" font-weight="600" fill="' + TS + '">resolved today</text>'
+    ),
+
+    'whatsapp-autoreply': sv(
+      '<rect width="400" height="225" fill="#E5DDD5"/>' +
+      '<rect x="0" y="0" width="400" height="36" fill="#075E54"/>' +
+      '<circle cx="28" cy="18" r="12" fill="#128C7E"/><text x="28" y="23" text-anchor="middle" font-size="12" font-weight="800" fill="' + W + '">B</text>' +
+      '<text x="48" y="16" font-size="11" font-weight="700" fill="' + W + '">Business Bot</text>' +
+      '<text x="48" y="28" font-size="9" fill="' + W + '" opacity=".7">online</text>' +
+      '<rect x="20" y="48" width="180" height="30" rx="8" fill="' + W + '"/>' +
+      '<text x="30" y="60" font-size="10" fill="#303030">Hi, what are your prices?</text>' +
+      '<text x="186" y="72" text-anchor="end" font-size="8" fill="#999">10:32 AM</text>' +
+      '<rect x="200" y="90" width="180" height="50" rx="8" fill="#DCF8C6"/>' +
+      '<text x="210" y="104" font-size="10" fill="#303030">Thanks for reaching out!</text>' +
+      '<text x="210" y="118" font-size="10" fill="#303030">Here are our packages:</text>' +
+      '<text x="210" y="132" font-size="10" font-weight="600" fill="#075E54">View Catalog</text>' +
+      '<text x="366" y="136" text-anchor="end" font-size="8" fill="#999">10:32 AM</text>' +
+      '<rect x="20" y="152" width="140" height="24" rx="8" fill="' + W + '"/>' +
+      '<text x="30" y="168" font-size="10" fill="#303030">I want to book</text>' +
+      '<rect x="220" y="182" width="160" height="30" rx="8" fill="#DCF8C6"/>' +
+      '<text x="230" y="196" font-size="10" fill="#303030">Great! Pick a date:</text>' +
+      '<text x="230" y="208" font-size="10" font-weight="600" fill="#075E54">Mon · Tue · Wed</text>'
+    )
+  };
+
   function buildPlaceholder(img) {
     var kind = img.getAttribute('data-ph');
     var label = img.getAttribute('data-ph-label') || 'WSE';
@@ -260,6 +549,13 @@
 
     if (kind === 'product') {
       var iconSlug = img.getAttribute('data-ph-icon');
+      var previewSvg = PRODUCT_PREVIEW_SVGS[iconSlug];
+      if (previewSvg) {
+        ph.className = 'ph ph-preview';
+        ph.innerHTML = previewSvg;
+        img.replaceWith(ph);
+        return;
+      }
       var iconPath = PRODUCT_ICON_PATHS[iconSlug] || '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>';
       ph.className = 'ph ph-illustration';
       ph.innerHTML =
@@ -385,9 +681,12 @@
         ? '<a class="link-arrow accent" href="' + p.url + '" target="_blank" rel="noopener">Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>'
         : '';
       var favicon = p.logo ? '<img src="' + p.logo + '" alt="">' : '';
+      var mediaContent = PRODUCT_PREVIEW_SVGS[p.slug]
+        ? '<div class="ph ph-preview">' + PRODUCT_PREVIEW_SVGS[p.slug] + '</div>'
+        : '<img src="assets/example.png" alt="' + p.name + ' preview" loading="lazy" data-ph="product" data-ph-icon="' + p.slug + '" data-ph-label="' + productInitials(p.name) + '" data-ph-cap="' + p.name + '">';
       return '<article class="card prod-card reveal" data-status="' + p.status + '" data-href="product.html?p=' + p.slug + '" role="link" tabindex="0" aria-label="' + p.name + ' details">' +
         '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + favicon + p.name + '</span>' + badge + '</div>' +
-        '<div class="prod-media"><img src="assets/example.png" alt="' + p.name + ' preview" loading="lazy" data-ph="product" data-ph-icon="' + p.slug + '" data-ph-label="' + productInitials(p.name) + '" data-ph-cap="' + p.name + '"></div>' +
+        '<div class="prod-media">' + mediaContent + '</div>' +
         '<div class="prod-body">' +
           '<div class="prod-top"><h3>' + p.name + '</h3></div>' +
           '<div class="prod-tag">' + p.tag + '</div>' +
@@ -447,7 +746,7 @@
         '<a class="link-arrow" href="products.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform:rotate(180deg)"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Back to Products</a>' +
         '<div class="detail-hero" style="margin-top:24px">' +
           '<div class="prod-chrome"><span class="pc-dots"><i></i><i></i><i></i></span><span class="pc-tab">' + detailFavicon + product.name + '</span>' + badge + '</div>' +
-          '<div class="dh-media"><img src="assets/example.png" alt="' + product.name + ' preview" data-ph="product" data-ph-icon="' + product.slug + '" data-ph-label="' + productInitials(product.name) + '" data-ph-cap="' + product.name + '"></div>' +
+          '<div class="dh-media">' + (PRODUCT_PREVIEW_SVGS[product.slug] ? '<div class="ph ph-preview">' + PRODUCT_PREVIEW_SVGS[product.slug] + '</div>' : '<img src="assets/example.png" alt="' + product.name + ' preview" data-ph="product" data-ph-icon="' + product.slug + '" data-ph-label="' + productInitials(product.name) + '" data-ph-cap="' + product.name + '">') + '</div>' +
         '</div>' +
         '<div class="detail-grid">' +
           '<div class="detail-body">' +
@@ -854,4 +1153,198 @@
       loadAffDashboard();
     });
   }
+
+  /* ═══════════════════════════════════════════════════════════════
+     3D MOTION GRAPHICS — Dark Luxury enhancements
+     Hero particle canvas · Card 3D tilt · Cursor glow
+     ═══════════════════════════════════════════════════════════════ */
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  /* ── Hero particle constellation ── */
+  function initHeroCanvas() {
+    var canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    var PARTICLE_COUNT = 60;
+    var CONNECTION_DIST = 140;
+    var GOLD = { r: 168, g: 136, b: 46 };
+    var particles = [];
+    var mouseX = -1000;
+    var mouseY = -1000;
+    var raf;
+    var w, h, dpr;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var rect = canvas.parentElement.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function createParticle() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2 + 0.8,
+        alpha: Math.random() * 0.4 + 0.15
+      };
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(createParticle());
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        var dx = mouseX - p.x;
+        var dy = mouseY - p.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200) {
+          var force = (200 - dist) / 200 * 0.008;
+          p.vx += dx * force;
+          p.vy += dy * force;
+        }
+
+        p.vx *= 0.99;
+        p.vy *= 0.99;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + GOLD.r + ',' + GOLD.g + ',' + GOLD.b + ',' + p.alpha + ')';
+        ctx.fill();
+
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var ddx = p.x - p2.x;
+          var ddy = p.y - p2.y;
+          var d = Math.sqrt(ddx * ddx + ddy * ddy);
+          if (d < CONNECTION_DIST) {
+            var lineAlpha = (1 - d / CONNECTION_DIST) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = 'rgba(' + GOLD.r + ',' + GOLD.g + ',' + GOLD.b + ',' + lineAlpha + ')';
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      raf = requestAnimationFrame(draw);
+    }
+
+    if (!prefersReducedMotion) {
+      init();
+      draw();
+
+      var heroSection = canvas.closest('.hero');
+      if (heroSection && !isTouchDevice) {
+        heroSection.addEventListener('mousemove', function (e) {
+          var rect = heroSection.getBoundingClientRect();
+          mouseX = e.clientX - rect.left;
+          mouseY = e.clientY - rect.top;
+        });
+        heroSection.addEventListener('mouseleave', function () {
+          mouseX = -1000;
+          mouseY = -1000;
+        });
+      }
+
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          resize();
+        }, 150);
+      });
+    }
+  }
+
+  /* ── 3D perspective card tilt ── */
+  function initCardTilt() {
+    if (prefersReducedMotion || isTouchDevice) return;
+
+    var tiltCards = document.querySelectorAll('.card, .show-card, .price-card');
+    tiltCards.forEach(function (card) {
+      card.setAttribute('data-tilt', '');
+
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var centerX = rect.width / 2;
+        var centerY = rect.height / 2;
+        var rotateX = ((y - centerY) / centerY) * -5;
+        var rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+      });
+
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ── Cursor glow follower ── */
+  function initCursorGlow() {
+    if (prefersReducedMotion || isTouchDevice) return;
+    if (window.innerWidth < 768) return;
+
+    var glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
+
+    var glowX = -400;
+    var glowY = -400;
+    var currentX = -400;
+    var currentY = -400;
+
+    document.addEventListener('mousemove', function (e) {
+      glowX = e.clientX;
+      glowY = e.clientY;
+    });
+
+    function moveGlow() {
+      currentX += (glowX - currentX) * 0.08;
+      currentY += (glowY - currentY) * 0.08;
+      glow.style.left = currentX + 'px';
+      glow.style.top = currentY + 'px';
+      requestAnimationFrame(moveGlow);
+    }
+    moveGlow();
+  }
+
+  /* ── Boot 3D enhancements ── */
+  initHeroCanvas();
+  initCardTilt();
+  initCursorGlow();
+
 })();
