@@ -228,7 +228,7 @@
     'whatsapp-autoreply': '<path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2z"/><path d="M9 7h6M9 10.5h4M9 14h6"/>'
   };
 
-  var G = '#A8882E', GB = '#C9A84C', S = '#F0ECE3', W = '#fff', T = '#1C1A14', TS = '#5C564A', B = '#FAF7F0';
+  var G = '#1B3A6B', GB = '#2D5FA0', S = '#F0ECE3', W = '#fff', T = '#1C1A14', TS = '#5C564A', B = '#FAF7F0';
   function sv(inner) { return '<svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%"><defs><style>@keyframes kPulse{0%,100%{opacity:.5}50%{opacity:1}}@keyframes kBlink{0%,100%{opacity:0}50%{opacity:1}}@keyframes kGrow{0%,100%{transform:scaleY(.7)}50%{transform:scaleY(1)}}@keyframes kSlide{0%,100%{opacity:.3;transform:translateX(-4px)}50%{opacity:.7;transform:translateX(4px)}}@keyframes kType{0%{width:0}50%{width:80px}100%{width:0}}.ap{animation:kPulse 2.4s ease-in-out infinite}.ab{animation:kBlink 1.2s ease-in-out infinite}.ag{animation:kGrow 2.8s ease-in-out infinite;transform-origin:center bottom}.as{animation:kSlide 3s ease-in-out infinite}</style></defs>' + inner + '</svg>'; }
   function bar(x, h, w, c) { return '<rect x="' + x + '" y="' + (185 - h) + '" width="' + (w || 28) + '" height="' + h + '" rx="4" fill="' + (c || G) + '" opacity=".6"/>'; }
   function ln(x, y, w, c, o) { return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="6" rx="3" fill="' + (c || TS) + '" opacity="' + (o || .3) + '"/>'; }
