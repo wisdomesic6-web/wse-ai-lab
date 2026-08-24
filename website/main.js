@@ -236,21 +236,24 @@
 
   var PRODUCT_PREVIEW_SVGS = {
     'memora-os': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect width="68" height="225" fill="' + S + '"/>' +
-      '<circle cx="34" cy="28" r="14" fill="' + G + '" opacity=".14"/>' +
-      '<text x="34" y="33" text-anchor="middle" font-size="13" font-weight="800" fill="' + G + '">M</text>' +
-      ln(14, 58, 40, G, .1) + ln(14, 74, 40, G, .07) + ln(14, 90, 40, G, .07) +
-      '<rect x="68" y="0" width="332" height="38" fill="' + W + '"/>' +
-      ln(84, 14, 90, G, .12) +
-      '<rect x="90" y="56" width="170" height="34" rx="12" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      ln(104, 66, 110, TS, .4) + ln(104, 78, 70, TS, .25) +
-      '<rect x="230" y="106" width="130" height="28" rx="12" fill="' + G + '"/>' +
-      ln(244, 116, 80, W, .8) +
-      '<rect x="90" y="150" width="190" height="40" rx="12" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      ln(104, 160, 130, TS, .4) + ln(104, 172, 90, TS, .25) + ln(104, 184, 50, G, .3) +
-      '<rect x="84" y="205" width="250" height="1" fill="' + G + '" opacity=".1"/>' +
-      '<rect class="ab" x="100" y="194" width="2" height="12" rx="1" fill="' + G + '"/>'
+      '<defs><linearGradient id="mobg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient>' +
+      '<radialGradient id="mogl" cx="200" cy="105" r="80" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2D5FA0" stop-opacity=".2"/><stop offset="100%" stop-color="#2D5FA0" stop-opacity="0"/></radialGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#mobg)"/>' +
+      '<g stroke="#2D5FA0" stroke-opacity=".06" stroke-width=".5"><line x1="0" y1="56" x2="400" y2="56"/><line x1="0" y1="112" x2="400" y2="112"/><line x1="0" y1="168" x2="400" y2="168"/><line x1="100" y1="0" x2="100" y2="225"/><line x1="200" y1="0" x2="200" y2="225"/><line x1="300" y1="0" x2="300" y2="225"/></g>' +
+      '<g fill="none" stroke="#3A72B5" stroke-width="1" stroke-opacity=".2"><path d="M65 50Q130 25,200 45"/><path d="M200 45Q270 30,335 65"/><path d="M335 65Q345 110,315 150"/><path d="M315 150Q255 175,165 168"/><path d="M165 168Q95 155,65 50"/><path d="M200 45L200 105"/><path d="M65 50L200 105"/><path d="M335 65L200 105"/><path d="M315 150L200 105"/><path d="M165 168L200 105"/></g>' +
+      '<circle cx="200" cy="105" r="35" fill="url(#mogl)"/>' +
+      '<circle cx="65" cy="50" r="4" fill="#4A8BDB" class="ap"/>' +
+      '<circle cx="200" cy="45" r="4.5" fill="#5E9DE5" class="ap" style="animation-delay:.4s"/>' +
+      '<circle cx="335" cy="65" r="4" fill="#4A8BDB" class="ap" style="animation-delay:.8s"/>' +
+      '<circle cx="315" cy="150" r="4" fill="#5E9DE5" class="ap" style="animation-delay:1.2s"/>' +
+      '<circle cx="165" cy="168" r="4.5" fill="#4A8BDB" class="ap" style="animation-delay:1.6s"/>' +
+      '<circle cx="200" cy="105" r="11" fill="#1B3A6B" stroke="#4A8BDB" stroke-width="1.5"/>' +
+      '<circle cx="200" cy="105" r="5" fill="#2D5FA0" class="ap" style="animation-delay:2s"/>' +
+      '<rect x="30" y="200" width="340" height="3" rx="1.5" fill="#2D5FA0" opacity=".15"/>' +
+      '<rect x="30" y="200" width="80" height="3" rx="1.5" fill="#4A8BDB" opacity=".4" class="as"/>' +
+      '<rect x="180" y="200" width="50" height="3" rx="1.5" fill="#5E9DE5" opacity=".3" class="as" style="animation-delay:1.5s"/>' +
+      '<text x="48" y="195" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6" class="ap" style="animation-delay:.6s">128MB</text>' +
+      '<text x="320" y="195" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6" class="ap" style="animation-delay:1.2s">ACTIVE</text>'
     ),
 
     'wse-datapilot': sv(
@@ -280,23 +283,24 @@
 
     'wse-audit-system': sv(
       '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="368" height="38" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<path d="M36 24l5 4-1-1 3-5" fill="none" stroke="' + G + '" stroke-width="2" stroke-linecap="round"/>' +
-      '<circle cx="34" cy="31" r="10" fill="none" stroke="' + G + '" stroke-width="1.5" opacity=".3"/>' +
-      ln(52, 24, 80, T, .5) + ln(52, 36, 50, TS, .2) +
-      '<text x="340" y="35" text-anchor="end" font-size="12" font-weight="700" fill="#15803D">COMPLIANT</text>' +
-      '<rect x="16" y="62" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="28" y="72" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 79l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
-      ln(52, 76, 160, T, .35) + '<text x="360" y="82" text-anchor="end" font-size="11" fill="#15803D">Pass</text>' +
-      '<rect x="16" y="100" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="28" y="110" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 117l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
-      ln(52, 114, 180, T, .35) + '<text x="360" y="120" text-anchor="end" font-size="11" fill="#15803D">Pass</text>' +
-      '<rect x="16" y="138" width="368" height="32" rx="8" fill="' + W + '" stroke="#D97706" stroke-opacity=".3"/>' +
-      '<rect x="28" y="148" width="14" height="14" rx="3" fill="#D97706" opacity=".15"/>' +
-      ln(52, 152, 140, T, .35) + '<text x="360" y="158" text-anchor="end" font-size="11" fill="#D97706">Review</text>' +
-      '<rect x="16" y="176" width="368" height="32" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="28" y="186" width="14" height="14" rx="3" fill="' + G + '" opacity=".15"/><path d="M31 193l3 3 5-6" fill="none" stroke="' + G + '" stroke-width="1.5"/>' +
-      ln(52, 190, 120, T, .35) + '<text x="360" y="196" text-anchor="end" font-size="11" fill="#15803D">Pass</text>'
+      '<circle cx="100" cy="100" r="58" fill="none" stroke="' + S + '" stroke-width="8"/>' +
+      '<circle cx="100" cy="100" r="58" fill="none" stroke="' + G + '" stroke-width="8" stroke-dasharray="328 365" stroke-linecap="round" transform="rotate(-90 100 100)" opacity=".6" class="ap"/>' +
+      '<text x="100" y="95" text-anchor="middle" font-size="22" font-weight="800" fill="' + T + '">94%</text>' +
+      '<text x="100" y="113" text-anchor="middle" font-size="9" font-weight="600" fill="' + TS + '">COMPLIANT</text>' +
+      '<text x="210" y="38" font-size="9" font-weight="600" fill="' + TS + '">ISA Standards</text>' +
+      '<rect x="210" y="44" width="160" height="8" rx="4" fill="' + S + '"/><rect x="210" y="44" width="150" height="8" rx="4" fill="' + G + '" opacity=".45"/>' +
+      '<text x="210" y="74" font-size="9" font-weight="600" fill="' + TS + '">ICAN Compliance</text>' +
+      '<rect x="210" y="80" width="160" height="8" rx="4" fill="' + S + '"/><rect x="210" y="80" width="140" height="8" rx="4" fill="' + GB + '" opacity=".45"/>' +
+      '<text x="210" y="110" font-size="9" font-weight="600" fill="' + TS + '">Risk Assessment</text>' +
+      '<rect x="210" y="116" width="160" height="8" rx="4" fill="' + S + '"/><rect x="210" y="116" width="130" height="8" rx="4" fill="#15803D" opacity=".35"/>' +
+      '<g font-size="8" font-weight="700"><circle cx="218" cy="142" r="4" fill="#15803D" opacity=".2"/><text x="226" y="145" fill="#15803D">Pass</text>' +
+      '<circle cx="268" cy="142" r="4" fill="#15803D" opacity=".2"/><text x="276" y="145" fill="#15803D">Pass</text>' +
+      '<circle cx="318" cy="142" r="4" fill="#D97706" opacity=".2"/><text x="326" y="145" fill="#D97706">Review</text></g>' +
+      '<text x="30" y="180" font-size="9" font-weight="600" fill="' + TS + '">Audit Score Trend</text>' +
+      '<polyline points="30,210 80,206 130,208 180,200 230,202 280,195 330,190 375,186" fill="none" stroke="' + G + '" stroke-width="1.5" opacity=".3" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="375" cy="186" r="3" fill="' + G + '" class="ap"/>' +
+      '<circle cx="330" cy="190" r="2" fill="' + G + '" opacity=".4" class="ap" style="animation-delay:.4s"/>' +
+      '<circle cx="280" cy="195" r="2" fill="' + G + '" opacity=".3" class="ap" style="animation-delay:.8s"/>'
     ),
 
     'wse-soundhub': sv(
@@ -323,26 +327,29 @@
     ),
 
     'solwise-realty-ai': sv(
+      '<defs><linearGradient id="srfl" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="' + G + '" stop-opacity=".12"/><stop offset="100%" stop-color="' + G + '" stop-opacity="0"/></linearGradient></defs>' +
       '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="180" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<rect x="24" y="20" width="164" height="90" rx="6" fill="' + S + '"/>' +
-      '<path d="M80 50l26-18 26 18v28H80z" fill="' + G + '" opacity=".2"/><path d="M80 50l26-18 26 18" fill="none" stroke="' + G + '" stroke-width="2"/>' +
-      ln(24, 122, 120, T, .4) + ln(24, 136, 80, TS, .2) +
-      '<text x="24" y="162" font-size="16" font-weight="800" fill="' + T + '">₦35M</text>' +
-      ln(24, 172, 60, TS, .15) +
-      '<rect x="24" y="186" width="72" height="20" rx="6" fill="' + G + '"/><text x="60" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="' + W + '">Enquire</text>' +
-      '<rect x="210" y="12" width="174" height="100" rx="10" fill="#25D366" opacity=".08" stroke="#25D366" stroke-opacity=".2"/>' +
-      '<circle cx="234" cy="32" r="12" fill="#25D366" opacity=".2"/><text x="234" y="37" text-anchor="middle" font-size="12" font-weight="800" fill="#25D366">W</text>' +
-      ln(254, 28, 60, '#25D366', .3) +
-      '<rect x="222" y="52" width="140" height="22" rx="8" fill="' + W + '" stroke="#25D366" stroke-opacity=".15"/>' +
-      ln(230, 60, 80, TS, .3) +
-      '<rect x="260" y="82" width="110" height="22" rx="8" fill="#25D366" opacity=".12"/>' +
-      ln(268, 90, 70, '#25D366', .4) +
-      '<rect x="210" y="124" width="174" height="88" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      ln(222, 136, 80, T, .35) +
-      '<text x="222" y="162" font-size="12" font-weight="700" fill="' + G + '">12 Active Leads</text>' +
-      '<rect x="222" y="176" width="148" height="8" rx="4" fill="' + S + '"/><rect x="222" y="176" width="100" height="8" rx="4" fill="' + G + '" opacity=".3"/>' +
-      ln(222, 196, 60, TS, .15)
+      '<g stroke="' + G + '" stroke-opacity=".06" stroke-width=".5"><line x1="45" y1="35" x2="380" y2="35"/><line x1="45" y1="85" x2="380" y2="85"/><line x1="45" y1="135" x2="380" y2="135"/></g>' +
+      '<text x="18" y="40" font-size="7" fill="' + TS + '" opacity=".5">₦50M</text>' +
+      '<text x="18" y="90" font-size="7" fill="' + TS + '" opacity=".5">₦35M</text>' +
+      '<text x="18" y="140" font-size="7" fill="' + TS + '" opacity=".5">₦20M</text>' +
+      '<path d="M45 130L100 120L155 110L210 95L265 80L320 60L375 45L375 158L45 158Z" fill="url(#srfl)"/>' +
+      '<polyline points="45,130 100,120 155,110 210,95 265,80 320,60 375,45" fill="none" stroke="' + G + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>' +
+      '<circle cx="45" cy="130" r="2.5" fill="' + G + '" opacity=".35"/>' +
+      '<circle cx="100" cy="120" r="2.5" fill="' + G + '" opacity=".35"/>' +
+      '<circle cx="155" cy="110" r="3" fill="' + G + '" class="ap" style="animation-delay:.3s"/>' +
+      '<circle cx="210" cy="95" r="3" fill="' + G + '" class="ap" style="animation-delay:.6s"/>' +
+      '<circle cx="265" cy="80" r="3" fill="' + GB + '" class="ap" style="animation-delay:.9s"/>' +
+      '<circle cx="320" cy="60" r="3.5" fill="' + GB + '" class="ap" style="animation-delay:1.2s"/>' +
+      '<circle cx="375" cy="45" r="4" fill="' + GB + '" class="ap" style="animation-delay:1.5s"/>' +
+      '<g font-size="7" fill="' + TS + '" opacity=".4"><text x="45" y="172">Jan</text><text x="100" y="172">Feb</text><text x="155" y="172">Mar</text><text x="210" y="172">Apr</text><text x="265" y="172">May</text><text x="320" y="172">Jun</text></g>' +
+      '<rect x="45" y="182" width="90" height="36" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".1"/>' +
+      '<text x="55" y="196" font-size="8" fill="' + TS + '">Avg Price</text>' +
+      '<text x="55" y="211" font-size="13" font-weight="800" fill="' + T + '">₦35M</text>' +
+      '<rect x="280" y="182" width="100" height="36" rx="8" fill="' + W + '" stroke="#25D366" stroke-opacity=".2"/>' +
+      '<circle cx="298" cy="195" r="7" fill="#25D366" opacity=".15"/><text x="298" y="199" text-anchor="middle" font-size="8" font-weight="800" fill="#25D366">W</text>' +
+      '<text x="310" y="196" font-size="8" font-weight="700" fill="' + T + '">12 Leads</text>' +
+      '<text x="298" y="211" font-size="7" fill="#15803D">+23% this week</text>'
     ),
 
     'smartsales': sv(

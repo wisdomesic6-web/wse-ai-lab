@@ -175,8 +175,11 @@ p{margin:0}
 }
 .on-navy{
   background:linear-gradient(180deg, var(--surface), rgba(27,58,107,.03), var(--surface));
-  color:var(--text);position:relative;
+  color:var(--text);position:relative;overflow:hidden;
 }
+.on-navy>.wrap{position:relative;z-index:1}
+.ooda-motion-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ooda-motion-bg svg{width:100%;height:100%}
 .on-navy::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse at 80% 20%, rgba(27,58,107,.06), transparent 50%);
@@ -733,12 +736,12 @@ form.inq{display:grid;gap:18px}
 /* ── CTA band ── */
 .cta-band{
   border:none;position:relative;overflow:hidden;
-  background:#1C1A14;color:#F0ECE3;
+  background:#1B3A6B;color:#F0ECE3;
   border-radius:20px;padding:clamp(48px,6vw,76px);text-align:center;
 }
 .cta-band::before{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse at 50% -20%, rgba(27,58,107,.18), transparent 60%);
+  background:radial-gradient(ellipse at 50% -20%, rgba(45,95,160,.35), transparent 60%);
 }
 .cta-band h2{max-width:22ch;margin:18px auto 16px;position:relative;color:#fff}
 .cta-band .lead{max-width:52ch;margin:0 auto 34px;position:relative;color:rgba(240,236,227,.7)}
