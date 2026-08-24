@@ -257,28 +257,32 @@
     ),
 
     'wse-datapilot': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="110" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      ln(28, 24, 50, TS, .2) +
-      '<text x="28" y="48" font-size="18" font-weight="800" fill="' + T + '">₦2.4M</text>' +
-      '<rect x="142" y="12" width="110" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      ln(154, 24, 40, TS, .2) +
-      '<text x="154" y="48" font-size="18" font-weight="800" fill="' + G + '">+34%</text>' +
-      '<rect x="268" y="12" width="116" height="50" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      ln(280, 24, 60, TS, .2) +
-      '<text x="280" y="48" font-size="18" font-weight="800" fill="' + T + '">1,247</text>' +
-      '<rect x="16" y="76" width="240" height="138" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      ln(28, 86, 60, TS, .25) +
-      '<rect class="ag" x="32" y="125" width="22" height="60" rx="4" fill="' + G + '" opacity=".6"/>' +
-      '<rect class="ag" x="62" y="95" width="22" height="90" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.15s"/>' +
-      '<rect class="ag" x="92" y="140" width="22" height="45" rx="4" fill="' + S + '" opacity=".6" style="animation-delay:.3s"/>' +
-      '<rect class="ag" x="122" y="110" width="22" height="75" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.45s"/>' +
-      '<rect class="ag" x="152" y="75" width="22" height="110" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.6s"/>' +
-      '<rect class="ag" x="182" y="130" width="22" height="55" rx="4" fill="' + S + '" opacity=".6" style="animation-delay:.75s"/>' +
-      '<rect class="ag" x="212" y="100" width="22" height="85" rx="4" fill="' + G + '" opacity=".6" style="animation-delay:.9s"/>' +
-      '<rect x="272" y="76" width="112" height="138" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      dot(328, 115, 28, G) + '<text x="328" y="120" text-anchor="middle" font-size="14" font-weight="800" fill="' + W + '">67%</text>' +
-      ln(284, 160, 88, TS, .15) + ln(284, 176, 70, TS, .10) + ln(284, 192, 80, G, .2)
+      '<defs><linearGradient id="dpbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#dpbg)"/>' +
+      '<g stroke="#2D5FA0" stroke-opacity=".08" stroke-width=".5"><line x1="0" y1="56" x2="400" y2="56"/><line x1="0" y1="112" x2="400" y2="112"/><line x1="0" y1="168" x2="400" y2="168"/></g>' +
+      '<rect x="16" y="12" width="110" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".2"/>' +
+      '<text x="28" y="28" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6">REVENUE</text>' +
+      '<text x="28" y="46" font-size="16" font-weight="800" fill="#fff">₦2.4M</text>' +
+      '<rect x="140" y="12" width="110" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".2"/>' +
+      '<text x="152" y="28" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6">GROWTH</text>' +
+      '<text x="152" y="46" font-size="16" font-weight="800" fill="#4ADE80">+34%</text>' +
+      '<rect x="264" y="12" width="120" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".2"/>' +
+      '<text x="276" y="28" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6">RECORDS</text>' +
+      '<text x="276" y="46" font-size="16" font-weight="800" fill="#fff">1,247</text>' +
+      '<rect class="ag" x="32" y="120" width="20" height="55" rx="3" fill="#4A8BDB" opacity=".5"/>' +
+      '<rect class="ag" x="60" y="95" width="20" height="80" rx="3" fill="#5E9DE5" opacity=".5" style="animation-delay:.15s"/>' +
+      '<rect class="ag" x="88" y="130" width="20" height="45" rx="3" fill="#3A72B5" opacity=".4" style="animation-delay:.3s"/>' +
+      '<rect class="ag" x="116" y="105" width="20" height="70" rx="3" fill="#4A8BDB" opacity=".5" style="animation-delay:.45s"/>' +
+      '<rect class="ag" x="144" y="80" width="20" height="95" rx="3" fill="#5E9DE5" opacity=".5" style="animation-delay:.6s"/>' +
+      '<rect class="ag" x="172" y="115" width="20" height="60" rx="3" fill="#3A72B5" opacity=".4" style="animation-delay:.75s"/>' +
+      '<rect class="ag" x="200" y="90" width="20" height="85" rx="3" fill="#4A8BDB" opacity=".5" style="animation-delay:.9s"/>' +
+      '<rect x="16" y="180" width="220" height="2" rx="1" fill="#2D5FA0" opacity=".2"/>' +
+      '<circle cx="320" cy="130" r="40" fill="none" stroke="#2D5FA0" stroke-width="6" stroke-opacity=".15"/>' +
+      '<circle cx="320" cy="130" r="40" fill="none" stroke="#4A8BDB" stroke-width="6" stroke-dasharray="180 252" stroke-linecap="round" transform="rotate(-90 320 130)" class="ap"/>' +
+      '<text x="320" y="126" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">67%</text>' +
+      '<text x="320" y="140" text-anchor="middle" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6">INSIGHT</text>' +
+      '<polyline points="240,200 260,195 280,198 300,188 320,190 340,182 360,175 380,170" fill="none" stroke="#4ADE80" stroke-width="1.5" opacity=".4" stroke-linecap="round"/>' +
+      '<circle cx="380" cy="170" r="2.5" fill="#4ADE80" class="ap"/>'
     ),
 
     'wse-audit-system': sv(
@@ -304,26 +308,61 @@
     ),
 
     'wse-soundhub': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="368" height="60" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<rect x="28" y="22" width="40" height="40" rx="8" fill="' + G + '" opacity=".12"/>' +
-      '<path d="M40 36l10 6-10 6z" fill="' + G + '"/>' +
-      ln(80, 28, 100, T, .4) + ln(80, 40, 60, TS, .2) +
-      '<rect x="80" y="52" width="120" height="6" rx="3" fill="' + S + '"/><rect x="80" y="52" width="45" height="6" rx="3" fill="' + G + '"/>' +
-      '<text x="360" y="46" text-anchor="end" font-size="12" font-weight="700" fill="' + G + '">₦45,000</text>' +
-      '<rect x="16" y="84" width="116" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="24" y="92" width="100" height="64" rx="6" fill="' + S + '"/>' +
-      '<circle cx="74" cy="124" r="16" fill="' + G + '" opacity=".15"/><path d="M68 118l14 6-14 6z" fill="' + G + '"/>' +
-      ln(24, 168, 80, T, .35) + ln(24, 182, 50, TS, .2) +
-      '<text x="24" y="204" font-size="12" font-weight="700" fill="' + G + '">₦85,000</text>' +
-      '<rect x="144" y="84" width="116" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="152" y="92" width="100" height="64" rx="6" fill="' + S + '"/>' +
-      ln(152, 168, 70, T, .35) + ln(152, 182, 50, TS, .2) +
-      '<text x="152" y="204" font-size="12" font-weight="700" fill="' + G + '">₦120,000</text>' +
-      '<rect x="272" y="84" width="112" height="130" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".08"/>' +
-      '<rect x="280" y="92" width="96" height="64" rx="6" fill="' + S + '"/>' +
-      ln(280, 168, 60, T, .35) + ln(280, 182, 40, TS, .2) +
-      '<text x="280" y="204" font-size="12" font-weight="700" fill="' + G + '">₦65,000</text>'
+      '<defs><linearGradient id="shbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#shbg)"/>' +
+      '<g stroke="#2D5FA0" stroke-opacity=".06" stroke-width=".5"><line x1="0" y1="112" x2="400" y2="112"/></g>' +
+      '<rect x="16" y="10" width="368" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<rect x="28" y="20" width="28" height="28" rx="14" fill="#4A8BDB" opacity=".25"/>' +
+      '<path d="M38 30l8 5-8 5z" fill="#5E9DE5"/>' +
+      '<rect x="66" y="28" width="140" height="4" rx="2" fill="#2D5FA0" opacity=".3"/>' +
+      '<rect x="66" y="28" width="55" height="4" rx="2" fill="#4A8BDB" opacity=".6" class="as"/>' +
+      '<text x="66" y="24" font-size="8" font-weight="600" fill="#fff" opacity=".7">Afrobeats Session</text>' +
+      '<text x="356" y="38" text-anchor="end" font-size="11" font-weight="700" fill="#5E9DE5">₦45,000</text>' +
+      '<g transform="translate(30,70)">' +
+        '<rect class="ag" x="0" y="0" width="4" height="35" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:0s"/>' +
+        '<rect class="ag" x="8" y="-8" width="4" height="50" rx="2" fill="#5E9DE5" opacity=".5" style="animation-delay:.1s"/>' +
+        '<rect class="ag" x="16" y="5" width="4" height="25" rx="2" fill="#3A72B5" opacity=".6" style="animation-delay:.2s"/>' +
+        '<rect class="ag" x="24" y="-15" width="4" height="65" rx="2" fill="#4A8BDB" opacity=".5" style="animation-delay:.3s"/>' +
+        '<rect class="ag" x="32" y="-5" width="4" height="45" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.4s"/>' +
+        '<rect class="ag" x="40" y="8" width="4" height="20" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.5s"/>' +
+        '<rect class="ag" x="48" y="-10" width="4" height="55" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.6s"/>' +
+        '<rect class="ag" x="56" y="2" width="4" height="32" rx="2" fill="#5E9DE5" opacity=".5" style="animation-delay:.7s"/>' +
+        '<rect class="ag" x="64" y="-12" width="4" height="60" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.15s"/>' +
+        '<rect class="ag" x="72" y="6" width="4" height="22" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.35s"/>' +
+        '<rect class="ag" x="80" y="-8" width="4" height="50" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.55s"/>' +
+        '<rect class="ag" x="88" y="0" width="4" height="35" rx="2" fill="#4A8BDB" opacity=".5" style="animation-delay:.75s"/>' +
+        '<rect class="ag" x="96" y="-15" width="4" height="65" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.25s"/>' +
+        '<rect class="ag" x="104" y="3" width="4" height="28" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.45s"/>' +
+        '<rect class="ag" x="112" y="-6" width="4" height="48" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.65s"/>' +
+        '<rect class="ag" x="120" y="5" width="4" height="25" rx="2" fill="#5E9DE5" opacity=".5" style="animation-delay:.85s"/>' +
+      '</g>' +
+      '<g transform="translate(200,70)">' +
+        '<rect class="ag" x="0" y="0" width="4" height="35" rx="2" fill="#5E9DE5" opacity=".5" style="animation-delay:.1s"/>' +
+        '<rect class="ag" x="8" y="-10" width="4" height="55" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.3s"/>' +
+        '<rect class="ag" x="16" y="6" width="4" height="22" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.5s"/>' +
+        '<rect class="ag" x="24" y="-8" width="4" height="50" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.7s"/>' +
+        '<rect class="ag" x="32" y="2" width="4" height="32" rx="2" fill="#4A8BDB" opacity=".5" style="animation-delay:.2s"/>' +
+        '<rect class="ag" x="40" y="-15" width="4" height="65" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.4s"/>' +
+        '<rect class="ag" x="48" y="5" width="4" height="25" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.6s"/>' +
+        '<rect class="ag" x="56" y="-5" width="4" height="45" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.8s"/>' +
+        '<rect class="ag" x="64" y="0" width="4" height="35" rx="2" fill="#5E9DE5" opacity=".5" style="animation-delay:.15s"/>' +
+        '<rect class="ag" x="72" y="-12" width="4" height="60" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.35s"/>' +
+        '<rect class="ag" x="80" y="8" width="4" height="20" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.55s"/>' +
+        '<rect class="ag" x="88" y="-6" width="4" height="48" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.75s"/>' +
+        '<rect class="ag" x="96" y="3" width="4" height="28" rx="2" fill="#4A8BDB" opacity=".5" style="animation-delay:.25s"/>' +
+        '<rect class="ag" x="104" y="-10" width="4" height="55" rx="2" fill="#5E9DE5" opacity=".6" style="animation-delay:.45s"/>' +
+        '<rect class="ag" x="112" y="5" width="4" height="25" rx="2" fill="#3A72B5" opacity=".5" style="animation-delay:.65s"/>' +
+        '<rect class="ag" x="120" y="-8" width="4" height="50" rx="2" fill="#4A8BDB" opacity=".6" style="animation-delay:.85s"/>' +
+      '</g>' +
+      '<rect x="16" y="170" width="180" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<circle cx="40" cy="192" r="14" fill="#4A8BDB" opacity=".15" class="ap"/>' +
+      '<text x="40" y="196" text-anchor="middle" font-size="10" font-weight="800" fill="#5E9DE5">DJ</text>' +
+      '<text x="62" y="188" font-size="8" font-weight="600" fill="#fff" opacity=".7">Live Mix Session</text>' +
+      '<text x="62" y="202" font-size="11" font-weight="700" fill="#5E9DE5">₦85,000</text>' +
+      '<rect x="210" y="170" width="174" height="44" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<text x="222" y="188" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">CATALOG</text>' +
+      '<text x="222" y="204" font-size="14" font-weight="800" fill="#fff">342 Tracks</text>' +
+      '<text x="356" y="200" text-anchor="end" font-size="8" font-weight="600" fill="#4ADE80" class="ap">LIVE</text>'
     ),
 
     'solwise-realty-ai': sv(
@@ -353,173 +392,241 @@
     ),
 
     'smartsales': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="110" y="4" width="180" height="217" rx="20" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      '<rect x="118" y="18" width="164" height="24" rx="0" fill="' + G + '" opacity=".06"/>' +
-      '<text x="200" y="35" text-anchor="middle" font-size="11" font-weight="700" fill="' + G + '">SmartSales</text>' +
-      ln(128, 56, 100, T, .25) +
-      '<text x="128" y="80" font-size="24" font-weight="800" fill="' + T + '">₦847K</text>' +
-      '<text x="230" y="80" font-size="11" font-weight="600" fill="#15803D">+12% today</text>' +
-      '<rect x="128" y="96" width="144" height="1" fill="' + G + '" opacity=".1"/>' +
-      '<rect x="128" y="108" width="144" height="28" rx="6" fill="' + S + '"/>' +
-      ln(136, 114, 60, T, .3) + '<text x="256" y="126" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦15,000</text>' +
-      '<rect x="128" y="142" width="144" height="28" rx="6" fill="' + S + '"/>' +
-      ln(136, 148, 70, T, .3) + '<text x="256" y="160" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦8,500</text>' +
-      '<rect x="128" y="176" width="144" height="28" rx="6" fill="' + S + '"/>' +
-      ln(136, 182, 50, T, .3) + '<text x="256" y="194" text-anchor="end" font-size="11" font-weight="700" fill="' + G + '">₦22,000</text>'
+      '<defs><linearGradient id="ssbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#ssbg)"/>' +
+      '<rect x="110" y="4" width="180" height="217" rx="18" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".2"/>' +
+      '<rect x="110" y="4" width="180" height="32" rx="18" fill="#1B3A6B"/>' +
+      '<text x="200" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">SmartSales</text>' +
+      '<text x="128" y="55" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".6">TODAY\'S REVENUE</text>' +
+      '<text x="128" y="76" font-size="22" font-weight="800" fill="#fff">₦847K</text>' +
+      '<text x="230" y="76" font-size="10" font-weight="600" fill="#4ADE80" class="ap">+12%</text>' +
+      '<rect x="128" y="86" width="144" height="1" fill="#2D5FA0" opacity=".2"/>' +
+      '<rect x="128" y="96" width="144" height="28" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="136" y="114" font-size="8" fill="#5E9DE5" opacity=".7">Retail Sale</text>' +
+      '<text x="260" y="114" text-anchor="end" font-size="10" font-weight="700" fill="#fff">₦15,000</text>' +
+      '<rect x="128" y="130" width="144" height="28" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="136" y="148" font-size="8" fill="#5E9DE5" opacity=".7">Wholesale</text>' +
+      '<text x="260" y="148" text-anchor="end" font-size="10" font-weight="700" fill="#fff">₦8,500</text>' +
+      '<rect x="128" y="164" width="144" height="28" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="136" y="182" font-size="8" fill="#5E9DE5" opacity=".7">Service Fee</text>' +
+      '<text x="260" y="182" text-anchor="end" font-size="10" font-weight="700" fill="#fff">₦22,000</text>' +
+      '<rect x="128" y="198" width="144" height="14" rx="7" fill="#1B3A6B"/>' +
+      '<rect x="128" y="198" width="100" height="14" rx="7" fill="#4A8BDB" opacity=".3" class="as"/>' +
+      '<circle cx="50" cy="80" r="3" fill="#4A8BDB" opacity=".15" class="ap"/>' +
+      '<circle cx="340" cy="140" r="4" fill="#5E9DE5" opacity=".1" class="ap" style="animation-delay:1s"/>' +
+      '<circle cx="70" cy="180" r="2" fill="#3A72B5" opacity=".12" class="ap" style="animation-delay:1.5s"/>'
     ),
 
     'wse-academy': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="368" height="36" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="32" y="35" font-size="13" font-weight="700" fill="' + T + '">Classes</text>' +
-      '<text x="110" y="35" font-size="13" font-weight="600" fill="' + G + '">Students</text>' +
-      '<text x="200" y="35" font-size="13" font-weight="600" fill="' + TS + '" opacity=".5">Fees</text>' +
-      '<rect x="16" y="58" width="180" height="76" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="28" y="78" font-size="12" font-weight="700" fill="' + T + '">JSS 1A</text>' +
-      '<text x="28" y="96" font-size="11" fill="' + TS + '">42 students</text>' +
-      ln(28, 108, 80, G, .15) + '<rect x="28" y="118" width="40" height="8" rx="4" fill="#15803D" opacity=".15"/><text x="34" y="125" font-size="8" font-weight="700" fill="#15803D">Active</text>' +
-      '<rect x="204" y="58" width="180" height="76" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="216" y="78" font-size="12" font-weight="700" fill="' + T + '">JSS 2B</text>' +
-      '<text x="216" y="96" font-size="11" fill="' + TS + '">38 students</text>' +
-      ln(216, 108, 70, G, .15) + '<rect x="216" y="118" width="40" height="8" rx="4" fill="#15803D" opacity=".15"/><text x="222" y="125" font-size="8" font-weight="700" fill="#15803D">Active</text>' +
-      '<rect x="16" y="144" width="180" height="68" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="28" y="164" font-size="12" font-weight="700" fill="' + T + '">SS 1</text>' +
-      '<text x="28" y="182" font-size="11" fill="' + TS + '">35 students</text>' +
-      '<rect x="204" y="144" width="180" height="68" rx="10" fill="' + G + '" opacity=".06" stroke="' + G + '" stroke-opacity=".12"/>' +
-      '<text x="294" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="' + G + '">+ Add Class</text>'
+      '<defs><linearGradient id="acbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#acbg)"/>' +
+      '<g stroke="#2D5FA0" stroke-opacity=".06" stroke-width=".5"><line x1="0" y1="56" x2="400" y2="56"/><line x1="0" y1="168" x2="400" y2="168"/></g>' +
+      '<rect x="16" y="10" width="368" height="32" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<text x="32" y="31" font-size="10" font-weight="700" fill="#fff">Classes</text>' +
+      '<text x="110" y="31" font-size="10" font-weight="600" fill="#5E9DE5">Students</text>' +
+      '<text x="200" y="31" font-size="10" font-weight="600" fill="#5E9DE5" opacity=".5">Fees</text>' +
+      '<text x="350" y="31" text-anchor="end" font-size="9" font-weight="600" fill="#4ADE80" class="ap">LIVE</text>' +
+      '<circle cx="70" cy="90" r="28" fill="none" stroke="#2D5FA0" stroke-width="5" stroke-opacity=".15"/>' +
+      '<circle cx="70" cy="90" r="28" fill="none" stroke="#4A8BDB" stroke-width="5" stroke-dasharray="150 176" stroke-linecap="round" transform="rotate(-90 70 90)" class="ap"/>' +
+      '<text x="70" y="86" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">42</text>' +
+      '<text x="70" y="97" text-anchor="middle" font-size="6" font-weight="600" fill="#5E9DE5" opacity=".6">JSS 1A</text>' +
+      '<circle cx="200" cy="90" r="28" fill="none" stroke="#2D5FA0" stroke-width="5" stroke-opacity=".15"/>' +
+      '<circle cx="200" cy="90" r="28" fill="none" stroke="#5E9DE5" stroke-width="5" stroke-dasharray="138 176" stroke-linecap="round" transform="rotate(-90 200 90)" class="ap" style="animation-delay:.4s"/>' +
+      '<text x="200" y="86" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">38</text>' +
+      '<text x="200" y="97" text-anchor="middle" font-size="6" font-weight="600" fill="#5E9DE5" opacity=".6">JSS 2B</text>' +
+      '<circle cx="330" cy="90" r="28" fill="none" stroke="#2D5FA0" stroke-width="5" stroke-opacity=".15"/>' +
+      '<circle cx="330" cy="90" r="28" fill="none" stroke="#3A72B5" stroke-width="5" stroke-dasharray="125 176" stroke-linecap="round" transform="rotate(-90 330 90)" class="ap" style="animation-delay:.8s"/>' +
+      '<text x="330" y="86" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">35</text>' +
+      '<text x="330" y="97" text-anchor="middle" font-size="6" font-weight="600" fill="#5E9DE5" opacity=".6">SS 1</text>' +
+      '<rect x="16" y="135" width="110" height="36" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="28" y="150" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">FEE COLLECTED</text>' +
+      '<text x="28" y="164" font-size="12" font-weight="800" fill="#fff">₦2.8M</text>' +
+      '<rect x="140" y="135" width="110" height="36" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="152" y="150" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">ATTENDANCE</text>' +
+      '<text x="152" y="164" font-size="12" font-weight="800" fill="#4ADE80">94.2%</text>' +
+      '<rect x="264" y="135" width="120" height="36" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="276" y="150" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">PASS RATE</text>' +
+      '<text x="276" y="164" font-size="12" font-weight="800" fill="#fff">87%</text>' +
+      '<polyline points="20,205 60,200 100,202 140,195 180,198 220,190 260,185 300,188 340,180 380,175" fill="none" stroke="#4A8BDB" stroke-width="1.5" opacity=".3" stroke-linecap="round"/>' +
+      '<text x="20" y="195" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".4">Performance Trend</text>' +
+      '<circle cx="380" cy="175" r="2.5" fill="#4A8BDB" class="ap"/>'
     ),
 
     'wizzy-ai': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="60" y="10" width="280" height="205" rx="14" fill="' + W + '" stroke="' + G + '" stroke-opacity=".12"/>' +
-      '<rect x="60" y="10" width="280" height="40" rx="14" fill="' + G + '" opacity=".06"/>' +
-      '<rect x="60" y="46" width="280" height="4" rx="0" fill="' + G + '" opacity=".06"/>' +
-      '<circle cx="86" cy="30" r="12" fill="' + G + '" opacity=".15"/><text x="86" y="35" text-anchor="middle" font-size="13" font-weight="800" fill="' + G + '">W</text>' +
-      '<text x="106" y="28" font-size="12" font-weight="700" fill="' + T + '">Wizzy</text>' +
-      '<circle class="ap" cx="106" cy="38" r="3" fill="#15803D"/>' + '<text x="114" y="42" font-size="9" fill="#15803D">Online</text>' +
-      '<rect x="80" y="62" width="160" height="30" rx="10" fill="' + S + '"/>' +
-      ln(90, 72, 110, TS, .35) + ln(90, 82, 70, TS, .2) +
-      '<rect x="200" y="104" width="120" height="24" rx="10" fill="' + G + '"/>' +
-      ln(212, 113, 70, W, .8) +
-      '<rect x="80" y="140" width="180" height="36" rx="10" fill="' + S + '"/>' +
-      ln(90, 150, 130, TS, .35) + ln(90, 162, 80, TS, .2) +
-      '<rect x="74" y="190" width="210" height="2" fill="' + G + '" opacity=".08"/>'
+      '<defs><linearGradient id="wzbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient>' +
+      '<radialGradient id="wzgl" cx="200" cy="112" r="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2D5FA0" stop-opacity=".1"/><stop offset="100%" stop-color="#2D5FA0" stop-opacity="0"/></radialGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#wzbg)"/>' +
+      '<rect fill="url(#wzgl)" width="400" height="225"/>' +
+      '<rect x="60" y="8" width="280" height="209" rx="12" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<rect x="60" y="8" width="280" height="36" rx="12" fill="#1B3A6B"/>' +
+      '<circle cx="84" cy="26" r="10" fill="#4A8BDB" opacity=".25"/><text x="84" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="#5E9DE5">W</text>' +
+      '<text x="100" y="24" font-size="10" font-weight="700" fill="#fff">Wizzy</text>' +
+      '<circle cx="100" cy="34" r="2.5" fill="#4ADE80" class="ap"/><text x="108" y="37" font-size="7" fill="#4ADE80">Online</text>' +
+      '<rect x="78" y="54" width="150" height="26" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="88" y="68" font-size="8" fill="#5E9DE5" opacity=".7">How do I track expenses?</text>' +
+      '<text x="220" y="72" font-size="6" fill="#5E9DE5" opacity=".35">10:32</text>' +
+      '<rect x="180" y="90" width="140" height="26" rx="8" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".2"/>' +
+      '<text x="190" y="104" font-size="8" fill="#fff" opacity=".8">Open Settings > Expenses</text>' +
+      '<text x="312" y="108" font-size="6" fill="#5E9DE5" opacity=".35">10:32</text>' +
+      '<circle cx="322" cy="98" r="5" fill="#4A8BDB" opacity=".15"/><text x="322" y="100" text-anchor="middle" font-size="5" font-weight="800" fill="#5E9DE5">AI</text>' +
+      '<rect x="78" y="126" width="180" height="34" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="88" y="140" font-size="8" fill="#5E9DE5" opacity=".7">Can you add a receipt for</text>' +
+      '<text x="88" y="152" font-size="8" fill="#5E9DE5" opacity=".7">today\'s purchase?</text>' +
+      '<rect x="160" y="170" width="160" height="26" rx="8" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".2"/>' +
+      '<text x="170" y="184" font-size="8" fill="#fff" opacity=".8">Done! Receipt #1247 added</text>' +
+      '<circle cx="312" cy="178" r="5" fill="#4A8BDB" opacity=".15"/><text x="312" y="181" text-anchor="middle" font-size="5" font-weight="800" fill="#5E9DE5">AI</text>' +
+      '<rect x="78" y="200" width="240" height="2" rx="1" fill="#2D5FA0" opacity=".15"/>' +
+      '<rect x="78" y="200" width="60" height="2" rx="1" fill="#4A8BDB" opacity=".3" class="as"/>' +
+      '<circle cx="30" cy="60" r="2" fill="#4A8BDB" opacity=".1" class="ap"/>' +
+      '<circle cx="370" cy="160" r="3" fill="#5E9DE5" opacity=".08" class="ap" style="animation-delay:1.2s"/>'
     ),
 
     'wse-trading-bot': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="12" y="8" width="376" height="30" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="24" y="28" font-size="12" font-weight="700" fill="' + T + '">EUR/USD</text>' +
-      '<text x="110" y="28" font-size="12" font-weight="800" fill="#15803D">1.0847</text>' +
-      '<text x="180" y="28" font-size="10" font-weight="600" fill="#15803D">+0.23%</text>' +
-      '<rect x="300" y="14" width="36" height="18" rx="4" fill="#15803D" opacity=".12"/><text x="318" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#15803D">BUY</text>' +
-      '<rect x="340" y="14" width="36" height="18" rx="4" fill="#dc2626" opacity=".12"/><text x="358" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">SELL</text>' +
-      '<line x1="40" y1="60" x2="40" y2="140" stroke="' + G + '" stroke-width="1.5"/><rect x="32" y="80" width="16" height="40" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="80" y1="50" x2="80" y2="150" stroke="' + G + '" stroke-width="1.5"/><rect x="72" y="60" width="16" height="60" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="120" y1="70" x2="120" y2="160" stroke="' + G + '" stroke-width="1.5"/><rect x="112" y="90" width="16" height="50" rx="2" fill="#dc2626" opacity=".4"/>' +
-      '<line x1="160" y1="55" x2="160" y2="145" stroke="' + G + '" stroke-width="1.5"/><rect x="152" y="65" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="200" y1="45" x2="200" y2="130" stroke="' + G + '" stroke-width="1.5"/><rect x="192" y="55" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="240" y1="60" x2="240" y2="140" stroke="' + G + '" stroke-width="1.5"/><rect x="232" y="75" width="16" height="40" rx="2" fill="#dc2626" opacity=".4"/>' +
-      '<line x1="280" y1="40" x2="280" y2="120" stroke="' + G + '" stroke-width="1.5"/><rect x="272" y="48" width="16" height="50" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="320" y1="35" x2="320" y2="110" stroke="' + G + '" stroke-width="1.5"/><rect x="312" y="40" width="16" height="45" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<line x1="360" y1="50" x2="360" y2="125" stroke="' + G + '" stroke-width="1.5"/><rect x="352" y="55" width="16" height="40" rx="2" fill="#15803D" opacity=".5"/>' +
-      '<polygon class="ap" points="195,50 200,42 205,50" fill="#15803D"/><text class="ap" x="200" y="38" text-anchor="middle" font-size="8" font-weight="700" fill="#15803D">BUY</text>' +
-      '<rect x="12" y="170" width="120" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="24" y="188" font-size="10" font-weight="600" fill="' + TS + '">Daily P/L</text>' +
-      '<text x="24" y="206" font-size="14" font-weight="800" fill="#15803D">+$342.80</text>' +
-      '<rect x="144" y="170" width="120" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="156" y="188" font-size="10" font-weight="600" fill="' + TS + '">Win Rate</text>' +
-      '<text x="156" y="206" font-size="14" font-weight="800" fill="' + G + '">73.2%</text>' +
-      '<rect x="276" y="170" width="112" height="46" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="288" y="188" font-size="10" font-weight="600" fill="' + TS + '">Risk Used</text>' +
-      '<text x="288" y="206" font-size="14" font-weight="800" fill="' + T + '">1.8%</text>'
+      '<defs><linearGradient id="tbbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#tbbg)"/>' +
+      '<g stroke="#2D5FA0" stroke-opacity=".06" stroke-width=".5"><line x1="0" y1="45" x2="400" y2="45"/><line x1="0" y1="90" x2="400" y2="90"/><line x1="0" y1="135" x2="400" y2="135"/></g>' +
+      '<rect x="12" y="6" width="376" height="28" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<text x="24" y="24" font-size="10" font-weight="700" fill="#fff">EUR/USD</text>' +
+      '<text x="110" y="24" font-size="10" font-weight="800" fill="#4ADE80">1.0847</text>' +
+      '<text x="175" y="24" font-size="8" font-weight="600" fill="#4ADE80" class="ap">+0.23%</text>' +
+      '<rect x="300" y="12" width="34" height="16" rx="4" fill="#4ADE80" opacity=".15"/><text x="317" y="24" text-anchor="middle" font-size="8" font-weight="700" fill="#4ADE80">BUY</text>' +
+      '<rect x="340" y="12" width="34" height="16" rx="4" fill="#F87171" opacity=".15"/><text x="357" y="24" text-anchor="middle" font-size="8" font-weight="700" fill="#F87171">SELL</text>' +
+      '<line x1="40" y1="55" x2="40" y2="130" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="34" y="75" width="12" height="35" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="78" y1="48" x2="78" y2="140" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="72" y="56" width="12" height="55" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="116" y1="65" x2="116" y2="150" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="110" y="82" width="12" height="45" rx="1.5" fill="#F87171" opacity=".35"/>' +
+      '<line x1="154" y1="52" x2="154" y2="138" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="148" y="60" width="12" height="48" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="192" y1="42" x2="192" y2="125" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="186" y="50" width="12" height="48" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="230" y1="55" x2="230" y2="135" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="224" y="70" width="12" height="38" rx="1.5" fill="#F87171" opacity=".35"/>' +
+      '<line x1="268" y1="38" x2="268" y2="115" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="262" y="45" width="12" height="48" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="306" y1="32" x2="306" y2="105" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="300" y="38" width="12" height="42" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<line x1="344" y1="45" x2="344" y2="118" stroke="#5E9DE5" stroke-width="1" stroke-opacity=".3"/><rect x="338" y="50" width="12" height="38" rx="1.5" fill="#4ADE80" opacity=".45"/>' +
+      '<polygon class="ap" points="187,45 192,38 197,45" fill="#4ADE80" opacity=".6"/><text class="ap" x="192" y="35" text-anchor="middle" font-size="7" font-weight="700" fill="#4ADE80">BUY</text>' +
+      '<rect x="12" y="165" width="120" height="50" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="24" y="182" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">DAILY P/L</text>' +
+      '<text x="24" y="202" font-size="14" font-weight="800" fill="#4ADE80">+$342.80</text>' +
+      '<rect x="144" y="165" width="120" height="50" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="156" y="182" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">WIN RATE</text>' +
+      '<text x="156" y="202" font-size="14" font-weight="800" fill="#fff">73.2%</text>' +
+      '<rect x="276" y="165" width="112" height="50" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<text x="288" y="182" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">RISK USED</text>' +
+      '<text x="288" y="202" font-size="14" font-weight="800" fill="#fff">1.8%</text>'
     ),
 
     'ai-lead-generator': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<path d="M120 20 L280 20 L250 80 L150 80 Z" fill="' + G + '" opacity=".08" stroke="' + G + '" stroke-opacity=".2"/>' +
-      '<text x="200" y="45" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">SCRAPED</text>' +
-      '<text x="200" y="62" text-anchor="middle" font-size="16" font-weight="800" fill="' + T + '">2,480</text>' +
-      '<path d="M150 84 L250 84 L232 132 L168 132 Z" fill="' + G + '" opacity=".12" stroke="' + G + '" stroke-opacity=".25"/>' +
-      '<text x="200" y="104" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">SCORED</text>' +
-      '<text x="200" y="122" text-anchor="middle" font-size="14" font-weight="800" fill="' + T + '">847</text>' +
-      '<path d="M168 136 L232 136 L220 176 L180 176 Z" fill="' + G + '" opacity=".18" stroke="' + G + '" stroke-opacity=".3"/>' +
-      '<text x="200" y="154" text-anchor="middle" font-size="10" font-weight="700" fill="' + G + '">HOT</text>' +
-      '<text x="200" y="170" text-anchor="middle" font-size="13" font-weight="800" fill="' + T + '">124</text>' +
-      '<rect x="16" y="190" width="112" height="26" rx="8" fill="#15803D" opacity=".08" stroke="#15803D" stroke-opacity=".15"/>' +
-      '<circle class="ap" cx="32" cy="203" r="4" fill="#15803D"/>' + '<text x="42" y="207" font-size="10" font-weight="600" fill="#15803D">Hot · 124</text>' +
-      '<rect x="144" y="190" width="112" height="26" rx="8" fill="' + G + '" opacity=".08" stroke="' + G + '" stroke-opacity=".15"/>' +
-      dot(160, 203, 4, G) + '<text x="170" y="207" font-size="10" font-weight="600" fill="' + G + '">Warm · 723</text>' +
-      '<rect x="272" y="190" width="112" height="26" rx="8" fill="' + TS + '" opacity=".08" stroke="' + TS + '" stroke-opacity=".15"/>' +
-      dot(288, 203, 4, TS) + '<text x="298" y="207" font-size="10" font-weight="600" fill="' + TS + '">Ignore · 1,633</text>'
+      '<defs><linearGradient id="lgbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#lgbg)"/>' +
+      '<path d="M120 18 L280 18 L252 72 L148 72 Z" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".2"/>' +
+      '<text x="200" y="38" text-anchor="middle" font-size="8" font-weight="600" fill="#5E9DE5" opacity=".6">SCRAPED</text>' +
+      '<text x="200" y="58" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">2,480</text>' +
+      '<path d="M148 76 L252 76 L235 122 L165 122 Z" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".25"/>' +
+      '<text x="200" y="94" text-anchor="middle" font-size="8" font-weight="600" fill="#5E9DE5" opacity=".6">SCORED</text>' +
+      '<text x="200" y="114" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">847</text>' +
+      '<path d="M165 126 L235 126 L222 164 L178 164 Z" fill="#1B3A6B" stroke="#5E9DE5" stroke-opacity=".3"/>' +
+      '<text x="200" y="142" text-anchor="middle" font-size="8" font-weight="600" fill="#5E9DE5" opacity=".6">HOT</text>' +
+      '<text x="200" y="158" text-anchor="middle" font-size="13" font-weight="800" fill="#4ADE80">124</text>' +
+      '<circle cx="140" cy="45" r="2" fill="#5E9DE5" opacity=".3" class="ap" style="animation-delay:0s"/>' +
+      '<circle cx="260" cy="42" r="2" fill="#4A8BDB" opacity=".3" class="ap" style="animation-delay:.3s"/>' +
+      '<circle cx="170" cy="95" r="1.5" fill="#5E9DE5" opacity=".3" class="ap" style="animation-delay:.6s"/>' +
+      '<circle cx="230" cy="92" r="1.5" fill="#4A8BDB" opacity=".3" class="ap" style="animation-delay:.9s"/>' +
+      '<circle cx="190" cy="140" r="1.5" fill="#4ADE80" opacity=".4" class="ap" style="animation-delay:1.2s"/>' +
+      '<circle cx="210" cy="138" r="1.5" fill="#4ADE80" opacity=".4" class="ap" style="animation-delay:1.5s"/>' +
+      '<rect x="16" y="180" width="112" height="34" rx="8" fill="#1B3A6B" stroke="#4ADE80" stroke-opacity=".15"/>' +
+      '<circle cx="32" cy="197" r="4" fill="#4ADE80" opacity=".25" class="ap"/>' +
+      '<text x="42" y="194" font-size="8" font-weight="600" fill="#4ADE80">Hot</text><text x="42" y="206" font-size="10" font-weight="700" fill="#fff">124</text>' +
+      '<rect x="144" y="180" width="112" height="34" rx="8" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".15"/>' +
+      '<circle cx="160" cy="197" r="4" fill="#4A8BDB" opacity=".25"/>' +
+      '<text x="170" y="194" font-size="8" font-weight="600" fill="#5E9DE5">Warm</text><text x="170" y="206" font-size="10" font-weight="700" fill="#fff">723</text>' +
+      '<rect x="272" y="180" width="112" height="34" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".12"/>' +
+      '<circle cx="288" cy="197" r="4" fill="#3A72B5" opacity=".2"/>' +
+      '<text x="298" y="194" font-size="8" font-weight="600" fill="#5E9DE5" opacity=".5">Skip</text><text x="298" y="206" font-size="10" font-weight="700" fill="#5E9DE5" opacity=".5">1,633</text>'
     ),
 
     'wse-postpilot': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="180" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<rect x="24" y="20" width="164" height="80" rx="6" fill="' + S + '"/>' +
-      '<text x="106" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="' + TS + '">Image Preview</text>' +
-      ln(24, 112, 140, T, .35) + ln(24, 126, 100, TS, .2) + ln(24, 140, 120, TS, .15) +
-      '<rect x="24" y="160" width="50" height="16" rx="4" fill="#0077B5" opacity=".12"/><text x="49" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="#0077B5">LinkedIn</text>' +
-      '<rect x="80" y="160" width="36" height="16" rx="4" fill="#E1306C" opacity=".12"/><text x="98" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="#E1306C">IG</text>' +
-      '<rect x="122" y="160" width="24" height="16" rx="4" fill="' + T + '" opacity=".12"/><text x="134" y="172" text-anchor="middle" font-size="8" font-weight="700" fill="' + T + '">X</text>' +
-      '<rect x="24" y="186" width="80" height="20" rx="6" fill="' + G + '"/><text x="64" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="' + W + '">Schedule</text>' +
-      '<rect x="210" y="12" width="174" height="48" rx="8" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="222" y="32" font-size="10" font-weight="600" fill="' + TS + '">Today\'s Queue</text>' +
-      '<text x="222" y="48" font-size="16" font-weight="800" fill="' + T + '">4 posts ready</text>' +
-      '<rect x="210" y="70" width="174" height="36" rx="8" fill="' + S + '"/>' +
-      '<circle class="ap" cx="226" cy="88" r="4" fill="#15803D"/>' + ln(236, 82, 100, T, .3) + ln(236, 92, 60, TS, .15) +
-      '<rect x="210" y="114" width="174" height="36" rx="8" fill="' + S + '"/>' +
-      '<circle class="ap" cx="226" cy="132" r="4" fill="#0077B5" style="animation-delay:.4s"/>' + ln(236, 126, 80, T, .3) + ln(236, 136, 70, TS, .15) +
-      '<rect x="210" y="158" width="174" height="36" rx="8" fill="' + S + '"/>' +
-      '<circle class="ap" cx="226" cy="176" r="4" fill="#E1306C" style="animation-delay:.8s"/>' + ln(236, 170, 90, T, .3) + ln(236, 180, 50, TS, .15)
+      '<defs><linearGradient id="ppbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#ppbg)"/>' +
+      '<rect x="16" y="8" width="180" height="208" rx="10" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<rect x="24" y="16" width="164" height="70" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".08"/>' +
+      '<text x="106" y="48" text-anchor="middle" font-size="9" font-weight="600" fill="#5E9DE5" opacity=".5">Content Preview</text>' +
+      '<text x="106" y="62" text-anchor="middle" font-size="7" fill="#5E9DE5" opacity=".3">1200 x 630</text>' +
+      '<text x="24" y="102" font-size="8" fill="#fff" opacity=".7">🚀 New product launch today...</text>' +
+      '<text x="24" y="116" font-size="7" fill="#5E9DE5" opacity=".5">#AI #Lagos #SaaS</text>' +
+      '<rect x="24" y="128" width="48" height="14" rx="4" fill="#0077B5" opacity=".2"/><text x="48" y="139" text-anchor="middle" font-size="7" font-weight="700" fill="#5E9DE5">LinkedIn</text>' +
+      '<rect x="78" y="128" width="32" height="14" rx="4" fill="#E1306C" opacity=".15"/><text x="94" y="139" text-anchor="middle" font-size="7" font-weight="700" fill="#E1306C">IG</text>' +
+      '<rect x="116" y="128" width="22" height="14" rx="4" fill="#fff" opacity=".08"/><text x="127" y="139" text-anchor="middle" font-size="7" font-weight="700" fill="#fff" opacity=".5">X</text>' +
+      '<rect x="24" y="152" width="76" height="20" rx="6" fill="#4A8BDB" opacity=".25"/><text x="62" y="166" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">Schedule</text>' +
+      '<rect x="108" y="152" width="76" height="20" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/><text x="146" y="166" text-anchor="middle" font-size="8" font-weight="600" fill="#5E9DE5">Draft</text>' +
+      '<rect x="210" y="8" width="174" height="40" rx="8" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<text x="222" y="25" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">TODAY\'S QUEUE</text>' +
+      '<text x="222" y="42" font-size="14" font-weight="800" fill="#fff">4 posts ready</text>' +
+      '<rect x="210" y="56" width="174" height="38" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="226" cy="75" r="4" fill="#4ADE80" opacity=".3" class="ap"/><text x="236" y="72" font-size="7" font-weight="600" fill="#fff" opacity=".7">Product Launch</text><text x="236" y="84" font-size="6" fill="#5E9DE5" opacity=".4">9:00 AM · All platforms</text>' +
+      '<rect x="210" y="100" width="174" height="38" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="226" cy="119" r="4" fill="#0077B5" opacity=".3" class="ap" style="animation-delay:.4s"/><text x="236" y="116" font-size="7" font-weight="600" fill="#fff" opacity=".7">Case Study</text><text x="236" y="128" font-size="6" fill="#5E9DE5" opacity=".4">12:00 PM · LinkedIn</text>' +
+      '<rect x="210" y="144" width="174" height="38" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="226" cy="163" r="4" fill="#E1306C" opacity=".3" class="ap" style="animation-delay:.8s"/><text x="236" y="160" font-size="7" font-weight="600" fill="#fff" opacity=".7">Behind the Scenes</text><text x="236" y="172" font-size="6" fill="#5E9DE5" opacity=".4">3:00 PM · Instagram</text>' +
+      '<rect x="210" y="190" width="174" height="26" rx="6" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".12"/>' +
+      '<text x="297" y="207" text-anchor="middle" font-size="8" font-weight="600" fill="#5E9DE5" opacity=".6">+ Add to queue</text>'
     ),
 
     'wse-autoreply': sv(
-      '<rect width="400" height="225" fill="' + B + '"/>' +
-      '<rect x="16" y="12" width="220" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<rect x="16" y="12" width="220" height="36" rx="10" fill="' + G + '" opacity=".05"/>' +
-      '<text x="32" y="35" font-size="12" font-weight="700" fill="' + T + '">Live Chat</text>' +
-      '<circle class="ap" cx="200" cy="30" r="4" fill="#15803D"/>' + '<text class="ap" x="210" y="34" font-size="9" font-weight="600" fill="#15803D">AI</text>' +
-      '<rect x="32" y="60" width="140" height="24" rx="8" fill="' + S + '"/>' +
-      ln(42, 68, 100, TS, .35) +
-      '<rect x="100" y="96" width="120" height="24" rx="8" fill="' + G + '" opacity=".12"/>' +
-      ln(112, 104, 80, G, .5) +
-      '<rect x="32" y="132" width="160" height="30" rx="8" fill="' + S + '"/>' +
-      ln(42, 140, 110, TS, .35) + ln(42, 152, 60, TS, .2) +
-      '<rect x="32" y="174" width="80" height="20" rx="6" fill="' + G + '" opacity=".08"/><text x="72" y="188" text-anchor="middle" font-size="9" font-weight="600" fill="' + G + '">Auto-reply</text>' +
-      '<rect x="252" y="12" width="132" height="200" rx="10" fill="' + W + '" stroke="' + G + '" stroke-opacity=".10"/>' +
-      '<text x="264" y="32" font-size="10" font-weight="700" fill="' + T + '">Queue</text>' +
-      '<rect x="260" y="44" width="116" height="36" rx="6" fill="' + S + '"/>' +
-      dot(272, 58, 3, '#15803D') + ln(280, 54, 70, T, .25) + ln(280, 66, 40, TS, .15) +
-      '<rect x="260" y="88" width="116" height="36" rx="6" fill="' + S + '"/>' +
-      dot(272, 102, 3, G) + ln(280, 98, 60, T, .25) + ln(280, 110, 50, TS, .15) +
-      '<rect x="260" y="132" width="116" height="36" rx="6" fill="' + S + '"/>' +
-      dot(272, 146, 3, '#D97706') + ln(280, 142, 80, T, .25) + ln(280, 154, 30, TS, .15) +
-      '<text x="318" y="192" text-anchor="middle" font-size="18" font-weight="800" fill="' + T + '">24</text>' +
-      '<text x="318" y="206" text-anchor="middle" font-size="9" font-weight="600" fill="' + TS + '">resolved today</text>'
+      '<defs><linearGradient id="arbg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#arbg)"/>' +
+      '<rect x="16" y="8" width="220" height="208" rx="10" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<rect x="16" y="8" width="220" height="32" rx="10" fill="#1B3A6B"/>' +
+      '<text x="32" y="28" font-size="10" font-weight="700" fill="#fff">Live Chat</text>' +
+      '<circle cx="200" cy="24" r="3" fill="#4ADE80" class="ap"/><text x="208" y="27" font-size="7" font-weight="600" fill="#4ADE80">AI</text>' +
+      '<rect x="32" y="50" width="130" height="22" rx="7" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="42" y="64" font-size="7" fill="#5E9DE5" opacity=".7">What are your prices?</text>' +
+      '<rect x="100" y="80" width="120" height="22" rx="7" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".2"/>' +
+      '<text x="110" y="94" font-size="7" fill="#fff" opacity=".8">Here\'s our catalog →</text>' +
+      '<circle cx="214" cy="86" r="4" fill="#4A8BDB" opacity=".15"/><text x="214" y="89" text-anchor="middle" font-size="5" font-weight="800" fill="#5E9DE5">AI</text>' +
+      '<rect x="32" y="110" width="160" height="28" rx="7" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="42" y="122" font-size="7" fill="#5E9DE5" opacity=".7">I need to book a service for</text>' +
+      '<text x="42" y="132" font-size="7" fill="#5E9DE5" opacity=".7">next week Tuesday</text>' +
+      '<rect x="80" y="146" width="140" height="22" rx="7" fill="#1B3A6B" stroke="#4A8BDB" stroke-opacity=".2"/>' +
+      '<text x="90" y="160" font-size="7" fill="#fff" opacity=".8">Booked! Tue 9AM confirmed</text>' +
+      '<circle cx="214" cy="152" r="4" fill="#4A8BDB" opacity=".15"/><text x="214" y="155" text-anchor="middle" font-size="5" font-weight="800" fill="#5E9DE5">AI</text>' +
+      '<rect x="32" y="176" width="76" height="18" rx="5" fill="#4A8BDB" opacity=".15"/><text x="70" y="189" text-anchor="middle" font-size="7" font-weight="600" fill="#5E9DE5">Auto-reply</text>' +
+      '<rect x="114" y="176" width="50" height="18" rx="5" fill="#4ADE80" opacity=".1"/><text x="139" y="189" text-anchor="middle" font-size="7" font-weight="600" fill="#4ADE80">ON</text>' +
+      '<rect x="252" y="8" width="132" height="208" rx="10" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<text x="264" y="28" font-size="9" font-weight="700" fill="#fff">Queue</text>' +
+      '<rect x="260" y="38" width="116" height="34" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="272" cy="55" r="3" fill="#4ADE80" opacity=".3" class="ap"/><text x="280" y="52" font-size="6" font-weight="600" fill="#fff" opacity=".6">Adebayo K.</text><text x="280" y="62" font-size="6" fill="#5E9DE5" opacity=".35">Pricing query</text>' +
+      '<rect x="260" y="78" width="116" height="34" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="272" cy="95" r="3" fill="#4A8BDB" opacity=".3" class="ap" style="animation-delay:.4s"/><text x="280" y="92" font-size="6" font-weight="600" fill="#fff" opacity=".6">Chioma N.</text><text x="280" y="102" font-size="6" fill="#5E9DE5" opacity=".35">Booking help</text>' +
+      '<rect x="260" y="118" width="116" height="34" rx="6" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="272" cy="135" r="3" fill="#FBBF24" opacity=".3" class="ap" style="animation-delay:.8s"/><text x="280" y="132" font-size="6" font-weight="600" fill="#fff" opacity=".6">Emeka O.</text><text x="280" y="142" font-size="6" fill="#5E9DE5" opacity=".35">Complaint</text>' +
+      '<text x="318" y="180" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">24</text>' +
+      '<text x="318" y="196" text-anchor="middle" font-size="7" font-weight="600" fill="#5E9DE5" opacity=".5">resolved today</text>'
     ),
 
     'whatsapp-autoreply': sv(
-      '<rect width="400" height="225" fill="#E5DDD5"/>' +
-      '<rect x="0" y="0" width="400" height="36" fill="#075E54"/>' +
-      '<circle cx="28" cy="18" r="12" fill="#128C7E"/><text x="28" y="23" text-anchor="middle" font-size="12" font-weight="800" fill="' + W + '">B</text>' +
-      '<text x="48" y="16" font-size="11" font-weight="700" fill="' + W + '">Business Bot</text>' +
-      '<text x="48" y="28" font-size="9" fill="' + W + '" opacity=".7">online</text>' +
-      '<rect x="20" y="48" width="180" height="30" rx="8" fill="' + W + '"/>' +
-      '<text x="30" y="60" font-size="10" fill="#303030">Hi, what are your prices?</text>' +
-      '<text x="186" y="72" text-anchor="end" font-size="8" fill="#999">10:32 AM</text>' +
-      '<rect x="200" y="90" width="180" height="50" rx="8" fill="#DCF8C6"/>' +
-      '<text x="210" y="104" font-size="10" fill="#303030">Thanks for reaching out!</text>' +
-      '<text x="210" y="118" font-size="10" fill="#303030">Here are our packages:</text>' +
-      '<text x="210" y="132" font-size="10" font-weight="600" fill="#075E54">View Catalog</text>' +
-      '<text x="366" y="136" text-anchor="end" font-size="8" fill="#999">10:32 AM</text>' +
-      '<rect x="20" y="152" width="140" height="24" rx="8" fill="' + W + '"/>' +
-      '<text x="30" y="168" font-size="10" fill="#303030">I want to book</text>' +
-      '<rect x="220" y="182" width="160" height="30" rx="8" fill="#DCF8C6"/>' +
-      '<text x="230" y="196" font-size="10" fill="#303030">Great! Pick a date:</text>' +
-      '<text x="230" y="208" font-size="10" font-weight="600" fill="#075E54">Mon · Tue · Wed</text>'
+      '<defs><linearGradient id="wabg" x1="0" y1="0" x2="400" y2="225" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0E2748"/><stop offset="100%" stop-color="#162F54"/></linearGradient></defs>' +
+      '<rect width="400" height="225" fill="url(#wabg)"/>' +
+      '<rect x="60" y="4" width="280" height="217" rx="12" fill="#0D1F3C" stroke="#3A72B5" stroke-opacity=".15"/>' +
+      '<rect x="60" y="4" width="280" height="32" rx="12" fill="#075E54"/>' +
+      '<circle cx="82" cy="20" r="10" fill="#128C7E"/><text x="82" y="24" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">B</text>' +
+      '<text x="98" y="17" font-size="9" font-weight="700" fill="#fff">Business Bot</text>' +
+      '<text x="98" y="28" font-size="7" fill="#fff" opacity=".6">online</text>' +
+      '<circle cx="320" cy="20" r="3" fill="#4ADE80" class="ap"/>' +
+      '<rect x="78" y="44" width="150" height="24" rx="7" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="88" y="58" font-size="8" fill="#5E9DE5" opacity=".7">Hi, what are your prices?</text>' +
+      '<text x="218" y="62" font-size="6" fill="#5E9DE5" opacity=".3">10:32</text>' +
+      '<rect x="190" y="76" width="132" height="42" rx="7" fill="#0F3D2E" stroke="#128C7E" stroke-opacity=".15"/>' +
+      '<text x="200" y="90" font-size="8" fill="#DCF8C6" opacity=".9">Thanks for reaching out!</text>' +
+      '<text x="200" y="102" font-size="8" fill="#DCF8C6" opacity=".9">Here are our packages:</text>' +
+      '<text x="200" y="114" font-size="8" font-weight="600" fill="#25D366">View Catalog →</text>' +
+      '<rect x="78" y="126" width="120" height="24" rx="7" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<text x="88" y="140" font-size="8" fill="#5E9DE5" opacity=".7">I want to book</text>' +
+      '<rect x="210" y="158" width="112" height="34" rx="7" fill="#0F3D2E" stroke="#128C7E" stroke-opacity=".15"/>' +
+      '<text x="220" y="172" font-size="8" fill="#DCF8C6" opacity=".9">Great! Pick a date:</text>' +
+      '<text x="220" y="186" font-size="8" font-weight="600" fill="#25D366">Mon · Tue · Wed</text>' +
+      '<rect x="78" y="200" width="60" height="14" rx="7" fill="#1B3A6B" stroke="#3A72B5" stroke-opacity=".1"/>' +
+      '<circle cx="92" cy="207" r="2" fill="#5E9DE5" opacity=".4" class="ap"/>' +
+      '<circle cx="100" cy="207" r="2" fill="#5E9DE5" opacity=".4" class="ap" style="animation-delay:.2s"/>' +
+      '<circle cx="108" cy="207" r="2" fill="#5E9DE5" opacity=".4" class="ap" style="animation-delay:.4s"/>' +
+      '<circle cx="30" cy="100" r="2.5" fill="#25D366" opacity=".1" class="ap" style="animation-delay:.6s"/>' +
+      '<circle cx="370" cy="60" r="2" fill="#128C7E" opacity=".1" class="ap" style="animation-delay:1s"/>'
     )
   };
 

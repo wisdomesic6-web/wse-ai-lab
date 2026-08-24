@@ -36,15 +36,66 @@
 
 <main id="main">
 
-  <section class="phero">
-    <div class="wrap">
+  <section class="phero workshop-hero">
+    <div class="workshop-bg" aria-hidden="true">
+      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+        <g stroke="#2D5FA0" stroke-opacity=".04" stroke-width=".5">
+          <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/>
+          <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/>
+          <line x1="0" y1="500" x2="1200" y2="500"/>
+          <line x1="200" y1="0" x2="200" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/>
+          <line x1="600" y1="0" x2="600" y2="600"/><line x1="800" y1="0" x2="800" y2="600"/>
+          <line x1="1000" y1="0" x2="1000" y2="600"/>
+        </g>
+        <g font-family="monospace" font-size="9" fill="#4A8BDB" opacity=".08">
+          <text x="80" y="80">const product = build();</text>
+          <text x="900" y="150">deploy(config);</text>
+          <text x="150" y="450">import { AI } from 'wse';</text>
+          <text x="750" y="520">export default app;</text>
+          <text x="400" y="280">async function ship() {</text>
+          <text x="950" y="380">return success;</text>
+        </g>
+        <circle cx="200" cy="200" r="3" fill="#4A8BDB" opacity=".12">
+          <animate attributeName="opacity" values=".05;.15;.05" dur="4s" repeatCount="indefinite"/>
+          <animate attributeName="cy" values="200;190;200" dur="6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="600" cy="100" r="2.5" fill="#5E9DE5" opacity=".1">
+          <animate attributeName="opacity" values=".04;.12;.04" dur="5s" repeatCount="indefinite" begin="1s"/>
+          <animate attributeName="cx" values="600;610;600" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="1000" cy="300" r="3" fill="#3A72B5" opacity=".1">
+          <animate attributeName="opacity" values=".05;.14;.05" dur="3.5s" repeatCount="indefinite" begin="2s"/>
+          <animate attributeName="cy" values="300;310;300" dur="7s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="400" cy="450" r="2" fill="#4A8BDB" opacity=".08">
+          <animate attributeName="opacity" values=".03;.1;.03" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+        <circle cx="800" cy="180" r="2.5" fill="#5E9DE5" opacity=".1">
+          <animate attributeName="opacity" values=".04;.13;.04" dur="5.5s" repeatCount="indefinite" begin="1.5s"/>
+          <animate attributeName="cx" values="800;790;800" dur="9s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="350" r="2" fill="#3A72B5" opacity=".08">
+          <animate attributeName="opacity" values=".03;.11;.03" dur="4s" repeatCount="indefinite" begin="3s"/>
+        </circle>
+        <path d="M100 200 Q200 180 300 200" fill="none" stroke="#4A8BDB" stroke-width=".5" stroke-opacity=".06">
+          <animate attributeName="stroke-opacity" values=".03;.08;.03" dur="6s" repeatCount="indefinite"/>
+        </path>
+        <path d="M700 150 Q850 120 1000 150" fill="none" stroke="#5E9DE5" stroke-width=".5" stroke-opacity=".05">
+          <animate attributeName="stroke-opacity" values=".02;.07;.02" dur="7s" repeatCount="indefinite" begin="2s"/>
+        </path>
+        <path d="M500 400 Q650 380 800 400" fill="none" stroke="#3A72B5" stroke-width=".5" stroke-opacity=".05">
+          <animate attributeName="stroke-opacity" values=".02;.06;.02" dur="5s" repeatCount="indefinite" begin="1s"/>
+        </path>
+      </svg>
+    </div>
+    <div class="wrap" style="position:relative;z-index:1">
       <span class="eyebrow">Products</span>
       <h1 class="h-xl" data-split>Thirteen products. Built, owned, operated.</h1>
       <p class="lead">Each one targets a specific gap in the African business market. We build them, run them internally, and offer them as SaaS — so when we build for you, we're using muscles we exercise every day.</p>
     </div>
   </section>
 
-  <section class="section" style="padding-top:clamp(30px,3.5vw,48px)">
+  <section class="section workshop-section" style="padding-top:clamp(30px,3.5vw,48px)">
     <div class="wrap">
       <div class="filter-tabs" role="tablist" aria-label="Filter products">
         <button class="filter-tab active" data-filter="all">All · 13</button>
@@ -56,8 +107,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="section" style="padding-top:0;padding-bottom:0">
-    <div class="wrap">
+  <section class="section workshop-section" style="padding-top:0;padding-bottom:0">
+    <div class="wrap" style="position:relative;z-index:1">
       <div class="cta-band reveal">
         <h2 class="h-lg">The next one could be yours.</h2>
         <p class="lead">Every product here started as a conversation. Bring us yours.</p>
