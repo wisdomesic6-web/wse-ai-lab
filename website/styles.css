@@ -848,6 +848,28 @@ form.inq{display:grid;gap:18px}
   font-size:var(--fs-label);font-weight:500;
 }
 
+/* ── Legal prose ── */
+.legal-hero{
+  background:radial-gradient(ellipse at 50% 0%, rgba(27,58,107,.08), transparent 60%),
+    linear-gradient(180deg, var(--surface), var(--bg));
+  text-align:center;padding-block:clamp(64px,6vw,100px) clamp(24px,3vw,40px);
+}
+.legal-hero h1{max-width:22ch;margin:22px auto 20px}
+.legal-hero .lead{max-width:58ch;margin-inline:auto}
+.legal-prose{max-width:780px;margin:0 auto;padding:0 20px clamp(60px,6vw,100px);line-height:1.8}
+.legal-prose h2{font-size:clamp(1.15rem,1rem + .5vw,1.35rem);margin:clamp(36px,4vw,52px) 0 14px;color:var(--text);letter-spacing:-.01em}
+.legal-prose h3{font-size:clamp(1rem,.95rem + .3vw,1.15rem);margin:28px 0 10px;color:var(--text)}
+.legal-prose p{margin:0 0 16px;color:var(--text-soft)}
+.legal-prose ul,.legal-prose ol{margin:0 0 16px;padding-left:1.5em;color:var(--text-soft)}
+.legal-prose li{margin-bottom:8px}
+.legal-prose a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.legal-prose a:hover{color:var(--gold-bright)}
+.legal-prose .effective{font-size:var(--fs-support);color:var(--muted);margin-bottom:28px;text-align:center}
+.legal-prose table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:var(--fs-support)}
+.legal-prose th,.legal-prose td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border)}
+.legal-prose th{font-weight:700;color:var(--text);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase}
+.legal-prose td{color:var(--text-soft)}
+
 /* ── Floating actions ── */
 .fab-wa{
   position:fixed;right:22px;bottom:22px;z-index:150;width:58px;height:58px;border-radius:50%;
