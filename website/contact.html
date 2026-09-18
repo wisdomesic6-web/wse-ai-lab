@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — WSE Lab Consult</title>
-<meta name="description" content="Ready to build something? Tell WSE Lab Consult the goal — we reply within 24 hours with a clear assessment and a concrete next step. Lagos, Nigeria.">
-<meta name="theme-color" content="#FAF7F0">
+<meta name="description" content="Have a project in mind? Get in touch with WSE Lab Consult. We build AI-powered software, automation systems, and SaaS platforms. Lagos, Nigeria.">
+<meta name="theme-color" content="#0A1628">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,12 +22,15 @@
       <span class="brand-name">WSE <b>Lab Consult</b></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" data-nav>Home</a>
       <a href="services.html" data-nav>Services</a>
       <a href="products.html" data-nav>Products</a>
+      <a href="solutions.html" data-nav>Solutions</a>
       <a href="about.html" data-nav>About</a>
-      <a href="index.html#pricing" data-nav>Pricing</a>
       <a href="contact.html" data-nav>Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -37,43 +40,93 @@
 
 <main id="main">
 
-  <section class="contact-hero">
+  <!-- HERO -->
+  <section class="phero">
     <div class="wrap">
-      <span class="eyebrow center">Get In Touch</span>
-      <h1 class="h-xl" data-split>Ready to build something?</h1>
-      <p class="lead">Share the goal — an AI product, an automation, or just a problem you're stuck on. We reply within 24 hours with a clear assessment and a concrete next step.</p>
+      <span class="eyebrow">Contact Us</span>
+      <h1 class="h-xl" data-split>Get in Touch</h1>
+      <p class="lead">Have a project in mind? We'd love to hear about it. Reach out and let's start building.</p>
     </div>
   </section>
 
-  <section class="section" style="padding-top:clamp(36px,4vw,56px)">
+  <!-- CONTACT SECTION -->
+  <section class="section">
     <div class="wrap">
       <div class="contact-grid">
 
-        <!-- Form -->
-        <div class="form-panel reveal">
-          <form class="inq" id="inquiryForm" action="https://formspree.io/f/mrewogqj" method="POST">
-            <div class="row2">
-              <div class="field"><label for="f-name">Full Name</label><input id="f-name" name="name" type="text" placeholder="Amara Okafor" autocomplete="name" required></div>
-              <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" placeholder="amara@company.com" autocomplete="email" required></div>
+        <!-- Left: Contact Info -->
+        <div class="contact-info reveal">
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 5L12 13 2 5"/></svg>
             </div>
+            <div>
+              <h4>Email Us</h4>
+              <p><a href="mailto:info@wseailab.com">info@wseailab.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <h4>Call Us</h4>
+              <p><a href="tel:+2348160829058">+234 816 082 9058</a></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Visit Us</h4>
+              <p>Lagos, Nigeria</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="ci-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h4>Working Hours</h4>
+              <p>Monday - Friday, 9:00 AM - 6:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="form-panel reveal">
+          <form id="inquiryForm" action="https://formspree.io/f/xzzdpjkb" method="POST">
             <div class="row2">
-              <div class="field"><label for="f-biz">Business</label><input id="f-biz" name="business" type="text" placeholder="Okafor Ventures Ltd" autocomplete="organization"></div>
-              <div class="field"><label for="f-need">Service Interest</label>
-                <select id="f-need" name="service_interest">
-                  <option>AI Product Build</option>
-                  <option>Business Automation</option>
-                  <option>AI Strategy &amp; Advisory</option>
-                  <option>SaaS Launch &amp; Scale</option>
-                  <option>Not sure yet</option>
-                </select>
+              <div class="field">
+                <label for="f-name">Name</label>
+                <input id="f-name" name="name" type="text" placeholder="Your full name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
               </div>
             </div>
-            <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="What are you trying to build or fix? What does success look like?" required></textarea></div>
-            <input type="hidden" name="_subject" value="New project enquiry — WSE Lab Consult">
-            <button class="btn btn-primary" type="submit" id="formSubmitBtn" style="justify-content:center">Send Message
+            <div class="field">
+              <label for="f-subject">Subject</label>
+              <select id="f-subject" name="subject">
+                <option>General Inquiry</option>
+                <option>Project Discussion</option>
+                <option>Partnership</option>
+                <option>Support</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-msg">Message</label>
+              <textarea id="f-msg" name="message" placeholder="Tell us about your project..." required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" id="formSubmitBtn" style="justify-content:center;width:100%">Send Message
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             </button>
-            <p style="font-size:12.5px;color:var(--muted);margin:2px 0 0">No spam, no sales calls you didn't ask for. Just a real reply from a builder.</p>
           </form>
           <div class="sent" id="formSent" role="status">
             <div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -82,38 +135,22 @@
           </div>
         </div>
 
-        <!-- Info card -->
-        <div class="info-card reveal">
-          <div class="info-row">
-            <span class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
-            <div>
-              <div class="info-k">Email</div>
-              <div class="info-v"><a href="mailto:info@wseailab.com">info@wseailab.com</a></div>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <span class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-            <div>
-              <div class="info-k">WhatsApp</div>
-              <div class="info-v"><a href="https://wa.me/2348160829058" target="_blank" rel="noopener">Scan to chat</a></div>
-              <div class="info-qr" style="margin-top:12px">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=208x208&amp;bgcolor=FFFFFF&amp;color=0A2463&amp;margin=10&amp;data=https://wa.me/2348160829058" alt="Scan to chat on WhatsApp" loading="lazy" width="104" height="104">
-              </div>
-            </div>
-          </div>
-
-          <div class="info-row">
-            <span class="pin" aria-hidden="true"></span>
-            <div>
-              <div class="info-k">Location</div>
-              <div class="info-v">Lagos, Nigeria</div>
-              <p style="font-size:12.5px;color:var(--on-navy-muted);margin-top:4px">Replies within 24 hours</p>
-            </div>
-          </div>
-        </div>
-
       </div>
+    </div>
+  </section>
+
+  <!-- MAP SECTION -->
+  <section class="section contact-map" style="padding-top:0">
+    <div class="wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253682.63280341!2d3.28395955!3d6.548055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8b2ae68280c1%3A0xdc9e87a367c3d9cb!2sLagos%2C%20Nigeria!5e0!3m2!1sen!2sng!4v1"
+        width="100%"
+        height="450"
+        style="border:0;border-radius:12px"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="WSE Lab Consult Location"></iframe>
     </div>
   </section>
 
@@ -127,34 +164,43 @@
           <img class="logo-img" src="assets/logo.svg" alt="WSE Lab Consult" data-ph="logo">
           <span class="brand-name">WSE <b>Lab Consult</b></span>
         </a>
-        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
+        <p class="footer-blurb">We build AI-powered software, automation systems, and SaaS platforms that generate real revenue for businesses worldwide.</p>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="products.html">Products</a>
         <a href="services.html">Services</a>
-        <a href="index.html#pricing">Pricing</a>
+        <a href="products.html">Products</a>
         <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="terms.html">Terms of Service</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="refund.html">Refund Policy</a>
-        <a href="dpa.html">Data Processing Agreement</a>
-        <a href="msa.html">Master Service Agreement</a>
+        <h4>Our Products</h4>
+        <a href="product.html?p=tradehub">WSE TradeHub</a>
+        <a href="product.html?p=academy">WSE Academy</a>
+        <a href="product.html?p=smartsales">SmartSales</a>
+        <a href="product.html?p=memora">Memora</a>
+        <a href="products.html">View All</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4>Get In Touch</h4>
         <a href="mailto:info@wseailab.com">info@wseailab.com</a>
+        <a href="tel:+2348160829058">+234 816 082 9058</a>
         <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
         <a href="contact.html">Start a Project</a>
       </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
-      <span>Intelligent Automation Studio</span>
+      <span>&copy; <span data-year>2026</span> WSE Lab Consult. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
     </div>
   </div>
 </footer>

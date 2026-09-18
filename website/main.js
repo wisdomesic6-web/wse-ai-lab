@@ -1285,7 +1285,7 @@
 
     var PARTICLE_COUNT = 60;
     var CONNECTION_DIST = 140;
-    var GOLD = { r: 168, g: 136, b: 46 };
+    var GOLD = { r: 37, g: 99, b: 235 };
     var particles = [];
     var mouseX = -1000;
     var mouseY = -1000;

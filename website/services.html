@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Services — WSE Lab Consult</title>
-<meta name="description" content="AI Product Build, Business Automation, AI Strategy &amp; Advisory, SaaS Launch &amp; Scale — WSE Lab Consult builds revenue-generating AI systems for African businesses.">
-<meta name="theme-color" content="#FAF7F0">
+<meta name="description" content="From strategy to scalable products — AI development, business automation, SaaS platforms, consulting, UI/UX design, and ongoing support from WSE Lab Consult.">
+<meta name="theme-color" content="#0A1628">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,12 +22,15 @@
       <span class="brand-name">WSE <b>Lab Consult</b></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" data-nav>Home</a>
       <a href="services.html" data-nav>Services</a>
       <a href="products.html" data-nav>Products</a>
+      <a href="solutions.html" data-nav>Solutions</a>
       <a href="about.html" data-nav>About</a>
-      <a href="index.html#pricing" data-nav>Pricing</a>
       <a href="contact.html" data-nav>Contact</a>
-      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project</a>
+      <a class="btn btn-primary nav-cta" href="contact.html">Start a Project
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -37,135 +40,106 @@
 
 <main id="main">
 
+  <!-- HERO -->
   <section class="phero">
     <div class="wrap">
-      <span class="eyebrow">Services</span>
-      <h1 class="h-xl" data-split>AI that pays for itself.</h1>
-      <p class="lead">Four ways we put intelligent automation to work for your business — each scoped to a fixed quote, shipped in stages, and measured by what it earns or saves.</p>
+      <span class="eyebrow">Our Services</span>
+      <h1 class="h-xl" data-split>From Strategy to Scalable Products</h1>
+      <p class="lead">End-to-end technology services that take your idea from concept to a revenue-generating product — built with modern AI, shipped in stages, and measured by results.</p>
     </div>
   </section>
 
-  <!-- 1 · AI PRODUCT BUILD -->
-  <section class="svc-section">
+  <!-- SERVICE CARDS -->
+  <section class="section">
     <div class="wrap">
-      <div class="svc-inner">
-        <div class="reveal">
-          <span class="eyebrow">01 · AI Product Build</span>
-          <h2 class="h-lg" style="margin:16px 0 14px">Your AI product, from concept to customers.</h2>
-          <p class="lead" style="font-size:1.05rem">We design, engineer, and launch complete AI products — assistants, copilots, and intelligent platforms trained on your business. Proven in our own portfolio before we ever build for you.</p>
-          <ul class="svc-list">
-            <li>Custom AI assistants with your business knowledge built in</li>
-            <li>Document analysis and plain-English reporting</li>
-            <li>Voice, image, and multilingual support</li>
-            <li>Claude API production infrastructure</li>
-            <li>Your data stays in your workspace — strict isolation</li>
-          </ul>
-          <div class="svc-meta">
-            <span class="svc-time">⏱ 6–10 weeks typical</span>
-            <a class="btn btn-primary" href="contact.html">Enquire
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <div class="grid g-3">
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
+          <h3>AI Product Development</h3>
+          <p>Build intelligent systems that learn and adapt to solve real business problems.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
-        <div class="svc-photo reveal">
-          <img src="assets/svc-development.jpg" alt="Software developer building an AI product at a modern workstation" width="2752" height="1536" loading="lazy">
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <h3>Business Automation</h3>
+          <p>Streamline operations, reduce manual work, and let your systems run 24/7.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>SaaS Platform Development</h3>
+          <p>Launch and scale your own software products with modern cloud architecture.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3>AI Strategy &amp; Consulting</h3>
+          <p>Turn AI into real business value with actionable strategy and clear roadmaps.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>Beautiful, intuitive, and conversion-focused design for web and mobile applications.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <div class="card svc-card reveal">
+          <div class="card-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Ongoing Support &amp; Growth</h3>
+          <p>Keep your systems running, scaling, and evolving as your business grows.</p>
+          <a class="card-link" href="contact.html">Learn More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- 2 · BUSINESS AUTOMATION -->
-  <section class="svc-section alt">
+  <!-- CTA WITH PHOTO -->
+  <section class="section" style="padding-top:0">
     <div class="wrap">
-      <div class="svc-inner">
-        <div class="reveal">
-          <span class="eyebrow">02 · Business Automation</span>
-          <h2 class="h-lg" style="margin:16px 0 14px">Operations that run while you sleep.</h2>
-          <p class="lead" style="font-size:1.05rem">We wire your business together — lead intake, follow-ups, reporting, WhatsApp responses — so the busywork runs itself around the clock, without a human on standby.</p>
-          <ul class="svc-list">
-            <li>n8n workflows across the tools you already use</li>
-            <li>WhatsApp, SMS, and email automation</li>
-            <li>Lead scoring with AI-drafted outreach</li>
-            <li>Scheduled reports that write themselves</li>
-            <li>Deployed live with monitoring and handover</li>
-          </ul>
-          <div class="svc-meta">
-            <span class="svc-time">⏱ 2–4 weeks typical</span>
-            <a class="btn btn-primary" href="contact.html">Enquire
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <div class="cta-photo reveal">
+        <div class="cta-photo-text">
+          <h2 class="h-lg">Let's Build Something Great Together</h2>
+          <p class="lead">Tell us your idea. We'll tell you the highest-leverage place to start — within 24 hours.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="contact.html">Start a Project
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="btn btn-outline-white" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Chat on WhatsApp</a>
           </div>
         </div>
-        <div class="svc-photo reveal">
-          <img src="assets/svc-automation.jpg" alt="Professional reviewing analytics dashboards for business automation" width="2752" height="1536" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · AI STRATEGY & ADVISORY -->
-  <section class="svc-section">
-    <div class="wrap">
-      <div class="svc-inner">
-        <div class="reveal">
-          <span class="eyebrow">03 · AI Strategy &amp; Advisory</span>
-          <h2 class="h-lg" style="margin:16px 0 14px">A build plan tied to revenue, not trends.</h2>
-          <p class="lead" style="font-size:1.05rem">A specific, prioritised plan for what to build, in what order, and why — grounded in thirteen products we've shipped ourselves, not a slide deck of possibilities.</p>
-          <ul class="svc-list">
-            <li>Technical audit of what you have today</li>
-            <li>Prioritised build roadmap with costs</li>
-            <li>Build-vs-buy calls for each piece</li>
-            <li>ROI model tied to your revenue targets</li>
-            <li>A plan you can execute with us or without us</li>
-          </ul>
-          <div class="svc-meta">
-            <span class="svc-time">⏱ 1–2 weeks typical</span>
-            <a class="btn btn-primary" href="contact.html">Enquire
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-        </div>
-        <div class="svc-photo reveal">
-          <img src="assets/svc-strategy.jpg" alt="Team in a strategy meeting discussing AI implementation roadmap" width="2752" height="1536" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · SAAS LAUNCH & SCALE -->
-  <section class="svc-section alt">
-    <div class="wrap">
-      <div class="svc-inner">
-        <div class="reveal">
-          <span class="eyebrow">04 · SaaS Launch &amp; Scale</span>
-          <h2 class="h-lg" style="margin:16px 0 14px">From working product to paying customers.</h2>
-          <p class="lead" style="font-size:1.05rem">Everything a product needs to earn: billing, auth, onboarding, and the growth loops that turn users into revenue. Naira-first with Paystack, global-ready with Stripe.</p>
-          <ul class="svc-list">
-            <li>Paystack and Stripe billing built in</li>
-            <li>Auth, roles, and multi-tenant workspaces</li>
-            <li>Onboarding flows that convert</li>
-            <li>Analytics and growth instrumentation</li>
-            <li>Staged delivery — live at every milestone</li>
-          </ul>
-          <div class="svc-meta">
-            <span class="svc-time">⏱ 4–8 weeks typical</span>
-            <a class="btn btn-primary" href="contact.html">Enquire
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-        </div>
-        <div class="svc-photo reveal">
-          <img src="assets/svc-development.jpg" alt="Developer launching and scaling a SaaS product" width="2752" height="1536" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section" style="padding-top:clamp(40px,4vw,64px);padding-bottom:0">
-    <div class="wrap">
-      <div class="cta-band reveal">
-        <h2 class="h-lg">Not sure which one you need?</h2>
-        <p class="lead">Tell us the problem. We'll tell you the highest-leverage place to start — within 24 hours.</p>
-        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-          <a class="btn btn-primary" href="contact.html">Start a Project</a>
-          <a class="btn btn-ghost" href="https://wa.me/2348160829058" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <div class="cta-photo-img">
+          <img src="assets/svc-development.jpg" alt="Team working on project" loading="lazy">
         </div>
       </div>
     </div>
@@ -181,34 +155,43 @@
           <img class="logo-img" src="assets/logo.svg" alt="WSE Lab Consult" data-ph="logo">
           <span class="brand-name">WSE <b>Lab Consult</b></span>
         </a>
-        <p class="footer-blurb">An intelligent automation studio in Lagos. We build revenue-generating AI systems for African businesses — and run thirteen of our own.</p>
+        <p class="footer-blurb">We build AI-powered software, automation systems, and SaaS platforms that generate real revenue for businesses worldwide.</p>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="products.html">Products</a>
         <a href="services.html">Services</a>
-        <a href="index.html#pricing">Pricing</a>
+        <a href="products.html">Products</a>
         <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="terms.html">Terms of Service</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="refund.html">Refund Policy</a>
-        <a href="dpa.html">Data Processing Agreement</a>
-        <a href="msa.html">Master Service Agreement</a>
+        <h4>Our Products</h4>
+        <a href="product.html?p=tradehub">WSE TradeHub</a>
+        <a href="product.html?p=academy">WSE Academy</a>
+        <a href="product.html?p=smartsales">SmartSales</a>
+        <a href="product.html?p=memora">Memora</a>
+        <a href="products.html">View All</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4>Get In Touch</h4>
         <a href="mailto:info@wseailab.com">info@wseailab.com</a>
+        <a href="tel:+2348160829058">+234 816 082 9058</a>
         <a href="https://wa.me/2348160829058" target="_blank" rel="noopener">WhatsApp</a>
         <a href="contact.html">Start a Project</a>
       </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>WSE Lab Consult © <span data-year>2026</span> · Lagos, Nigeria</span>
-      <span>Intelligent Automation Studio</span>
+      <span>&copy; <span data-year>2026</span> WSE Lab Consult. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
     </div>
   </div>
 </footer>
