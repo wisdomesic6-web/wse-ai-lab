@@ -152,6 +152,83 @@
         'Currently in development in the WSE workshop.'
       ],
       features: ['24/7 automated FAQ responses', 'Order updates and appointment booking', 'Lead capture into your CRM', 'Human handover when needed']
+    },
+    {
+      slug: 'ai-construction-design', name: 'AI Design Engine for Construction', status: 'building', tag: 'Construction · Design Automation',
+      url: null,
+      desc: 'Automated construction design pipeline — from project brief to drawings and specs, built on an n8n automation core.',
+      long: [
+        'AI Design Engine for Construction automates the early stages of a construction project — turning a brief into structured design outputs instead of starting from a blank page.',
+        'The pipeline is built on n8n workflow automation, wiring together the research, drafting, and content-generation steps a design team would otherwise do by hand.',
+        'Currently in early development in the WSE workshop.'
+      ],
+      features: ['Brief-to-design automated pipeline', 'n8n-powered workflow core', 'Reduces manual drafting time', 'Built for construction project teams']
+    },
+    {
+      slug: 'ai-data-os', name: 'AI Operating System for Data Analysis', status: 'building', tag: 'Data · Multi-tenant SaaS',
+      url: null,
+      desc: 'Multi-tenant AI operating system for data analysis — organisation accounts, API keys, and usage plans on a dedicated orchestration backend.',
+      long: [
+        'AI Operating System for Data Analysis is a multi-tenant backend for running data-analysis workloads at the organisation level — accounts, API keys, and usage plans are first-class from day one.',
+        'A dedicated orchestration layer coordinates the analysis jobs, built to scale past a single-tenant tool.',
+        'Currently in development in the WSE workshop.'
+      ],
+      features: ['Multi-tenant organisation accounts', 'API key management', 'Usage-based plans', 'Dedicated job orchestration backend']
+    },
+    {
+      slug: 'budgetrix', name: 'Budgetrix', status: 'building', tag: 'Travel · Budget Planning',
+      url: null,
+      desc: 'Budget-first travel planner — tell it what you have to spend, it builds the trip around it.',
+      long: [
+        'Budgetrix flips the usual travel-planning order: instead of picking a destination and hoping the cost works out, you set your budget first and Budgetrix builds a trip that fits it.',
+        'An allocation engine splits your budget across flights, stays, and activities, pulling in live pricing data as integrations complete.',
+        'Phase 1 MVP in progress in the WSE workshop.'
+      ],
+      features: ['Budget-first trip planning', 'Automated spend allocation engine', 'Live pricing integrations (in progress)', 'Built for cost-conscious travellers']
+    },
+    {
+      slug: 'choirserve', name: 'ChoirServe', status: 'building', tag: 'Faith Tech · Choir Management',
+      url: null,
+      desc: 'Multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.',
+      long: [
+        'ChoirServe is a multi-tenant SaaS platform for church choirs and music departments — rosters, rehearsal scheduling, and attendance in one system.',
+        'Built on Supabase with a full multi-tenant data model, it is designed to serve many churches from one platform, each fully isolated.',
+        'Pre-launch: core phases built with a full automated test suite passing, final deployment and live verification still pending.'
+      ],
+      features: ['Choir roster management', 'Rehearsal scheduling', 'Attendance tracking', 'Multi-tenant, per-church data isolation']
+    },
+    {
+      slug: 'wiz-9ja', name: 'Wiz-9ja', status: 'building', tag: 'AI · Nigerian Pidgin Voice & Content',
+      url: null,
+      desc: 'AI voice and content platform built natively for Nigerian Pidgin.',
+      long: [
+        'Wiz-9ja is an AI voice and content platform designed around Nigerian Pidgin — built for the way millions of Nigerians actually speak, not a translation layer bolted onto an English-first model.',
+        'The project is currently in its discovery and architecture phase, with early technical benchmarking underway.',
+        'Early-stage — in the planning and architecture phase of the WSE workshop.'
+      ],
+      features: ['Native Nigerian Pidgin voice & content', 'Architecture and benchmarking underway', 'Early-stage — not yet in active build']
+    },
+    {
+      slug: 'wse-scripturebeam', name: 'WSE ScriptureBeam', status: 'building', tag: 'Faith Tech · Live Presentation',
+      url: null,
+      desc: 'Real-time scripture detection and display for live sermons.',
+      long: [
+        'WSE ScriptureBeam listens to a live sermon and detects scripture references as they are spoken, displaying them automatically for the congregation — no manual slide-flipping required.',
+        'The detection core is built and tested; the live presentation interface is the next build phase.',
+        'Mid-development in the WSE workshop — core engine built, presentation layer in progress.'
+      ],
+      features: ['Live sermon audio detection', 'Automatic scripture reference matching', 'Real-time display output', 'Built for church presentation teams']
+    },
+    {
+      slug: 'amazo-books', name: 'Amazo Books', status: 'building', tag: 'Publishing · Digital Products',
+      url: null,
+      desc: "WSE Lab Consult's self-publishing line — AI business playbooks for African entrepreneurs.",
+      long: [
+        "Amazo Books is WSE Lab Consult's self-publishing line — a growing library of AI Business Playbooks written for African entrepreneurs and small business owners.",
+        'Each title is a practical, no-fluff guide rather than theory — the kind of playbook meant to be used, not shelved.',
+        'A sales page and the first set of titles already exist; wider distribution is in progress.'
+      ],
+      features: ['Practical AI business playbooks', 'Written for African entrepreneurs', 'Growing title library', 'Direct sales page']
     }
   ];
 

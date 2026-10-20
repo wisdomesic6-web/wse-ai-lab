@@ -91,6 +91,48 @@ const PRODUCTS = [
     url: null,
     desc: "Automated WhatsApp responses for Nigerian businesses — FAQs, orders, bookings, lead capture, 24/7.",
   },
+  {
+    slug: "ai-construction-design", name: "AI Design Engine for Construction", status: "building",
+    tag: "Construction · Design Automation",
+    url: null,
+    desc: "Automated construction design pipeline — from project brief to drawings and specs, built on an n8n automation core.",
+  },
+  {
+    slug: "ai-data-os", name: "AI Operating System for Data Analysis", status: "building",
+    tag: "Data · Multi-tenant SaaS",
+    url: null,
+    desc: "Multi-tenant AI operating system for data analysis — organisation accounts, API keys, and usage plans on a dedicated orchestration backend.",
+  },
+  {
+    slug: "budgetrix", name: "Budgetrix", status: "building",
+    tag: "Travel · Budget Planning",
+    url: null,
+    desc: "Budget-first travel planner — tell it what you have to spend, it builds the trip around it.",
+  },
+  {
+    slug: "choirserve", name: "ChoirServe", status: "building",
+    tag: "Faith Tech · Choir Management",
+    url: null,
+    desc: "Multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.",
+  },
+  {
+    slug: "wiz-9ja", name: "Wiz-9ja", status: "building",
+    tag: "AI · Nigerian Pidgin Voice & Content",
+    url: null,
+    desc: "AI voice and content platform built natively for Nigerian Pidgin.",
+  },
+  {
+    slug: "wse-scripturebeam", name: "WSE ScriptureBeam", status: "building",
+    tag: "Faith Tech · Live Presentation",
+    url: null,
+    desc: "Real-time scripture detection and display for live sermons.",
+  },
+  {
+    slug: "amazo-books", name: "Amazo Books", status: "building",
+    tag: "Publishing · Digital Products",
+    url: null,
+    desc: "WSE Lab Consult's self-publishing line — AI business playbooks for African entrepreneurs.",
+  },
 ];
 
 exports.handler = async function (event) {
