@@ -207,17 +207,6 @@
         'Mid-development in the WSE workshop — core engine built, presentation layer in progress.'
       ],
       features: ['Live sermon audio detection', 'Automatic scripture reference matching', 'Real-time display output', 'Built for church presentation teams']
-    },
-    {
-      slug: 'amazo-books', name: 'Amazo Books', status: 'building', tag: 'Publishing · Digital Products',
-      url: null,
-      desc: "WSE Lab Consult's self-publishing line — AI business playbooks for African entrepreneurs.",
-      long: [
-        "Amazo Books is WSE Lab Consult's self-publishing line — a growing library of AI Business Playbooks written for African entrepreneurs and small business owners.",
-        'Each title is a practical, no-fluff guide rather than theory — the kind of playbook meant to be used, not shelved.',
-        'A sales page and the first set of titles already exist; wider distribution is in progress.'
-      ],
-      features: ['Practical AI business playbooks', 'Written for African entrepreneurs', 'Growing title library', 'Direct sales page']
     }
   ];
 

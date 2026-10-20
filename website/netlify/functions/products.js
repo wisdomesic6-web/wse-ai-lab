@@ -121,12 +121,6 @@ const PRODUCTS = [
     url: null,
     desc: "Real-time scripture detection and display for live sermons.",
   },
-  {
-    slug: "amazo-books", name: "Amazo Books", status: "building",
-    tag: "Publishing · Digital Products",
-    url: null,
-    desc: "WSE Lab Consult's self-publishing line — AI business playbooks for African entrepreneurs.",
-  },
 ];
 
 exports.handler = async function (event) {
