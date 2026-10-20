@@ -8,18 +8,23 @@
    Env: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
    ═══════════════════════════════════════════════════════════ */
 
+// n8n runs locally (Docker, Wisdom's PC) and is exposed publicly via an existing
+// Cloudflare Tunnel at this host — webhook paths must be absolute, since a relative
+// path would resolve against the OS's own domain instead of n8n's.
+const N8N_PUBLIC_URL = "https://n8n.wseailab.com";
+
 const AGENTS = [
   { name: "WIZZY (GM)", workflowId: "v6joXhejH4wpp4NP", webhookPath: null, schedule: "Weekly Mon 7AM + on demand", role: "General Manager" },
-  { name: "Sales Agent", workflowId: "pfHIJWw1QOD0gzf6", webhookPath: "/webhook/sales-agent", schedule: "Tuesdays 8AM" },
-  { name: "Onboarding Agent", workflowId: "fseLr3oMhwcsMLyw", webhookPath: "/webhook/onboarding", schedule: "On demand" },
-  { name: "Finance — Expense Logger", workflowId: "DyNFDDMW0phEkX5L", webhookPath: "/webhook/expense", schedule: "On demand" },
-  { name: "Finance — Monthly P&L", workflowId: "TsATLYzBcxGipcOT", webhookPath: "/webhook/monthly-pnl", schedule: "End of month" },
-  { name: "Finance — Monthly Invoices", workflowId: "R8sqyMi7u7y8rZZo", webhookPath: "/webhook/monthly-invoices", schedule: "1st of month 9AM" },
-  { name: "Finance — Payment Webhook", workflowId: "AQLSQrOgmWB2nU0C", webhookPath: "/webhook/paystack-webhook", schedule: "On payment" },
-  { name: "Finance — Email Receipt Reader", workflowId: "FdxQSyCy3BOPUl0W", webhookPath: "/webhook/receipt-reader", schedule: "Daily 8AM" },
-  { name: "Operations Agent", workflowId: "iLz3u6j5UJUFHh0t", webhookPath: "/webhook/briefing", schedule: "Mon 7AM / Daily midnight" },
+  { name: "Sales Agent", workflowId: "pfHIJWw1QOD0gzf6", webhookPath: N8N_PUBLIC_URL + "/webhook/run-sales", schedule: "Tuesdays 8AM" },
+  { name: "Onboarding Agent", workflowId: "fseLr3oMhwcsMLyw", webhookPath: N8N_PUBLIC_URL + "/webhook/onboarding", schedule: "On demand" },
+  { name: "Finance — Expense Logger", workflowId: "DyNFDDMW0phEkX5L", webhookPath: N8N_PUBLIC_URL + "/webhook/expense", schedule: "On demand" },
+  { name: "Finance — Monthly P&L", workflowId: "TsATLYzBcxGipcOT", webhookPath: N8N_PUBLIC_URL + "/webhook/monthly-pnl", schedule: "End of month" },
+  { name: "Finance — Monthly Invoices", workflowId: "R8sqyMi7u7y8rZZo", webhookPath: N8N_PUBLIC_URL + "/webhook/monthly-invoices", schedule: "1st of month 9AM" },
+  { name: "Finance — Payment Webhook", workflowId: "AQLSQrOgmWB2nU0C", webhookPath: N8N_PUBLIC_URL + "/webhook/paystack-webhook", schedule: "On payment" },
+  { name: "Finance — Email Receipt Reader", workflowId: "FdxQSyCy3BOPUl0W", webhookPath: N8N_PUBLIC_URL + "/webhook/receipt-reader", schedule: "Daily 8AM" },
+  { name: "Operations Agent", workflowId: "iLz3u6j5UJUFHh0t", webhookPath: N8N_PUBLIC_URL + "/webhook/briefing", schedule: "Mon 7AM / Daily midnight" },
   { name: "PostPilot (Content Engine)", workflowId: "u4aWSpDm2ogGf3j9", webhookPath: null, schedule: "Daily" },
-  { name: "Product Sync Agent", workflowId: "Qkjuz4zzSPF3SrOX", webhookPath: "/webhook/product-sync", schedule: "Every 6 hours" },
+  { name: "Product Sync Agent", workflowId: "Qkjuz4zzSPF3SrOX", webhookPath: N8N_PUBLIC_URL + "/webhook/product-sync", schedule: "Every 6 hours" },
   { name: "Telegram Bot", workflowId: "LoHIvLTlYZwD8NsC", webhookPath: null, schedule: "Every 30s (polling)" },
 ];
 
