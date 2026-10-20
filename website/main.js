@@ -165,17 +165,6 @@
       features: ['Brief-to-design automated pipeline', 'n8n-powered workflow core', 'Reduces manual drafting time', 'Built for construction project teams']
     },
     {
-      slug: 'ai-data-os', name: 'AI Operating System for Data Analysis', status: 'building', tag: 'Data · Multi-tenant SaaS',
-      url: null,
-      desc: 'Multi-tenant AI operating system for data analysis — organisation accounts, API keys, and usage plans on a dedicated orchestration backend.',
-      long: [
-        'AI Operating System for Data Analysis is a multi-tenant backend for running data-analysis workloads at the organisation level — accounts, API keys, and usage plans are first-class from day one.',
-        'A dedicated orchestration layer coordinates the analysis jobs, built to scale past a single-tenant tool.',
-        'Currently in development in the WSE workshop.'
-      ],
-      features: ['Multi-tenant organisation accounts', 'API key management', 'Usage-based plans', 'Dedicated job orchestration backend']
-    },
-    {
       slug: 'budgetrix', name: 'Budgetrix', status: 'building', tag: 'Travel · Budget Planning',
       url: null,
       desc: 'Budget-first travel planner — tell it what you have to spend, it builds the trip around it.',

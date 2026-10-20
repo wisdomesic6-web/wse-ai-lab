@@ -98,12 +98,6 @@ const PRODUCTS = [
     desc: "Automated construction design pipeline — from project brief to drawings and specs, built on an n8n automation core.",
   },
   {
-    slug: "ai-data-os", name: "AI Operating System for Data Analysis", status: "building",
-    tag: "Data · Multi-tenant SaaS",
-    url: null,
-    desc: "Multi-tenant AI operating system for data analysis — organisation accounts, API keys, and usage plans on a dedicated orchestration backend.",
-  },
-  {
     slug: "budgetrix", name: "Budgetrix", status: "building",
     tag: "Travel · Budget Planning",
     url: null,
