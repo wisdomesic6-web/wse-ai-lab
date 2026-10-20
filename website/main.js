@@ -176,11 +176,11 @@
       features: ['Budget-first trip planning', 'Automated spend allocation engine', 'Live pricing integrations (in progress)', 'Built for cost-conscious travellers']
     },
     {
-      slug: 'choirserve', name: 'ChoirServe', status: 'building', tag: 'Faith Tech · Choir Management',
+      slug: 'mdos', name: 'MDOS', status: 'building', tag: 'Faith Tech · Choir Management',
       url: null,
-      desc: 'Multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.',
+      desc: 'MDOS (Music Department Operating System) — multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.',
       long: [
-        'ChoirServe is a multi-tenant SaaS platform for church choirs and music departments — rosters, rehearsal scheduling, and attendance in one system.',
+        'MDOS (Music Department Operating System) is a multi-tenant SaaS platform for church choirs and music departments — rosters, rehearsal scheduling, and attendance in one system.',
         'Built on Supabase with a full multi-tenant data model, it is designed to serve many churches from one platform, each fully isolated.',
         'Pre-launch: core phases built with a full automated test suite passing, final deployment and live verification still pending.'
       ],

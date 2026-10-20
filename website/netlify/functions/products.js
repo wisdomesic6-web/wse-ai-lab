@@ -104,10 +104,10 @@ const PRODUCTS = [
     desc: "Budget-first travel planner — tell it what you have to spend, it builds the trip around it.",
   },
   {
-    slug: "choirserve", name: "ChoirServe", status: "building",
+    slug: "mdos", name: "MDOS", status: "building",
     tag: "Faith Tech · Choir Management",
     url: null,
-    desc: "Multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.",
+    desc: "MDOS (Music Department Operating System) — multi-tenant SaaS for church choir rosters, rehearsal scheduling, and attendance.",
   },
   {
     slug: "wiz-9ja", name: "Wiz-9ja", status: "building",
