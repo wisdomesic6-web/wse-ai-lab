@@ -34,7 +34,7 @@
     },
     {
       slug: 'wse-audit-system', name: 'WSE Audit System', status: 'live', tag: 'Accounting · ICAN / ISA 2024',
-      url: 'https://wseauditsystem.netlify.app', logo: 'assets/products/wse-audit-system.svg',
+      url: 'https://wse-audit-system.vercel.app', logo: 'assets/products/wse-audit-system.svg',
       desc: 'Audit intelligence for Nigerian accounting firms — ICAN and ISA 2024 compliant, with an AI copilot.',
       long: [
         'WSE Audit System is a SaaS audit intelligence platform built for Nigerian accounting firms. It is compliant with ICAN requirements and the ISA 2024 standards, so firms can modernise without compliance risk.',

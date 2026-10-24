@@ -24,7 +24,7 @@ const PRODUCTS = [
   {
     slug: "wse-audit-system", name: "WSE Audit System", status: "live",
     tag: "Accounting · ICAN / ISA 2024",
-    url: "https://wseauditsystem.netlify.app",
+    url: "https://wse-audit-system.vercel.app",
     logo: "assets/products/wse-audit-system.svg",
     desc: "Audit intelligence for Nigerian accounting firms — ICAN and ISA 2024 compliant, with an AI copilot.",
   },
