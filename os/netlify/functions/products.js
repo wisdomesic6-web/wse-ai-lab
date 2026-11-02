@@ -1,5 +1,12 @@
 /* ═══════════════════════════════════════════════════════════
-   WSE Lab Consult OS — Products telemetry API (Netlify serverless function)
+   WSE Lab Consult OS — Products telemetry API
+
+   Plain Node.js handler, shared by both hosting adapters that call it:
+   os/api/products.js (Vercel — the OS's current, actual deployment at
+   app.wseailab.com / wseos.wseailab.com) and Netlify's function runtime
+   directly (kept only in case Netlify is ever used again; not currently
+   deployed there). Lives under netlify/functions/ for historical reasons,
+   not because the logic is Netlify-specific.
 
    Subscriber/billing rollup across WSE's own SaaS products (Audit System,
    SmartSales, etc.) — "who signed up, what plan, have they paid" ONLY.
@@ -14,13 +21,12 @@
                       plan?, paid? }
              Upserts on (product_slug, external_user_id).
              Auth: header x-webhook-secret must match PRODUCTS_WEBHOOK_SECRET.
-             This is IN ADDITION TO the existing Netlify edge Basic-Auth gate
-             (netlify/edge-functions/auth.js, config.path:"/*") which still
-             covers this route — a calling product's backend needs BOTH a
-             valid Authorization: Basic header (OS_USER/OS_PASSWORD) AND this
-             secret. That gate was not narrowed for this endpoint; narrowing
-             it is a separate, deliberate change to make later if the double
-             auth becomes a real friction point.
+             POST to this route is excluded from the Basic-Auth gate
+             (os/middleware.js on Vercel) — a calling product's backend has
+             no human to supply OS_USER/OS_PASSWORD, so this secret stands
+             in as its auth instead. GET (the dashboard's own query) is NOT
+             excluded and still requires Basic Auth, since it returns
+             subscriber names/emails.
 
    Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, PRODUCTS_WEBHOOK_SECRET
    ═══════════════════════════════════════════════════════════ */
