@@ -101,7 +101,20 @@ async function safeEqual(a, b) {
   return diff === 0;
 }
 
+// Paths that products' own backends call machine-to-machine, with no human
+// available to supply a Basic Auth login. Scoped to POST only — a GET here
+// would return subscriber names/emails with no auth at all, which this must
+// never do, so a GET (e.g. the dashboard's own query) still goes through the
+// normal gate below. POST has its own auth instead: a timing-safe shared-
+// secret check inside api/products.js (PRODUCTS_WEBHOOK_SECRET).
+const MACHINE_TO_MACHINE_POST_PATHS = new Set(["/api/products"]);
+
 export default async function middleware(request) {
+  const { pathname } = new URL(request.url);
+  if (request.method === "POST" && MACHINE_TO_MACHINE_POST_PATHS.has(pathname)) {
+    return undefined;
+  }
+
   const user = process.env.OS_USER || "wse";
   const pass = process.env.OS_PASSWORD;
 
