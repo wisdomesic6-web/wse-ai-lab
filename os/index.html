@@ -2933,6 +2933,20 @@ html[data-density="compact"] { font-size: 14.5px; }
       </div>
     </div>
 
+    <!-- PAYSTACK: every transaction on the company's live Paystack account,
+         independent of which product initiated it -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Paystack transactions</div>
+          <div class="card-sub" id="paystackSub">Every successful payment on the company's Paystack account.</div>
+        </div>
+      </div>
+      <div id="paystackTable">
+        <div class="act-empty" style="padding:28px 8px;text-align:center;color:var(--text3);font-size:13px;">No transactions yet.</div>
+      </div>
+    </div>
+
   </div><!-- /content -->
 </main>
 </div>
@@ -8451,6 +8465,36 @@ document.addEventListener('DOMContentLoaded', function() {
     el.innerHTML = rows;
   }
 
+  // ── Paystack transactions (every payment on the live account, any product) ──
+  function applyPaystack(data) {
+    const el = document.getElementById('paystackTable');
+    const sub = document.getElementById('paystackSub');
+    if (!el) return;
+    const txns = Array.isArray(data.transactions) ? data.transactions : [];
+    if (sub) {
+      sub.textContent = txns.length
+        ? txns.length + ' successful payments · ' + fmtFull(data.totalAmount) + ' total'
+        : 'Every successful payment on the company\'s Paystack account.';
+    }
+    if (!txns.length) return; // keep the static "No transactions yet." empty state
+    const rows = txns
+      .slice(0, 20)
+      .map((t) => {
+        const when = t.paidAt ? new Date(t.paidAt).toLocaleDateString() : '—';
+        const who = t.customerEmail || t.reference;
+        return (
+          '<div class="act-item">' +
+          '<div class="act-av" style="background:#0BA960">₦</div>' +
+          '<div class="act-body"><div class="act-desc">' + esc(who) + '</div>' +
+          '<div class="act-time">' + esc(t.channel || 'card') + ' · ' + esc(when) + '</div></div>' +
+          '<div class="act-val" style="color:var(--green,#1FCFA4)">' + fmtFull(t.amount) + '</div>' +
+          '</div>'
+        );
+      })
+      .join('');
+    el.innerHTML = rows;
+  }
+
   async function load() {
     try {
       const res = await fetch('/.netlify/functions/dashboard', { headers: { Accept: 'application/json' } });
@@ -8473,6 +8517,15 @@ document.addEventListener('DOMContentLoaded', function() {
       applyProducts(data.products);
     } catch (e) {
       console.warn('[Products] live data unavailable, using static fallback:', e.message);
+    }
+    try {
+      const res = await fetch('/.netlify/functions/paystack-transactions', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      applyPaystack(data);
+    } catch (e) {
+      console.warn('[Paystack] live data unavailable, using static fallback:', e.message);
     }
   }
 
