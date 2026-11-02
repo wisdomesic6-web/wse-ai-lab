@@ -2634,7 +2634,7 @@ html[data-density="compact"] { font-size: 14.5px; }
     <div class="nav-item" data-page="tasks" onclick="showPage('tasks')">
       <div class="nav-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
       Tasks
-      <span class="nav-badge">12</span>
+      <span class="nav-badge" id="navBadgeTasks">0</span>
     </div>
     <div class="nav-item" data-page="crm" onclick="showPage('crm')">
       <div class="nav-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
@@ -2979,29 +2979,30 @@ html[data-density="compact"] { font-size: 14.5px; }
     </div>
   </header>
 
-  <!-- WORKFLOW STRIP -->
+  <!-- WORKFLOW STRIP — each stage filters the board/list to that status;
+       clicking the active one (or the sprint node) clears the stage filter. -->
   <div class="workflow-strip">
     <div class="wf-stage">
-      <div class="wf-node active">🚀 Sprint Q2 2026</div>
+      <div class="wf-node active" id="wf-all" onclick="setStageFilter(null)">🚀 Sprint Q2 2026</div>
     </div>
     <div class="wf-arrow">›</div>
     <div class="wf-stage">
-      <div class="wf-node">Backlog</div>
+      <div class="wf-node" id="wf-todo" onclick="setStageFilter('todo')">Backlog</div>
     </div>
     <div class="wf-arrow">›</div>
     <div class="wf-stage">
-      <div class="wf-node">Active</div>
+      <div class="wf-node" id="wf-inprog" onclick="setStageFilter('inprog')">Active</div>
     </div>
     <div class="wf-arrow">›</div>
     <div class="wf-stage">
-      <div class="wf-node">QA</div>
+      <div class="wf-node" id="wf-review" onclick="setStageFilter('review')">QA</div>
     </div>
     <div class="wf-arrow">›</div>
     <div class="wf-stage">
-      <div class="wf-node">Done</div>
+      <div class="wf-node" id="wf-done" onclick="setStageFilter('done')">Done</div>
     </div>
     <div style="margin-left:12px;">
-      <div class="wf-node" style="border:1px dashed rgba(255,255,255,0.1);color:var(--text3);font-size:11px;">+ New Workflow</div>
+      <div class="wf-node" style="border:1px dashed rgba(255,255,255,0.1);color:var(--text3);font-size:11px;cursor:default;" title="Custom pipelines aren't built yet">+ New Workflow</div>
     </div>
   </div>
 
@@ -3018,15 +3019,19 @@ html[data-density="compact"] { font-size: 14.5px; }
           List
         </div>
       </div>
-      <div class="filter-chip active">
+      <div class="filter-chip active" id="chipAllTasks" onclick="clearAllFilters()">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
         All Tasks
       </div>
-      <div class="filter-chip tb-hide-xs">
+      <div class="filter-chip tb-hide-xs" id="chipAssignee" style="position:relative;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        Assignee
+        <span id="chipAssigneeLabel">Assignee</span>
+        <select id="assigneeFilterSelect" onchange="setAssigneeFilter(this.value)"
+          style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;">
+          <option value="">Assignee</option>
+        </select>
       </div>
-      <div class="filter-chip tb-hide-xs">Due Date</div>
+      <div class="filter-chip tb-hide-xs" id="chipDueDate" onclick="toggleDueDateFilter()">Due Date</div>
     </div>
     <div class="toolbar-right">
       <div class="workflow-select tb-hide-xs">
@@ -3045,6 +3050,10 @@ html[data-density="compact"] { font-size: 14.5px; }
   <div class="board-area">
 
     <!-- KANBAN VIEW -->
+    <!-- Columns are rendered entirely from live TASKS data by renderTasksBoard()
+         (called after loadTasks() fetches from Supabase) — no static example
+         cards here. Counts start at 0 and are corrected by that same render
+         pass; this avoids a flash of fake content before the real data loads. -->
     <div id="kanbanView">
 
       <!-- COL: TO DO -->
@@ -3053,88 +3062,13 @@ html[data-density="compact"] { font-size: 14.5px; }
           <div class="k-col-title">
             <div class="k-status-dot" style="background:var(--col-todo)"></div>
             To Do
-            <span class="k-col-count" id="count-todo">4</span>
+            <span class="k-col-count" id="count-todo">0</span>
           </div>
           <div class="k-col-add" onclick="openModalWithStatus('todo')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           </div>
         </div>
-        <div class="k-cards" id="col-todo">
-
-          <div class="task-card pri-high" draggable="true" data-id="t1" data-status="todo" onclick="openPanel('t1')">
-            <div class="card-labels">
-              <span class="label-chip" style="background:rgba(255,79,120,0.15);color:var(--red)">🔴 Urgent</span>
-              <span class="label-chip" style="background:rgba(74,106,255,0.12);color:var(--accent2)">Finance</span>
-            </div>
-            <div class="card-top">
-              <div class="card-title-text">Prepare Q2 investor deck with financial projections</div>
-              <div class="card-menu" onclick="event.stopPropagation()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-              </div>
-            </div>
-            <div class="card-desc">Include revenue forecasts, burn rate analysis, and growth metrics for Series A presentation.</div>
-            <div class="subtask-bar">
-              <div class="subtask-label"><span>Subtasks</span><span>2 / 5</span></div>
-              <div class="subtask-track"><div class="subtask-fill" style="width:40%"></div></div>
-            </div>
-            <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-high">↑ High</span>
-                <div class="card-due overdue">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  Apr 20
-                </div>
-              </div>
-              <div class="card-footer-right">
-                <div class="card-comment-count">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                  3
-                </div>
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#4A6AFF,#7698FF)">AO</div>
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#1FCFA4,#0EC4D8)">KA</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="task-card pri-med" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-med">– Med</span>
-                <div class="card-due soon">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Apr 26
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#F4A21B,#EF6C00)">MT
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="task-card pri-low" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-low">↓ Low</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                May 10
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#9F78FA,#818CF8)">JD
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <div class="k-cards" id="col-todo"></div>
         <div class="k-add-card" onclick="openModalWithStatus('todo')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add task
@@ -3147,57 +3081,13 @@ html[data-density="compact"] { font-size: 14.5px; }
           <div class="k-col-title">
             <div class="k-status-dot" style="background:var(--col-inprog)"></div>
             In Progress
-            <span class="k-col-count" id="count-inprog">3</span>
+            <span class="k-col-count" id="count-inprog">0</span>
           </div>
           <div class="k-col-add" onclick="openModalWithStatus('inprog')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           </div>
         </div>
-        <div class="k-cards" id="col-inprog">
-
-          <div class="task-card pri-high" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-high">↑ High</span>
-                <div class="card-due soon">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Apr 25
-                </div>
-              </div>
-              <div class="card-footer-right">
-                <div class="card-comment-count">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                  7
-                </div>
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#4A6AFF,#7698FF)">AO</div>
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#14C4D8,#0B7EA8)">BI</div>
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#9F78FA,#818CF8)">JD
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
-
-          <div class="task-card pri-med" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-med">– Med</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Apr 30
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#1FCFA4,#0EC4D8)">KA
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <div class="k-cards" id="col-inprog"></div>
         <div class="k-add-card" onclick="openModalWithStatus('inprog')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add task
@@ -3210,52 +3100,13 @@ html[data-density="compact"] { font-size: 14.5px; }
           <div class="k-col-title">
             <div class="k-status-dot" style="background:var(--col-review)"></div>
             Review
-            <span class="k-col-count" id="count-review">2</span>
+            <span class="k-col-count" id="count-review">0</span>
           </div>
           <div class="k-col-add" onclick="openModalWithStatus('review')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           </div>
         </div>
-        <div class="k-cards" id="col-review">
-
-          <div class="task-card pri-med" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-med">– Med</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Apr 27
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#F4A21B,#EF6C00)">MT</div>
-                <div class="assignee-av" style="background:linear-gradient(135deg,#9F78FA,#818CF8)">JD
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="task-card pri-low" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-low">↓ Low</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Apr 28
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#4A6AFF,#7698FF)">AO
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <div class="k-cards" id="col-review"></div>
         <div class="k-add-card" onclick="openModalWithStatus('review')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add task
@@ -3268,51 +3119,13 @@ html[data-density="compact"] { font-size: 14.5px; }
           <div class="k-col-title">
             <div class="k-status-dot" style="background:var(--col-done)"></div>
             Completed
-            <span class="k-col-count" id="count-done">3</span>
+            <span class="k-col-count" id="count-done">0</span>
           </div>
           <div class="k-col-add" onclick="openModalWithStatus('done')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           </div>
         </div>
-        <div class="k-cards" id="col-done">
-
-          <div class="task-card pri-high" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-high">↑ High</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg>
-                <span style="color:var(--green)">Completed Apr 20</span>
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#1FCFA4,#0EC4D8)">KA
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="task-card pri-med" draggable="true" <div class="card-footer">
-              <div class="card-footer-left">
-                <span class="pri-badge pri-badge-med">– Med</span>
-                <div class="card-due ok">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M9 11l3 3L22 4"/></svg>
-                <span style="color:var(--green)">Completed Apr 18</span>
-                </div>
-              </div>
-              <div class="card-footer-right">
-                
-                <div class="card-assignees">
-                  <div class="assignee-av" style="background:linear-gradient(135deg,#4A6AFF,#7698FF)">AO
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <div class="k-cards" id="col-done"></div>
         <div class="k-add-card" onclick="openModalWithStatus('done')">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add task
@@ -5520,7 +5333,7 @@ const PRI_LABEL = { 'pri-high':'High', 'pri-med':'Medium', 'pri-low':'Low' };
 function renderListView() {
   const tbody = document.getElementById('listBody');
   tbody.innerHTML = '';
-  Object.values(TASKS).forEach(t => {
+  (typeof getFilteredTasks === 'function' ? getFilteredTasks() : Object.values(TASKS)).forEach(t => {
     const s = STATUS_MAP[t.status];
     const pColor = PRI_COLOR[t.priority];
     const avs = t.assignees.map(a => `<div class="lt-av" style="background:${TEAM[a]?.color || 'linear-gradient(135deg,#4A6AFF,#7698FF)'}">${a}</div>`).join('');
@@ -5765,6 +5578,13 @@ function updateCounts() {
     const el = document.getElementById(`count-${s}`);
     if (el) el.textContent = count;
   });
+  // Sidebar "Tasks" badge: open (not-yet-done) tasks, from the full TASKS
+  // store — not the currently filtered view, since this is a global
+  // indicator visible from every page, not just the Tasks board itself.
+  const navBadge = document.getElementById('navBadgeTasks');
+  if (navBadge && typeof TASKS !== 'undefined') {
+    navBadge.textContent = Object.values(TASKS).filter(t => t.status !== 'done').length;
+  }
 }
 
 /* ── Bind drag to all existing cards on load ── */
@@ -5793,6 +5613,7 @@ function rebuildTeam() {
   TEAM = {};
   MEMBERS.forEach(m => { TEAM[m.initials] = { id: m.id, name: m.name, email: m.email, role: m.role, color: m.color, owner: !!m.owner }; });
   populateAssigneeSelect();
+  if (typeof populateAssigneeFilterSelect === 'function') populateAssigneeFilterSelect();
   renderTeamRoster();
 }
 
@@ -6383,7 +6204,7 @@ function taskCardHTML(t) {
 function renderTasksBoard() {
   const cols = ['todo','inprog','review','done'];
   cols.forEach(s => { const c = document.getElementById('col-' + s); if (c) c.innerHTML = ''; });
-  Object.values(TASKS).forEach(t => {
+  getFilteredTasks().forEach(t => {
     const c = document.getElementById('col-' + t.status);
     if (c) c.insertAdjacentHTML('beforeend', taskCardHTML(t));
   });
@@ -6391,6 +6212,89 @@ function renderTasksBoard() {
     document.querySelectorAll('.k-cards .task-card').forEach(card => bindCardDrag(card));
   }
   if (typeof updateCounts === 'function') updateCounts();
+}
+
+/* ═════════════════════════════════════════════
+   TASK FILTERS — workflow-strip stage pills + toolbar chips.
+   A stage filter alone needs no column show/hide logic: a task only
+   ever has one status, so filtering to e.g. 'todo' naturally leaves
+   every other column empty without touching their visibility.
+   ═════════════════════════════════════════════ */
+let taskFilters = { stage: null, assignee: null, dueSoon: false };
+
+function getFilteredTasks() {
+  return Object.values(TASKS).filter(t => {
+    if (taskFilters.stage && t.status !== taskFilters.stage) return false;
+    if (taskFilters.assignee && !(t.assignees || []).includes(taskFilters.assignee)) return false;
+    if (taskFilters.dueSoon) {
+      const urg = t.dueISO && typeof getDueUrgency === 'function' ? getDueUrgency(t.dueISO) : 'none';
+      if (urg !== 'overdue' && urg !== 'today' && urg !== 'soon') return false;
+    }
+    return true;
+  });
+}
+
+function rerenderTasks() {
+  if (typeof renderTasksBoard === 'function') renderTasksBoard();
+  if (typeof renderListView === 'function') renderListView();
+}
+
+/* Stage filter chip label on "All Tasks" reflects whichever filters are
+   live, since a stage filter alone doesn't light up the "All Tasks" chip
+   (that one specifically means "no filters at all"). */
+function syncAllTasksChipActive() {
+  const chip = document.getElementById('chipAllTasks');
+  if (!chip) return;
+  const anyFilter = taskFilters.stage || taskFilters.assignee || taskFilters.dueSoon;
+  chip.classList.toggle('active', !anyFilter);
+}
+
+function setStageFilter(status) {
+  taskFilters.stage = status;
+  syncAllTasksChipActive();
+  rerenderTasks();
+}
+
+function clearAllFilters() {
+  taskFilters = { stage: null, assignee: null, dueSoon: false };
+  document.querySelectorAll('.wf-node').forEach(n => n.classList.remove('active'));
+  const allNode = document.getElementById('wf-all');
+  if (allNode) allNode.classList.add('active');
+  const sel = document.getElementById('assigneeFilterSelect');
+  if (sel) sel.value = '';
+  const assigneeChip = document.getElementById('chipAssignee');
+  if (assigneeChip) assigneeChip.classList.remove('active');
+  const dueChip = document.getElementById('chipDueDate');
+  if (dueChip) dueChip.classList.remove('active');
+  syncAllTasksChipActive();
+  rerenderTasks();
+}
+
+function setAssigneeFilter(initials) {
+  taskFilters.assignee = initials || null;
+  const chip = document.getElementById('chipAssignee');
+  if (chip) chip.classList.toggle('active', !!initials);
+  syncAllTasksChipActive();
+  rerenderTasks();
+}
+
+function toggleDueDateFilter() {
+  taskFilters.dueSoon = !taskFilters.dueSoon;
+  const chip = document.getElementById('chipDueDate');
+  if (chip) chip.classList.toggle('active', taskFilters.dueSoon);
+  syncAllTasksChipActive();
+  rerenderTasks();
+}
+
+/* Rebuild the toolbar's Assignee filter <select> from the live roster —
+   same data populateAssigneeSelect() uses for the new-task modal. */
+function populateAssigneeFilterSelect() {
+  const sel = document.getElementById('assigneeFilterSelect');
+  if (!sel || typeof MEMBERS === 'undefined') return;
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Assignee</option>' +
+    MEMBERS.map(m => `<option value="${m.initials}">${escHtml(m.name)}</option>`).join('');
+  if (cur && MEMBERS.some(m => m.initials === cur)) sel.value = cur;
 }
 
 /* ═════════════════════════════════════════════
