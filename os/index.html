@@ -2920,6 +2920,19 @@ html[data-density="compact"] { font-size: 14.5px; }
       </div>
     </div>
 
+    <!-- PRODUCTS: subscriber/billing telemetry across all WSE SaaS products -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Products</div>
+          <div class="card-sub">Who's signed up, and who's paying — per product. Never the product's own tenant data.</div>
+        </div>
+      </div>
+      <div id="productsTable">
+        <div class="act-empty" style="padding:28px 8px;text-align:center;color:var(--text3);font-size:13px;">No product signups yet.</div>
+      </div>
+    </div>
+
   </div><!-- /content -->
 </main>
 </div>
@@ -8415,6 +8428,29 @@ document.addEventListener('DOMContentLoaded', function() {
     ch.update();
   }
 
+  // ── Products telemetry (who's signed up / paid, per WSE SaaS product) ──
+  function applyProducts(products) {
+    const el = document.getElementById('productsTable');
+    if (!el) return;
+    if (!Array.isArray(products) || !products.length) return; // keep the static "No product signups yet." empty state
+    const rows = products
+      .slice()
+      .sort((a, b) => b.total - a.total)
+      .map((p) => {
+        const last = p.last_signup_at ? new Date(p.last_signup_at).toLocaleDateString() : '—';
+        return (
+          '<div class="act-item">' +
+          '<div class="act-av" style="background:#4A6AFF">' + esc((p.slug || '?').slice(0, 2).toUpperCase()) + '</div>' +
+          '<div class="act-body"><div class="act-desc">' + esc(p.slug) + '</div>' +
+          '<div class="act-time">' + p.total + ' signed up · ' + p.paid + ' paying · last ' + last + '</div></div>' +
+          '<div class="act-val" style="color:' + (p.paid > 0 ? 'var(--green,#1FCFA4)' : 'var(--text3)') + '">' + p.paid + '/' + p.total + '</div>' +
+          '</div>'
+        );
+      })
+      .join('');
+    el.innerHTML = rows;
+  }
+
   async function load() {
     try {
       const res = await fetch('/.netlify/functions/dashboard', { headers: { Accept: 'application/json' } });
@@ -8428,6 +8464,15 @@ document.addEventListener('DOMContentLoaded', function() {
       applyChart(data.revenue_monthly);
     } catch (e) {
       console.warn('[Dashboard] live data unavailable, using static fallback:', e.message);
+    }
+    try {
+      const res = await fetch('/.netlify/functions/products', { headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      applyProducts(data.products);
+    } catch (e) {
+      console.warn('[Products] live data unavailable, using static fallback:', e.message);
     }
   }
 
